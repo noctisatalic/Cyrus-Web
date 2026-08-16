@@ -187,7 +187,7 @@ section {
   align-items: center;
   justify-content: space-between;
   height: 64px;
-  padding: 6px 8px 6px 18px;
+  padding: 6px 12px 6px 18px;
   border-radius: 24px;
   background: #FFFFFF;
   border: 1px solid var(--line);
@@ -197,23 +197,13 @@ section {
 .nav-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
 }
 
-.brand-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
-  background: var(--primary);
-  color: var(--white);
-  display: grid;
-  place-items: center;
-  font-size: 13px;
-  font-weight: 700;
+.nav-logo-img {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 
 .nav-links {
@@ -934,7 +924,7 @@ footer {
 <div class="cursor"></div>
 <div class="cursor-ring"></div>
 
-<!-- Floating CS Button (Nomor WhatsApp Diperbarui) -->
+<!-- Floating CS Button -->
 <a href="https://wa.me/6281318048885?text=Halo%20Customer%20Service%20CyrusWeb,%20saya%20ingin%20bertanya" target="_blank" class="cs-float-btn" title="Customer Service">
   <svg viewBox="0 0 24 24">
     <path d="M12 2C6.48 2 2 6.48 2 12c0 1.82.49 3.53 1.35 5L2 22l5.1-1.33C8.53 21.52 10.22 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/>
@@ -945,8 +935,7 @@ footer {
 <div class="nav-wrapper">
   <nav class="navbar">
     <a href="#home" class="nav-brand">
-      <div class="brand-icon">C</div>
-      <span>CyrusWeb</span>
+      <img src="Cyrus-Web.png" alt="Cyrus Web Logo" class="nav-logo-img">
     </a>
     <div class="nav-links">
       <a href="#services" class="nav-link">Layanan</a>
@@ -1494,4 +1483,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
-
