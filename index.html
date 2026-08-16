@@ -1,0 +1,4289 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cyrus Web — Web Development Studio</title>
+
+<meta name="description"
+content="Cyrus Web — Web design, web development, maintenance dan update website untuk bisnis modern.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+
+<style>
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root{
+    --bg:#060606;
+    --bg-soft:#0c0c0d;
+
+    --glass:rgba(255,255,255,.055);
+    --glass-strong:rgba(255,255,255,.085);
+
+    --border:rgba(255,255,255,.12);
+
+    --text:#f5f5f3;
+    --muted:#9b9b9b;
+    --muted2:#696969;
+
+    --font-body:"DM Sans",sans-serif;
+    --font-display:"Instrument Sans",sans-serif;
+
+    --radius:28px;
+
+    --nav-height:66px;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+    background:#060606;
+}
+
+body{
+    font-family:var(--font-body);
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(255,255,255,.055),
+            transparent 28%
+        ),
+        #060606;
+
+    color:var(--text);
+
+    overflow-x:hidden;
+
+    font-weight:400;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button{
+    font-family:inherit;
+}
+
+::selection{
+    background:#fff;
+    color:#000;
+}
+
+
+/* =========================================================
+   CUSTOM CURSOR
+========================================================= */
+
+.cursor{
+    position:fixed;
+
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    pointer-events:none;
+
+    z-index:99999;
+
+    transform:translate(-50%,-50%);
+
+    mix-blend-mode:difference;
+}
+
+.cursor-ring{
+    position:fixed;
+
+    width:34px;
+    height:34px;
+
+    border:1px solid rgba(255,255,255,.55);
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    z-index:99998;
+
+    transform:translate(-50%,-50%);
+
+    transition:
+        width .3s ease,
+        height .3s ease,
+        background .3s ease,
+        border-color .3s ease;
+}
+
+.cursor-ring.active{
+    width:62px;
+    height:62px;
+
+    background:rgba(255,255,255,.035);
+
+    border-color:rgba(255,255,255,.25);
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+.container{
+    width:min(1180px,calc(100% - 40px));
+    margin:auto;
+}
+
+section{
+    position:relative;
+    padding:130px 0;
+}
+
+.section-label{
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    padding:8px 12px;
+
+    border:1px solid var(--border);
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.035);
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    color:#a7a7a7;
+
+    font-size:10px;
+
+    font-weight:600;
+
+    letter-spacing:.11em;
+
+    text-transform:uppercase;
+}
+
+.section-label span{
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    background:#ddd;
+
+    box-shadow:0 0 10px rgba(255,255,255,.8);
+}
+
+.section-title{
+    font-family:var(--font-display);
+
+    font-size:clamp(43px,6vw,76px);
+
+    line-height:1;
+
+    letter-spacing:-.045em;
+
+    font-weight:500;
+
+    margin-top:24px;
+}
+
+.section-description{
+    max-width:580px;
+
+    color:var(--muted);
+
+    font-size:14px;
+
+    line-height:1.8;
+
+    margin-top:22px;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.nav-wrap{
+    position:fixed;
+
+    left:50%;
+    top:20px;
+
+    transform:translateX(-50%);
+
+    z-index:1000;
+}
+
+.navbar{
+    width:min(920px,calc(100vw - 28px));
+
+    height:var(--nav-height);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:7px 8px 7px 18px;
+
+    background:rgba(18,18,19,.72);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:22px;
+
+    backdrop-filter:blur(28px) saturate(150%);
+    -webkit-backdrop-filter:blur(28px) saturate(150%);
+
+    box-shadow:
+        0 18px 55px rgba(0,0,0,.38),
+        inset 0 1px 0 rgba(255,255,255,.07);
+}
+
+.brand{
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-family:var(--font-display);
+
+    font-size:14px;
+
+    font-weight:600;
+
+    letter-spacing:-.02em;
+}
+
+.brand-mark{
+    width:34px;
+    height:34px;
+
+    display:grid;
+
+    place-items:center;
+
+    border-radius:11px;
+
+    background:#f4f4f2;
+
+    color:#080808;
+
+    font-size:12px;
+
+    font-weight:700;
+}
+
+.nav-links{
+    display:flex;
+
+    align-items:center;
+
+    gap:2px;
+}
+
+.nav-link{
+    padding:10px 12px;
+
+    border-radius:12px;
+
+    color:#858585;
+
+    font-size:11px;
+
+    transition:.25s ease;
+}
+
+.nav-link:hover,
+.nav-link.active{
+    color:#f5f5f5;
+
+    background:rgba(255,255,255,.06);
+}
+
+.nav-action{
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+}
+
+
+/* LIQUID SWITCH */
+
+.liquid-switch{
+    position:relative;
+
+    width:73px;
+    height:42px;
+
+    padding:3px;
+
+    border-radius:14px;
+
+    overflow:hidden;
+
+    border:1px solid rgba(255,255,255,.11);
+
+    background:rgba(255,255,255,.045);
+
+    cursor:pointer;
+}
+
+.switch-liquid{
+    position:absolute;
+
+    width:34px;
+    height:34px;
+
+    top:3px;
+    left:3px;
+
+    border-radius:11px;
+
+    background:#f4f4f2;
+
+    box-shadow:
+        0 5px 18px rgba(255,255,255,.1);
+}
+
+.switch-text{
+    position:relative;
+
+    z-index:2;
+
+    height:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-around;
+
+    font-size:9px;
+
+    font-weight:700;
+}
+
+.switch-text span:first-child{
+    color:#050505;
+}
+
+.switch-text span:last-child{
+    color:#666;
+}
+
+.menu-btn{
+    display:none;
+
+    width:40px;
+    height:40px;
+
+    border:1px solid var(--border);
+
+    background:rgba(255,255,255,.05);
+
+    color:#fff;
+
+    border-radius:13px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    min-height:100vh;
+
+    padding-top:165px;
+    padding-bottom:100px;
+
+    display:flex;
+
+    align-items:center;
+
+    overflow:hidden;
+}
+
+.hero-background{
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    z-index:-3;
+}
+
+
+/*
+   VIDEO BACKGROUND
+
+   File:
+   assets/cowboy-motion.mp4
+*/
+
+.cowboy-video{
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    opacity:.28;
+
+    filter:
+        grayscale(1)
+        contrast(1.12)
+        brightness(.55);
+
+    transform:scale(1.04);
+}
+
+
+/* BACKGROUND OVERLAY */
+
+.hero-gradient{
+    position:absolute;
+
+    inset:0;
+
+    z-index:3;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 40%,
+            transparent 0%,
+            rgba(5,5,5,.25) 40%,
+            rgba(5,5,5,.82) 100%
+        ),
+
+        linear-gradient(
+            180deg,
+            rgba(5,5,5,.25),
+            rgba(5,5,5,.55) 60%,
+            #060606 100%
+        );
+}
+
+
+/* FALLBACK */
+
+.cowboy-fallback{
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    opacity:.08;
+}
+
+.cowboy-silhouette{
+    position:absolute;
+
+    width:190px;
+    height:430px;
+
+    background:#fff;
+
+    border-radius:45% 45% 22% 22%;
+
+    filter:blur(2px);
+
+    transform:translateY(40px);
+}
+
+.cowboy-silhouette::before{
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+    height:90px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    left:35px;
+    top:-50px;
+}
+
+.cowboy-silhouette::after{
+    content:"";
+
+    position:absolute;
+
+    width:245px;
+    height:20px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    left:-28px;
+    top:-36px;
+}
+
+
+/* GRID */
+
+.hero-grid{
+    position:absolute;
+
+    width:120%;
+    height:65%;
+
+    left:-10%;
+    bottom:-24%;
+
+    background-image:
+
+        linear-gradient(
+            rgba(255,255,255,.03) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.03) 1px,
+            transparent 1px
+        );
+
+    background-size:70px 70px;
+
+    transform:
+        perspective(600px)
+        rotateX(63deg);
+
+    transform-origin:center;
+
+    opacity:.2;
+}
+
+
+/* HERO CONTENT */
+
+.hero-content{
+    position:relative;
+
+    z-index:5;
+
+    width:100%;
+}
+
+.hero-topline{
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    color:#8c8c8c;
+
+    font-size:10px;
+
+    font-weight:500;
+
+    letter-spacing:.12em;
+}
+
+.hero-topline .line{
+    width:34px;
+
+    height:1px;
+
+    background:#686868;
+}
+
+
+/* HERO TYPOGRAPHY */
+
+.hero-title{
+    font-family:var(--font-display);
+
+    font-size:clamp(58px,8.5vw,118px);
+
+    line-height:.9;
+
+    letter-spacing:-.06em;
+
+    font-weight:500;
+
+    max-width:1050px;
+
+    margin-top:27px;
+}
+
+.hero-soft{
+    color:rgba(255,255,255,.47);
+}
+
+
+/* HERO DESCRIPTION */
+
+.hero-sub{
+    max-width:570px;
+
+    color:#999;
+
+    font-size:14px;
+
+    line-height:1.85;
+
+    margin-top:30px;
+}
+
+
+/* BUTTONS */
+
+.hero-buttons{
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    margin-top:32px;
+}
+
+.btn{
+    min-height:49px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:9px;
+
+    padding:0 19px;
+
+    border-radius:15px;
+
+    border:1px solid var(--border);
+
+    font-size:11px;
+
+    font-weight:600;
+
+    transition:.3s ease;
+}
+
+.btn-primary{
+    background:#f4f4f2;
+
+    color:#070707;
+}
+
+.btn-primary:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 15px 35px rgba(255,255,255,.1);
+}
+
+.btn-ghost{
+    background:rgba(255,255,255,.045);
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    color:#ddd;
+}
+
+.btn-ghost:hover{
+    background:rgba(255,255,255,.085);
+
+    transform:translateY(-3px);
+}
+
+
+/* HERO STATS */
+
+.hero-stats{
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:35px;
+
+    margin-top:67px;
+}
+
+.stat{
+    min-width:115px;
+}
+
+.stat strong{
+    display:block;
+
+    font-family:var(--font-display);
+
+    font-size:22px;
+
+    font-weight:500;
+}
+
+.stat span{
+    display:block;
+
+    color:#666;
+
+    font-size:10px;
+
+    margin-top:5px;
+}
+
+
+/* FLOATING STATUS */
+
+.float-widget{
+    position:absolute;
+
+    z-index:6;
+
+    padding:15px 16px;
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.045);
+
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.28);
+}
+
+.widget-status{
+    right:5%;
+    top:38%;
+}
+
+.widget-status small{
+    color:#666;
+
+    font-size:8px;
+
+    letter-spacing:.1em;
+
+    text-transform:uppercase;
+}
+
+.widget-status strong{
+    display:block;
+
+    margin-top:6px;
+
+    font-size:11px;
+
+    font-weight:500;
+}
+
+.status-dot{
+    display:inline-block;
+
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:#a4ffb6;
+
+    box-shadow:0 0 10px #a4ffb6;
+
+    margin-right:5px;
+}
+
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
+.services-grid{
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:13px;
+
+    margin-top:58px;
+}
+
+.glass-card{
+    position:relative;
+
+    overflow:hidden;
+
+    min-height:255px;
+
+    padding:27px;
+
+    border-radius:26px;
+
+    border:1px solid var(--border);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.075),
+            rgba(255,255,255,.025)
+        );
+
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+
+    transition:
+        transform .4s ease,
+        border .4s ease,
+        background .4s ease;
+}
+
+.glass-card::before{
+    content:"";
+
+    position:absolute;
+
+    width:170px;
+    height:170px;
+
+    right:-85px;
+    top:-85px;
+
+    background:rgba(255,255,255,.065);
+
+    border-radius:50%;
+
+    filter:blur(35px);
+}
+
+.glass-card:hover{
+    transform:translateY(-7px);
+
+    border-color:rgba(255,255,255,.22);
+
+    background:rgba(255,255,255,.07);
+}
+
+.card-number{
+    color:#505050;
+
+    font-size:9px;
+
+    font-weight:600;
+
+    letter-spacing:.08em;
+}
+
+.card-icon{
+    width:43px;
+    height:43px;
+
+    display:grid;
+
+    place-items:center;
+
+    margin-top:43px;
+
+    border:1px solid var(--border);
+
+    border-radius:13px;
+
+    background:rgba(255,255,255,.045);
+
+    color:#d8d8d8;
+
+    font-size:14px;
+}
+
+.glass-card h3{
+    margin-top:18px;
+
+    font-family:var(--font-display);
+
+    font-size:20px;
+
+    font-weight:500;
+
+    letter-spacing:-.025em;
+}
+
+.glass-card p{
+    color:#777;
+
+    font-size:12px;
+
+    line-height:1.75;
+
+    margin-top:8px;
+}
+
+
+/* =========================================================
+   PROCESS
+========================================================= */
+
+.process{
+    display:grid;
+
+    grid-template-columns:.7fr 1.3fr;
+
+    gap:80px;
+}
+
+.process-list{
+    margin-top:48px;
+}
+
+.process-item{
+    display:grid;
+
+    grid-template-columns:45px 1fr;
+
+    gap:18px;
+
+    padding:23px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.process-number{
+    color:#555;
+
+    font-size:10px;
+}
+
+.process-item h3{
+    font-family:var(--font-display);
+
+    font-size:18px;
+
+    font-weight:500;
+
+    letter-spacing:-.02em;
+}
+
+.process-item p{
+    color:#727272;
+
+    line-height:1.7;
+
+    font-size:12px;
+
+    margin-top:7px;
+}
+
+
+/* =========================================================
+   PRICING
+========================================================= */
+
+.pricing-head{
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:30px;
+
+    align-items:flex-end;
+}
+
+.pricing-grid{
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:12px;
+
+    margin-top:58px;
+}
+
+.price-card{
+    position:relative;
+
+    padding:25px;
+
+    border:1px solid var(--border);
+
+    border-radius:25px;
+
+    background:rgba(255,255,255,.04);
+
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+
+    transition:.4s ease;
+}
+
+.price-card.featured{
+    background:rgba(255,255,255,.085);
+
+    transform:translateY(-10px);
+
+    border-color:rgba(255,255,255,.23);
+}
+
+.price-card:hover{
+    transform:translateY(-7px);
+}
+
+.price-card.featured:hover{
+    transform:translateY(-15px);
+}
+
+.badge{
+    position:absolute;
+
+    top:15px;
+    right:15px;
+
+    padding:5px 8px;
+
+    border-radius:999px;
+
+    background:#f4f4f2;
+
+    color:#070707;
+
+    font-size:8px;
+
+    font-weight:700;
+
+    letter-spacing:.05em;
+}
+
+.price-name{
+    color:#999;
+
+    font-size:10px;
+
+    font-weight:600;
+
+    letter-spacing:.07em;
+}
+
+.price{
+    margin-top:17px;
+
+    font-family:var(--font-display);
+
+    font-size:33px;
+
+    font-weight:500;
+
+    letter-spacing:-.05em;
+}
+
+.price small{
+    font-family:var(--font-body);
+
+    color:#666;
+
+    font-size:10px;
+
+    letter-spacing:0;
+}
+
+.price-description{
+    color:#707070;
+
+    font-size:11px;
+
+    line-height:1.7;
+
+    min-height:60px;
+
+    margin-top:9px;
+}
+
+.feature-list{
+    list-style:none;
+
+    margin-top:24px;
+
+    padding-top:19px;
+
+    border-top:1px solid rgba(255,255,255,.07);
+}
+
+.feature-list li{
+    display:flex;
+
+    gap:8px;
+
+    color:#888;
+
+    font-size:10px;
+
+    line-height:1.6;
+
+    margin:9px 0;
+}
+
+.feature-list li::before{
+    content:"✓";
+
+    color:#ddd;
+}
+
+
+/* =========================================================
+   PORTFOLIO
+========================================================= */
+
+.portfolio-grid{
+    display:grid;
+
+    grid-template-columns:repeat(12,1fr);
+
+    gap:14px;
+
+    margin-top:58px;
+}
+
+.project{
+    position:relative;
+
+    min-height:335px;
+
+    overflow:hidden;
+
+    border-radius:27px;
+
+    border:1px solid var(--border);
+
+    background:#111;
+}
+
+.project:nth-child(1){
+    grid-column:span 7;
+}
+
+.project:nth-child(2){
+    grid-column:span 5;
+}
+
+.project:nth-child(3){
+    grid-column:span 5;
+}
+
+.project:nth-child(4){
+    grid-column:span 7;
+}
+
+.project-media{
+    position:absolute;
+
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at 30% 30%,
+            #555,
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #191919,
+            #060606
+        );
+
+    transition:transform .7s ease;
+}
+
+.project:hover .project-media{
+    transform:scale(1.055);
+}
+
+.project-overlay{
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            transparent 25%,
+            rgba(0,0,0,.92)
+        );
+}
+
+.project-content{
+    position:absolute;
+
+    left:24px;
+    right:24px;
+    bottom:24px;
+
+    z-index:2;
+}
+
+.project-tag{
+    display:inline-block;
+
+    padding:6px 8px;
+
+    border:1px solid rgba(255,255,255,.13);
+
+    background:rgba(255,255,255,.055);
+
+    border-radius:999px;
+
+    font-size:8px;
+
+    color:#aaa;
+
+    letter-spacing:.06em;
+}
+
+.project h3{
+    font-family:var(--font-display);
+
+    font-size:23px;
+
+    font-weight:500;
+
+    letter-spacing:-.03em;
+
+    margin-top:9px;
+}
+
+.project p{
+    color:#777;
+
+    font-size:10px;
+
+    margin-top:5px;
+}
+
+.portfolio-note{
+    margin-top:16px;
+
+    color:#5c5c5c;
+
+    font-size:10px;
+}
+
+
+/* =========================================================
+   UPDATE SYSTEM
+========================================================= */
+
+.update-layout{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:14px;
+
+    margin-top:58px;
+}
+
+.update-panel{
+    min-height:355px;
+
+    padding:29px;
+
+    border:1px solid var(--border);
+
+    border-radius:27px;
+
+    background:rgba(255,255,255,.04);
+
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+}
+
+.timeline{
+    margin-top:32px;
+}
+
+.timeline-item{
+    position:relative;
+
+    padding-left:28px;
+
+    padding-bottom:23px;
+}
+
+.timeline-item::before{
+    content:"";
+
+    position:absolute;
+
+    left:3px;
+    top:6px;
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#ddd;
+}
+
+.timeline-item::after{
+    content:"";
+
+    position:absolute;
+
+    left:6px;
+    top:17px;
+
+    width:1px;
+
+    height:calc(100% - 4px);
+
+    background:rgba(255,255,255,.1);
+}
+
+.timeline-item:last-child::after{
+    display:none;
+}
+
+.timeline-item strong{
+    font-size:12px;
+
+    font-weight:500;
+}
+
+.timeline-item p{
+    color:#707070;
+
+    font-size:10px;
+
+    line-height:1.7;
+
+    margin-top:5px;
+}
+
+.dashboard-mini{
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:9px;
+
+    margin-top:29px;
+}
+
+.mini{
+    padding:17px;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    border-radius:17px;
+
+    background:rgba(255,255,255,.03);
+}
+
+.mini span{
+    color:#5f5f5f;
+
+    font-size:8px;
+
+    letter-spacing:.08em;
+}
+
+.mini strong{
+    display:block;
+
+    font-family:var(--font-display);
+
+    font-size:20px;
+
+    font-weight:500;
+
+    margin-top:7px;
+}
+
+
+/* =========================================================
+   TRANSACTION
+========================================================= */
+
+.transaction-grid{
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:12px;
+
+    margin-top:58px;
+}
+
+.transaction-card{
+    padding:27px;
+
+    min-height:235px;
+
+    border-radius:24px;
+
+    border:1px solid var(--border);
+
+    background:rgba(255,255,255,.04);
+
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+}
+
+.transaction-card .step{
+    color:#555;
+
+    font-size:9px;
+
+    letter-spacing:.08em;
+}
+
+.transaction-card h3{
+    font-family:var(--font-display);
+
+    font-size:20px;
+
+    font-weight:500;
+
+    margin-top:42px;
+}
+
+.transaction-card p{
+    color:#707070;
+
+    font-size:11px;
+
+    line-height:1.75;
+
+    margin-top:9px;
+}
+
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+.faq-list{
+    max-width:850px;
+
+    margin:58px auto 0;
+}
+
+.faq-item{
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.faq-question{
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    padding:23px 0;
+
+    background:none;
+
+    border:0;
+
+    color:#eee;
+
+    text-align:left;
+
+    font-size:12px;
+
+    font-weight:500;
+}
+
+.faq-plus{
+    width:29px;
+    height:29px;
+
+    display:grid;
+
+    place-items:center;
+
+    border:1px solid var(--border);
+
+    border-radius:9px;
+
+    color:#999;
+
+    transition:.3s;
+}
+
+.faq-answer{
+    max-height:0;
+
+    overflow:hidden;
+
+    transition:max-height .4s ease;
+}
+
+.faq-answer p{
+    color:#707070;
+
+    font-size:11px;
+
+    line-height:1.8;
+
+    padding:0 50px 23px 0;
+}
+
+.faq-item.open .faq-plus{
+    transform:rotate(45deg);
+
+    background:#f4f4f2;
+
+    color:#080808;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.cta{
+    padding-bottom:150px;
+}
+
+.cta-box{
+    position:relative;
+
+    overflow:hidden;
+
+    text-align:center;
+
+    padding:100px 30px;
+
+    border-radius:37px;
+
+    border:1px solid var(--border);
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(255,255,255,.1),
+            transparent 45%
+        ),
+        rgba(255,255,255,.04);
+}
+
+.cta-box h2{
+    font-family:var(--font-display);
+
+    font-size:clamp(46px,7vw,88px);
+
+    line-height:.92;
+
+    letter-spacing:-.06em;
+
+    font-weight:500;
+}
+
+.cta-box p{
+    max-width:540px;
+
+    margin:24px auto;
+
+    color:#777;
+
+    font-size:13px;
+
+    line-height:1.8;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    padding:38px 0;
+
+    border-top:1px solid rgba(255,255,255,.07);
+}
+
+.footer-inner{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:30px;
+}
+
+.footer-copy{
+    color:#555;
+
+    font-size:9px;
+}
+
+.footer-links{
+    display:flex;
+
+    gap:19px;
+}
+
+.footer-links a{
+    color:#666;
+
+    font-size:9px;
+
+    transition:.2s;
+}
+
+.footer-links a:hover{
+    color:#eee;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:900px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .navbar{
+        padding-left:13px;
+    }
+
+    .hero{
+        padding-top:150px;
+    }
+
+    .widget-status{
+        display:none;
+    }
+
+    .services-grid,
+    .pricing-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .process{
+        grid-template-columns:1fr;
+
+        gap:30px;
+    }
+
+    .transaction-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+
+@media(max-width:600px){
+
+    body,
+    a,
+    button{
+        cursor:auto;
+    }
+
+    .cursor,
+    .cursor-ring{
+        display:none;
+    }
+
+    section{
+        padding:90px 0;
+    }
+
+    .container{
+        width:calc(100% - 28px);
+    }
+
+    .hero{
+        min-height:880px;
+
+        align-items:flex-start;
+
+        padding-top:145px;
+    }
+
+    .hero-title{
+        font-size:62px;
+
+        line-height:.92;
+    }
+
+    .hero-sub{
+        font-size:13px;
+    }
+
+    .hero-stats{
+        margin-top:52px;
+
+        gap:21px;
+    }
+
+    .services-grid,
+    .pricing-grid,
+    .update-layout{
+        grid-template-columns:1fr;
+    }
+
+    .price-card.featured{
+        transform:none;
+    }
+
+    .portfolio-grid{
+        display:grid;
+
+        grid-template-columns:1fr;
+    }
+
+    .project:nth-child(n){
+        grid-column:span 1;
+
+        min-height:300px;
+    }
+
+    .pricing-head{
+        display:block;
+    }
+
+    .footer-inner{
+        flex-direction:column;
+
+        align-items:flex-start;
+    }
+
+    .footer-links{
+        flex-wrap:wrap;
+    }
+
+    .cta-box{
+        padding:80px 20px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    html{
+        scroll-behavior:auto;
+    }
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms!important;
+
+        transition-duration:.01ms!important;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     CURSOR
+===================================================== -->
+
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<div class="nav-wrap">
+
+<nav class="navbar">
+
+    <a href="#home" class="brand">
+
+        <span class="brand-mark">
+            C
+        </span>
+
+        <span>
+            Cyrus Web
+        </span>
+
+    </a>
+
+
+    <div class="nav-links">
+
+        <a href="#services" class="nav-link">
+            Layanan
+        </a>
+
+        <a href="#portfolio" class="nav-link">
+            Portfolio
+        </a>
+
+        <a href="#pricing" class="nav-link">
+            Paket
+        </a>
+
+        <a href="#process" class="nav-link">
+            Proses
+        </a>
+
+        <a href="#faq" class="nav-link">
+            FAQ
+        </a>
+
+    </div>
+
+
+    <div class="nav-action">
+
+        <div class="liquid-switch">
+
+            <div class="switch-liquid"></div>
+
+            <div class="switch-text">
+
+                <span>C</span>
+                <span>W</span>
+
+            </div>
+
+        </div>
+
+
+        <button class="menu-btn">
+            ☰
+        </button>
+
+    </div>
+
+</nav>
+
+</div>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<main>
+
+<section class="hero" id="home">
+
+
+    <div class="hero-background">
+
+
+        <!--
+            VIDEO HERO
+
+            Masukkan video:
+
+            assets/cowboy-motion.mp4
+
+            Video sebaiknya memiliki lisensi
+            commercial-use yang jelas.
+        -->
+
+        <video
+            class="cowboy-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata">
+
+            <source
+                src="assets/cowboy-motion.mp4"
+                type="video/mp4">
+
+        </video>
+
+
+        <div class="cowboy-fallback">
+
+            <div class="cowboy-silhouette"></div>
+
+        </div>
+
+
+        <div class="hero-grid"></div>
+
+        <div class="hero-gradient"></div>
+
+    </div>
+
+
+
+    <div class="float-widget widget-status">
+
+        <small>
+            System status
+        </small>
+
+        <strong>
+
+            <span class="status-dot"></span>
+
+            Cyrus Web Online
+
+        </strong>
+
+    </div>
+
+
+
+    <div class="container hero-content">
+
+
+        <div class="hero-topline">
+
+            <span class="line"></span>
+
+            WEB DEVELOPMENT STUDIO
+
+        </div>
+
+
+        <h1 class="hero-title">
+
+            Websites built
+            <br>
+
+            <span class="hero-soft">
+                with intention.
+            </span>
+
+        </h1>
+
+
+        <p class="hero-sub">
+
+            Kami membangun website yang tidak hanya terlihat
+            baik, tetapi memiliki struktur yang jelas,
+            responsif, mudah dikembangkan dan siap mengikuti
+            kebutuhan bisnis Anda.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a
+                href="#pricing"
+                class="btn btn-primary">
+
+                Mulai Project →
+
+            </a>
+
+
+            <a
+                href="#portfolio"
+                class="btn btn-ghost">
+
+                Lihat Portfolio
+
+            </a>
+
+        </div>
+
+
+        <div class="hero-stats">
+
+            <div class="stat">
+
+                <strong>
+                    01
+                </strong>
+
+                <span>
+                    Design
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <strong>
+                    02
+                </strong>
+
+                <span>
+                    Development
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <strong>
+                    03
+                </strong>
+
+                <span>
+                    Maintenance
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SERVICES
+===================================================== -->
+
+<section id="services">
+
+<div class="container">
+
+
+    <div class="section-label">
+
+        <span></span>
+
+        What we do
+
+    </div>
+
+
+    <h2 class="section-title">
+
+        Website yang
+        <br>
+        bekerja untuk bisnis.
+
+    </h2>
+
+
+    <p class="section-description">
+
+        Dari landing page sederhana sampai website dengan
+        sistem yang lebih kompleks. Cyrus Web menangani
+        desain, development dan pengembangan setelah
+        website selesai dibuat.
+
+    </p>
+
+
+    <div class="services-grid">
+
+
+        <article class="glass-card">
+
+            <span class="card-number">
+                01 / DESIGN
+            </span>
+
+            <div class="card-icon">
+                ✦
+            </div>
+
+            <h3>
+                Web Design
+            </h3>
+
+            <p>
+                UI/UX modern, responsive dan memiliki
+                identitas visual yang disesuaikan
+                dengan karakter brand.
+            </p>
+
+        </article>
+
+
+        <article class="glass-card">
+
+            <span class="card-number">
+                02 / BUILD
+            </span>
+
+            <div class="card-icon">
+                ⌘
+            </div>
+
+            <h3>
+                Web Development
+            </h3>
+
+            <p>
+                Mengubah desain menjadi website nyata
+                dengan struktur yang rapi, cepat
+                dan mudah dikembangkan.
+            </p>
+
+        </article>
+
+
+        <article class="glass-card">
+
+            <span class="card-number">
+                03 / UPDATE
+            </span>
+
+            <div class="card-icon">
+                ↻
+            </div>
+
+            <h3>
+                Web Update
+            </h3>
+
+            <p>
+                Perubahan konten, gambar, portfolio,
+                produk atau fitur setelah website
+                sudah live.
+            </p>
+
+        </article>
+
+
+        <article class="glass-card">
+
+            <span class="card-number">
+                04 / OPTIMIZE
+            </span>
+
+            <div class="card-icon">
+                ↗
+            </div>
+
+            <h3>
+                Optimization
+            </h3>
+
+            <p>
+                Optimasi struktur, performa, responsive
+                layout dan pengalaman pengguna.
+            </p>
+
+        </article>
+
+
+        <article class="glass-card">
+
+            <span class="card-number">
+                05 / SUPPORT
+            </span>
+
+            <div class="card-icon">
+                ◎
+            </div>
+
+            <h3>
+                Maintenance
+            </h3>
+
+            <p>
+                Pemeliharaan website agar tetap berjalan
+                dan dapat dikembangkan sesuai kebutuhan.
+            </p>
+
+        </article>
+
+
+        <article class="glass-card">
+
+            <span class="card-number">
+                06 / CUSTOM
+            </span>
+
+            <div class="card-icon">
+                ＋
+            </div>
+
+            <h3>
+                Custom System
+            </h3>
+
+            <p>
+                Sistem khusus untuk kebutuhan bisnis,
+                mulai dari katalog hingga dashboard
+                internal.
+            </p>
+
+        </article>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PROCESS
+===================================================== -->
+
+<section id="process">
+
+<div class="container">
+
+<div class="process">
+
+
+    <div>
+
+        <div class="section-label">
+
+            <span></span>
+
+            Workflow
+
+        </div>
+
+
+        <h2 class="section-title">
+
+            Dari ide
+            <br>
+            menjadi sistem.
+
+        </h2>
+
+
+        <p class="section-description">
+
+            Proses dibuat transparan supaya client tahu
+            apa yang sedang dikerjakan dan apa yang
+            akan diterima.
+
+        </p>
+
+    </div>
+
+
+    <div class="process-list">
+
+
+        <div class="process-item">
+
+            <div class="process-number">
+                01
+            </div>
+
+            <div>
+
+                <h3>
+                    Discovery
+                </h3>
+
+                <p>
+                    Memahami bisnis, target customer,
+                    kebutuhan dan tujuan website.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="process-item">
+
+            <div class="process-number">
+                02
+            </div>
+
+            <div>
+
+                <h3>
+                    Design
+                </h3>
+
+                <p>
+                    Membuat struktur halaman, UI,
+                    responsive layout dan visual identity.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="process-item">
+
+            <div class="process-number">
+                03
+            </div>
+
+            <div>
+
+                <h3>
+                    Development
+                </h3>
+
+                <p>
+                    Design diterjemahkan menjadi website
+                    yang benar-benar dapat digunakan.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="process-item">
+
+            <div class="process-number">
+                04
+            </div>
+
+            <div>
+
+                <h3>
+                    Testing
+                </h3>
+
+                <p>
+                    Pengujian responsive, navigasi,
+                    interaction dan fungsi utama.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="process-item">
+
+            <div class="process-number">
+                05
+            </div>
+
+            <div>
+
+                <h3>
+                    Launch
+                </h3>
+
+                <p>
+                    Website dipublikasikan dan
+                    diserahkan kepada client.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PRICING
+===================================================== -->
+
+<section id="pricing">
+
+<div class="container">
+
+
+    <div class="pricing-head">
+
+        <div>
+
+            <div class="section-label">
+
+                <span></span>
+
+                Packages
+
+            </div>
+
+
+            <h2 class="section-title">
+
+                Pilih level
+                <br>
+                website Anda.
+
+            </h2>
+
+        </div>
+
+
+        <p class="section-description">
+
+            Harga awal di bawah adalah struktur contoh.
+            Harga final dapat disesuaikan berdasarkan
+            scope project.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="pricing-grid">
+
+
+        <article class="price-card">
+
+            <div class="price-name">
+                STARTER
+            </div>
+
+            <div class="price">
+                Rp750K
+            </div>
+
+            <div class="price-description">
+
+                Untuk bisnis kecil yang membutuhkan
+                digital presence profesional.
+
+            </div>
+
+
+            <ul class="feature-list">
+
+                <li>
+                    1 halaman utama
+                </li>
+
+                <li>
+                    Responsive mobile
+                </li>
+
+                <li>
+                    Custom UI
+                </li>
+
+                <li>
+                    CTA WhatsApp
+                </li>
+
+                <li>
+                    Basic SEO structure
+                </li>
+
+                <li>
+                    Deployment assistance
+                </li>
+
+            </ul>
+
+
+            <a
+                href="#order"
+                class="btn btn-ghost">
+
+                Pilih Starter
+
+            </a>
+
+        </article>
+
+
+
+        <article class="price-card featured">
+
+            <span class="badge">
+                POPULAR
+            </span>
+
+
+            <div class="price-name">
+                BUSINESS
+            </div>
+
+            <div class="price">
+                Rp1.5JT
+            </div>
+
+            <div class="price-description">
+
+                Website bisnis lengkap untuk membangun
+                kredibilitas dan mendapatkan customer.
+
+            </div>
+
+
+            <ul class="feature-list">
+
+                <li>
+                    Multi-section website
+                </li>
+
+                <li>
+                    Portfolio / gallery
+                </li>
+
+                <li>
+                    FAQ
+                </li>
+
+                <li>
+                    Contact system
+                </li>
+
+                <li>
+                    Custom animation
+                </li>
+
+                <li>
+                    SEO basic setup
+                </li>
+
+                <li>
+                    Deployment
+                </li>
+
+                <li>
+                    1x minor update
+                </li>
+
+            </ul>
+
+
+            <a
+                href="#order"
+                class="btn btn-primary">
+
+                Pilih Business
+
+            </a>
+
+        </article>
+
+
+
+        <article class="price-card">
+
+            <div class="price-name">
+                PROFESSIONAL
+            </div>
+
+            <div class="price">
+                Rp3JT
+            </div>
+
+            <div class="price-description">
+
+                Untuk brand yang membutuhkan website
+                dengan pengalaman pengguna lebih kompleks.
+
+            </div>
+
+
+            <ul class="feature-list">
+
+                <li>
+                    Custom multi-page
+                </li>
+
+                <li>
+                    Advanced UI/UX
+                </li>
+
+                <li>
+                    Interactive animation
+                </li>
+
+                <li>
+                    Portfolio system
+                </li>
+
+                <li>
+                    Product / service catalog
+                </li>
+
+                <li>
+                    Advanced responsive
+                </li>
+
+                <li>
+                    Performance optimization
+                </li>
+
+                <li>
+                    3x update
+                </li>
+
+            </ul>
+
+
+            <a
+                href="#order"
+                class="btn btn-ghost">
+
+                Pilih Professional
+
+            </a>
+
+        </article>
+
+
+
+        <article class="price-card">
+
+            <div class="price-name">
+                CUSTOM
+            </div>
+
+            <div class="price">
+                Custom
+            </div>
+
+            <div class="price-description">
+
+                Untuk kebutuhan website dengan
+                dashboard, CMS atau sistem bisnis khusus.
+
+            </div>
+
+
+            <ul class="feature-list">
+
+                <li>
+                    Custom architecture
+                </li>
+
+                <li>
+                    CMS / Admin dashboard
+                </li>
+
+                <li>
+                    Database
+                </li>
+
+                <li>
+                    Authentication
+                </li>
+
+                <li>
+                    Custom API
+                </li>
+
+                <li>
+                    Payment integration
+                </li>
+
+                <li>
+                    Maintenance option
+                </li>
+
+            </ul>
+
+
+            <a
+                href="#order"
+                class="btn btn-ghost">
+
+                Konsultasi
+
+            </a>
+
+        </article>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PORTFOLIO
+===================================================== -->
+
+<section id="portfolio">
+
+<div class="container">
+
+
+    <div class="section-label">
+
+        <span></span>
+
+        Selected work
+
+    </div>
+
+
+    <h2 class="section-title">
+
+        Built with purpose.
+
+    </h2>
+
+
+    <p class="section-description">
+
+        Portfolio ini nantinya akan terhubung ke CMS.
+        Anda dapat menambah, menghapus dan mengganti
+        project serta video tanpa mengedit HTML secara manual.
+
+    </p>
+
+
+    <div class="portfolio-grid">
+
+
+        <article class="project">
+
+            <div class="project-media"></div>
+
+            <div class="project-overlay"></div>
+
+            <div class="project-content">
+
+                <span class="project-tag">
+                    BUSINESS
+                </span>
+
+                <h3>
+                    Brand Website
+                </h3>
+
+                <p>
+                    Corporate / Business Website
+                </p>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="project">
+
+            <div class="project-media"></div>
+
+            <div class="project-overlay"></div>
+
+            <div class="project-content">
+
+                <span class="project-tag">
+                    CREATIVE
+                </span>
+
+                <h3>
+                    Creative Studio
+                </h3>
+
+                <p>
+                    Portfolio Experience
+                </p>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="project">
+
+            <div class="project-media"></div>
+
+            <div class="project-overlay"></div>
+
+            <div class="project-content">
+
+                <span class="project-tag">
+                    COMMERCE
+                </span>
+
+                <h3>
+                    Product Catalog
+                </h3>
+
+                <p>
+                    Digital Product Experience
+                </p>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="project">
+
+            <div class="project-media"></div>
+
+            <div class="project-overlay"></div>
+
+            <div class="project-content">
+
+                <span class="project-tag">
+                    CUSTOM
+                </span>
+
+                <h3>
+                    Custom Web System
+                </h3>
+
+                <p>
+                    Interactive Business Platform
+                </p>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+
+    <div class="portfolio-note">
+
+        * Portfolio media nantinya dikelola melalui
+        Cyrus Web CMS.
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CLIENT UPDATE
+===================================================== -->
+
+<section>
+
+<div class="container">
+
+
+    <div class="section-label">
+
+        <span></span>
+
+        After launch
+
+    </div>
+
+
+    <h2 class="section-title">
+
+        Website selesai bukan
+        <br>
+        berarti hubungan selesai.
+
+    </h2>
+
+
+    <div class="update-layout">
+
+
+        <div class="update-panel">
+
+            <span class="section-label">
+                Client Update
+            </span>
+
+
+            <div class="timeline">
+
+
+                <div class="timeline-item">
+
+                    <strong>
+                        Request Update
+                    </strong>
+
+                    <p>
+                        Client mengirim permintaan
+                        perubahan melalui sistem.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <strong>
+                        Review
+                    </strong>
+
+                    <p>
+                        Cyrus Web mengecek scope dan
+                        estimasi pengerjaan.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <strong>
+                        Development
+                    </strong>
+
+                    <p>
+                        Perubahan dikerjakan dan status
+                        project dapat dipantau.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <strong>
+                        Delivered
+                    </strong>
+
+                    <p>
+                        Update selesai dan client mendapatkan
+                        hasil terbaru.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <div class="update-panel">
+
+            <span class="section-label">
+                Project Dashboard
+            </span>
+
+
+            <div class="dashboard-mini">
+
+
+                <div class="mini">
+
+                    <span>
+                        PROJECT
+                    </span>
+
+                    <strong>
+                        Active
+                    </strong>
+
+                </div>
+
+
+                <div class="mini">
+
+                    <span>
+                        PROGRESS
+                    </span>
+
+                    <strong>
+                        78%
+                    </strong>
+
+                </div>
+
+
+                <div class="mini">
+
+                    <span>
+                        UPDATES
+                    </span>
+
+                    <strong>
+                        03
+                    </strong>
+
+                </div>
+
+
+                <div class="mini">
+
+                    <span>
+                        STATUS
+                    </span>
+
+                    <strong>
+                        On Track
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <p class="section-description">
+
+                Gambaran dashboard client yang nantinya
+                dapat dikembangkan menjadi sistem sebenarnya.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TRANSACTION
+===================================================== -->
+
+<section id="order">
+
+<div class="container">
+
+
+    <div class="section-label">
+
+        <span></span>
+
+        How to order
+
+    </div>
+
+
+    <h2 class="section-title">
+
+        Transaksi yang
+        <br>
+        dibuat jelas.
+
+    </h2>
+
+
+    <p class="section-description">
+
+        Client tidak perlu menebak proses berikutnya.
+        Setiap tahap memiliki status dan output yang jelas.
+
+    </p>
+
+
+    <div class="transaction-grid">
+
+
+        <article class="transaction-card">
+
+            <span class="step">
+                STEP 01
+            </span>
+
+            <h3>
+                Brief
+            </h3>
+
+            <p>
+                Client mengisi kebutuhan website,
+                referensi dan informasi bisnis.
+            </p>
+
+        </article>
+
+
+        <article class="transaction-card">
+
+            <span class="step">
+                STEP 02
+            </span>
+
+            <h3>
+                Quotation
+            </h3>
+
+            <p>
+                Cyrus Web menentukan scope, harga,
+                timeline dan deliverables.
+            </p>
+
+        </article>
+
+
+        <article class="transaction-card">
+
+            <span class="step">
+                STEP 03
+            </span>
+
+            <h3>
+                Deposit
+            </h3>
+
+            <p>
+                Setelah kesepakatan, project dimulai
+                berdasarkan metode pembayaran.
+            </p>
+
+        </article>
+
+
+        <article class="transaction-card">
+
+            <span class="step">
+                STEP 04
+            </span>
+
+            <h3>
+                Development
+            </h3>
+
+            <p>
+                Website dibuat dan progress project
+                diperbarui secara berkala.
+            </p>
+
+        </article>
+
+
+        <article class="transaction-card">
+
+            <span class="step">
+                STEP 05
+            </span>
+
+            <h3>
+                Review
+            </h3>
+
+            <p>
+                Client melakukan pengecekan sebelum
+                website dipublikasikan.
+            </p>
+
+        </article>
+
+
+        <article class="transaction-card">
+
+            <span class="step">
+                STEP 06
+            </span>
+
+            <h3>
+                Launch
+            </h3>
+
+            <p>
+                Website live dan client menerima
+                akses serta file yang disepakati.
+            </p>
+
+        </article>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FAQ
+===================================================== -->
+
+<section id="faq">
+
+<div class="container">
+
+
+    <div style="text-align:center">
+
+        <div class="section-label">
+
+            <span></span>
+
+            FAQ
+
+        </div>
+
+
+        <h2 class="section-title">
+
+            Pertanyaan umum.
+
+        </h2>
+
+    </div>
+
+
+    <div class="faq-list">
+
+
+        <div class="faq-item">
+
+            <button class="faq-question">
+
+                Apa yang saya dapat setelah membeli website?
+
+                <span class="faq-plus">
+                    +
+                </span>
+
+            </button>
+
+
+            <div class="faq-answer">
+
+                <p>
+
+                    Tergantung paket. Secara umum client
+                    mendapatkan website sesuai scope,
+                    file/source yang disepakati, deployment
+                    dan dokumentasi atau akses yang termasuk
+                    dalam paket.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="faq-item">
+
+            <button class="faq-question">
+
+                Apakah website bisa di-update setelah selesai?
+
+                <span class="faq-plus">
+                    +
+                </span>
+
+            </button>
+
+
+            <div class="faq-answer">
+
+                <p>
+
+                    Bisa. Cyrus Web menyediakan layanan
+                    update dan maintenance sehingga client
+                    tidak harus mengubah kode sendiri.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="faq-item">
+
+            <button class="faq-question">
+
+                Apakah saya mendapatkan source code?
+
+                <span class="faq-plus">
+                    +
+                </span>
+
+            </button>
+
+
+            <div class="faq-answer">
+
+                <p>
+
+                    Kepemilikan dan akses source code mengikuti
+                    ketentuan paket dan kesepakatan project
+                    sebelum development.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="faq-item">
+
+            <button class="faq-question">
+
+                Apakah bisa dibuatkan website dengan fitur khusus?
+
+                <span class="faq-plus">
+                    +
+                </span>
+
+            </button>
+
+
+            <div class="faq-answer">
+
+                <p>
+
+                    Bisa. Untuk dashboard, database, login,
+                    CMS, API, katalog dinamis atau sistem
+                    transaksi, gunakan paket Custom.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="faq-item">
+
+            <button class="faq-question">
+
+                Berapa lama pengerjaan website?
+
+                <span class="faq-plus">
+                    +
+                </span>
+
+            </button>
+
+
+            <div class="faq-answer">
+
+                <p>
+
+                    Timeline bergantung pada kompleksitas,
+                    jumlah halaman, konten dan fitur.
+                    Estimasi final diberikan setelah scope
+                    project disepakati.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="cta">
+
+<div class="container">
+
+
+    <div class="cta-box">
+
+
+        <div class="section-label">
+
+            <span></span>
+
+            Start a project
+
+        </div>
+
+
+        <h2>
+
+            Your business.
+            <br>
+            Better online.
+
+        </h2>
+
+
+        <p>
+
+            Punya ide website?
+            Mari ubah menjadi digital experience
+            yang benar-benar dapat digunakan.
+
+        </p>
+
+
+        <div
+            class="hero-buttons"
+            style="justify-content:center">
+
+
+            <a
+                href="#"
+                class="btn btn-primary">
+
+                Konsultasi Project →
+
+            </a>
+
+
+            <a
+                href="#pricing"
+                class="btn btn-ghost">
+
+                Lihat Paket
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+<div class="container footer-inner">
+
+
+    <div class="footer-copy">
+
+        © 2026 Cyrus Web.
+        Digital Web Development Studio.
+
+    </div>
+
+
+    <div class="footer-links">
+
+        <a href="#home">
+            Home
+        </a>
+
+        <a href="#portfolio">
+            Portfolio
+        </a>
+
+        <a href="#pricing">
+            Pricing
+        </a>
+
+        <a href="#faq">
+            FAQ
+        </a>
+
+    </div>
+
+
+</div>
+
+</footer>
+
+
+
+<script>
+
+/* =========================================================
+   GSAP
+========================================================= */
+
+gsap.registerPlugin(ScrollTrigger);
+
+
+/* =========================================================
+   CUSTOM CURSOR
+========================================================= */
+
+const cursor =
+    document.querySelector(".cursor");
+
+const ring =
+    document.querySelector(".cursor-ring");
+
+let mouseX =
+    window.innerWidth / 2;
+
+let mouseY =
+    window.innerHeight / 2;
+
+let ringX =
+    mouseX;
+
+let ringY =
+    mouseY;
+
+
+window.addEventListener("mousemove",(event)=>{
+
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+
+
+    gsap.to(cursor,{
+
+        x:mouseX,
+        y:mouseY,
+
+        duration:.08,
+
+        ease:"power2.out"
+
+    });
+
+});
+
+
+gsap.ticker.add(()=>{
+
+    ringX +=
+        (mouseX - ringX) * .14;
+
+    ringY +=
+        (mouseY - ringY) * .14;
+
+
+    ring.style.left =
+        ringX + "px";
+
+    ring.style.top =
+        ringY + "px";
+
+});
+
+
+document
+.querySelectorAll(
+    "a,button,.glass-card,.project,.price-card"
+)
+.forEach(element=>{
+
+    element.addEventListener(
+        "mouseenter",
+        ()=>{
+
+            ring.classList.add("active");
+
+        }
+    );
+
+
+    element.addEventListener(
+        "mouseleave",
+        ()=>{
+
+            ring.classList.remove("active");
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   HERO PARALLAX
+========================================================= */
+
+gsap.to(".hero-grid",{
+
+    y:180,
+
+    scrollTrigger:{
+
+        trigger:".hero",
+
+        start:"top top",
+
+        end:"bottom top",
+
+        scrub:1.5
+
+    }
+
+});
+
+
+gsap.to(".cowboy-video",{
+
+    y:"8%",
+
+    scale:1.08,
+
+    scrollTrigger:{
+
+        trigger:".hero",
+
+        start:"top top",
+
+        end:"bottom top",
+
+        scrub:2
+
+    }
+
+});
+
+
+gsap.to(".hero-content",{
+
+    y:-75,
+
+    opacity:.25,
+
+    scrollTrigger:{
+
+        trigger:".hero",
+
+        start:"top top",
+
+        end:"bottom top",
+
+        scrub:1
+
+    }
+
+});
+
+
+/* =========================================================
+   HERO ENTRANCE
+========================================================= */
+
+gsap.from(".hero-title",{
+
+    y:65,
+
+    opacity:0,
+
+    duration:1.2,
+
+    ease:"power4.out",
+
+    delay:.15
+
+});
+
+
+gsap.from(
+    ".hero-sub,.hero-buttons,.hero-stats",
+{
+
+    y:25,
+
+    opacity:0,
+
+    duration:.9,
+
+    stagger:.13,
+
+    ease:"power3.out",
+
+    delay:.45
+
+});
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+gsap.utils
+.toArray(
+    ".glass-card,.price-card,.transaction-card,.project,.process-item,.update-panel"
+)
+.forEach(element=>{
+
+    gsap.from(element,{
+
+        y:45,
+
+        opacity:0,
+
+        duration:.8,
+
+        ease:"power3.out",
+
+        scrollTrigger:{
+
+            trigger:element,
+
+            start:"top 86%",
+
+            toggleActions:
+                "play none none reverse"
+
+        }
+
+    });
+
+});
+
+
+/* =========================================================
+   FLOATING STATUS
+========================================================= */
+
+gsap.to(".widget-status",{
+
+    y:-12,
+
+    duration:2.6,
+
+    repeat:-1,
+
+    yoyo:true,
+
+    ease:"sine.inOut"
+
+});
+
+
+/* =========================================================
+   MAGNETIC BUTTON
+========================================================= */
+
+document
+.querySelectorAll(".btn")
+.forEach(button=>{
+
+
+    button.addEventListener(
+        "mousemove",
+        event=>{
+
+            const rect =
+                button.getBoundingClientRect();
+
+
+            const x =
+                event.clientX
+                -
+                rect.left
+                -
+                rect.width / 2;
+
+
+            const y =
+                event.clientY
+                -
+                rect.top
+                -
+                rect.height / 2;
+
+
+            gsap.to(button,{
+
+                x:x * .12,
+
+                y:y * .12,
+
+                duration:.25
+
+            });
+
+        }
+    );
+
+
+    button.addEventListener(
+        "mouseleave",
+        ()=>{
+
+            gsap.to(button,{
+
+                x:0,
+
+                y:0,
+
+                duration:.5,
+
+                ease:"elastic.out(1,.4)"
+
+            });
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   CARD TILT
+========================================================= */
+
+document
+.querySelectorAll(
+    ".glass-card,.price-card,.project"
+)
+.forEach(card=>{
+
+
+    card.addEventListener(
+        "mousemove",
+        event=>{
+
+            const rect =
+                card.getBoundingClientRect();
+
+
+            const x =
+                event.clientX -
+                rect.left;
+
+
+            const y =
+                event.clientY -
+                rect.top;
+
+
+            const rotateX =
+                ((y / rect.height) - .5)
+                * -3;
+
+
+            const rotateY =
+                ((x / rect.width) - .5)
+                * 3;
+
+
+            gsap.to(card,{
+
+                rotateX,
+
+                rotateY,
+
+                duration:.35,
+
+                transformPerspective:800
+
+            });
+
+        }
+    );
+
+
+    card.addEventListener(
+        "mouseleave",
+        ()=>{
+
+            gsap.to(card,{
+
+                rotateX:0,
+
+                rotateY:0,
+
+                duration:.6,
+
+                ease:"power3.out"
+
+            });
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   LIQUID SWITCH
+========================================================= */
+
+const liquidSwitch =
+    document.querySelector(
+        ".liquid-switch"
+    );
+
+const switchLiquid =
+    document.querySelector(
+        ".switch-liquid"
+    );
+
+let switchState = false;
+
+
+liquidSwitch.addEventListener(
+    "click",
+    ()=>{
+
+        switchState =
+            !switchState;
+
+
+        gsap.to(
+            switchLiquid,
+            {
+
+                x:
+                    switchState
+                    ? 31
+                    : 0,
+
+                scaleX:
+                    switchState
+                    ? 1.12
+                    : 1,
+
+                duration:.55,
+
+                ease:"elastic.out(1,.5)"
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+document
+.querySelectorAll(".faq-question")
+.forEach(button=>{
+
+
+    button.addEventListener(
+        "click",
+        ()=>{
+
+            const item =
+                button.parentElement;
+
+
+            const answer =
+                item.querySelector(
+                    ".faq-answer"
+                );
+
+
+            const isOpen =
+                item.classList.contains(
+                    "open"
+                );
+
+
+            document
+            .querySelectorAll(".faq-item")
+            .forEach(other=>{
+
+                if(other !== item){
+
+                    other.classList.remove(
+                        "open"
+                    );
+
+
+                    other
+                    .querySelector(
+                        ".faq-answer"
+                    )
+                    .style.maxHeight =
+                        null;
+
+                }
+
+            });
+
+
+            if(!isOpen){
+
+                item.classList.add(
+                    "open"
+                );
+
+
+                answer.style.maxHeight =
+                    answer.scrollHeight +
+                    "px";
+
+            }else{
+
+                item.classList.remove(
+                    "open"
+                );
+
+
+                answer.style.maxHeight =
+                    null;
+
+            }
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   ACTIVE NAV
+========================================================= */
+
+const sections =
+    document.querySelectorAll(
+        "section[id]"
+    );
+
+const navLinks =
+    document.querySelectorAll(
+        ".nav-link"
+    );
+
+
+window.addEventListener(
+    "scroll",
+    ()=>{
+
+        let current = "";
+
+
+        sections.forEach(section=>{
+
+            const top =
+                section.offsetTop - 180;
+
+
+            if(
+                window.scrollY >= top
+            ){
+
+                current =
+                    section.getAttribute(
+                        "id"
+                    );
+
+            }
+
+        });
+
+
+        navLinks.forEach(link=>{
+
+            link.classList.remove(
+                "active"
+            );
+
+
+            if(
+                link.getAttribute(
+                    "href"
+                )
+                ===
+                "#" + current
+            ){
+
+                link.classList.add(
+                    "active"
+                );
+
+            }
+
+        });
+
+    }
+);
+
+
+/* =========================================================
+   PORTFOLIO DATA
+   FUTURE CMS
+========================================================= */
+
+const portfolioData = [
+
+    {
+
+        title:
+            "Brand Website",
+
+        category:
+            "BUSINESS",
+
+        description:
+            "Corporate website",
+
+        media:
+            "assets/portfolio/project-01.mp4"
+
+    },
+
+
+    {
+
+        title:
+            "Creative Studio",
+
+        category:
+            "CREATIVE",
+
+        description:
+            "Creative portfolio",
+
+        media:
+            "assets/portfolio/project-02.mp4"
+
+    },
+
+
+    {
+
+        title:
+            "Product Catalog",
+
+        category:
+            "COMMERCE",
+
+        description:
+            "Digital catalog",
+
+        media:
+            "assets/portfolio/project-03.mp4"
+
+    },
+
+
+    {
+
+        title:
+            "Custom Web System",
+
+        category:
+            "CUSTOM",
+
+        description:
+            "Business platform",
+
+        media:
+            "assets/portfolio/project-04.mp4"
+
+    }
+
+];
+
+
+/*
+    FUTURE ARCHITECTURE
+
+    portfolioData
+          ↓
+    CMS / DATABASE
+          ↓
+    ADMIN DASHBOARD
+          ↓
+    Upload Video
+          ↓
+    Publish
+          ↓
+    PUBLIC WEBSITE
+
+    Client nantinya dapat mengelola
+    portfolio tanpa mengedit HTML.
+*/
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+const menuBtn =
+    document.querySelector(
+        ".menu-btn"
+    );
+
+
+menuBtn?.addEventListener(
+    "click",
+    ()=>{
+
+        alert(
+            "Mobile navigation drawer akan dibuat pada tahap berikutnya."
+        );
+
+    }
+);
+
+</script>
+
+</body>
+</html>
