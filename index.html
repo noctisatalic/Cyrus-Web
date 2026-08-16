@@ -3,27 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cyrus Web V4 — Web Development Studio</title>
-<meta name="description" content="Cyrus Web V4 — White modern liquid glass web design, development, and digital identity studio.">
+<title>CyrusWeb — Web Development Studio</title>
+<meta name="description" content="CyrusWeb — White modern web design, development, and digital identity studio.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
 
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
-
 <style>
 :root {
   --primary: #111111;
-  --bg: #F5F7F9;
+  --bg: #FFFFFF;
   --white: #FFFFFF;
-  --muted: #707070;
-  --light: #EDEFF2;
-  --line: rgba(17, 17, 17, 0.07);
-  --glass-surface: rgba(255, 255, 255, 0.65);
-  --glass-border: rgba(255, 255, 255, 0.9);
-  --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --muted: #666666;
+  --light: #F5F5F5;
+  --line: rgba(17, 17, 17, 0.08);
+  --glass-border: rgba(17, 17, 17, 0.08);
+  --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
   --font-body: 'DM Sans', sans-serif;
   --font-display: 'Instrument Sans', sans-serif;
 }
@@ -42,10 +38,7 @@ html {
 body {
   font-family: var(--font-body);
   color: var(--primary);
-  background: 
-    radial-gradient(circle at 20% -10%, rgba(255, 255, 255, 0.95), transparent 40%),
-    radial-gradient(circle at 80% 50%, rgba(230, 235, 240, 0.5), transparent 50%),
-    var(--bg);
+  background: #FFFFFF;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
@@ -77,36 +70,13 @@ section {
   padding: 120px 0;
 }
 
-/* Glass System Utilities */
 .liquid-glass {
   position: relative;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.4));
-  backdrop-filter: blur(24px) saturate(140%);
-  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  background: var(--white);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
-  isolation: isolate;
+  border-radius: 24px;
   overflow: hidden;
-}
-
-.liquid-glass::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.9), transparent 50%);
-  opacity: 0.7;
-}
-
-.liquid-glass::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 1), transparent);
-  opacity: 0.8;
 }
 
 /* Custom Cursor */
@@ -149,6 +119,7 @@ section {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
+  background: var(--light);
 }
 .section-tag span {
   width: 5px;
@@ -172,6 +143,35 @@ section {
   margin-top: 16px;
 }
 
+/* Floating CS Button */
+.cs-float-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 9999;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+}
+
+.cs-float-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.cs-float-btn svg {
+  width: 26px;
+  height: 26px;
+  fill: #111111;
+}
+
 /* Navbar */
 .nav-wrapper {
   position: fixed;
@@ -189,6 +189,9 @@ section {
   height: 64px;
   padding: 6px 8px 6px 18px;
   border-radius: 24px;
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
 .nav-brand {
@@ -196,7 +199,7 @@ section {
   align-items: center;
   gap: 10px;
   font-family: var(--font-display);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.02em;
 }
@@ -229,7 +232,7 @@ section {
 
 .nav-link:hover, .nav-link.active {
   color: var(--primary);
-  background: rgba(17, 17, 17, 0.04);
+  background: var(--light);
 }
 
 .nav-actions {
@@ -249,13 +252,12 @@ section {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 20px rgba(17, 17, 17, 0.15);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .nav-cta:hover {
   transform: translateY(-1px);
-  box-shadow: 0 12px 24px rgba(17, 17, 17, 0.22);
+  box-shadow: 0 6px 16px rgba(17, 17, 17, 0.15);
 }
 
 .mobile-menu-btn {
@@ -263,8 +265,8 @@ section {
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid var(--glass-border);
+  background: var(--light);
+  border: 1px solid var(--line);
   font-size: 16px;
   align-items: center;
   justify-content: center;
@@ -272,49 +274,13 @@ section {
 
 /* Hero Section */
 .hero {
-  min-height: 100vh;
+  min-height: 85vh;
   display: flex;
   align-items: center;
   padding-top: 160px;
   padding-bottom: 80px;
   position: relative;
-  overflow: hidden;
-}
-
-.hero-atmosphere {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.cowboy-silhouette {
-  position: absolute;
-  right: -5%;
-  top: 12%;
-  width: min(720px, 65vw);
-  opacity: 0.12;
-  filter: drop-shadow(0 30px 60px rgba(0,0,0,0.06));
-  z-index: 1;
-  will-change: transform;
-}
-
-.cowboy-silhouette svg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.hero-grid-bg {
-  position: absolute;
-  inset: -20% -10%;
-  background-image: 
-    linear-gradient(rgba(17, 17, 17, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(17, 17, 17, 0.035) 1px, transparent 1px);
-  background-size: 60px 60px;
-  transform: perspective(600px) rotateX(60deg);
-  opacity: 0.6;
-  z-index: 1;
+  background: #FFFFFF;
 }
 
 .hero-content {
@@ -380,33 +346,32 @@ section {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  box-shadow: 0 12px 30px rgba(17, 17, 17, 0.18);
+  box-shadow: 0 8px 20px rgba(17, 17, 17, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 36px rgba(17, 17, 17, 0.25);
+  box-shadow: 0 12px 28px rgba(17, 17, 17, 0.18);
 }
 
 .btn-secondary {
   height: 52px;
   padding: 0 24px;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid var(--glass-border);
+  background: var(--white);
+  border: 1px solid var(--line);
   color: var(--primary);
   font-size: 13px;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(20px);
   transition: background 0.2s, transform 0.2s;
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--light);
   transform: translateY(-2px);
 }
 
@@ -444,7 +409,7 @@ section {
 .service-card {
   padding: 32px;
   border-radius: 28px;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.3s, box-shadow 0.3s;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -453,7 +418,7 @@ section {
 
 .service-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
 }
 
 .service-card-top {
@@ -473,8 +438,8 @@ section {
   width: 44px;
   height: 44px;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid var(--glass-border);
+  background: var(--light);
+  border: 1px solid var(--line);
   display: grid;
   place-items: center;
   font-size: 16px;
@@ -565,14 +530,14 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+  transition: transform 0.3s, box-shadow 0.3s;
   position: relative;
 }
 
 .price-card.featured {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.65));
-  border-color: rgba(17, 17, 17, 0.15);
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.08);
+  background: var(--white);
+  border: 2px solid var(--primary);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
   transform: translateY(-8px);
 }
 
@@ -649,88 +614,75 @@ section {
 }
 
 /* Portfolio Section */
-.portfolio-grid {
+.testimonial-grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
   margin-top: 48px;
 }
 
-.portfolio-item {
-  grid-column: span 6;
-  border-radius: 32px;
-  min-height: 380px;
-  position: relative;
-  overflow: hidden;
+.testimonial-card {
+  padding: 24px;
+  border-radius: 28px;
+  background: var(--white);
+  border: 1px solid var(--line);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 36px;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  gap: 20px;
 }
 
-.portfolio-item:nth-child(1) { grid-column: span 7; }
-.portfolio-item:nth-child(2) { grid-column: span 5; }
-.portfolio-item:nth-child(3) { grid-column: span 5; }
-.portfolio-item:nth-child(4) { grid-column: span 7; }
-
-.portfolio-item:hover {
-  transform: scale(0.99);
+.brand-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-.portfolio-media {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #e4e7ec, #cbd5e1);
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 0;
+.brand-logo-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: var(--light);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 11px;
 }
 
-.portfolio-item:hover .portfolio-media {
-  transform: scale(1.04);
-}
-
-.portfolio-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(17, 17, 17, 0.75) 0%, rgba(17, 17, 17, 0.2) 50%, transparent 100%);
-  z-index: 1;
-}
-
-.portfolio-content {
-  position: relative;
-  z-index: 2;
-  color: var(--white);
-}
-
-.portfolio-tag {
-  display: inline-block;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.portfolio-content h3 {
+.brand-info h4 {
   font-family: var(--font-display);
-  font-size: 26px;
-  font-weight: 500;
-  letter-spacing: -0.025em;
-  margin-top: 12px;
+  font-size: 18px;
+  font-weight: 600;
 }
 
-.portfolio-content p {
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 13px;
-  margin-top: 6px;
+.brand-info p {
+  font-size: 12px;
+  color: var(--muted);
 }
 
-/* Dashboard & Update Preview Section */
+.video-container {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.testimonial-text {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* Dashboard & Update Section */
 .update-grid {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
@@ -756,7 +708,7 @@ section {
   position: relative;
 }
 
-.timeline-step:not(:last-child):::after {
+.timeline-step:not(:last-child)::after {
   content: "";
   position: absolute;
   left: 7px;
@@ -771,7 +723,7 @@ section {
   height: 15px;
   border-radius: 50%;
   background: var(--primary);
-  border: 3px solid rgba(255, 255, 255, 0.8);
+  border: 3px solid #FFFFFF;
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -797,8 +749,8 @@ section {
 .dash-box {
   padding: 20px;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.4);
-  border: 1px solid var(--glass-border);
+  background: var(--light);
+  border: 1px solid var(--line);
 }
 
 .dash-box span {
@@ -845,8 +797,8 @@ section {
   width: 32px;
   height: 32px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid var(--glass-border);
+  background: var(--light);
+  border: 1px solid var(--line);
   display: grid;
   place-items: center;
   font-size: 14px;
@@ -912,6 +864,7 @@ section {
 footer {
   padding: 40px 0;
   border-top: 1px solid var(--line);
+  background: #FFFFFF;
 }
 
 .footer-inner {
@@ -936,15 +889,12 @@ footer {
   color: var(--primary);
 }
 
-/* Responsive Media Queries */
+/* Responsive */
 @media(max-width: 1024px) {
-  .services-grid {
+  .services-grid, .pricing-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .pricing-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .update-grid {
+  .update-grid, .testimonial-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -963,22 +913,18 @@ footer {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  .portfolio-item, .portfolio-item:nth-child(n) {
-    grid-column: span 12;
-    min-height: 320px;
-  }
-  .cowboy-silhouette {
-    right: -25%;
-    width: 120vw;
-    top: 20%;
-    opacity: 0.08;
-  }
   .cursor, .cursor-ring {
     display: none;
   }
   .hero-stats {
     flex-direction: column;
     gap: 20px;
+  }
+  .cs-float-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
   }
 }
 </style>
@@ -988,12 +934,19 @@ footer {
 <div class="cursor"></div>
 <div class="cursor-ring"></div>
 
-<!-- Floating Navigation Bar -->
+<!-- Floating CS Button (Nomor WhatsApp Diperbarui) -->
+<a href="https://wa.me/6281318048885?text=Halo%20Customer%20Service%20CyrusWeb,%20saya%20ingin%20bertanya" target="_blank" class="cs-float-btn" title="Customer Service">
+  <svg viewBox="0 0 24 24">
+    <path d="M12 2C6.48 2 2 6.48 2 12c0 1.82.49 3.53 1.35 5L2 22l5.1-1.33C8.53 21.52 10.22 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/>
+  </svg>
+</a>
+
+<!-- Navigation Bar -->
 <div class="nav-wrapper">
-  <nav class="navbar liquid-glass">
+  <nav class="navbar">
     <a href="#home" class="nav-brand">
       <div class="brand-icon">C</div>
-      <span>Cyrus Web V4</span>
+      <span>CyrusWeb</span>
     </a>
     <div class="nav-links">
       <a href="#services" class="nav-link">Layanan</a>
@@ -1003,7 +956,7 @@ footer {
       <a href="#faq" class="nav-link">FAQ</a>
     </div>
     <div class="nav-actions">
-      <a href="#order" class="nav-cta">Mulai Project</a>
+      <a href="https://wa.me/6281318048885?text=Halo%20CyrusWeb,%20saya%20ingin%20memulai%20project%20website" target="_blank" class="nav-cta">Mulai Project</a>
       <button class="mobile-menu-btn" aria-label="Menu">☰</button>
     </div>
   </nav>
@@ -1012,47 +965,21 @@ footer {
 <main>
   <!-- Hero Section -->
   <section class="hero" id="home">
-    <div class="hero-atmosphere">
-      <div class="hero-grid-bg"></div>
-      <div class="cowboy-silhouette" aria-hidden="true">
-        <svg viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg">
-          <g fill="#111111">
-            <ellipse cx="590" cy="205" rx="150" ry="28"/>
-            <path d="M520 190 Q540 85 610 78 Q680 86 705 190 Z"/>
-            <circle cx="613" cy="205" r="48"/>
-            <path d="M575 244 Q620 228 665 250 L735 500 L525 500 Z"/>
-            <path d="M570 270 L500 355 L535 380 L600 310 Z"/>
-            <path d="M655 268 L735 350 L710 380 L640 312 Z"/>
-            <path d="M555 470 L625 470 L610 610 L565 610 Z"/>
-            <path d="M625 470 L685 465 L725 600 L680 612 Z"/>
-            <path d="M330 390 Q365 315 475 315 Q570 320 635 385 L690 420 L665 465 L585 438 L520 410 L455 430 L390 470 L315 450 Z"/>
-            <path d="M360 350 Q315 290 345 250 Q375 275 410 330 Z"/>
-            <path d="M337 255 L300 220 L325 300 Z"/>
-            <path d="M470 420 L450 565 L415 565 L425 430 Z"/>
-            <path d="M565 425 L610 565 L575 570 L535 445 Z"/>
-            <path d="M350 430 L310 555 L275 550 L305 415 Z"/>
-            <path d="M635 420 L700 535 L665 555 L610 445 Z"/>
-            <path d="M320 385 Q235 335 250 275 Q280 335 345 350 Z"/>
-          </g>
-        </svg>
-      </div>
-    </div>
-
     <div class="container hero-content">
       <div class="hero-eyebrow">
         <span class="line"></span>
-        <span>Digital Web Studio V4</span>
+        <span>Digital Web Studio</span>
       </div>
       <h1 class="hero-headline">
         BUILD YOUR
         <span>DIGITAL IDENTITY.</span>
       </h1>
       <p class="hero-subheadline">
-        Redesigned from the ground up with Apple-inspired Liquid Glass architecture, minimal structural depth, and high-performance GSAP motion.
+        Redesigned with minimal structure, pure white aesthetics, and high-performance GSAP motion.
       </p>
       <div class="hero-cta-group">
-        <a href="#pricing" class="btn-primary">Pilih Paket Website →</a>
-        <a href="#portfolio" class="btn-secondary">Lihat Portfolio</a>
+        <a href="https://wa.me/6281318048885?text=Halo%20CyrusWeb,%20saya%20ingin%20memilih%20paket%20website" target="_blank" class="btn-primary">Pilih Paket Website →</a>
+        <a href="#portfolio" class="btn-secondary">Lihat Testimoni &amp; Portfolio</a>
       </div>
       <div class="hero-stats">
         <div class="stat-item">
@@ -1086,7 +1013,7 @@ footer {
           </div>
           <div>
             <h3>Web Design</h3>
-            <p>UI/UX modern dengan estetika minimal, tipografi presisi, dan sistem kaca cair yang konsisten.</p>
+            <p>UI/UX modern dengan estetika minimal, tipografi presisi, dan tata letak yang bersih.</p>
           </div>
         </article>
 
@@ -1169,7 +1096,7 @@ footer {
             <span class="process-step-num">02</span>
             <div>
               <h3>Architecture &amp; UI Design</h3>
-              <p>Menyusun wireframe, tata letak responsif, serta penerapan sistem White Liquid Glass V4.</p>
+              <p>Menyusun wireframe, tata letak responsif, serta penerapan gaya modern CyrusWeb.</p>
             </div>
           </div>
           <div class="process-card liquid-glass">
@@ -1211,12 +1138,12 @@ footer {
             <ul class="price-features">
               <li>1 Halaman Utama</li>
               <li>Responsive Mobile UI</li>
-              <li>Custom Glass Design</li>
+              <li>Custom Clean Design</li>
               <li>WhatsApp CTA Integration</li>
               <li>Basic SEO Structure</li>
             </ul>
           </div>
-          <a href="#order" class="btn-secondary" style="width:100%; justify-content:center;">Pilih Starter</a>
+          <a href="https://wa.me/6281318048885?text=Halo%20CyrusWeb,%20saya%20berminat%20paket%20Starter" target="_blank" class="btn-secondary" style="width:100%; justify-content:center;">Pilih Starter</a>
         </article>
 
         <article class="price-card featured liquid-glass">
@@ -1234,7 +1161,7 @@ footer {
               <li>1x Minor Update</li>
             </ul>
           </div>
-          <a href="#order" class="btn-primary" style="width:100%; justify-content:center;">Pilih Business</a>
+          <a href="https://wa.me/6281318048885?text=Halo%20CyrusWeb,%20saya%20berminat%20paket%20Business" target="_blank" class="btn-primary" style="width:100%; justify-content:center;">Pilih Business</a>
         </article>
 
         <article class="price-card liquid-glass">
@@ -1251,7 +1178,7 @@ footer {
               <li>3x Update Support</li>
             </ul>
           </div>
-          <a href="#order" class="btn-secondary" style="width:100%; justify-content:center;">Pilih Professional</a>
+          <a href="https://wa.me/6281318048885?text=Halo%20CyrusWeb,%20saya%20berminat%20paket%20Professional" target="_blank" class="btn-secondary" style="width:100%; justify-content:center;">Pilih Professional</a>
         </article>
 
         <article class="price-card liquid-glass">
@@ -1267,7 +1194,7 @@ footer {
               <li>Dedicated Maintenance</li>
             </ul>
           </div>
-          <a href="#order" class="btn-secondary" style="width:100%; justify-content:center;">Konsultasi</a>
+          <a href="https://wa.me/6281318048885?text=Halo%20CyrusWeb,%20saya%20ingin%20konsultasi%20paket%20Custom" target="_blank" class="btn-secondary" style="width:100%; justify-content:center;">Konsultasi</a>
         </article>
       </div>
     </div>
@@ -1276,56 +1203,50 @@ footer {
   <!-- Portfolio Section -->
   <section id="portfolio">
     <div class="container">
-      <div class="section-tag"><span></span>Selected Work</div>
+      <div class="section-tag"><span></span>Selected Work &amp; Reviews</div>
       <h2 class="section-title">Built with purpose.</h2>
-      <p class="section-desc">Setiap karya dirancang dengan fokus pada estetika visual, kecepatan muat, dan konversi pengguna.</p>
+      <p class="section-desc">Lihat bagaimana kustomer kami puas dengan hasil pembuatan website dan tampilan interaktif yang disajikan.</p>
 
-      <div class="portfolio-grid">
-        <article class="portfolio-item liquid-glass">
-          <div class="portfolio-media"></div>
-          <div class="portfolio-overlay"></div>
-          <div class="portfolio-content">
-            <span class="portfolio-tag">Business</span>
-            <h3>Corporate Brand Experience</h3>
-            <p>Redesigned digital presence for modern enterprise.</p>
+      <div class="testimonial-grid">
+        <article class="testimonial-card">
+          <div class="brand-header">
+            <div class="brand-logo-img">AURA</div>
+            <div class="brand-info">
+              <h4>Aura Style Co.</h4>
+              <p>Fashion &amp; E-commerce</p>
+            </div>
           </div>
+          <div class="video-container">
+            <video controls poster="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80">
+              <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+              Browser Anda tidak mendukung video.
+            </video>
+          </div>
+          <p class="testimonial-text">"Website kami jadi terlihat jauh lebih elegan dan profesional. Penjualan produk meningkat setelah versi baru dipublikasikan!"</p>
         </article>
 
-        <article class="portfolio-item liquid-glass">
-          <div class="portfolio-media"></div>
-          <div class="portfolio-overlay"></div>
-          <div class="portfolio-content">
-            <span class="portfolio-tag">Creative</span>
-            <h3>Studio Portfolio V4</h3>
-            <p>Immersive liquid glass UI components.</p>
+        <article class="testimonial-card">
+          <div class="brand-header">
+            <div class="brand-logo-img">NEXUS</div>
+            <div class="brand-info">
+              <h4>Nexus Tech Studio</h4>
+              <p>SaaS &amp; Technology</p>
+            </div>
           </div>
-        </article>
-
-        <article class="portfolio-item liquid-glass">
-          <div class="portfolio-media"></div>
-          <div class="portfolio-overlay"></div>
-          <div class="portfolio-content">
-            <span class="portfolio-tag">Commerce</span>
-            <h3>Digital Product Catalog</h3>
-            <p>Streamlined purchasing experience.</p>
+          <div class="video-container">
+            <video controls poster="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80">
+              <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+              Browser Anda tidak mendukung video.
+            </video>
           </div>
-        </article>
-
-        <article class="portfolio-item liquid-glass">
-          <div class="portfolio-media"></div>
-          <div class="portfolio-overlay"></div>
-          <div class="portfolio-content">
-            <span class="portfolio-tag">Custom</span>
-            <h3>Interactive Business Platform</h3>
-            <p>Tailored dashboard web application.</p>
-          </div>
+          <p class="testimonial-text">"Pengerjaan sangat cepat dan komunikatif. Animasi yang diberikan sangat halus tanpa memberatkan kecepatan muat website."</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- Update & Dashboard Preview Section -->
-  <section>
+  <!-- Update Section -->
+  <section id="updates">
     <div class="container">
       <div class="section-tag"><span></span>After Launch</div>
       <h2 class="section-title">Website selesai bukan<br>berarti hubungan selesai.</h2>
@@ -1339,14 +1260,14 @@ footer {
               <div class="timeline-dot"></div>
               <div class="timeline-content">
                 <strong>1. Request Permintaan</strong>
-                <p>Kirimkan perubahan konten atau penambahan fitur melalui sistem tiket kami.</p>
+                <p>Kirimkan perubahan konten atau penambahan fitur melalui WhatsApp Customer Service kami.</p>
               </div>
             </div>
             <div class="timeline-step">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
                 <strong>2. Validasi &amp; Pengerjaan</strong>
-                <p>Tim Cyrus Web segera memproses perubahan sesuai scope kesepakatan.</p>
+                <p>Tim CyrusWeb segera memproses perubahan sesuai scope kesepakatan.</p>
               </div>
             </div>
             <div class="timeline-step">
@@ -1397,8 +1318,8 @@ footer {
       <div class="faq-container">
         <div class="faq-item">
           <button class="faq-question">
-            Apa yang saya dapatkan setelah memesan website?
-            <div class="faq-icon">+</div>
+            <span>Apa yang saya dapatkan setelah memesan website?</span>
+            <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
             <p>Anda mendapatkan website lengkap sesuai paket yang dipilih, ter-deploy secara profesional, siap diakses publik, beserta dokumentasi atau akses pengelolaan yang disepakati.</p>
@@ -1407,8 +1328,8 @@ footer {
 
         <div class="faq-item">
           <button class="faq-question">
-            Apakah website bisa diperbarui setelah live?
-            <div class="faq-icon">+</div>
+            <span>Apakah website bisa diperbarui setelah live?</span>
+            <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
             <p>Tentu. Kami menyediakan layanan update berkala dan pemeliharaan sehingga Anda tidak perlu repot mengubah kode secara manual.</p>
@@ -1417,8 +1338,8 @@ footer {
 
         <div class="faq-item">
           <button class="faq-question">
-            Berapa lama estimasi waktu pengerjaan project?
-            <div class="faq-icon">+</div>
+            <span>Berapa lama estimasi waktu pengerjaan project?</span>
+            <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
             <p>Durasi pengerjaan bervariasi mulai dari 3 hingga 14 hari kerja tergantung pada kompleksitas desain, jumlah halaman, dan fitur khusus yang dibutuhkan.</p>
@@ -1427,8 +1348,8 @@ footer {
 
         <div class="faq-item">
           <button class="faq-question">
-            Bisakah dibuatkan fitur kustom khusus?
-            <div class="faq-icon">+</div>
+            <span>Bisakah dibuatkan fitur kustom khusus?</span>
+            <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
             <p>Sangat bisa. Anda dapat memilih paket Custom untuk kebutuhan integrasi database, panel admin dashboard, maupun sistem interaktif khusus.</p>
@@ -1438,15 +1359,15 @@ footer {
     </div>
   </section>
 
-  <!-- CTA Chamber Section -->
+  <!-- CTA Section -->
   <section class="cta-section" id="order">
     <div class="container">
       <div class="cta-chamber liquid-glass">
         <div class="section-tag"><span></span>Start a Project</div>
         <h2>Your business.<br>Better online.</h2>
-        <p>Punya visi atau ide website? Mari wujudkan bersama Cyrus Web V4 menjadi pengalaman digital yang memukau.</p>
+        <p>Punya visi atau ide website? Mari wujudkan bersama CyrusWeb menjadi pengalaman digital yang memukau.</p>
         <div class="hero-cta-group">
-          <a href="#pricing" class="btn-primary">Konsultasi Sekarang →</a>
+          <a href="https://wa.me/6281318048885?text=Halo%20CyrusWeb,%20saya%20ingin%20konsultasi%20pembuatan%20website" target="_blank" class="btn-primary">Konsultasi Sekarang →</a>
           <a href="#home" class="btn-secondary">Kembali ke Atas</a>
         </div>
       </div>
@@ -1456,7 +1377,7 @@ footer {
 
 <footer>
   <div class="container footer-inner">
-    <div class="footer-copy">&copy; 2026 Cyrus Web. All rights reserved. White Modern Liquid Glass V4.</div>
+    <div class="footer-copy">&copy; 2026 CyrusWeb. All rights reserved.</div>
     <div class="footer-links">
       <a href="#home">Home</a>
       <a href="#services">Layanan</a>
@@ -1466,16 +1387,20 @@ footer {
   </div>
 </footer>
 
+<!-- Skrip GSAP dan ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  // GSAP & ScrollTrigger Setup
+  // Inisialisasi GSAP ScrollTrigger
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Custom Cursor Motion
+    /* --- Custom Cursor --- */
     const cursor = document.querySelector(".cursor");
     const ring = document.querySelector(".cursor-ring");
-    let mouseX = innerWidth / 2, mouseY = innerHeight / 2;
+    let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
     let ringX = mouseX, ringY = mouseY;
 
     window.addEventListener("mousemove", (e) => {
@@ -1493,12 +1418,12 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    document.querySelectorAll("a, button, .service-card, .price-card, .portfolio-item").forEach(el => {
+    document.querySelectorAll("a, button, .service-card, .price-card, .testimonial-card").forEach(el => {
       el.addEventListener("mouseenter", () => ring && ring.classList.add("active"));
       el.addEventListener("mouseleave", () => ring && ring.classList.remove("active"));
     });
 
-    // Hero Entrance Animations
+    /* --- Animasi Hero Load --- */
     const heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
     heroTl.from(".hero-eyebrow", { y: 20, opacity: 0, duration: 0.8, delay: 0.1 })
           .from(".hero-headline", { y: 50, opacity: 0, duration: 1 }, "-=0.6")
@@ -1506,56 +1431,27 @@ document.addEventListener("DOMContentLoaded", () => {
           .from(".hero-cta-group", { y: 20, opacity: 0, duration: 0.8 }, "-=0.6")
           .from(".hero-stats", { y: 20, opacity: 0, duration: 0.8 }, "-=0.6");
 
-    // Cowboy Silhouette Parallax
-    gsap.to(".cowboy-silhouette", {
-      y: -100,
-      x: -40,
-      scale: 1.05,
-      scrollTrigger: {
-        trigger: ".hero",
-        start: "top top",
-        end: "bottom top",
-        scrub: 1.5
-      }
-    });
-
-    // Scroll Reveal for Cards & Sections
-    const revealElements = document.querySelectorAll(".service-card, .process-card, .price-card, .portfolio-item, .update-panel");
+    /* --- Animasi Scroll Reveal per Komponen --- */
+    const revealElements = document.querySelectorAll(".service-card, .process-card, .price-card, .testimonial-card, .update-panel, .cta-chamber");
     revealElements.forEach(el => {
-      gsap.from(el, {
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 88%",
-          toggleActions: "play none none reverse"
+      gsap.fromTo(el, 
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 88%",
+            toggleActions: "play none none reverse"
+          }
         }
-      });
+      );
     });
-
-    // Desktop Subtle 3D Card Tilt
-    if (window.innerWidth > 768) {
-      document.querySelectorAll(".service-card, .price-card, .portfolio-item").forEach(card => {
-        card.addEventListener("mousemove", (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const xc = rect.width / 2;
-          const yc = rect.height / 2;
-          const rotateX = ((y - yc) / yc) * -3;
-          const rotateY = ((x - xc) / xc) * 3;
-          gsap.to(card, { rotateX, rotateY, transformPerspective: 1000, duration: 0.3, ease: "power2.out" });
-        });
-        card.addEventListener("mouseleave", () => {
-          gsap.to(card, { rotateX: 0, rotateY: 0, duration: 0.5, ease: "power3.out" });
-        });
-      });
-    }
   }
 
-  // FAQ Accordion Functionality
+  /* --- Interactive FAQ Accordion --- */
   document.querySelectorAll(".faq-question").forEach(btn => {
     btn.addEventListener("click", () => {
       const item = btn.parentElement;
@@ -1579,7 +1475,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Active Nav Link Spy on Scroll
+  /* --- Active Navbar Tracker --- */
   const sections = document.querySelectorAll("section[id]");
   const navLinks = document.querySelectorAll(".nav-link");
   window.addEventListener("scroll", () => {
