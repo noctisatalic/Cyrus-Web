@@ -1236,43 +1236,8 @@ body.nav-locked {
       <h2 class="section-title">Work that speaks<br>for itself.</h2>
       <p class="section-desc">Project nyata dan concept work ditampilkan secara transparan. Tidak ada client list atau hasil yang dibuat-buat.</p>
 
-      <div class="clean-work-grid">
-        <article class="clean-work-card clean-work-featured">
-          <div class="clean-work-media">
-            <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1400&q=85"
-                 alt="Audio production workspace" loading="lazy">
-          </div>
-          <div class="clean-work-body">
-            <div class="clean-work-meta"><span>REAL PROJECT</span><span>Audio Production</span></div>
-            <h3>SPR Audio</h3>
-            <p>Custom web presence untuk bisnis audio, dengan fokus pada portfolio, layanan, brand presence, dan jalur kontak.</p>
-            <a href="https://spraudio.github.io/SPR-Audio/" target="_blank" rel="noopener">View Project <span>↗</span></a>
-          </div>
-        </article>
-
-        <article class="clean-work-card">
-          <div class="clean-work-media">
-            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=85"
-                 alt="Commerce website concept" loading="lazy">
-          </div>
-          <div class="clean-work-body">
-            <div class="clean-work-meta"><span>CONCEPT PROJECT</span><span>Commerce</span></div>
-            <h3>Ihsan Koi</h3>
-            <p>Eksplorasi website brand produk dengan fokus pada katalog, identitas, dan pengalaman browsing yang lebih premium.</p>
-          </div>
-        </article>
-
-        <article class="clean-work-card">
-          <div class="clean-work-media">
-            <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1200&q=85"
-                 alt="Modern web interface concept" loading="lazy">
-          </div>
-          <div class="clean-work-body">
-            <div class="clean-work-meta"><span>CONCEPT PROJECT</span><span>Web Experience</span></div>
-            <h3>Cyrus Experimental</h3>
-            <p>Eksperimen responsive interface, motion, dan interaction untuk menunjukkan arah visual Cyrus.</p>
-          </div>
-        </article>
+      <div class="clean-work-grid" id="portfolio-grid">
+        <div class="portfolio-loading">Memuat portfolio...</div>
       </div>
     </div>
   </section>
@@ -1535,6 +1500,74 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("scroll", updateActiveNav);
   updateActiveNav();
+});
+</script>
+
+
+<script>
+/* --- Dynamic Portfolio CMS --- */
+document.addEventListener("DOMContentLoaded", () => {
+  const portfolioGrid = document.querySelector("#portfolio-grid");
+
+  if (!portfolioGrid) return;
+
+  fetch("https://cyrusweb-f8hns0v4j-noctisatalics-projects.vercel.app/api/portfolio")
+    .then(res => {
+      if (!res.ok) throw new Error("Portfolio API error");
+      return res.json();
+    })
+    .then(result => {
+      if (!result.success || !Array.isArray(result.data)) {
+        throw new Error("Format portfolio tidak valid");
+      }
+
+      portfolioGrid.innerHTML = "";
+
+      result.data.forEach(item => {
+        const article = document.createElement("article");
+
+        article.className =
+          "clean-work-card" +
+          (item.featured ? " clean-work-featured" : "");
+
+        article.innerHTML = `
+          <div class="clean-work-media">
+            <img
+              src="${item.imageUrl}"
+              alt="${item.title}"
+              loading="lazy"
+            >
+          </div>
+
+          <div class="clean-work-body">
+            <div class="clean-work-meta">
+              <span>${item.featured ? "REAL PROJECT" : "PROJECT"}</span>
+              <span>${item.category}</span>
+            </div>
+
+            <h3>${item.title}</h3>
+
+            <p>${item.description}</p>
+
+            ${
+              item.projectUrl
+                ? `<a href="${item.projectUrl}" target="_blank" rel="noopener">
+                    View Project <span>↗</span>
+                  </a>`
+                : ""
+            }
+          </div>
+        `;
+
+        portfolioGrid.appendChild(article);
+      });
+    })
+    .catch(error => {
+      console.error("Portfolio load error:", error);
+
+      portfolioGrid.innerHTML =
+        '<div class="portfolio-loading">Portfolio belum dapat dimuat.</div>';
+    });
 });
 </script>
 
