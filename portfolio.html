@@ -1511,7 +1511,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!portfolioGrid) return;
 
-  fetch("https://cyrusweb-f8hns0v4j-noctisatalics-projects.vercel.app/api/portfolio")
+  console.log("CMS START"); fetch("https://cyrusweb-f8hns0v4j-noctisatalics-projects.vercel.app/api/portfolio")
     .then(res => {
       if (!res.ok) throw new Error("Portfolio API error");
       return res.json();
@@ -1521,6 +1521,7 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error("Format portfolio tidak valid");
       }
 
+      console.log("CMS DATA:", result.data);
       portfolioGrid.innerHTML = "";
 
       result.data.forEach(item => {
