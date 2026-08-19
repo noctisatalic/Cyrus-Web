@@ -1522,6 +1522,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       portfolioGrid.innerHTML = "";
+      portfolioGrid.innerHTML += "<div>JUMLAH DATA: " + result.data.length + "</div>";
       portfolioGrid.innerHTML += "<article>RENDER TEST</article>";
       result.data.forEach(item => { portfolioGrid.innerHTML += "<div>DATA: " + item.title + "</div>"; });
 
