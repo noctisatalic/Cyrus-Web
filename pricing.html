@@ -1572,5 +1572,92 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+
+<script>
+/* --- Dynamic Pricing CMS --- */
+document.addEventListener("DOMContentLoaded", () => {
+  const grid = document.querySelector(".pricing-grid");
+  if (!grid) return;
+
+  fetch("https://cyrusweb.vercel.app/api/pricing?t=" + Date.now())
+    .then(res => {
+      if (!res.ok) throw new Error("Pricing API error");
+      return res.json();
+    })
+    .then(result => {
+      if (!result.success || !Array.isArray(result.data)) {
+        throw new Error("Format pricing tidak valid");
+      }
+
+      grid.innerHTML = "";
+
+      result.data.forEach(item => {
+        const card = document.createElement("article");
+
+        card.className =
+          "price-card liquid-glass" +
+          (item.highlighted ? " featured" : "");
+
+        const price = /^\d+$/.test(String(item.price))
+          ? "Rp" + Number(item.price).toLocaleString("id-ID")
+          : item.price;
+
+        const period = item.period
+          ? "<small> " + item.period + "</small>"
+          : "";
+
+        const features = Array.isArray(item.features)
+          ? item.features.map(feature => "<li>" + feature + "</li>").join("")
+          : "";
+
+        const isCustom =
+          String(item.name).toLowerCase() === "custom";
+
+        const buttonText =
+          isCustom ? "Konsultasi" : "Pilih " + item.name;
+
+        const message =
+          isCustom
+            ? "Halo CyrusWeb, saya ingin konsultasi paket Custom"
+            : "Halo CyrusWeb, saya berminat paket " + item.name;
+
+        card.innerHTML =
+          (item.highlighted
+            ? '<span class="price-badge">POPULAR</span>'
+            : "") +
+          '<div>' +
+          '<span class="price-tier">' +
+          String(item.name).toUpperCase() +
+          '</span>' +
+          '<div class="price-amount">' +
+          price +
+          period +
+          '</div>' +
+          '<p class="price-desc">' +
+          (item.description || "") +
+          '</p>' +
+          '<ul class="price-features">' +
+          features +
+          '</ul>' +
+          '</div>' +
+          '<a href="https://wa.me/6281318048885?text=' +
+          encodeURIComponent(message) +
+          '" target="_blank" rel="noopener" class="' +
+          (item.highlighted ? "btn-primary" : "btn-secondary") +
+          '" style="width:100%;justify-content:center;">' +
+          buttonText +
+          '</a>';
+
+        grid.appendChild(card);
+      });
+    })
+    .catch(error => {
+      console.error("Pricing load error:", error);
+      grid.innerHTML =
+        '<div class="portfolio-loading">Pricing gagal dimuat.</div>';
+    });
+});
+</script>
+
 </body>
 </html>
