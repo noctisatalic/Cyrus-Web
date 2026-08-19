@@ -1523,6 +1523,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       portfolioGrid.innerHTML = "";
       portfolioGrid.innerHTML += "<article>RENDER TEST</article>";
+      result.data.forEach(item => { portfolioGrid.innerHTML += "<div>DATA: " + item.title + "</div>"; });
 
       result.data.forEach(item => {
         const article = document.createElement("article");
