@@ -1511,6 +1511,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!portfolioGrid) return;
 
+  portfolioGrid.innerHTML = "<p style="padding:20px">CMS SCRIPT JALAN...</p>";
   console.log("CMS START"); fetch("https://cyrusweb-f8hns0v4j-noctisatalics-projects.vercel.app/api/portfolio")
     .then(res => {
       if (!res.ok) throw new Error("Portfolio API error");
