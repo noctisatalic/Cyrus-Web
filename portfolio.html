@@ -1566,7 +1566,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Portfolio load error:", error);
 
       portfolioGrid.innerHTML =
-        '<div class="portfolio-loading">Portfolio belum dapat dimuat.</div>';
+        '<div class="portfolio-loading">ERROR CMS: ' + error.message + '</div>';
     });
 });
 </script>
