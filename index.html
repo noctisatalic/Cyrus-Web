@@ -1636,27 +1636,33 @@ document.addEventListener("DOMContentLoaded", () => {
   const currentFile = location.pathname.split("/").pop() || "index.html";
 
   function updateActiveNav() {
-    // Tentukan anchor section yang sedang terlihat (khusus link ber-hash di halaman ini)
-    let currentAnchor = "";
-    sections.forEach(sec => {
-      if (window.scrollY >= sec.offsetTop - 180) {
-        currentAnchor = sec.getAttribute("id");
-      }
-    });
+    const currentPath = window.location.pathname;
+    const currentFile =
+      currentPath.split("/").filter(Boolean).pop() || "index.html";
 
     navLinks.forEach(link => {
       const href = link.getAttribute("href") || "";
       const [linkFile, linkAnchor] = href.split("#");
-      const linkFileName = linkFile || currentFile;
 
       let isActive = false;
+
+      // Link dengan anchor hanya aktif di halaman + anchor yang sesuai.
       if (linkAnchor) {
-        // Link menuju anchor spesifik (mis. Proses -> index.html#process)
-        isActive = linkFileName === currentFile && linkAnchor === currentAnchor;
+        const targetFile = linkFile || "index.html";
+        const currentAnchor = window.location.hash.replace("#", "");
+
+        isActive =
+          targetFile === currentFile &&
+          currentAnchor === linkAnchor;
       } else {
-        // Link menuju halaman utuh (mis. Layanan -> layanan.html)
-        isActive = linkFileName === currentFile;
+        // Link halaman biasa hanya aktif berdasarkan nama file.
+        const targetFile = linkFile || "index.html";
+
+        isActive =
+          targetFile === currentFile ||
+          (targetFile === "index.html" && currentFile === "");
       }
+
       link.classList.toggle("active", isActive);
     });
   }

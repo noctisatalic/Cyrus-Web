@@ -1538,27 +1538,35 @@ document.addEventListener("DOMContentLoaded", () => {
   /* --- Active Navbar Tracker (multi-page) --- */
   const sections = document.querySelectorAll("main section[id]");
   const navLinks = document.querySelectorAll(".nav-link");
-  const currentFile = location.pathname.split("/").pop() || "index.html";
 
   function updateActiveNav() {
-    let currentAnchor = "";
-    sections.forEach(sec => {
-      if (window.scrollY >= sec.offsetTop - 180) {
-        currentAnchor = sec.getAttribute("id");
-      }
-    });
+    const currentPath = window.location.pathname;
+    const currentFile =
+      currentPath.split("/").filter(Boolean).pop() || "index.html";
 
     navLinks.forEach(link => {
       const href = link.getAttribute("href") || "";
       const [linkFile, linkAnchor] = href.split("#");
-      const linkFileName = linkFile || currentFile;
 
       let isActive = false;
+
+      // Link dengan anchor hanya aktif di halaman + anchor yang sesuai.
       if (linkAnchor) {
-        isActive = linkFileName === currentFile && linkAnchor === currentAnchor;
+        const targetFile = linkFile || "index.html";
+        const currentAnchor = window.location.hash.replace("#", "");
+
+        isActive =
+          targetFile === currentFile &&
+          currentAnchor === linkAnchor;
       } else {
-        isActive = linkFileName === currentFile;
+        // Link halaman biasa hanya aktif berdasarkan nama file.
+        const targetFile = linkFile || "index.html";
+
+        isActive =
+          targetFile === currentFile ||
+          (targetFile === "index.html" && currentFile === "");
       }
+
       link.classList.toggle("active", isActive);
     });
   }
