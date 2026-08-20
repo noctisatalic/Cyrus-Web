@@ -1135,7 +1135,7 @@ body.nav-locked {
   overflow:hidden;
   border:1px solid var(--line);
   border-radius:24px;
-  background:#fff;
+  background:var(--white);
   box-shadow:0 10px 30px rgba(0,0,0,.035);
 }
 .clean-work-featured{grid-column:1/-1;}
@@ -1269,6 +1269,164 @@ html[data-theme="dark"] .nav-cta {
 
 </style>
 
+<script>
+(function () {
+  const saved = localStorage.getItem("cyrus-theme");
+  const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.dataset.theme =
+    saved || (preferred ? "dark" : "light");
+})();
+</script>
+
+<style id="cyrus-theme-engine">
+:root {
+  --cw-bg: #ffffff;
+  --cw-surface: rgba(255,255,255,.78);
+  --cw-surface-solid: #ffffff;
+  --cw-text: #111111;
+  --cw-muted: #666666;
+  --cw-line: rgba(17,17,17,.09);
+  --cw-soft: #f5f5f5;
+}
+
+html[data-theme="dark"] {
+  /* Original CyrusWeb design tokens */
+  --primary: #F5F5F5;
+  --bg: #0B0B0B;
+  --white: #F5F5F5;
+  --muted: #A0A0A0;
+  --light: #181818;
+  --line: rgba(255, 255, 255, 0.11);
+  --glass-border: rgba(255, 255, 255, 0.11);
+  --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.30);
+
+  /* Theme engine aliases */
+  --cw-bg: var(--bg);
+  --cw-surface: rgba(24,24,24,.78);
+  --cw-surface-solid: #151515;
+  --cw-text: var(--primary);
+  --cw-muted: var(--muted);
+  --cw-line: var(--line);
+  --cw-soft: var(--light);
+}
+
+html[data-theme="dark"],
+html[data-theme="dark"] body {
+  background: var(--cw-bg) !important;
+  color: var(--cw-text);
+}
+
+html[data-theme="dark"] body {
+  color-scheme: dark;
+}
+
+html[data-theme="dark"] .navbar,
+html[data-theme="dark"] .nav-wrapper .navbar,
+html[data-theme="dark"] .liquid-glass,
+html[data-theme="dark"] .price-card,
+html[data-theme="dark"] .service-card,
+html[data-theme="dark"] .process-card {
+  background: var(--cw-surface) !important;
+  border-color: var(--cw-line) !important;
+  color: var(--cw-text);
+}
+
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] section {
+  background: transparent;
+}
+
+html[data-theme="dark"] .section-tag,
+html[data-theme="dark"] .service-icon,
+html[data-theme="dark"] .mobile-menu-btn,
+html[data-theme="dark"] .nav-link:hover,
+html[data-theme="dark"] .nav-link.active,
+html[data-theme="dark"] .btn-secondary {
+  background: var(--cw-soft) !important;
+  border-color: var(--cw-line) !important;
+  color: var(--cw-text) !important;
+}
+
+html[data-theme="dark"] .hero-headline,
+html[data-theme="dark"] .section-title,
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] strong {
+  color: var(--cw-text);
+}
+
+html[data-theme="dark"] p,
+html[data-theme="dark"] .muted,
+html[data-theme="dark"] .section-desc,
+html[data-theme="dark"] .hero-subheadline,
+html[data-theme="dark"] .stat-item span {
+  color: var(--cw-muted);
+}
+
+html[data-theme="dark"] .nav-link {
+  color: var(--cw-muted);
+}
+
+html[data-theme="dark"] .nav-cta,
+html[data-theme="dark"] .btn-primary {
+  background: #f5f5f5 !important;
+  color: #111 !important;
+}
+
+html[data-theme="dark"] .cs-float-btn {
+  background: #151515;
+  border-color: var(--cw-line);
+}
+
+html[data-theme="dark"] .cs-float-btn svg {
+  fill: #f5f5f5;
+}
+
+html[data-theme="dark"] .cursor {
+  background: #f5f5f5;
+}
+
+html[data-theme="dark"] .cursor-ring {
+  border-color: rgba(255,255,255,.3);
+}
+
+html[data-theme="dark"] ::selection {
+  background: #f5f5f5;
+  color: #111;
+}
+
+.cw-theme-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  background: var(--light);
+  color: var(--primary);
+  font-size: 15px;
+  transition: transform .2s, background .2s, color .2s;
+}
+
+.cw-theme-toggle:hover {
+  transform: translateY(-1px);
+}
+
+.cw-theme-toggle .cw-moon {
+  display: none;
+}
+
+html[data-theme="dark"] .cw-theme-toggle .cw-sun {
+  display: none;
+}
+
+html[data-theme="dark"] .cw-theme-toggle .cw-moon {
+  display: inline;
+}
+</style>
 </head>
 <body>
 
@@ -1299,6 +1457,10 @@ html[data-theme="dark"] .nav-cta {
       <a href="contact.html" class="nav-link">Kontak</a>
     </div>
     <div class="nav-actions">
+      <button type="button" class="cw-theme-toggle" id="cw-theme-toggle" aria-label="Ganti tema" title="Ganti tema">
+        <span class="cw-sun">☀</span>
+        <span class="cw-moon">☾</span>
+      </button>
       <a href="https://wa.me/6281318048885?text=Halo%20CyrusWeb,%20saya%20ingin%20memulai%20project%20website" target="_blank" class="nav-cta">Mulai Project</a>
       <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="nav-links-panel">☰</button>
     </div>
@@ -1653,6 +1815,25 @@ document.addEventListener("DOMContentLoaded", () => {
         '<div class="portfolio-loading">ERROR CMS: ' + error.message + '</div>';
     });
 });
+</script>
+
+
+<script>
+(function () {
+  const themeToggle = document.getElementById("cw-theme-toggle");
+
+  if (!themeToggle) return;
+
+  themeToggle.addEventListener("click", () => {
+    const current =
+      document.documentElement.dataset.theme || "light";
+
+    const next = current === "dark" ? "light" : "dark";
+
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem("cyrus-theme", next);
+  });
+})();
 </script>
 
 </body>
