@@ -1504,7 +1504,7 @@ document.addEventListener("DOMContentLoaded", () => {
       submitBtn.textContent = "Mengirim...";
 
       try {
-        const res = await fetch("https://cyrusweb-git-master-noctisatalics-projects.vercel.app/api/contact", {
+        const res = await fetch("https://cyrusweb.vercel.app/api/contact", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(Object.fromEntries(new FormData(contactForm)))
