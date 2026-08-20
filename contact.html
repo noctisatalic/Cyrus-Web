@@ -1435,6 +1435,28 @@ html[data-theme="dark"] .form-submit-btn {
   -webkit-text-fill-color: #111111 !important;
 }
 </style>
+
+<style id="cyrus-contact-footer-fix">
+html, body {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+footer {
+  margin-top: auto !important;
+  flex-shrink: 0;
+}
+</style>
+
 </head>
 <body>
 
