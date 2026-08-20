@@ -1631,9 +1631,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* --- Active Navbar Tracker (multi-page) --- */
-  const sections = document.querySelectorAll("main section[id]");
   const navLinks = document.querySelectorAll(".nav-link");
-  const currentFile = location.pathname.split("/").pop() || "index.html";
 
   function updateActiveNav() {
     const currentPath = window.location.pathname;
