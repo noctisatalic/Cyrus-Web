@@ -2205,6 +2205,77 @@ html:not([data-theme="dark"]) .cyrus-entity-dot {
 
 </style>
 
+
+<style id="cyrus-selected-work-dark">
+/* ===== CYRUS SELECTED WORK — DARK GLASS POLISH ===== */
+
+html[data-theme="dark"] .selected-work {
+  color: var(--cw-text);
+}
+
+html[data-theme="dark"] .selected-work::before {
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(255,255,255,.10) 0%,
+      rgba(255,255,255,.035) 38%,
+      transparent 72%
+    );
+}
+
+html[data-theme="dark"] .work-card {
+  border: 1px solid rgba(255,255,255,.09);
+  box-shadow:
+    0 18px 50px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+html[data-theme="dark"] .work-meta {
+  background: rgba(18,18,18,.58);
+  border-top: 1px solid rgba(255,255,255,.08);
+  color: var(--cw-text);
+  backdrop-filter: blur(20px) saturate(120%);
+  -webkit-backdrop-filter: blur(20px) saturate(120%);
+}
+
+html[data-theme="dark"] .work-meta h3 {
+  color: var(--cw-text);
+}
+
+html[data-theme="dark"] .work-meta p {
+  color: var(--cw-muted);
+}
+
+html[data-theme="dark"] .work-index {
+  color: var(--cw-muted);
+}
+
+html[data-theme="dark"] .work-arrow {
+  border-color: rgba(255,255,255,.14);
+  color: var(--cw-text);
+  background: rgba(255,255,255,.035);
+}
+
+html[data-theme="dark"] .selected-work-footer {
+  border-top-color: rgba(255,255,255,.09);
+}
+
+html[data-theme="dark"] .selected-work-footer a {
+  color: var(--cw-text);
+}
+
+html[data-theme="dark"] .work-card::before {
+  background:
+    linear-gradient(
+      115deg,
+      rgba(255,255,255,.10),
+      transparent 28%,
+      transparent 70%,
+      rgba(255,255,255,.045)
+    );
+}
+</style>
+
 </head>
 <body>
 
