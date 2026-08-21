@@ -1807,10 +1807,6 @@ html:not([data-theme="dark"]) .cyrus-entity-dot {
   min-height: 882px;
 }
 
-.work-card:hover {
-  transform: translateY(-8px);
-}
-
 .work-visual {
   position: relative;
   height: calc(100% - 105px);
@@ -2840,8 +2836,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (!reduceMotion) {
-    gsap.to(entity, {
-      yPercent: -3,
+    gsap.to(orbits, {
+      y: -8,
       duration: 3.8,
       repeat: -1,
       yoyo: true,
