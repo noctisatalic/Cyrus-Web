@@ -2244,6 +2244,45 @@ html[data-theme="dark"] .work-card::before {
 }
 </style>
 
+
+<style id="cyrus-navbar-final-dark">
+/* ===== CYRUS NAVBAR — FINAL DARK GLASS ===== */
+
+html[data-theme="dark"] .navbar {
+  background: rgba(10,10,10,.42) !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+  box-shadow: 0 10px 35px rgba(0,0,0,.18) !important;
+  backdrop-filter: blur(24px) saturate(125%);
+  -webkit-backdrop-filter: blur(24px) saturate(125%);
+}
+
+html[data-theme="dark"] .nav-links {
+  background: var(--cw-surface-solid) !important;
+  border-color: var(--cw-line) !important;
+  color: var(--cw-text) !important;
+}
+
+html[data-theme="dark"] .nav-links .nav-link {
+  color: var(--cw-text) !important;
+}
+
+html[data-theme="dark"] .nav-links .nav-link:hover,
+html[data-theme="dark"] .nav-links .nav-link.active {
+  color: var(--cw-text) !important;
+  background: var(--cw-soft) !important;
+}
+
+@media (max-width: 768px) {
+  html[data-theme="dark"] .nav-links {
+    background: rgba(18,18,18,.94) !important;
+    border: 1px solid rgba(255,255,255,.08) !important;
+    box-shadow: 0 18px 40px rgba(0,0,0,.30) !important;
+    backdrop-filter: blur(18px) saturate(115%);
+    -webkit-backdrop-filter: blur(18px) saturate(115%);
+  }
+}
+</style>
+
 </head>
 <body>
 
