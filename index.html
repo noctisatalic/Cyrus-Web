@@ -1465,10 +1465,11 @@ html[data-theme="dark"] .mobile-menu-btn {
 /* CYRUS DARK SURFACE FIX */
 
 html[data-theme="dark"] .navbar {
-  background: rgba(10,10,10,.58) !important;
-  border-color: rgba(255,255,255,.10) !important;
-  backdrop-filter: blur(22px) saturate(120%);
-  -webkit-backdrop-filter: blur(22px) saturate(120%);
+  background: rgba(10,10,10,.42) !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+  box-shadow: 0 10px 35px rgba(0,0,0,.18) !important;
+  backdrop-filter: blur(24px) saturate(125%);
+  -webkit-backdrop-filter: blur(24px) saturate(125%);
 }
 
 html[data-theme="dark"] .clean-work-media {
@@ -2128,25 +2129,6 @@ html:not([data-theme="dark"]) .cyrus-entity-dot {
   isolation: isolate;
 }
 
-.selected-work::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: -80px;
-  width: min(760px, 100vw);
-  height: 180px;
-  transform: translateX(-50%);
-  pointer-events: none;
-  background:
-    radial-gradient(
-      ellipse,
-      rgba(255,255,255,.72) 0%,
-      rgba(255,255,255,.30) 38%,
-      transparent 72%
-    );
-  filter: blur(8px);
-  z-index: -1;
-}
 
 .selected-work-head {
   position: relative;
@@ -2190,11 +2172,6 @@ html:not([data-theme="dark"]) .cyrus-entity-dot {
   .hero-transition {
     height: 0;
   }
-
-  .selected-work::before {
-    top: -55px;
-    height: 130px;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2213,15 +2190,6 @@ html[data-theme="dark"] .selected-work {
   color: var(--cw-text);
 }
 
-html[data-theme="dark"] .selected-work::before {
-  background:
-    radial-gradient(
-      ellipse,
-      rgba(255,255,255,.10) 0%,
-      rgba(255,255,255,.035) 38%,
-      transparent 72%
-    );
-}
 
 html[data-theme="dark"] .work-card {
   border: 1px solid rgba(255,255,255,.09);
