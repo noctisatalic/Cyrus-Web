@@ -1502,6 +1502,267 @@ footer {
 }
 </style>
 
+
+<style id="cyrus-signature-hero">
+/* ===== CYRUS SIGNATURE HERO ===== */
+.hero {
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  z-index: -3;
+  background:
+    radial-gradient(circle at 72% 42%, rgba(0,0,0,.075), transparent 24%),
+    radial-gradient(circle at 88% 18%, rgba(0,0,0,.045), transparent 20%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  right: -170px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid rgba(17,17,17,.07);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 70px rgba(17,17,17,.018),
+    0 0 0 140px rgba(17,17,17,.012);
+  z-index: -2;
+  pointer-events: none;
+}
+
+.cyrus-entity {
+  position: absolute;
+  right: 4%;
+  top: 50%;
+  width: min(390px, 34vw);
+  aspect-ratio: 1;
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: none;
+  opacity: .92;
+}
+
+.cyrus-entity-core {
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 45%,
+      rgba(17,17,17,.12) 0 2%,
+      rgba(17,17,17,.055) 18%,
+      rgba(17,17,17,.018) 42%,
+      transparent 68%);
+  filter: blur(.2px);
+}
+
+.cyrus-entity-orbit {
+  position: absolute;
+  inset: 2%;
+  border: 1px solid rgba(17,17,17,.09);
+  border-radius: 50%;
+  transform: rotate(-18deg) scaleY(.42);
+}
+
+.cyrus-entity-orbit:nth-child(2) {
+  transform: rotate(62deg) scaleY(.42);
+}
+
+.cyrus-entity-orbit:nth-child(3) {
+  transform: rotate(142deg) scaleY(.42);
+}
+
+.cyrus-entity-ring {
+  position: absolute;
+  inset: 27%;
+  border: 1px solid rgba(17,17,17,.14);
+  border-radius: 50%;
+  box-shadow: inset 0 0 40px rgba(17,17,17,.025);
+}
+
+.cyrus-entity-dot {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #111;
+  box-shadow: 0 0 18px rgba(17,17,17,.22);
+}
+
+.cyrus-entity-dot.one {
+  left: 18%;
+  top: 42%;
+}
+
+.cyrus-entity-dot.two {
+  right: 18%;
+  top: 28%;
+}
+
+.cyrus-entity-dot.three {
+  right: 29%;
+  bottom: 17%;
+}
+
+.hero-content {
+  z-index: 5;
+}
+
+.hero-headline,
+.hero-subheadline,
+.hero-cta-group,
+.hero-stats,
+.hero-eyebrow {
+  position: relative;
+  z-index: 6;
+}
+
+@media (max-width: 900px) {
+  .cyrus-entity {
+    right: -8%;
+    width: 300px;
+    opacity: .42;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero {
+    min-height: auto;
+    padding-top: 145px;
+    padding-bottom: 70px;
+  }
+
+  .cyrus-entity {
+    width: 240px;
+    right: -72px;
+    top: 31%;
+    opacity: .22;
+  }
+
+  .hero::after {
+    width: 300px;
+    height: 300px;
+    right: -150px;
+  }
+
+  .hero-stats {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cyrus-entity {
+    transform: translateY(-50%) !important;
+  }
+}
+</style>
+
+
+<style id="cyrus-signature-hero-dark">
+/* ===== CYRUS SIGNATURE HERO — DARK MODE ===== */
+
+html[data-theme="dark"] .cyrus-entity {
+  opacity: 1 !important;
+  z-index: 20 !important;
+}
+
+html[data-theme="dark"] .cyrus-entity-core {
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(255,255,255,.30) 0 2%,
+      rgba(255,255,255,.14) 18%,
+      rgba(255,255,255,.055) 42%,
+      transparent 68%
+    ) !important;
+}
+
+html[data-theme="dark"] .cyrus-entity-orbit {
+  border-color: rgba(255,255,255,.28) !important;
+}
+
+html[data-theme="dark"] .cyrus-entity-ring {
+  border-color: rgba(255,255,255,.38) !important;
+  box-shadow:
+    inset 0 0 40px rgba(255,255,255,.045),
+    0 0 24px rgba(255,255,255,.035) !important;
+}
+
+html[data-theme="dark"] .cyrus-entity-dot {
+  background: #F5F5F5 !important;
+  box-shadow:
+    0 0 10px rgba(255,255,255,.65),
+    0 0 24px rgba(255,255,255,.25) !important;
+}
+
+html[data-theme="dark"] .hero::before {
+  background:
+    radial-gradient(
+      circle at 72% 42%,
+      rgba(255,255,255,.10),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 88% 18%,
+      rgba(255,255,255,.06),
+      transparent 20%
+    ) !important;
+}
+
+html[data-theme="dark"] .hero::after {
+  border-color: rgba(255,255,255,.14) !important;
+  box-shadow:
+    0 0 0 70px rgba(255,255,255,.025),
+    0 0 0 140px rgba(255,255,255,.015) !important;
+}
+</style>
+
+
+<style id="cyrus-signature-hero-light-polish">
+/* ===== CYRUS SIGNATURE HERO — LIGHT POLISH ===== */
+
+html:not([data-theme="dark"]) .cyrus-entity {
+  opacity: 1 !important;
+}
+
+html:not([data-theme="dark"]) .cyrus-entity-core {
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(17,17,17,.20) 0 2%,
+      rgba(17,17,17,.085) 18%,
+      rgba(17,17,17,.030) 42%,
+      transparent 68%
+    ) !important;
+}
+
+html:not([data-theme="dark"]) .cyrus-entity-orbit {
+  border-color: rgba(17,17,17,.16) !important;
+}
+
+html:not([data-theme="dark"]) .cyrus-entity-ring {
+  border-color: rgba(17,17,17,.22) !important;
+  box-shadow:
+    inset 0 0 40px rgba(17,17,17,.035),
+    0 0 24px rgba(17,17,17,.025) !important;
+}
+
+html:not([data-theme="dark"]) .cyrus-entity-dot {
+  background: #111 !important;
+  box-shadow:
+    0 0 10px rgba(17,17,17,.30),
+    0 0 22px rgba(17,17,17,.10) !important;
+}
+</style>
+
 </head>
 <body>
 
@@ -1545,6 +1806,18 @@ footer {
 <main>
   <section class="hero" id="home">
     <div class="container hero-content">
+
+<div class="cyrus-entity" aria-hidden="true">
+  <div class="cyrus-entity-core"></div>
+  <div class="cyrus-entity-orbit"></div>
+  <div class="cyrus-entity-orbit"></div>
+  <div class="cyrus-entity-orbit"></div>
+  <div class="cyrus-entity-ring"></div>
+  <span class="cyrus-entity-dot one"></span>
+  <span class="cyrus-entity-dot two"></span>
+  <span class="cyrus-entity-dot three"></span>
+</div>
+
       <div class="hero-eyebrow">
         <span class="line"></span>
         <span>Digital Web Studio</span>
@@ -1991,6 +2264,73 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("scroll", updateActiveNav);
   updateActiveNav();
+});
+</script>
+
+
+
+<script id="cyrus-signature-hero-motion">
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof gsap === "undefined") return;
+
+  const entity = document.querySelector(".cyrus-entity");
+  const orbits = document.querySelectorAll(".cyrus-entity-orbit");
+  const dots = document.querySelectorAll(".cyrus-entity-dot");
+
+  if (!entity) return;
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!reduceMotion) {
+    gsap.to(entity, {
+      y: "-=12",
+      duration: 3.8,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+
+    orbits.forEach((orbit, i) => {
+      gsap.to(orbit, {
+        rotation: "+=360",
+        duration: 18 + i * 7,
+        repeat: -1,
+        ease: "none"
+      });
+    });
+
+    dots.forEach((dot, i) => {
+      gsap.to(dot, {
+        scale: 1.7,
+        opacity: .45,
+        duration: 1.4 + i * .3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: i * .25
+      });
+    });
+
+    if (window.matchMedia("(pointer:fine)").matches) {
+      const moveX = gsap.quickTo(entity, "x", {
+        duration: .8,
+        ease: "power3.out"
+      });
+
+      const moveY = gsap.quickTo(entity, "y", {
+        duration: .8,
+        ease: "power3.out"
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        const x = (e.clientX / window.innerWidth - .5) * 28;
+        const y = (e.clientY / window.innerHeight - .5) * 20;
+
+        moveX(x);
+        moveY(y - 12);
+      }, { passive: true });
+    }
+  }
 });
 </script>
 
