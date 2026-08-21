@@ -2334,8 +2334,12 @@ html[data-theme="dark"] .navbar {
   content: none !important;
 }
 
-/* Process nav: active without rectangular background */
-html[data-theme="dark"] .nav-links .nav-link[href="index.html#process"].active {
+/* Process nav — no rectangular background in any state */
+html[data-theme="dark"] .nav-links .nav-link[href="index.html#process"],
+html[data-theme="dark"] .nav-links .nav-link[href="index.html#process"]:hover,
+html[data-theme="dark"] .nav-links .nav-link[href="index.html#process"].active,
+html[data-theme="dark"] .nav-links .nav-link[href="index.html#process"]:focus,
+html[data-theme="dark"] .nav-links .nav-link[href="index.html#process"]:focus-visible {
   background: transparent !important;
   border-color: transparent !important;
   box-shadow: none !important;
