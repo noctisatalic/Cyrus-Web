@@ -2059,20 +2059,34 @@ document.addEventListener("DOMContentLoaded", () => {
           .from(".hero-cta-group", { y: 20, opacity: 0, duration: 0.8 }, "-=0.6")
           .from(".hero-stats", { y: 20, opacity: 0, duration: 0.8 }, "-=0.6");
 
-    /* --- Animasi Scroll Reveal per Komponen --- */
-    const revealElements = document.querySelectorAll(".service-card, .process-card, .price-card, .testimonial-card, .update-panel, .cta-chamber");
-    revealElements.forEach(el => {
-      gsap.fromTo(el, 
-        { y: 50, opacity: 0 },
+    /* --- Cyrus Motion Engine: Premium Reveal --- */
+    const revealElements = document.querySelectorAll(
+      ".service-card, .process-card, .price-card, .testimonial-card, .update-panel, .cta-chamber"
+    );
+
+    revealElements.forEach((el, index) => {
+      gsap.fromTo(
+        el,
+        {
+          y: 42,
+          opacity: 0,
+          scale: 0.965,
+          filter: "blur(3px)"
+        },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
+          scale: 1,
+          filter: "blur(0px)",
+          duration: 0.72,
+          delay: Math.min(index * 0.055, 0.22),
           ease: "power3.out",
+          clearProps: "filter,transform",
           scrollTrigger: {
             trigger: el,
             start: "top 88%",
-            toggleActions: "play none none reverse"
+            toggleActions: "play none none reverse",
+            once: false
           }
         }
       );
