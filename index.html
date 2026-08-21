@@ -227,6 +227,20 @@ section {
   background: var(--light);
 }
 
+/* Proses — gunakan visual navbar normal tanpa state highlight */
+.nav-links .nav-link[href="index.html#process"]:hover,
+.nav-links .nav-link[href="index.html#process"]:active,
+.nav-links .nav-link[href="index.html#process"]:focus,
+.nav-links .nav-link[href="index.html#process"]:focus-visible,
+.nav-links .nav-link[href="index.html#process"].active {
+  color: var(--muted) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
 .nav-actions {
   display: flex;
   align-items: center;
@@ -1440,8 +1454,8 @@ html[data-theme="dark"] .nav-links .nav-link {
   color: var(--cw-text) !important;
 }
 
-html[data-theme="dark"] .nav-links .nav-link:hover,
-html[data-theme="dark"] .nav-links .nav-link.active {
+html[data-theme="dark"] .nav-links .nav-link:hover:not([href="index.html#process"]),
+html[data-theme="dark"] .nav-links .nav-link.active:not([href="index.html#process"]) {
   color: var(--cw-text) !important;
   background: var(--cw-soft) !important;
 }
@@ -2266,8 +2280,8 @@ html[data-theme="dark"] .nav-links .nav-link {
   color: var(--cw-text) !important;
 }
 
-html[data-theme="dark"] .nav-links .nav-link:hover,
-html[data-theme="dark"] .nav-links .nav-link.active {
+html[data-theme="dark"] .nav-links .nav-link:hover:not([href="index.html#process"]),
+html[data-theme="dark"] .nav-links .nav-link.active:not([href="index.html#process"]) {
   color: var(--cw-text) !important;
   background: var(--cw-soft) !important;
 }
@@ -2334,52 +2348,10 @@ html[data-theme="dark"] .navbar {
   content: none !important;
 }
 
-/* Process nav — no rectangular background in any state */
-html[data-theme="dark"] .nav-links .nav-link[href="index.html#process"],
-html[data-theme="dark"] .nav-links .nav-link[href="index.html#process"]:hover,
-html[data-theme="dark"] .nav-links .nav-link[href="index.html#process"].active,
-html[data-theme="dark"] .nav-links .nav-link[href="index.html#process"]:focus,
-html[data-theme="dark"] .nav-links .nav-link[href="index.html#process"]:focus-visible {
-  background: transparent !important;
-  border-color: transparent !important;
-  box-shadow: none !important;
-}
-
 </style>
 
 
-<style id="cyrus-process-mobile-final">
-.nav-links .nav-link[href="index.html#process"] {
-  color: var(--muted) !important;
-  background: transparent !important;
-  background-color: transparent !important;
-  border: 0 !important;
-  border-color: transparent !important;
-  box-shadow: none !important;
-  outline: none !important;
-  -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
-  -webkit-focus-ring-color: transparent !important;
-  text-decoration: none !important;
-  -webkit-user-select: none !important;
-  user-select: none !important;
-  touch-action: manipulation;
-}
 
-.nav-links .nav-link[href="index.html#process"]:hover,
-.nav-links .nav-link[href="index.html#process"]:active,
-.nav-links .nav-link[href="index.html#process"]:focus,
-.nav-links .nav-link[href="index.html#process"]:focus-visible,
-.nav-links .nav-link[href="index.html#process"].active {
-  color: var(--muted) !important;
-  background: transparent !important;
-  background-color: transparent !important;
-  border: 0 !important;
-  border-color: transparent !important;
-  box-shadow: none !important;
-  outline: none !important;
-  -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
-}
-</style>
 
 </head>
 <body>
@@ -2964,7 +2936,6 @@ document.addEventListener("DOMContentLoaded", () => {
       currentPath.split("/").filter(Boolean).pop() || "index.html";
 
     navLinks.forEach(link => {
-      if (link.getAttribute("href") === "index.html#process") { link.classList.remove("active"); return; }
       const href = link.getAttribute("href") || "";
       const [linkFile, linkAnchor] = href.split("#");
 
