@@ -1446,6 +1446,14 @@ html[data-theme="dark"] .nav-links .nav-link.active {
   background: var(--cw-soft) !important;
 }
 
+/* Proses: desktop tetap tanpa block, mobile tetap mengikuti active navbar */
+@media (min-width: 769px) {
+  html[data-theme="dark"] .nav-links .nav-link[href="index.html#process"].active {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+}
+
 html[data-theme="dark"] .nav-links .cw-theme-toggle {
   color: var(--cw-text) !important;
   background: var(--cw-soft) !important;
@@ -2271,6 +2279,7 @@ html[data-theme="dark"] .nav-links .nav-link.active {
   color: var(--cw-text) !important;
   background: var(--cw-soft) !important;
 }
+
 
 @media (max-width: 768px) {
   html[data-theme="dark"] .nav-links {
