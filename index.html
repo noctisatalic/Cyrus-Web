@@ -2366,6 +2366,108 @@ html[data-theme="dark"] .navbar {
 </style>
 
 
+
+<style id="cyrus-contact-form-focus-fix">
+.form-group input,
+.form-group textarea,
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group input:active,
+.form-group textarea:active {
+  color: var(--primary) !important;
+  background: var(--light) !important;
+  -webkit-text-fill-color: var(--primary) !important;
+  opacity: 1 !important;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--muted) !important;
+  opacity: 1 !important;
+}
+
+html[data-theme="dark"] .form-group input,
+html[data-theme="dark"] .form-group textarea,
+html[data-theme="dark"] .form-group input:focus,
+html[data-theme="dark"] .form-group textarea:focus,
+html[data-theme="dark"] .form-group input:active,
+html[data-theme="dark"] .form-group textarea:active {
+  color: var(--cw-text) !important;
+  background: var(--cw-soft) !important;
+  -webkit-text-fill-color: var(--cw-text) !important;
+}
+
+html[data-theme="dark"] .form-group input::placeholder,
+html[data-theme="dark"] .form-group textarea::placeholder {
+  color: var(--cw-muted) !important;
+  -webkit-text-fill-color: var(--cw-muted) !important;
+}
+</style>
+
+
+<style id="cyrus-contact-form-browser-fix">
+/* CYRUS CONTACT FORM — FORCE INPUT VISIBILITY */
+.form-group input,
+.form-group textarea {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  -webkit-text-fill-color: var(--primary) !important;
+  color: var(--primary) !important;
+  background-color: var(--light) !important;
+  opacity: 1 !important;
+  caret-color: var(--primary) !important;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  -webkit-text-fill-color: var(--primary) !important;
+  color: var(--primary) !important;
+  background-color: var(--light) !important;
+  opacity: 1 !important;
+  caret-color: var(--primary) !important;
+  outline: none !important;
+}
+
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:hover,
+.form-group input:-webkit-autofill:focus,
+.form-group textarea:-webkit-autofill,
+.form-group textarea:-webkit-autofill:hover,
+.form-group textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--primary) !important;
+  color: var(--primary) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--light) inset !important;
+  box-shadow: 0 0 0 1000px var(--light) inset !important;
+  background-color: var(--light) !important;
+  transition: background-color 9999s ease-out 0s !important;
+}
+
+html[data-theme="dark"] .form-group input,
+html[data-theme="dark"] .form-group textarea,
+html[data-theme="dark"] .form-group input:focus,
+html[data-theme="dark"] .form-group textarea:focus {
+  -webkit-text-fill-color: var(--cw-text) !important;
+  color: var(--cw-text) !important;
+  background-color: var(--cw-soft) !important;
+  caret-color: var(--cw-text) !important;
+}
+
+html[data-theme="dark"] .form-group input:-webkit-autofill,
+html[data-theme="dark"] .form-group input:-webkit-autofill:hover,
+html[data-theme="dark"] .form-group input:-webkit-autofill:focus,
+html[data-theme="dark"] .form-group textarea:-webkit-autofill,
+html[data-theme="dark"] .form-group textarea:-webkit-autofill:hover,
+html[data-theme="dark"] .form-group textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--cw-text) !important;
+  color: var(--cw-text) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--cw-soft) inset !important;
+  box-shadow: 0 0 0 1000px var(--cw-soft) inset !important;
+  background-color: var(--cw-soft) !important;
+}
+</style>
+
 </head>
 <body>
 
