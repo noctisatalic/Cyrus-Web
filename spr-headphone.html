@@ -281,86 +281,8 @@ const band =
     shellMaterial
   );
 
+band.visible = false;
 product.add(band);
-
-/* =========================================================
-   INNER HEAD CUSHION
-========================================================= */
-
-const cushionCurve =
-  new THREE.CatmullRomCurve3([
-
-    new THREE.Vector3(
-      -.91,
-      .02,
-      -.02
-    ),
-
-    new THREE.Vector3(
-      -.89,
-      .58,
-      -.02
-    ),
-
-    new THREE.Vector3(
-      -.70,
-      1.02,
-      -.02
-    ),
-
-    new THREE.Vector3(
-      -.38,
-      1.30,
-      -.02
-    ),
-
-    new THREE.Vector3(
-      0,
-      1.39,
-      -.02
-    ),
-
-    new THREE.Vector3(
-      .38,
-      1.30,
-      -.02
-    ),
-
-    new THREE.Vector3(
-      .70,
-      1.02,
-      -.02
-    ),
-
-    new THREE.Vector3(
-      .89,
-      .58,
-      -.02
-    ),
-
-    new THREE.Vector3(
-      .91,
-      .02,
-      -.02
-    )
-
-  ]);
-
-const headCushion =
-  new THREE.Mesh(
-    new THREE.TubeGeometry(
-      cushionCurve,
-      80,
-      .075,
-      20,
-      false
-    ),
-    cushionMaterial
-  );
-
-product.add(
-  headCushion
-);
 
 /* =========================================================
    EAR CUP
@@ -409,6 +331,9 @@ function createCup(side){
   housing.rotation.z =
     side < 0 ? Math.PI / 2 : -Math.PI / 2;
 
+  // TEMPORARY TEST: hide housing
+  housing.visible = false;
+
   cup.add(housing);
 
   /* =======================================================
@@ -432,6 +357,7 @@ function createCup(side){
   backShell.position.x =
     -front * .20;
 
+  backShell.visible = false;
   cup.add(backShell);
 
   /* =======================================================
@@ -455,6 +381,7 @@ function createCup(side){
   face.position.x =
     front * .205;
 
+  face.visible = false;
   cup.add(face);
 
   /* =======================================================
@@ -477,6 +404,9 @@ function createCup(side){
 
   outerRim.position.x =
     front * .235;
+
+  // TEMPORARY TEST: hide outer rim
+  outerRim.visible = false;
 
   cup.add(outerRim);
 
@@ -512,53 +442,8 @@ function createCup(side){
     1.10
   );
 
+  earCushion.visible = false;
   cup.add(earCushion);
-
-  /* =======================================================
-     INNER EAR CAVITY
-  ======================================================= */
-
-  const inner =
-    new THREE.Mesh(
-      new THREE.CylinderGeometry(
-        .255,
-        .255,
-        .035,
-        80
-      ),
-      innerMaterial
-    );
-
-  inner.rotation.z =
-    side < 0 ? Math.PI / 2 : -Math.PI / 2;
-
-  inner.position.x =
-    front * .245;
-
-  cup.add(inner);
-
-  /* =======================================================
-     DRIVER
-  ======================================================= */
-
-  const driver =
-    new THREE.Mesh(
-      new THREE.CylinderGeometry(
-        .12,
-        .12,
-        .025,
-        64
-      ),
-      accentMaterial
-    );
-
-  driver.rotation.z =
-    side < 0 ? Math.PI / 2 : -Math.PI / 2;
-
-  driver.position.x =
-    front * .255;
-
-  cup.add(driver);
 
   /* =======================================================
      YOKE
@@ -598,6 +483,9 @@ function createCup(side){
     1
   );
 
+  // TEMPORARY TEST: hide yoke
+  yoke.visible = false;
+
   cup.add(yoke);
 
   /* =======================================================
@@ -623,6 +511,9 @@ function createCup(side){
     .12,
     0
   );
+
+  // TEMPORARY TEST: hide hinge
+  hinge.visible = false;
 
   cup.add(hinge);
 
