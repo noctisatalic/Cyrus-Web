@@ -1037,7 +1037,9 @@ body.nav-locked {
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  background: var(--white);
+  background: var(--light) !important;
+  color: var(--primary) !important;
+  -webkit-text-fill-color: var(--primary) !important;
   border-color: var(--primary);
 }
 
@@ -1524,6 +1526,42 @@ html[data-theme="dark"] .navbar {
   background: none !important;
   box-shadow: none !important;
   content: none !important;
+}
+</style>
+
+
+<style id="cyrus-contact-form-visibility-fix">
+.form-group input,
+.form-group textarea,
+.form-group input:focus,
+.form-group textarea:focus {
+  background: var(--light) !important;
+  color: var(--primary) !important;
+  -webkit-text-fill-color: var(--primary) !important;
+  opacity: 1 !important;
+  caret-color: var(--primary) !important;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--muted) !important;
+  opacity: 1 !important;
+}
+
+html[data-theme="dark"] .form-group input,
+html[data-theme="dark"] .form-group textarea,
+html[data-theme="dark"] .form-group input:focus,
+html[data-theme="dark"] .form-group textarea:focus {
+  background: var(--cw-soft) !important;
+  color: var(--cw-text) !important;
+  -webkit-text-fill-color: var(--cw-text) !important;
+  caret-color: var(--cw-text) !important;
+}
+
+html[data-theme="dark"] .form-group input::placeholder,
+html[data-theme="dark"] .form-group textarea::placeholder {
+  color: var(--cw-muted) !important;
+  -webkit-text-fill-color: var(--cw-muted) !important;
 }
 </style>
 
