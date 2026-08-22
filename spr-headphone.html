@@ -16,6 +16,7 @@ html,body{
 #viewer{
   position:fixed;
   inset:0;
+  overflow:hidden;
   touch-action:none;
   cursor:grab;
 }
@@ -25,9 +26,9 @@ html,body{
 }
 
 canvas{
-  display:block;
   width:100%;
   height:100%;
+  display:block;
 }
 </style>
 </head>
@@ -41,74 +42,340 @@ canvas{
 <script>
 (() => {
 
+"use strict";
+
 const viewer = document.getElementById("viewer");
+
+/* =========================
+   SCENE
+========================= */
 
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(
-  40,
+  35,
   1,
   0.1,
   100
 );
 
-camera.position.z = 4;
+camera.position.set(0,0,6.2);
+
+/* =========================
+   RENDERER
+========================= */
 
 const renderer = new THREE.WebGLRenderer({
   antialias:true,
-  alpha:true
+  alpha:true,
+  powerPreference:"high-performance"
 });
 
 renderer.setPixelRatio(
   Math.min(window.devicePixelRatio || 1,2)
 );
 
-renderer.setSize(
-  viewer.clientWidth || 300,
-  viewer.clientHeight || 300,
-  false
-);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.15;
 
 viewer.appendChild(renderer.domElement);
 
-/* LIGHT */
+/* =========================
+   LIGHT
+========================= */
 
 scene.add(
   new THREE.HemisphereLight(
     0xffffff,
-    0x222222,
-    3
+    0x111111,
+    2.2
   )
 );
 
-const light = new THREE.DirectionalLight(
+const key = new THREE.DirectionalLight(
   0xffffff,
   4
 );
 
-light.position.set(3,4,5);
+key.position.set(4,5,6);
+scene.add(key);
 
-scene.add(light);
-
-/* CUBE */
-
-const cube = new THREE.Mesh(
-  new THREE.BoxGeometry(1.6,1.6,1.6),
-  new THREE.MeshPhysicalMaterial({
-    color:0x202020,
-    metalness:.6,
-    roughness:.2,
-    clearcoat:1
-  })
+const fill = new THREE.DirectionalLight(
+  0xffffff,
+  2
 );
 
-scene.add(cube);
+fill.position.set(-4,2,4);
+scene.add(fill);
 
-/* DRAG */
+const rim = new THREE.DirectionalLight(
+  0xffffff,
+  3
+);
+
+rim.position.set(-4,4,-5);
+scene.add(rim);
+
+/* =========================
+   MATERIAL
+========================= */
+
+const shell = new THREE.MeshPhysicalMaterial({
+  color:0x111214,
+  roughness:.22,
+  metalness:.58,
+  clearcoat:.9,
+  clearcoatRoughness:.15
+});
+
+const rubber = new THREE.MeshPhysicalMaterial({
+  color:0x030303,
+  roughness:.82,
+  metalness:.02
+});
+
+const inner = new THREE.MeshPhysicalMaterial({
+  color:0x000000,
+  roughness:.95,
+  metalness:0
+});
+
+const metal = new THREE.MeshPhysicalMaterial({
+  color:0x777777,
+  roughness:.22,
+  metalness:1,
+  clearcoat:.5
+});
+
+/* =========================
+   PRODUCT
+========================= */
+
+const product = new THREE.Group();
+
+scene.add(product);
+
+product.scale.set(.82,.82,.82);
+
+product.rotation.x = -.04;
+product.rotation.y = -.35;
+
+/* =========================
+   HEADBAND
+========================= */
+
+const bandCurve =
+new THREE.CatmullRomCurve3([
+
+  new THREE.Vector3(-1.25,-.2,0),
+
+  new THREE.Vector3(-1.24,.55,0),
+
+  new THREE.Vector3(-.95,1.12,0),
+
+  new THREE.Vector3(-.5,1.48,0),
+
+  new THREE.Vector3(0,1.58,0),
+
+  new THREE.Vector3(.5,1.48,0),
+
+  new THREE.Vector3(.95,1.12,0),
+
+  new THREE.Vector3(1.24,.55,0),
+
+  new THREE.Vector3(1.25,-.2,0)
+
+]);
+
+const band =
+new THREE.Mesh(
+  new THREE.TubeGeometry(
+    bandCurve,
+    80,
+    .13,
+    24,
+    false
+  ),
+  shell
+);
+
+product.add(band);
+
+/* =========================
+   INNER HEAD CUSHION
+========================= */
+
+const cushionCurve =
+new THREE.CatmullRomCurve3([
+
+  new THREE.Vector3(-.9,-.05,-.02),
+
+  new THREE.Vector3(-.89,.55,-.02),
+
+  new THREE.Vector3(-.66,.96,-.02),
+
+  new THREE.Vector3(-.32,1.18,-.02),
+
+  new THREE.Vector3(0,1.25,-.02),
+
+  new THREE.Vector3(.32,1.18,-.02),
+
+  new THREE.Vector3(.66,.96,-.02),
+
+  new THREE.Vector3(.89,.55,-.02),
+
+  new THREE.Vector3(.9,-.05,-.02)
+
+]);
+
+const cushion =
+new THREE.Mesh(
+  new THREE.TubeGeometry(
+    cushionCurve,
+    64,
+    .075,
+    18,
+    false
+  ),
+  rubber
+);
+
+product.add(cushion);
+
+/* =========================
+   EAR CUPS
+========================= */
+
+function makeCup(side){
+
+  const cup = new THREE.Group();
+
+  cup.position.x = side * 1.25;
+
+  /* outer housing */
+
+  const housing =
+  new THREE.Mesh(
+    new THREE.CylinderGeometry(
+      .58,
+      .58,
+      .38,
+      64
+    ),
+    shell
+  );
+
+  housing.rotation.x = Math.PI/2;
+
+  cup.add(housing);
+
+  /* outer metal ring */
+
+  const outerRing =
+  new THREE.Mesh(
+    new THREE.TorusGeometry(
+      .47,
+      .065,
+      20,
+      64
+    ),
+    metal
+  );
+
+  outerRing.position.z = .21;
+
+  cup.add(outerRing);
+
+  /* ear cushion */
+
+  const earCushion =
+  new THREE.Mesh(
+    new THREE.TorusGeometry(
+      .39,
+      .115,
+      24,
+      64
+    ),
+    rubber
+  );
+
+  earCushion.position.z = .205;
+
+  cup.add(earCushion);
+
+  /* recessed inner surface */
+
+  const innerFace =
+  new THREE.Mesh(
+    new THREE.CylinderGeometry(
+      .29,
+      .29,
+      .025,
+      64
+    ),
+    inner
+  );
+
+  innerFace.rotation.x = Math.PI/2;
+
+  innerFace.position.z = .20;
+
+  cup.add(innerFace);
+
+  product.add(cup);
+}
+
+/* IMPORTANT:
+   cups are complete objects.
+   No center rod / useless metal.
+*/
+
+makeCup(-1);
+makeCup(1);
+
+/* =========================
+   CONNECTOR
+========================= */
+
+function connector(side){
+
+  const connector =
+  new THREE.Mesh(
+    new THREE.CylinderGeometry(
+      .10,
+      .10,
+      .34,
+      32
+    ),
+    metal
+  );
+
+  connector.rotation.z = Math.PI/2;
+
+  connector.position.set(
+    side*1.25,
+    -.02,
+    0
+  );
+
+  product.add(connector);
+}
+
+connector(-1);
+connector(1);
+
+/* =========================
+   DRAG
+========================= */
 
 let dragging = false;
+
 let lastX = 0;
 let lastY = 0;
+
+let velocityX = 0;
+let velocityY = 0;
 
 viewer.addEventListener(
   "pointerdown",
@@ -118,6 +385,9 @@ viewer.addEventListener(
 
     lastX = e.clientX;
     lastY = e.clientY;
+
+    velocityX = 0;
+    velocityY = 0;
 
     viewer.setPointerCapture(e.pointerId);
   }
@@ -135,24 +405,36 @@ viewer.addEventListener(
     lastX = e.clientX;
     lastY = e.clientY;
 
-    cube.rotation.y += dx*.01;
-    cube.rotation.x += dy*.01;
+    velocityY = dx*.009;
+    velocityX = dy*.004;
+
+    product.rotation.y += velocityY;
+    product.rotation.x += velocityX;
+
+    product.rotation.x =
+      THREE.MathUtils.clamp(
+        product.rotation.x,
+        -.55,
+        .55
+      );
   }
 );
 
-viewer.addEventListener(
-  "pointerup",
-  e => {
+function release(e){
 
-    dragging = false;
+  dragging = false;
 
-    try{
-      viewer.releasePointerCapture(e.pointerId);
-    }catch(_){}
-  }
-);
+  try{
+    viewer.releasePointerCapture(e.pointerId);
+  }catch(_){}
+}
 
-/* RESIZE */
+viewer.addEventListener("pointerup",release);
+viewer.addEventListener("pointercancel",release);
+
+/* =========================
+   RESIZE
+========================= */
 
 function resize(){
 
@@ -170,14 +452,24 @@ window.addEventListener("resize",resize);
 
 resize();
 
-/* LOOP */
+/* =========================
+   ANIMATION
+========================= */
+
+const clock = new THREE.Clock();
 
 function animate(){
 
   requestAnimationFrame(animate);
 
   if(!dragging){
-    cube.rotation.y += .004;
+
+    product.rotation.y += velocityY;
+
+    product.rotation.x += velocityX;
+
+    velocityY *= .94;
+    velocityX *= .92;
   }
 
   renderer.render(scene,camera);
