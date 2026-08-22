@@ -2482,133 +2482,29 @@ html[data-theme="dark"] .navbar {
 </style>
 
 
-<style id="cyrus-audio-slot-css">
-.cyrus-audio-slot{
-  position:relative;
-  width:100%;
-  height:320px;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
 
-.cyrus-audio-slot > *{
-  max-width:100%;
-}
-</style>
 
 <style id="cyrus-spr-headphone-slot">
 .cyrus-audio-slot{
-  position:relative !important;
   width:100% !important;
   height:320px !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
+  position:relative !important;
   overflow:hidden !important;
-  perspective:1000px !important;
+  display:block !important;
+  margin:0 !important;
+  padding:0 !important;
 }
 
-.spr-headphone{
-  position:relative;
-  width:250px;
-  height:250px;
-  transform-style:preserve-3d;
-  transform:rotateX(-5deg) rotateY(-18deg);
-  transition:transform .08s linear;
-  filter:drop-shadow(0 28px 22px rgba(0,0,0,.3));
-  cursor:grab;
-}
-
-.spr-headphone:active{
-  cursor:grabbing;
-}
-
-.spr-band{
-  position:absolute;
-  left:38px;
-  top:12px;
-  width:174px;
-  height:180px;
-  border:18px solid #151719;
-  border-bottom:0;
-  border-radius:100px 100px 0 0;
-  transform:translateZ(0);
-  box-shadow:
-    inset 0 3px 4px rgba(255,255,255,.16),
-    0 8px 14px rgba(0,0,0,.3);
-}
-
-.spr-cup{
-  position:absolute;
-  top:112px;
-  width:78px;
-  height:88px;
-  transform-style:preserve-3d;
-}
-
-.spr-left{
-  left:2px;
-}
-
-.spr-right{
-  right:2px;
-}
-
-.spr-cup-shell{
-  width:78px;
-  height:88px;
-  border-radius:42%;
-  background:
-    linear-gradient(145deg,#292b2e,#08090a 70%);
-  border:2px solid #3a3c3f;
-  box-shadow:
-    inset 5px 5px 10px rgba(255,255,255,.1),
-    inset -8px -8px 14px rgba(0,0,0,.7),
-    0 12px 20px rgba(0,0,0,.35);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  transform-style:preserve-3d;
-}
-
-.spr-cushion{
-  width:59px;
-  height:69px;
-  border-radius:48%;
-  background:
-    radial-gradient(
-      ellipse at center,
-      #020202 0 42%,
-      #111214 45%,
-      #25272a 67%,
-      #050505 100%
-    );
-  box-shadow:
-    inset 0 5px 9px rgba(0,0,0,.9),
-    inset 0 -3px 5px rgba(255,255,255,.08);
-  transform:translateZ(4px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.spr-inner{
-  width:36px;
-  height:45px;
-  border-radius:48%;
-  background:#000;
-  box-shadow:
-    inset 0 3px 8px rgba(255,255,255,.035);
-}
-
-.spr-left{
-  transform:rotateY(8deg);
-}
-
-.spr-right{
-  transform:rotateY(-8deg);
+.cyrus-audio-slot iframe{
+  width:100% !important;
+  height:320px !important;
+  min-height:320px !important;
+  display:block !important;
+  position:absolute !important;
+  inset:0 !important;
+  border:0 !important;
+  background:transparent !important;
+  z-index:50 !important;
 }
 </style>
 
