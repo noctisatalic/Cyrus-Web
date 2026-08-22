@@ -3536,119 +3536,16 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
           /* =========================
-             3D HEADPHONE
+             LEGACY 2D HEADPHONE DISABLED
              ========================= */
 
           if (visual === "audio") {
-
             const scene =
-              article.querySelector(
-                ".cyrus-headphone-scene"
-              );
+              article.querySelector(".cyrus-headphone-scene");
 
-            const headphone =
-              article.querySelector(
-                ".cyrus-headphone"
-              );
-
-            let rotationY = 0;
-            let rotationX = -8;
-
-            let dragging = false;
-            let startX = 0;
-            let startY = 0;
-            let startYRotation = 0;
-            let startXRotation = 0;
-            let autoRotate = true;
-
-            function render() {
-              headphone.style.transform =
-                `translate(-50%,-50%)
-                 rotateX(${rotationX}deg)
-                 rotateY(${rotationY}deg)`;
+            if (scene) {
+              scene.dataset.legacy2d = "disabled";
             }
-
-            function animate() {
-              if (autoRotate && !dragging) {
-                rotationY += .20;
-                render();
-              }
-
-              requestAnimationFrame(animate);
-            }
-
-            scene.addEventListener(
-              "pointerdown",
-              e => {
-                dragging = true;
-                autoRotate = false;
-
-                startX = e.clientX;
-                startY = e.clientY;
-
-                startYRotation = rotationY;
-                startXRotation = rotationX;
-
-                scene.setPointerCapture(
-                  e.pointerId
-                );
-              }
-            );
-
-            scene.addEventListener(
-              "pointermove",
-              e => {
-
-                if (!dragging) return;
-
-                const dx =
-                  e.clientX - startX;
-
-                const dy =
-                  e.clientY - startY;
-
-                rotationY =
-                  startYRotation + dx * .55;
-
-                rotationX =
-                  Math.max(
-                    -35,
-                    Math.min(
-                      25,
-                      startXRotation - dy * .35
-                    )
-                  );
-
-                render();
-              }
-            );
-
-            function stopDrag(e) {
-              dragging = false;
-
-              try {
-                scene.releasePointerCapture(
-                  e.pointerId
-                );
-              } catch (_) {}
-
-              setTimeout(() => {
-                autoRotate = true;
-              },900);
-            }
-
-            scene.addEventListener(
-              "pointerup",
-              stopDrag
-            );
-
-            scene.addEventListener(
-              "pointercancel",
-              stopDrag
-            );
-
-            render();
-            animate();
           }
 
           /* =========================
