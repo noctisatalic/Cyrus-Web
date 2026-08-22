@@ -2951,6 +2951,10 @@ html[data-theme="dark"] .navbar {
 }
 </style>
 
+
+<!-- CYRUS-WEBGL-ENGINE -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.min.js"></script>
+
 </head>
 <body>
 
@@ -3873,6 +3877,768 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("cyrus-theme", next);
   });
 })();
+</script>
+
+
+<style id="cyrus-webgl-layer">
+.cyrus-webgl-canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  z-index:8;
+  pointer-events:none;
+}
+
+.cyrus-webgl-host{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  border-radius:inherit;
+  pointer-events:none;
+}
+
+.cyrus-webgl-host canvas{
+  width:100%;
+  height:100%;
+}
+</style>
+
+<script>
+/* CYRUS WEBGL 3D ENGINE — VOLUME OBJECTS */
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof THREE === "undefined") {
+    console.warn("Cyrus WebGL: Three.js belum tersedia.");
+    return;
+  }
+
+  const hosts = document.querySelectorAll(
+    ".cyrus-headphone-scene, .cyrus-koi-scene"
+  );
+
+  hosts.forEach(host => {
+    if (host.querySelector(".cyrus-webgl-host")) return;
+
+    const isKoi =
+      host.classList.contains("cyrus-koi-scene");
+
+    const layer =
+      document.createElement("div");
+
+    layer.className =
+      "cyrus-webgl-host";
+
+    layer.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    host.appendChild(layer);
+
+    const scene =
+      new THREE.Scene();
+
+    const camera =
+      new THREE.PerspectiveCamera(
+        32,
+        1,
+        0.1,
+        100
+      );
+
+    camera.position.set(
+      0,
+      0,
+      isKoi ? 7 : 6.5
+    );
+
+    const renderer =
+      new THREE.WebGLRenderer({
+        antialias:true,
+        alpha:true,
+        powerPreference:"high-performance"
+      });
+
+    renderer.setPixelRatio(
+      Math.min(
+        window.devicePixelRatio || 1,
+        2
+      )
+    );
+
+    renderer.outputColorSpace =
+      THREE.SRGBColorSpace;
+
+    renderer.toneMapping =
+      THREE.ACESFilmicToneMapping;
+
+    renderer.toneMappingExposure =
+      1.25;
+
+    renderer.shadowMap.enabled = true;
+
+    renderer.shadowMap.type =
+      THREE.PCFSoftShadowMap;
+
+    layer.appendChild(
+      renderer.domElement
+    );
+
+    /* =========================
+       LIGHTING
+       ========================= */
+
+    const hemi =
+      new THREE.HemisphereLight(
+        0xffffff,
+        0x172025,
+        2.4
+      );
+
+    scene.add(hemi);
+
+    const key =
+      new THREE.DirectionalLight(
+        0xffffff,
+        4.5
+      );
+
+    key.position.set(
+      4,
+      6,
+      6
+    );
+
+    key.castShadow = true;
+
+    scene.add(key);
+
+    const rim =
+      new THREE.DirectionalLight(
+        isKoi ? 0x8ee8ff : 0xbfd5ff,
+        3
+      );
+
+    rim.position.set(
+      -5,
+      2,
+      -4
+    );
+
+    scene.add(rim);
+
+    const fill =
+      new THREE.PointLight(
+        isKoi ? 0x8ddde8 : 0xffffff,
+        2.2,
+        10
+      );
+
+    fill.position.set(
+      0,
+      -1,
+      4
+    );
+
+    scene.add(fill);
+
+    const group =
+      new THREE.Group();
+
+    scene.add(group);
+
+    /* =========================
+       MATERIAL HELPERS
+       ========================= */
+
+    function physical(options) {
+      return new THREE.MeshPhysicalMaterial({
+        roughness:
+          options.roughness ?? 0.3,
+
+        metalness:
+          options.metalness ?? 0,
+
+        clearcoat:
+          options.clearcoat ?? 0.5,
+
+        clearcoatRoughness:
+          options.clearcoatRoughness ?? 0.15,
+
+        color:
+          options.color ?? 0xffffff
+      });
+    }
+
+    function addMesh(
+      geometry,
+      material,
+      parent = group
+    ) {
+      const mesh =
+        new THREE.Mesh(
+          geometry,
+          material
+        );
+
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+
+      parent.add(mesh);
+
+      return mesh;
+    }
+
+    /* =========================
+       HEADPHONE
+       ========================= */
+
+    function createHeadphone() {
+
+      const headphone =
+        new THREE.Group();
+
+      headphone.scale.set(
+        1.25,
+        1.25,
+        1.25
+      );
+
+      group.add(
+        headphone
+      );
+
+      const black =
+        physical({
+          color:0x0b0c0d,
+          roughness:.22,
+          metalness:.35,
+          clearcoat:.9
+        });
+
+      const cushion =
+        physical({
+          color:0x202124,
+          roughness:.58,
+          metalness:.05,
+          clearcoat:.45
+        });
+
+      const chrome =
+        physical({
+          color:0x70777b,
+          roughness:.18,
+          metalness:.8,
+          clearcoat:.8
+        });
+
+      /* headband */
+
+      const band =
+        new THREE.Mesh(
+          new THREE.TorusGeometry(
+            1.32,
+            .12,
+            18,
+            96,
+            Math.PI
+          ),
+          black
+        );
+
+      band.rotation.z =
+        Math.PI;
+
+      band.position.y =
+        .35;
+
+      band.castShadow = true;
+
+      headphone.add(
+        band
+      );
+
+      /* left/right ear cups */
+
+      [-1,1].forEach(side => {
+
+        const cup =
+          new THREE.Group();
+
+        cup.position.set(
+          side * 1.12,
+          -.52,
+          0
+        );
+
+        cup.rotation.z =
+          side * -.08;
+
+        headphone.add(
+          cup
+        );
+
+        const outer =
+          addMesh(
+            new THREE.CylinderGeometry(
+              .72,
+              .72,
+              .34,
+              48
+            ),
+            black,
+            cup
+          );
+
+        outer.rotation.z =
+          Math.PI / 2;
+
+        const ring =
+          addMesh(
+            new THREE.TorusGeometry(
+              .55,
+              .075,
+              16,
+              48
+            ),
+            chrome,
+            cup
+          );
+
+        ring.rotation.y =
+          Math.PI / 2;
+
+        const pad =
+          addMesh(
+            new THREE.CylinderGeometry(
+              .54,
+              .54,
+              .22,
+              48
+            ),
+            cushion,
+            cup
+          );
+
+        pad.rotation.z =
+          Math.PI / 2;
+
+        pad.position.x =
+          side * .12;
+
+        const inner =
+          addMesh(
+            new THREE.CylinderGeometry(
+              .35,
+              .35,
+              .08,
+              48
+            ),
+            black,
+            cup
+          );
+
+        inner.rotation.z =
+          Math.PI / 2;
+
+        inner.position.x =
+          side * .24;
+
+        const grille =
+          addMesh(
+            new THREE.CylinderGeometry(
+              .25,
+              .25,
+              .025,
+              32
+            ),
+            chrome,
+            cup
+          );
+
+        grille.rotation.z =
+          Math.PI / 2;
+
+        grille.position.x =
+          side * .29;
+      });
+
+      /* bridge */
+
+      const bridge =
+        new THREE.Mesh(
+          new THREE.TorusGeometry(
+            1.08,
+            .075,
+            16,
+            64,
+            Math.PI
+          ),
+          black
+        );
+
+      bridge.rotation.z =
+        Math.PI;
+
+      bridge.position.y =
+        .25;
+
+      bridge.scale.y =
+        .82;
+
+      headphone.add(
+        bridge
+      );
+
+      return headphone;
+    }
+
+    /* =========================
+       KOI
+       ========================= */
+
+    function createKoi() {
+
+      const koi =
+        new THREE.Group();
+
+      koi.scale.set(
+        1.45,
+        1.45,
+        1.45
+      );
+
+      group.add(
+        koi
+      );
+
+      const white =
+        physical({
+          color:0xf4f3ed,
+          roughness:.3,
+          metalness:.02,
+          clearcoat:.75
+        });
+
+      const orange =
+        physical({
+          color:0xe56d31,
+          roughness:.3,
+          metalness:.02,
+          clearcoat:.9
+        });
+
+      const dark =
+        physical({
+          color:0x111214,
+          roughness:.2,
+          metalness:.05,
+          clearcoat:.75
+        });
+
+      const body =
+        addMesh(
+          new THREE.SphereGeometry(
+            1,
+            48,
+            32
+          ),
+          white,
+          koi
+        );
+
+      body.scale.set(
+        1.75,
+        .52,
+        .58
+      );
+
+      /* orange dorsal patches */
+
+      [
+        [-.55,.16,.02,.62,.28,.61],
+        [.18,.19,.01,.48,.27,.58]
+      ].forEach(v => {
+
+        const patch =
+          addMesh(
+            new THREE.SphereGeometry(
+              1,
+              32,
+              20
+            ),
+            orange,
+            koi
+          );
+
+        patch.position.set(
+          v[0],
+          v[1],
+          v[2]
+        );
+
+        patch.scale.set(
+          v[3],
+          v[4],
+          v[5]
+        );
+      });
+
+      /* head */
+
+      const head =
+        addMesh(
+          new THREE.SphereGeometry(
+            .57,
+            40,
+            28
+          ),
+          white,
+          koi
+        );
+
+      head.position.x =
+        1.18;
+
+      head.scale.set(
+        1.05,
+        .88,
+        .9
+      );
+
+      /* eyes */
+
+      [-1,1].forEach(side => {
+
+        const eye =
+          addMesh(
+            new THREE.SphereGeometry(
+              .075,
+              20,
+              16
+            ),
+            dark,
+            koi
+          );
+
+        eye.position.set(
+          1.38,
+          .18,
+          side * .37
+        );
+      });
+
+      /* tail */
+
+      const tail =
+        new THREE.Group();
+
+      tail.position.x =
+        -1.7;
+
+      koi.add(
+        tail
+      );
+
+      const tailGeo =
+        new THREE.ConeGeometry(
+          .72,
+          1.05,
+          32
+        );
+
+      const tailMesh =
+        addMesh(
+          tailGeo,
+          white,
+          tail
+        );
+
+      tailMesh.rotation.z =
+        Math.PI / 2;
+
+      tailMesh.scale.y =
+        .7;
+
+      /* fins */
+
+      [-1,1].forEach(side => {
+
+        const fin =
+          addMesh(
+            new THREE.ConeGeometry(
+              .32,
+              .75,
+              24
+            ),
+            white,
+            koi
+          );
+
+        fin.position.set(
+          .15,
+          -.08,
+          side * .55
+        );
+
+        fin.rotation.x =
+          side * 1.1;
+
+        fin.rotation.z =
+          .25;
+      });
+
+      /* dorsal fin */
+
+      const dorsal =
+        addMesh(
+          new THREE.ConeGeometry(
+            .3,
+            .65,
+            24
+          ),
+          orange,
+          koi
+        );
+
+      dorsal.position.set(
+        -.1,
+        .5,
+        0
+      );
+
+      dorsal.rotation.z =
+        Math.PI / 2;
+
+      return koi;
+    }
+
+    const object =
+      isKoi
+        ? createKoi()
+        : createHeadphone();
+
+    /* =========================
+       CURSOR / TOUCH
+       ========================= */
+
+    let targetX = 0;
+    let targetY = 0;
+
+    let currentX = 0;
+    let currentY = 0;
+
+    function pointerMove(e) {
+
+      const rect =
+        host.getBoundingClientRect();
+
+      targetX =
+        (e.clientX - rect.left) /
+        rect.width - .5;
+
+      targetY =
+        (e.clientY - rect.top) /
+        rect.height - .5;
+    }
+
+    host.addEventListener(
+      "pointermove",
+      pointerMove,
+      { passive:true }
+    );
+
+    host.addEventListener(
+      "pointerleave",
+      () => {
+        targetX = 0;
+        targetY = 0;
+      }
+    );
+
+    function resize() {
+
+      const width =
+        Math.max(
+          1,
+          host.clientWidth
+        );
+
+      const height =
+        Math.max(
+          1,
+          host.clientHeight
+        );
+
+      camera.aspect =
+        width / height;
+
+      camera.updateProjectionMatrix();
+
+      renderer.setSize(
+        width,
+        height,
+        false
+      );
+    }
+
+    const observer =
+      new ResizeObserver(
+        resize
+      );
+
+    observer.observe(host);
+
+    function animate() {
+
+      requestAnimationFrame(
+        animate
+      );
+
+      currentX +=
+        (targetX - currentX) *
+        .055;
+
+      currentY +=
+        (targetY - currentY) *
+        .055;
+
+      object.rotation.y =
+        currentX *
+        (isKoi ? .65 : .85);
+
+      object.rotation.x =
+        currentY *
+        (isKoi ? .35 : .45);
+
+      object.position.x =
+        currentX *
+        .16;
+
+      object.position.y =
+        -currentY *
+        .10;
+
+      if (isKoi) {
+        object.rotation.z =
+          Math.sin(
+            performance.now() *
+            .0015
+          ) * .025;
+      }
+
+      renderer.render(
+        scene,
+        camera
+      );
+    }
+
+    resize();
+    animate();
+  });
+});
 </script>
 
 </body>
