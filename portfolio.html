@@ -2950,6 +2950,86 @@ html[data-theme="dark"] .navbar {
 
 </style>
 
+
+<style id="cyrus-spr-headphone-layout-fix">
+
+.cyrus-project-stage{
+  position:relative !important;
+  overflow:hidden !important;
+}
+
+.cyrus-project-stage .cyrus-headphone-scene{
+  position:absolute !important;
+
+  left:50% !important;
+  top:50% !important;
+
+  width:300px !important;
+  height:270px !important;
+
+  margin:0 !important;
+  padding:0 !important;
+
+  transform:
+    translate(-50%,-50%) !important;
+
+  display:block !important;
+
+  overflow:visible !important;
+
+  z-index:8 !important;
+
+  pointer-events:none !important;
+}
+
+.cyrus-project-stage .cyrus-headphone-scene .cyrus-headphone{
+  position:absolute !important;
+
+  left:50% !important;
+  top:50% !important;
+
+  margin:0 !important;
+
+  width:250px !important;
+  height:225px !important;
+
+  transform:
+    translate(-50%,-50%)
+    rotateX(-4deg)
+    rotateY(-12deg) !important;
+
+  transform-origin:center center !important;
+
+  pointer-events:none !important;
+}
+
+.cyrus-project-stage .cyrus-stage-label{
+  z-index:30 !important;
+}
+
+.cyrus-project-stage .cyrus-stage-hint{
+  z-index:30 !important;
+}
+
+@media(max-width:600px){
+
+  .cyrus-project-stage .cyrus-headphone-scene{
+    width:270px !important;
+    height:250px !important;
+  }
+
+  .cyrus-project-stage .cyrus-headphone-scene .cyrus-headphone{
+    transform:
+      translate(-50%,-50%)
+      scale(.82)
+      rotateX(-4deg)
+      rotateY(-12deg) !important;
+  }
+
+}
+
+</style>
+
 </head>
 <body>
 
