@@ -2626,9 +2626,10 @@ window.CyrusInitHeadphones = function startCyrusHeadphones(){
         );
 
         /*
-         * WebGL berhasil dibuat.
+         * JANGAN lock di sini.
+         * Masih ada material + geometry + animation
+         * yang harus selesai.
          */
-        host.dataset.cyrusFinal3d = "1";
 
         /* ==================================================
            LIGHTING
@@ -3245,6 +3246,12 @@ window.CyrusInitHeadphones = function startCyrusHeadphones(){
         }
 
         animate();
+
+        /*
+         * SELURUH ENGINE BERHASIL.
+         * Baru sekarang host dikunci.
+         */
+        host.dataset.cyrusFinal3d = "1";
 
     });
 }
