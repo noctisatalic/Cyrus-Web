@@ -137,8 +137,8 @@ function updateCameraFraming(){
 
   if(aspect < .65){
 
-    // Mobile portrait — slightly smaller, centered
-    distance = 7.55;
+    // Mobile portrait — centered and slightly smaller
+    distance = 7.75;
 
   }else if(aspect < .9){
 
@@ -159,7 +159,7 @@ function updateCameraFraming(){
 
   camera.position.set(
     0,
-    .08,
+    .12,
     distance
   );
 
@@ -355,13 +355,31 @@ function createCup(side){
   const cup =
     new THREE.Group();
 
-  // Symmetry lock — kedua ear cup memakai basis transform identik
-  cup.scale.set(1, 1, 1);
-  cup.rotation.set(0, 0, 0);
+  /*
+   * TRUE MIRRORED EAR CUP
+   * Semua komponen menggunakan local front direction.
+   * Tidak ada transform manual yang berbeda antara kiri/kanan.
+   */
 
-  cup.position.x =
-    side * 1.18;
-/* BODY */
+  const front =
+    -side;
+
+  cup.position.set(
+    side * 1.18,
+    0,
+    0
+  );
+
+  cup.rotation.set(
+    0,
+    0,
+    0
+  );
+
+
+  /* =====================================================
+     BODY
+  ===================================================== */
 
   const body =
     new THREE.Mesh(
@@ -380,7 +398,9 @@ function createCup(side){
   cup.add(body);
 
 
-  /* FRONT PLATE */
+  /* =====================================================
+     FRONT PLATE
+  ===================================================== */
 
   const plate =
     new THREE.Mesh(
@@ -397,12 +417,14 @@ function createCup(side){
     Math.PI / 2;
 
   plate.position.x =
-    -side * .19;
+    front * .19;
 
   cup.add(plate);
 
 
-  /* OUTER RING */
+  /* =====================================================
+     OUTER RING
+  ===================================================== */
 
   const ring =
     new THREE.Mesh(
@@ -419,12 +441,14 @@ function createCup(side){
     Math.PI / 2;
 
   ring.position.x =
-    -side * .22;
+    front * .22;
 
   cup.add(ring);
 
 
-  /* EAR CUSHION */
+  /* =====================================================
+     EAR CUSHION
+  ===================================================== */
 
   const cushion =
     new THREE.Mesh(
@@ -441,7 +465,7 @@ function createCup(side){
     Math.PI / 2;
 
   cushion.position.x =
-    -side * .245;
+    front * .245;
 
   cushion.scale.set(
     1,
@@ -452,7 +476,9 @@ function createCup(side){
   cup.add(cushion);
 
 
-  /* INNER CAVITY */
+  /* =====================================================
+     INNER CAVITY
+  ===================================================== */
 
   const cavity =
     new THREE.Mesh(
@@ -469,12 +495,14 @@ function createCup(side){
     Math.PI / 2;
 
   cavity.position.x =
-    -side * .255;
+    front * .255;
 
   cup.add(cavity);
 
 
-  /* DRIVER */
+  /* =====================================================
+     DRIVER
+  ===================================================== */
 
   const driver =
     new THREE.Mesh(
@@ -491,12 +519,14 @@ function createCup(side){
     Math.PI / 2;
 
   driver.position.x =
-    -side * .27;
+    front * .27;
 
   cup.add(driver);
 
 
-  /* SMALL CENTER */
+  /* =====================================================
+     SMALL CENTER
+  ===================================================== */
 
   const center =
     new THREE.Mesh(
@@ -513,14 +543,13 @@ function createCup(side){
     Math.PI / 2;
 
   center.position.x =
-    -side * .285;
+    front * .285;
 
   cup.add(center);
 
 
   product.add(cup);
 }
-
 createCup(-1);
 createCup(1);
 
