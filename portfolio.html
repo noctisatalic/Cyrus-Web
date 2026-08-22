@@ -3881,32 +3881,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 <style id="cyrus-webgl-layer">
-.cyrus-webgl-canvas{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  display:block;
-  z-index:8;
-  pointer-events:none;
-}
-
-.cyrus-webgl-host{
-  position:absolute;
-  inset:0;
-  overflow:hidden;
-  border-radius:inherit;
-  pointer-events:none;
-}
-
-.cyrus-webgl-host canvas{
-  width:100%;
-  height:100%;
-}
 
 /* =========================================================
-   CYRUS WEBGL — HIDE LEGACY 2D OBJECTS
+   CYRUS WEBGL — DETERMINISTIC PRODUCT VIEWER LAYER
    ========================================================= */
+
+.cyrus-webgl-host {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  border-radius: inherit;
+  z-index: 100 !important;
+  pointer-events: auto !important;
+  touch-action: none !important;
+}
+
+.cyrus-webgl-host canvas {
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 101 !important;
+  pointer-events: auto !important;
+  touch-action: none !important;
+}
+
+/* Hide only the old 2D visual pieces.
+   Keep the scene/container itself visible. */
 
 .cyrus-headphone-scene .cyrus-headband,
 .cyrus-headphone-scene .cyrus-ear,
@@ -3919,17 +3923,6 @@ document.addEventListener("DOMContentLoaded", () => {
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
-}
-
-.cyrus-webgl-host {
-  z-index: 20 !important;
-}
-
-.cyrus-webgl-host canvas {
-  display: block;
-  position: absolute;
-  inset: 0;
-  z-index: 21;
 }
 
 </style>
@@ -4022,6 +4015,59 @@ document.addEventListener("DOMContentLoaded", () => {
 
     layer.appendChild(
       renderer.domElement
+    );
+
+    const runtimeBadge =
+      document.createElement("div");
+
+    runtimeBadge.textContent =
+      "WEBGL: " +
+      (isKoi ? "KOI" : "HEADPHONE") +
+      " | HOST " +
+      host.clientWidth +
+      "x" +
+      host.clientHeight +
+      " | OBJECT " +
+      object.children.length;
+
+    runtimeBadge.style.cssText = `
+      position:absolute;
+      left:8px;
+      bottom:8px;
+      z-index:9999;
+      padding:6px 9px;
+      font:10px/1.2 monospace;
+      color:#111;
+      background:rgba(255,255,255,.85);
+      border-radius:6px;
+      pointer-events:none;
+    `;
+
+    host.appendChild(runtimeBadge);
+
+    console.log(
+      "CYRUS WEBGL READY",
+      isKoi ? "KOI" : "HEADPHONE",
+      {
+        hostWidth: host.clientWidth,
+        hostHeight: host.clientHeight,
+        canvasWidth: renderer.domElement.width,
+        canvasHeight: renderer.domElement.height,
+        objectVisible: object.visible,
+        objectChildren: object.children.length,
+        cameraZ: camera.position.z,
+        objectPosition: {
+          x: object.position.x,
+          y: object.position.y,
+          z: object.position.z
+        },
+        objectScale: {
+          x: object.scale.x,
+          y: object.scale.y,
+          z: object.scale.z
+        },
+        sceneChildren: scene.children.length
+      }
     );
 
     /* =========================
@@ -5272,41 +5318,93 @@ document.addEventListener("DOMContentLoaded", () => {
         : createHeadphone();
 
     /* =========================
-       CURSOR / TOUCH
+       STUDIO PRODUCT DRAG
        ========================= */
 
-    let targetX = 0;
-    let targetY = 0;
+    let dragging = false;
 
-    let currentX = 0;
-    let currentY = 0;
+    let previousX = 0;
+    let previousY = 0;
 
-    function pointerMove(e) {
-
-      const rect =
-        host.getBoundingClientRect();
-
-      targetX =
-        (e.clientX - rect.left) /
-        rect.width - .5;
-
-      targetY =
-        (e.clientY - rect.top) /
-        rect.height - .5;
-    }
+    let velocityY = 0;
+    let velocityX = 0;
 
     host.addEventListener(
-      "pointermove",
-      pointerMove,
-      { passive:true }
+      "pointerdown",
+      e => {
+
+        dragging = true;
+
+        previousX = e.clientX;
+        previousY = e.clientY;
+
+        velocityY = 0;
+        velocityX = 0;
+
+        try {
+          host.setPointerCapture(e.pointerId);
+        } catch {}
+
+      }
     );
 
     host.addEventListener(
-      "pointerleave",
-      () => {
-        targetX = 0;
-        targetY = 0;
+      "pointermove",
+      e => {
+
+        if (!dragging) return;
+
+        const dx =
+          e.clientX - previousX;
+
+        const dy =
+          e.clientY - previousY;
+
+        previousX = e.clientX;
+        previousY = e.clientY;
+
+        velocityY =
+          dx * 0.008;
+
+        velocityX =
+          dy * 0.003;
+
+        object.rotation.y +=
+          velocityY;
+
+        object.rotation.x +=
+          velocityX;
+
+        object.rotation.x =
+          THREE.MathUtils.clamp(
+            object.rotation.x,
+            -0.28,
+            0.28
+          );
+
       }
+    );
+
+    function stopDragging(e) {
+
+      dragging = false;
+
+      try {
+        host.releasePointerCapture(
+          e.pointerId
+        );
+      } catch {}
+
+    }
+
+    host.addEventListener(
+      "pointerup",
+      stopDragging
+    );
+
+    host.addEventListener(
+      "pointercancel",
+      stopDragging
     );
 
     function resize() {
@@ -5348,29 +5446,29 @@ document.addEventListener("DOMContentLoaded", () => {
         animate
       );
 
-      currentX +=
-        (targetX - currentX) *
-        .055;
+      /* =========================
+         PRODUCT VIEWER INERTIA
+         ========================= */
 
-      currentY +=
-        (targetY - currentY) *
-        .055;
+      if (!dragging) {
 
-      object.rotation.y =
-        currentX *
-        (isKoi ? .65 : .85);
+        object.rotation.y +=
+          velocityY;
 
-      object.rotation.x =
-        currentY *
-        (isKoi ? .35 : .45);
+        object.rotation.x +=
+          velocityX;
 
-      object.position.x =
-        currentX *
-        .16;
+        velocityY *= .94;
+        velocityX *= .94;
 
-      object.position.y =
-        -currentY *
-        .10;
+        object.rotation.x =
+          THREE.MathUtils.clamp(
+            object.rotation.x,
+            -0.28,
+            0.28
+          );
+
+      }
 
       if (isKoi) {
 
