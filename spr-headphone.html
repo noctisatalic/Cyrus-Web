@@ -487,19 +487,24 @@ function createCup(side){
   const earCushion =
     new THREE.Mesh(
       new THREE.TorusGeometry(
-        .375,
-        .125,
+        .385,
+        .115,
         32,
         96
       ),
       cushionMaterial
     );
 
-  earCushion.rotation.z =
-    side < 0 ? Math.PI / 2 : -Math.PI / 2;
+  /*
+   * Torus default menghadap sepanjang Z.
+   * Diputar 90° pada Y agar bidang cushion
+   * menjadi tegak terhadap sumbu X ear-cup.
+   */
+  earCushion.rotation.y =
+    Math.PI / 2;
 
   earCushion.position.x =
-    front * .225;
+    front * .175;
 
   earCushion.scale.set(
     1,
