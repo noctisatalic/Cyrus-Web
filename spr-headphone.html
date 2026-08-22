@@ -1,59 +1,27 @@
-<!DOCTYPE html>
-<html lang="id">
+<!doctype html>
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
 html,body{
   margin:0;
   width:100%;
   height:100%;
-  overflow:hidden;
-  background:transparent;
+  background:#050505;
 }
-
-#viewer{
-  position:fixed;
+#test{
+  position:absolute;
   inset:0;
-  overflow:hidden;
-  cursor:grab;
-  touch-action:none;
-}
-
-#viewer:active{
-  cursor:grabbing;
-}
-
-canvas{
-  display:block;
-  width:100%;
-  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font:700 28px Arial;
 }
 </style>
 </head>
-
 <body>
-
-<div id="viewer"></div>
-
-<script>
-document.body.style.background = "#111";
-
-document.getElementById("viewer").innerHTML = `
-  <div style="
-    position:absolute;
-    inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:white;
-    font:700 24px Arial;
-  ">
-    SCRIPT BERJALAN
-  </div>
-`;
-</script>
-
+<div id="test">SPR HEADPHONE FILE OK</div>
 </body>
 </html>
