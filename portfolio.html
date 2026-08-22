@@ -1116,362 +1116,491 @@ body.nav-locked {
   }
 }
 
+
 /* ============================================================
-   CYRUS PORTFOLIO — VISUAL PRESENTATION SYSTEM V2
-   Automatic image art direction
+   CYRUS PORTFOLIO — HARD CODED PROJECT STAGES
+   CMS hanya menyediakan data project + URL.
+   Visual setiap project dikontrol frontend.
    ============================================================ */
 
 #portfolio-grid {
   margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
 }
 
-.clean-work-card {
+.cyrus-project-card {
   position: relative;
-  isolation: isolate;
   overflow: hidden;
+  min-height: 430px;
+  border-radius: 30px;
   border: 1px solid rgba(17,17,17,.08);
-  border-radius: 28px;
-  background: #fff;
-  box-shadow:
-    0 12px 35px rgba(0,0,0,.035),
-    0 2px 8px rgba(0,0,0,.025);
+  background: #f7f7f7;
+  isolation: isolate;
   transition:
-    transform .65s cubic-bezier(.16,1,.3,1),
-    box-shadow .65s cubic-bezier(.16,1,.3,1);
+    transform .6s cubic-bezier(.16,1,.3,1),
+    box-shadow .6s cubic-bezier(.16,1,.3,1);
 }
 
-.clean-work-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(
-      circle at 20% 10%,
-      rgba(255,255,255,.95),
-      transparent 42%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,.04),
-      rgba(255,255,255,.5)
-    );
-  opacity: .65;
-}
-
-.clean-work-card:hover {
-  transform: translateY(-9px);
+.cyrus-project-card:hover {
+  transform: translateY(-7px);
   box-shadow:
-    0 30px 70px rgba(0,0,0,.10),
-    0 8px 20px rgba(0,0,0,.05);
+    0 28px 70px rgba(0,0,0,.10),
+    0 8px 24px rgba(0,0,0,.05);
 }
 
-.clean-work-media {
+.cyrus-project-card.featured {
+  grid-column: 1 / -1;
+  min-height: 500px;
+}
+
+/* ============================================================
+   STAGE
+   ============================================================ */
+
+.cyrus-project-stage {
   position: relative;
-  aspect-ratio: 16 / 9;
+  height: 310px;
   overflow: hidden;
+  display: grid;
+  place-items: center;
   background:
-    radial-gradient(
-      circle at 30% 20%,
-      rgba(255,255,255,.95),
-      rgba(244,244,244,.85) 42%,
-      rgba(225,225,225,.8)
-    );
+    radial-gradient(circle at 50% 35%, #ffffff 0%, #f3f3f3 48%, #e7e7e7 100%);
 }
 
-/* Ambient color extracted visually from the image itself */
-.clean-work-media::before {
+.cyrus-project-card.featured .cyrus-project-stage {
+  height: 365px;
+}
+
+/* subtle moving light */
+
+.cyrus-project-stage::before {
   content: "";
   position: absolute;
-  inset: -18%;
-  z-index: 1;
-  pointer-events: none;
-  background:
-    radial-gradient(
-      circle at 25% 30%,
-      var(--portfolio-glow, rgba(0,0,0,.12)),
-      transparent 52%
-    );
-  filter: blur(38px);
-  opacity: .55;
-  transform: scale(1.1);
-  transition:
-    opacity .7s ease,
-    transform .9s cubic-bezier(.16,1,.3,1);
+  width: 55%;
+  height: 55%;
+  border-radius: 50%;
+  background: rgba(255,255,255,.9);
+  filter: blur(45px);
+  animation: cyrusAmbient 5s ease-in-out infinite alternate;
 }
 
-.clean-work-media::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,.04) 0%,
-      rgba(255,255,255,.0) 42%,
-      rgba(255,255,255,.22) 100%
-    );
-
-  mix-blend-mode: screen;
+@keyframes cyrusAmbient {
+  from {
+    transform: translate(-20px,-10px) scale(.9);
+    opacity: .55;
+  }
+  to {
+    transform: translate(25px,15px) scale(1.15);
+    opacity: .9;
+  }
 }
 
-.clean-work-card:hover .clean-work-media::before {
-  opacity: .8;
-  transform: scale(1.18);
-}
+/* ============================================================
+   HEADPHONE 3D
+   ============================================================ */
 
-.clean-work-media img {
+.cyrus-headphone-scene {
   position: relative;
-  z-index: 0;
-
-  display: block;
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-  object-position: center;
-
-  transform: scale(1.015);
-
-  filter:
-    saturate(.88)
-    contrast(.96)
-    brightness(1.025);
-
-  transition:
-    transform 1s cubic-bezier(.16,1,.3,1),
-    filter 1s cubic-bezier(.16,1,.3,1);
-}
-
-.clean-work-card:hover .clean-work-media img {
-  transform: scale(1.055);
-  filter:
-    saturate(.96)
-    contrast(1)
-    brightness(1.04);
-}
-
-/* Premium image frame */
-.clean-work-media .portfolio-image-frame {
-  position: absolute;
-  inset: 9%;
-  z-index: 3;
-  pointer-events: none;
-
-  border: 1px solid rgba(255,255,255,.48);
-  border-radius: 18px;
-
-  box-shadow:
-    inset 0 0 0 1px rgba(17,17,17,.035),
-    0 15px 35px rgba(0,0,0,.08);
-
-  opacity: .72;
-
-  transition:
-    inset .8s cubic-bezier(.16,1,.3,1),
-    opacity .5s ease;
-}
-
-.clean-work-card:hover .clean-work-media .portfolio-image-frame {
-  inset: 7%;
-  opacity: .95;
-}
-
-/* Portfolio badge */
-.portfolio-image-badge {
-  position: absolute;
-  top: 16px;
-  left: 16px;
+  width: min(330px, 72vw);
+  height: 260px;
+  perspective: 900px;
+  cursor: grab;
+  touch-action: none;
   z-index: 5;
+}
 
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
+.cyrus-headphone-scene:active {
+  cursor: grabbing;
+}
 
+.cyrus-headphone {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 180px;
+  height: 190px;
+  transform-style: preserve-3d;
+  transform:
+    translate(-50%,-50%)
+    rotateX(-8deg)
+    rotateY(0deg);
+  will-change: transform;
+}
+
+.cyrus-headband {
+  position: absolute;
+  left: 50%;
+  top: 5px;
+  width: 145px;
+  height: 150px;
+  transform: translateX(-50%);
+  border: 18px solid #111;
+  border-bottom-color: transparent;
+  border-radius: 50% 50% 42% 42%;
+  box-shadow:
+    inset 0 0 0 4px #333,
+    0 18px 30px rgba(0,0,0,.18);
+}
+
+.cyrus-ear {
+  position: absolute;
+  top: 91px;
+  width: 52px;
+  height: 72px;
+  border-radius: 18px;
+  background:
+    linear-gradient(145deg,#2c2c2c,#080808);
+  box-shadow:
+    inset 7px 6px 10px rgba(255,255,255,.08),
+    inset -7px -8px 14px rgba(0,0,0,.5),
+    0 18px 28px rgba(0,0,0,.22);
+  transform-style: preserve-3d;
+}
+
+.cyrus-ear::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border-radius: 13px;
+  background:
+    radial-gradient(circle at 40% 35%, #444, #111 65%);
+  box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,.08);
+}
+
+.cyrus-ear.left {
+  left: 3px;
+  transform: rotateY(12deg) translateZ(12px);
+}
+
+.cyrus-ear.right {
+  right: 3px;
+  transform: rotateY(-12deg) translateZ(12px);
+}
+
+.cyrus-bridge {
+  position: absolute;
+  left: 50%;
+  top: 93px;
+  width: 90px;
+  height: 16px;
+  transform: translateX(-50%);
+  border-top: 7px solid #171717;
+  border-radius: 50%;
+}
+
+.cyrus-highlight {
+  position: absolute;
+  width: 90px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.2);
+  filter: blur(8px);
+  top: 25px;
+  left: 45px;
+  transform: rotate(-20deg);
+}
+
+/* floating labels */
+
+.cyrus-stage-label {
+  position: absolute;
+  z-index: 10;
+  top: 18px;
+  left: 18px;
   padding: 7px 11px;
-
   border-radius: 999px;
-
   background: rgba(255,255,255,.72);
-  border: 1px solid rgba(255,255,255,.7);
-
+  border: 1px solid rgba(255,255,255,.8);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-
-  color: #111;
   font-size: 9px;
   font-weight: 800;
-  letter-spacing: .09em;
+  letter-spacing: .1em;
   text-transform: uppercase;
-
-  box-shadow:
-    0 8px 22px rgba(0,0,0,.08);
 }
 
-.portfolio-image-badge::before {
+.cyrus-stage-hint {
+  position: absolute;
+  z-index: 10;
+  right: 18px;
+  bottom: 18px;
+  font-size: 10px;
+  color: #777;
+}
+
+/* ============================================================
+   KOI / COMMERCE STAGE
+   ============================================================ */
+
+.cyrus-koi-scene {
+  position: relative;
+  width: min(390px, 82vw);
+  height: 230px;
+  border-radius: 28px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 35% 30%, #dffcff, transparent 28%),
+    linear-gradient(145deg,#e8f7f7,#b8dfe2);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.6),
+    0 25px 45px rgba(0,0,0,.12);
+  z-index: 5;
+}
+
+.cyrus-koi-water {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-radial-gradient(
+      ellipse at center,
+      transparent 0 20px,
+      rgba(255,255,255,.18) 22px 24px
+    );
+  animation: koiWater 8s linear infinite;
+}
+
+@keyframes koiWater {
+  from { transform: translateX(-20px) translateY(-5px); }
+  to { transform: translateX(20px) translateY(5px); }
+}
+
+.cyrus-koi {
+  position: absolute;
+  width: 105px;
+  height: 48px;
+  border-radius: 60% 45% 45% 60%;
+  background:
+    linear-gradient(90deg,#fff 0 35%,#ef7b36 36% 61%,#fff 62%);
+  box-shadow: 0 14px 25px rgba(0,0,0,.13);
+}
+
+.cyrus-koi::before {
   content: "";
-  width: 5px;
-  height: 5px;
+  position: absolute;
+  right: -26px;
+  top: 7px;
+  border-width: 17px 30px 17px 0;
+  border-style: solid;
+  border-color: transparent rgba(239,123,54,.8) transparent transparent;
+  transform: rotate(7deg);
+}
+
+.cyrus-koi::after {
+  content: "";
+  position: absolute;
+  left: 22px;
+  top: 18px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: #111;
 }
 
-/* Body */
-.clean-work-body {
+.koi-one {
+  left: 55px;
+  top: 70px;
+  transform: rotate(-12deg);
+  animation: koiSwim1 5s ease-in-out infinite alternate;
+}
+
+.koi-two {
+  right: 48px;
+  bottom: 48px;
+  transform: scale(.72) rotate(15deg);
+  animation: koiSwim2 6s ease-in-out infinite alternate;
+}
+
+@keyframes koiSwim1 {
+  to { transform: translate(35px,12px) rotate(5deg); }
+}
+
+@keyframes koiSwim2 {
+  to { transform: translate(-30px,-15px) scale(.72) rotate(-5deg); }
+}
+
+/* ============================================================
+   GENERIC WEB EXPERIENCE
+   ============================================================ */
+
+.cyrus-browser-scene {
   position: relative;
-  z-index: 4;
-  padding: 22px 22px 24px;
-  background: rgba(255,255,255,.96);
+  width: min(430px, 84vw);
+  height: 245px;
+  border-radius: 20px;
+  background: #111;
+  padding: 10px;
+  box-shadow: 0 28px 50px rgba(0,0,0,.18);
+  transform: perspective(900px) rotateX(5deg) rotateY(-5deg);
+  z-index: 5;
 }
 
-.clean-work-meta {
+.cyrus-browser-top {
+  height: 22px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-
-  margin-bottom: 9px;
-
-  color: var(--muted);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .11em;
-}
-
-.clean-work-meta span + span::before {
-  content: "·";
-  margin-right: 10px;
-}
-
-.clean-work-body h3 {
-  margin: 0 0 8px;
-
-  font-family: var(--font-display);
-  font-size: 24px;
-  line-height: 1.05;
-  font-weight: 500;
-  letter-spacing: -.035em;
-}
-
-.clean-work-body p {
-  max-width: 650px;
-
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.65;
-}
-
-.clean-work-body a {
-  display: inline-flex;
+  gap: 5px;
   align-items: center;
-  gap: 7px;
-
-  margin-top: 16px;
-
-  font-size: 12px;
-  font-weight: 700;
-
-  transition:
-    gap .3s ease,
-    opacity .3s ease;
+  padding-left: 5px;
 }
 
-.clean-work-body a:hover {
-  gap: 11px;
+.cyrus-browser-top i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #777;
 }
 
-/* Featured project gets a stronger art-directed stage */
-.clean-work-featured .clean-work-media {
-  aspect-ratio: 2 / 1;
+.cyrus-browser-screen {
+  height: calc(100% - 22px);
+  border-radius: 12px;
+  background:
+    linear-gradient(135deg,#fff,#eeeeee);
+  padding: 24px;
+  overflow: hidden;
 }
 
-.clean-work-featured .clean-work-media img {
-  filter:
-    saturate(.84)
-    contrast(.94)
-    brightness(1.035);
+.cyrus-browser-line {
+  height: 10px;
+  width: 48%;
+  border-radius: 99px;
+  background: #111;
+  margin-bottom: 12px;
 }
 
-.clean-work-featured .clean-work-body {
-  padding: 24px 26px 27px;
+.cyrus-browser-line.small {
+  width: 28%;
+  background: #bbb;
 }
 
-.clean-work-featured .clean-work-body h3 {
-  font-size: clamp(26px, 3vw, 34px);
+.cyrus-browser-block {
+  margin-top: 22px;
+  height: 92px;
+  border-radius: 15px;
+  background:
+    linear-gradient(
+      135deg,
+      #111 0 25%,
+      #777 25% 27%,
+      #eee 27%
+    );
+  animation: browserPulse 4s ease-in-out infinite alternate;
 }
 
-/* Dark theme */
-html[data-theme="dark"] .clean-work-card {
-  background: var(--cw-surface-solid, #111);
-  border-color: var(--cw-line, rgba(255,255,255,.1));
+@keyframes browserPulse {
+  to {
+    transform: translateY(-5px);
+    border-radius: 22px;
+  }
 }
 
-html[data-theme="dark"] .clean-work-body {
-  background: rgba(18,18,18,.96);
-}
+/* ============================================================
+   CARD BODY
+   ============================================================ */
 
-html[data-theme="dark"] .portfolio-image-badge {
-  background: rgba(20,20,20,.68);
-  border-color: rgba(255,255,255,.12);
-  color: #fff;
-}
-
-html[data-theme="dark"] .portfolio-image-badge::before {
+.cyrus-project-body {
+  position: relative;
+  z-index: 10;
+  padding: 22px 24px 25px;
   background: #fff;
 }
 
-@media (max-width: 700px) {
+.cyrus-project-meta {
+  display: flex;
+  gap: 10px;
+  color: #777;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
 
+.cyrus-project-title {
+  margin-top: 9px;
+  font-family: var(--font-display);
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: -.04em;
+}
+
+.cyrus-project-description {
+  margin-top: 7px;
+  max-width: 650px;
+  color: #666;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.cyrus-project-link {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  margin-top: 15px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.cyrus-project-link:hover {
+  gap: 11px;
+}
+
+html[data-theme="dark"] .cyrus-project-card {
+  background: #111;
+  border-color: rgba(255,255,255,.1);
+}
+
+html[data-theme="dark"] .cyrus-project-stage {
+  background:
+    radial-gradient(circle at 50% 35%, #333 0%, #181818 50%, #0c0c0c 100%);
+}
+
+html[data-theme="dark"] .cyrus-project-body {
+  background: #121212;
+}
+
+html[data-theme="dark"] .cyrus-project-description,
+html[data-theme="dark"] .cyrus-project-meta {
+  color: #999;
+}
+
+@media(max-width:700px) {
   #portfolio-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
     margin-top: 34px;
   }
 
-  .clean-work-card {
-    border-radius: 20px;
+  .cyrus-project-card,
+  .cyrus-project-card.featured {
+    grid-column: auto;
+    min-height: auto;
   }
 
-  .clean-work-media,
-  .clean-work-featured .clean-work-media {
-    aspect-ratio: 16 / 10;
+  .cyrus-project-stage,
+  .cyrus-project-card.featured .cyrus-project-stage {
+    height: 280px;
   }
 
-  .clean-work-body,
-  .clean-work-featured .clean-work-body {
-    padding: 17px;
+  .cyrus-project-body {
+    padding: 18px;
   }
 
-  .clean-work-body h3,
-  .clean-work-featured .clean-work-body h3 {
-    font-size: 20px;
+  .cyrus-project-title {
+    font-size: 21px;
   }
 
-  .clean-work-body p {
-    font-size: 12px;
-  }
-
-  .portfolio-image-badge {
-    top: 11px;
-    left: 11px;
-    padding: 6px 9px;
-    font-size: 8px;
-  }
-
-  .clean-work-media .portfolio-image-frame {
-    inset: 7%;
-    border-radius: 13px;
+  .cyrus-project-description {
+    font-size: 11px;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-
-  .clean-work-card,
-  .clean-work-media img,
-  .clean-work-media::before,
-  .clean-work-media .portfolio-image-frame {
-    transition: none !important;
+@media(prefers-reduced-motion:reduce) {
+  .cyrus-project-stage::before,
+  .cyrus-koi-water,
+  .cyrus-koi,
+  .cyrus-browser-block {
+    animation: none !important;
   }
 }
 
@@ -2196,14 +2325,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <script>
 /* ============================================================
-   CYRUS PORTFOLIO — DYNAMIC VISUAL CMS
-   API tetap sama. Tampilan gambar otomatis dipoles.
+   CYRUS PORTFOLIO — HARD CODED VISUAL ENGINE
+   CMS = DATA + URL
+   FRONTEND = VISUAL
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
-  const portfolioGrid = document.querySelector("#portfolio-grid");
 
-  if (!portfolioGrid) return;
+  const grid = document.querySelector("#portfolio-grid");
+  if (!grid) return;
 
   const API =
     "https://cyrusweb.vercel.app/api/portfolio?t=" + Date.now();
@@ -2213,143 +2343,276 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!res.ok) {
         throw new Error("Portfolio API error: " + res.status);
       }
-
       return res.json();
     })
-
     .then(result => {
 
       if (!result.success || !Array.isArray(result.data)) {
         throw new Error("Format portfolio tidak valid");
       }
 
-      portfolioGrid.innerHTML = "";
+      grid.innerHTML = "";
 
       if (!result.data.length) {
-        portfolioGrid.innerHTML =
+        grid.innerHTML =
           '<div class="portfolio-loading">Belum ada project.</div>';
         return;
       }
 
-      result.data.forEach((item, index) => {
+      result.data
+        .sort((a,b) => (a.order ?? 0) - (b.order ?? 0))
+        .forEach((item, index) => {
 
-        const article = document.createElement("article");
+          const slug = String(item.slug || "").toLowerCase();
+          const category = String(item.category || "").toLowerCase();
 
-        article.className =
-          "clean-work-card" +
-          (item.featured ? " clean-work-featured" : "");
+          let visual = "browser";
 
-        /*
-         * Automatic visual label.
-         * Tidak perlu menambahkan field baru ke database.
-         */
-        const label =
-          item.featured
-            ? "Featured Project"
-            : "Selected Work";
+          if (
+            slug.includes("spr") ||
+            slug.includes("audio") ||
+            category.includes("audio")
+          ) {
+            visual = "audio";
+          }
 
-        article.innerHTML = `
-          <div class="clean-work-media">
+          if (
+            slug.includes("ihsan") ||
+            slug.includes("koi") ||
+            category.includes("commerce")
+          ) {
+            visual = "koi";
+          }
 
-            <span class="portfolio-image-badge">
-              ${label}
-            </span>
+          const article = document.createElement("article");
 
-            <img
-              src="${escapeHtml(item.imageUrl || "")}"
-              alt="${escapeHtml(item.title || "CyrusWeb project")}"
-              loading="${index === 0 ? "eager" : "lazy"}"
-              decoding="async"
-            >
+          article.className =
+            "cyrus-project-card" +
+            (item.featured ? " featured" : "");
 
-          </div>
+          article.innerHTML = `
+            <div class="cyrus-project-stage">
 
-          <div class="clean-work-body">
+              <span class="cyrus-stage-label">
+                ${item.featured ? "Featured Project" : "Selected Work"}
+              </span>
 
-            <div class="clean-work-meta">
-              <span>${item.featured ? "REAL PROJECT" : "PROJECT"}</span>
-              <span>${escapeHtml(item.category || "Web Design")}</span>
+              ${visual === "audio" ? `
+                <div class="cyrus-headphone-scene" data-rotate="0">
+
+                  <div class="cyrus-headphone">
+
+                    <div class="cyrus-headband"></div>
+
+                    <div class="cyrus-ear left"></div>
+                    <div class="cyrus-ear right"></div>
+
+                    <div class="cyrus-bridge"></div>
+
+                    <div class="cyrus-highlight"></div>
+
+                  </div>
+
+                </div>
+
+                <span class="cyrus-stage-hint">
+                  Drag to rotate
+                </span>
+              ` : ""}
+
+              ${visual === "koi" ? `
+                <div class="cyrus-koi-scene">
+
+                  <div class="cyrus-koi-water"></div>
+
+                  <div class="cyrus-koi koi-one"></div>
+                  <div class="cyrus-koi koi-two"></div>
+
+                </div>
+              ` : ""}
+
+              ${visual === "browser" ? `
+                <div class="cyrus-browser-scene">
+
+                  <div class="cyrus-browser-top">
+                    <i></i><i></i><i></i>
+                  </div>
+
+                  <div class="cyrus-browser-screen">
+
+                    <div class="cyrus-browser-line"></div>
+                    <div class="cyrus-browser-line small"></div>
+
+                    <div class="cyrus-browser-block"></div>
+
+                  </div>
+
+                </div>
+              ` : ""}
+
             </div>
 
-            <h3>${escapeHtml(item.title || "Untitled Project")}</h3>
+            <div class="cyrus-project-body">
 
-            <p>
-              ${escapeHtml(
-                item.description ||
-                "Digital experience crafted by CyrusWeb."
-              )}
-            </p>
+              <div class="cyrus-project-meta">
+                <span>${item.featured ? "REAL PROJECT" : "PROJECT"}</span>
+                <span>${escapeHtml(item.category || "Web Experience")}</span>
+              </div>
 
-            ${
-              item.projectUrl
-                ? `
-                  <a
-                    href="${escapeHtml(item.projectUrl)}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View Project <span>↗</span>
-                  </a>
-                `
-                : ""
-            }
+              <h3 class="cyrus-project-title">
+                ${escapeHtml(item.title || "Untitled Project")}
+              </h3>
 
-          </div>
-        `;
+              <p class="cyrus-project-description">
+                ${escapeHtml(
+                  item.description ||
+                  "Digital experience crafted by CyrusWeb."
+                )}
+              </p>
 
-        portfolioGrid.appendChild(article);
-
-        /*
-         * Subtle GSAP reveal untuk project yang baru masuk.
-         */
-        if (
-          typeof gsap !== "undefined" &&
-          typeof ScrollTrigger !== "undefined"
-        ) {
-          gsap.fromTo(
-            article,
-            {
-              y: 28,
-              opacity: 0,
-              scale: .985
-            },
-            {
-              y: 0,
-              opacity: 1,
-              scale: 1,
-              duration: .7,
-              delay: Math.min(index * .08, .3),
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: article,
-                start: "top 90%",
-                once: true
+              ${
+                item.projectUrl
+                  ? `
+                    <a
+                      class="cyrus-project-link"
+                      href="${escapeHtml(item.projectUrl)}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Visit Website <span>↗</span>
+                    </a>
+                  `
+                  : ""
               }
-            }
-          );
-        }
 
-      });
+            </div>
+          `;
+
+          grid.appendChild(article);
+
+          /* GSAP reveal */
+          if (
+            typeof gsap !== "undefined" &&
+            typeof ScrollTrigger !== "undefined"
+          ) {
+
+            gsap.fromTo(
+              article,
+              {
+                y: 35,
+                opacity: 0,
+                scale: .97
+              },
+              {
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                duration: .75,
+                delay: Math.min(index * .08, .3),
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: article,
+                  start: "top 90%",
+                  once: true
+                }
+              }
+            );
+          }
+
+          /* ======================================================
+             HEADPHONE INTERACTION
+             ====================================================== */
+
+          if (visual === "audio") {
+
+            const scene =
+              article.querySelector(".cyrus-headphone-scene");
+
+            const headphone =
+              article.querySelector(".cyrus-headphone");
+
+            let rotation = 0;
+            let dragging = false;
+            let startX = 0;
+            let startRotation = 0;
+
+            let autoRotate = true;
+
+            function render() {
+              headphone.style.transform =
+                `translate(-50%,-50%)
+                 rotateX(-8deg)
+                 rotateY(${rotation}deg)`;
+            }
+
+            function animate() {
+
+              if (autoRotate && !dragging) {
+                rotation += 0.22;
+                render();
+              }
+
+              requestAnimationFrame(animate);
+            }
+
+            scene.addEventListener("pointerdown", e => {
+
+              dragging = true;
+              autoRotate = false;
+
+              startX = e.clientX;
+              startRotation = rotation;
+
+              scene.setPointerCapture(e.pointerId);
+            });
+
+            scene.addEventListener("pointermove", e => {
+
+              if (!dragging) return;
+
+              const delta = e.clientX - startX;
+
+              rotation =
+                startRotation + delta * 0.65;
+
+              render();
+            });
+
+            function stopDrag(e) {
+
+              dragging = false;
+
+              try {
+                scene.releasePointerCapture(e.pointerId);
+              } catch (_) {}
+
+              setTimeout(() => {
+                autoRotate = true;
+              }, 900);
+            }
+
+            scene.addEventListener("pointerup", stopDrag);
+            scene.addEventListener("pointercancel", stopDrag);
+
+            render();
+            animate();
+          }
+
+        });
 
     })
-
     .catch(error => {
 
       console.error("Portfolio load error:", error);
 
-      portfolioGrid.innerHTML = `
+      grid.innerHTML = `
         <div class="portfolio-loading">
           Portfolio sedang tidak tersedia.
         </div>
       `;
-
     });
 
 
-  /*
-   * Escape HTML supaya data dari CMS tidak langsung
-   * dimasukkan sebagai HTML mentah.
-   */
   function escapeHtml(value) {
 
     return String(value)
