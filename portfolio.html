@@ -3033,15 +3033,20 @@ document.addEventListener("DOMContentLoaded", () => {
                       aria-label="Interactive 3D headphone"
                     >
                       <iframe
-                        src="spr-headphone.html"
+                        src="./spr-headphone.html?v=3"
                         title="SPR Audio 3D Headphone"
                         loading="eager"
                         style="
                           width:100%;
-                          height:100%;
+                          height:320px;
+                          min-height:320px;
+                          flex:1 1 100%;
                           border:0;
                           display:block;
+                          position:relative;
+                          z-index:20;
                           background:transparent;
+                          pointer-events:auto;
                         "
                       ></iframe>
                     </div>
