@@ -137,8 +137,8 @@ function updateCameraFraming(){
 
   if(aspect < .65){
 
-    // Mobile portrait
-    distance = 7.15;
+    // Mobile portrait — slightly smaller, centered
+    distance = 7.55;
 
   }else if(aspect < .9){
 
@@ -159,7 +159,7 @@ function updateCameraFraming(){
 
   camera.position.set(
     0,
-    .12,
+    .08,
     distance
   );
 
@@ -345,6 +345,10 @@ function createCup(side){
 
   const cup =
     new THREE.Group();
+
+  // Symmetry lock — kedua ear cup memakai basis transform identik
+  cup.scale.set(1, 1, 1);
+  cup.rotation.set(0, 0, 0);
 
   cup.position.x =
     side * 1.18;
