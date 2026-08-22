@@ -3257,13 +3257,13 @@ window.CyrusInitHeadphones = function startCyrusHeadphones(){
 
 function boot(){
 
+    /*
+     * Jangan pernah menyerah hanya karena
+     * Three.js / portfolio card belum siap.
+     */
+
     if(typeof THREE === "undefined"){
-
-        setTimeout(
-            boot,
-            100
-        );
-
+        setTimeout(boot, 150);
         return;
     }
 
@@ -3272,44 +3272,18 @@ function boot(){
             ".cyrus-headphone-scene"
         );
 
-    if(scenes.length){
-
-        startCyrusHeadphones();
-
+    if(!scenes.length){
+        setTimeout(boot, 150);
         return;
     }
 
     /*
-     * MutationObserver menangkap card
-     * yang baru dibuat oleh CMS.
+     * Jalankan engine.
+     * Engine sendiri mencegah double initialization.
      */
+    startCyrusHeadphones();
 
-    if(!window.__cyrusHeadphoneObserver){
-
-        window.__cyrusHeadphoneObserver =
-            new MutationObserver(
-                function(){
-
-                    const found =
-                        document.querySelectorAll(
-                            ".cyrus-headphone-scene"
-                        );
-
-                    if(found.length){
-                        startCyrusHeadphones();
-                    }
-
-                }
-            );
-
-        window.__cyrusHeadphoneObserver.observe(
-            document.body,
-            {
-                childList:true,
-                subtree:true
-            }
-        );
-    }
+}
 }
 
 if(
