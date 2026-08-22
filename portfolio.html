@@ -2487,24 +2487,32 @@ html[data-theme="dark"] .navbar {
 <style id="cyrus-spr-headphone-slot">
 .cyrus-audio-slot{
   width:100% !important;
-  height:320px !important;
-  position:relative !important;
+  height:100% !important;
+  min-height:350px !important;
+  position:absolute !important;
+  inset:0 !important;
   overflow:hidden !important;
   display:block !important;
   margin:0 !important;
   padding:0 !important;
+  z-index:20 !important;
 }
 
 .cyrus-audio-slot iframe{
   width:100% !important;
-  height:320px !important;
-  min-height:320px !important;
+  height:100% !important;
+  min-height:100% !important;
   display:block !important;
   position:absolute !important;
   inset:0 !important;
   border:0 !important;
   background:transparent !important;
   z-index:50 !important;
+  pointer-events:auto !important;
+}
+
+.cyrus-project-card.featured .cyrus-audio-slot{
+  min-height:430px !important;
 }
 </style>
 
