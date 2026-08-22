@@ -1454,6 +1454,17 @@ html[data-theme="dark"] .nav-links .nav-link:hover {
 
 html[data-theme="dark"] .nav-links .nav-link.active {
   color: var(--cw-text) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+@media (min-width: 769px) {
+  html[data-theme="dark"] .nav-links .nav-link:focus,
+  html[data-theme="dark"] .nav-links .nav-link:focus-visible {
+    background: transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
 }
 
 
@@ -2361,11 +2372,11 @@ html[data-theme="dark"] .navbar {
 
 
 
-\n
 
-\n
 
-\n
+
+
+
 
 
 </head>
