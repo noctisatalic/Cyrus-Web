@@ -406,8 +406,8 @@ function createCup(side){
       shellMaterial
     );
 
-  housing.rotation.y =
-    Math.PI / 2;
+  housing.rotation.z =
+    side < 0 ? Math.PI / 2 : -Math.PI / 2;
 
   cup.add(housing);
 
@@ -426,8 +426,8 @@ function createCup(side){
       shellSoftMaterial
     );
 
-  backShell.rotation.y =
-    Math.PI / 2;
+  backShell.rotation.z =
+    side < 0 ? Math.PI / 2 : -Math.PI / 2;
 
   backShell.position.x =
     -front * .20;
@@ -449,8 +449,8 @@ function createCup(side){
       shellSoftMaterial
     );
 
-  face.rotation.y =
-    Math.PI / 2;
+  face.rotation.z =
+    side < 0 ? Math.PI / 2 : -Math.PI / 2;
 
   face.position.x =
     front * .205;
@@ -472,36 +472,13 @@ function createCup(side){
       metalMaterial
     );
 
-  outerRim.rotation.y =
-    Math.PI / 2;
+  outerRim.rotation.z =
+    side < 0 ? Math.PI / 2 : -Math.PI / 2;
 
   outerRim.position.x =
     front * .235;
 
   cup.add(outerRim);
-
-  /* =======================================================
-     INNER DECORATIVE RIM
-  ======================================================= */
-
-  const innerRim =
-    new THREE.Mesh(
-      new THREE.TorusGeometry(
-        .395,
-        .030,
-        20,
-        80
-      ),
-      accentMaterial
-    );
-
-  innerRim.rotation.y =
-    Math.PI / 2;
-
-  innerRim.position.x =
-    front * .255;
-
-  cup.add(innerRim);
 
   /* =======================================================
      EAR CUSHION
@@ -518,11 +495,11 @@ function createCup(side){
       cushionMaterial
     );
 
-  earCushion.rotation.y =
-    Math.PI / 2;
+  earCushion.rotation.z =
+    side < 0 ? Math.PI / 2 : -Math.PI / 2;
 
   earCushion.position.x =
-    front * .145;
+    front * .225;
 
   earCushion.scale.set(
     1,
@@ -547,11 +524,11 @@ function createCup(side){
       innerMaterial
     );
 
-  inner.rotation.y =
-    Math.PI / 2;
+  inner.rotation.z =
+    side < 0 ? Math.PI / 2 : -Math.PI / 2;
 
   inner.position.x =
-    front * .13;
+    front * .245;
 
   cup.add(inner);
 
@@ -570,11 +547,11 @@ function createCup(side){
       accentMaterial
     );
 
-  driver.rotation.y =
-    Math.PI / 2;
+  driver.rotation.z =
+    side < 0 ? Math.PI / 2 : -Math.PI / 2;
 
   driver.position.x =
-    front * .155;
+    front * .255;
 
   cup.add(driver);
 
