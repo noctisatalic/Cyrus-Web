@@ -1223,142 +1223,350 @@ body.nav-locked {
 }
 
 /* =========================
-   3D HEADPHONE
+   3D HEADPHONE — VOLUME ENGINE
    ========================= */
 
-.cyrus-headphone-scene {
+.cyrus-headphone-scene{
   position:relative;
   z-index:10;
-  width:min(390px,80vw);
-  height:290px;
-  perspective:1100px;
+  width:min(430px,88vw);
+  height:300px;
+  perspective:1200px;
+  transform-style:preserve-3d;
   cursor:grab;
   touch-action:none;
 }
 
-.cyrus-headphone-scene:active {
+.cyrus-headphone-scene:active{
   cursor:grabbing;
 }
 
-.cyrus-headphone {
+.cyrus-headphone{
   position:absolute;
   left:50%;
   top:50%;
-  width:220px;
-  height:230px;
+  width:250px;
+  height:235px;
   transform:
     translate(-50%,-50%)
-    rotateX(-8deg)
+    rotateX(-10deg)
     rotateY(0deg);
   transform-style:preserve-3d;
   will-change:transform;
 }
 
-.cyrus-headphone::after {
-  content:"";
+.cyrus-headband{
   position:absolute;
   left:50%;
-  bottom:-30px;
-  width:185px;
-  height:35px;
-  transform:translateX(-50%) rotateX(70deg);
-  border-radius:50%;
-  background:rgba(0,0,0,.25);
-  filter:blur(18px);
-}
-
-.cyrus-headband {
-  position:absolute;
-  left:50%;
-  top:5px;
-  width:175px;
-  height:180px;
+  top:-8px;
+  width:190px;
+  height:190px;
   transform:translateX(-50%);
-  border:22px solid #101010;
+  border:24px solid #101010;
   border-bottom-color:transparent;
-  border-radius:50% 50% 45% 45%;
+  border-radius:50%;
   box-shadow:
-    inset 0 0 0 5px #333,
-    inset 8px 10px 18px rgba(255,255,255,.12),
-    0 20px 35px rgba(0,0,0,.25);
-}
-
-.cyrus-ear {
-  position:absolute;
-  top:108px;
-  width:67px;
-  height:91px;
-  border-radius:22px;
-  background:
-    linear-gradient(
-      145deg,
-      #454545 0%,
-      #111 35%,
-      #050505 72%,
-      #292929 100%
-    );
-  box-shadow:
-    inset 8px 7px 12px rgba(255,255,255,.12),
-    inset -10px -12px 20px rgba(0,0,0,.7),
-    0 20px 32px rgba(0,0,0,.28);
+    inset 4px 5px 0 rgba(255,255,255,.15),
+    inset -8px -8px 12px rgba(0,0,0,.7),
+    0 25px 35px rgba(0,0,0,.22);
   transform-style:preserve-3d;
 }
 
-.cyrus-ear::before {
+.cyrus-headband::after{
   content:"";
   position:absolute;
-  inset:11px;
-  border-radius:17px;
+  inset:-7px;
+  border:5px solid rgba(255,255,255,.07);
+  border-bottom-color:transparent;
+  border-radius:50%;
+  transform:translateZ(10px);
+}
+
+.cyrus-ear{
+  position:absolute;
+  top:105px;
+  width:78px;
+  height:105px;
+  border-radius:25px 25px 30px 30px;
   background:
-    radial-gradient(
-      circle at 35% 28%,
-      #666,
-      #181818 38%,
-      #050505 75%
+    linear-gradient(
+      145deg,
+      #555 0%,
+      #202020 22%,
+      #070707 58%,
+      #303030 100%
     );
   box-shadow:
-    inset 0 0 0 2px rgba(255,255,255,.09);
+    inset 9px 7px 15px rgba(255,255,255,.16),
+    inset -13px -14px 22px rgba(0,0,0,.8),
+    12px 25px 35px rgba(0,0,0,.28);
+  transform-style:preserve-3d;
 }
 
-.cyrus-ear::after {
+.cyrus-ear::before{
   content:"";
   position:absolute;
-  inset:18px;
-  border-radius:50%;
-  border:2px solid rgba(255,255,255,.08);
+  inset:10px;
+  border-radius:20px;
+  background:
+    radial-gradient(
+      ellipse at 32% 25%,
+      #777 0%,
+      #292929 24%,
+      #080808 65%,
+      #151515 100%
+    );
+  box-shadow:
+    inset 0 0 0 3px rgba(255,255,255,.07),
+    inset 8px 8px 15px rgba(255,255,255,.05);
+  transform:translateZ(8px);
 }
 
-.cyrus-ear.left {
-  left:0;
-  transform:rotateY(15deg) translateZ(15px);
-}
-
-.cyrus-ear.right {
-  right:0;
-  transform:rotateY(-15deg) translateZ(15px);
-}
-
-.cyrus-bridge {
+.cyrus-ear::after{
+  content:"";
   position:absolute;
   left:50%;
-  top:109px;
-  width:100px;
-  height:18px;
-  transform:translateX(-50%);
-  border-top:8px solid #171717;
+  top:50%;
+  width:43px;
+  height:58px;
+  transform:translate(-50%,-50%) translateZ(14px);
   border-radius:50%;
+  border:5px solid #171717;
+  background:
+    radial-gradient(
+      circle,
+      #050505 0 42%,
+      #262626 44% 54%,
+      #080808 57%
+    );
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.07),
+    inset 0 5px 8px rgba(255,255,255,.06);
 }
 
-.cyrus-highlight {
+.cyrus-ear.left{
+  left:0;
+  transform:
+    translateZ(18px)
+    rotateY(18deg);
+}
+
+.cyrus-ear.right{
+  right:0;
+  transform:
+    translateZ(18px)
+    rotateY(-18deg);
+}
+
+.cyrus-bridge{
   position:absolute;
-  left:45px;
-  top:25px;
-  width:115px;
-  height:22px;
+  left:50%;
+  top:108px;
+  width:92px;
+  height:26px;
+  transform:
+    translateX(-50%)
+    translateZ(5px);
+  border-top:9px solid #111;
   border-radius:50%;
-  background:rgba(255,255,255,.25);
-  filter:blur(10px);
-  transform:rotate(-20deg);
+  box-shadow:0 -2px 3px rgba(255,255,255,.08);
+}
+
+.cyrus-highlight{
+  position:absolute;
+  left:40px;
+  top:18px;
+  width:150px;
+  height:30px;
+  border-radius:50%;
+  background:rgba(255,255,255,.22);
+  filter:blur(11px);
+  transform:
+    translateZ(30px)
+    rotate(-18deg);
+  pointer-events:none;
+}
+
+/* =========================
+   CYRUS 3D KOI — VOLUME ENGINE
+   ========================= */
+
+.cyrus-koi-scene{
+  position:relative;
+  z-index:10;
+  width:min(520px,90vw);
+  height:290px;
+  overflow:hidden;
+  border-radius:34px;
+  perspective:1100px;
+  transform-style:preserve-3d;
+  background:
+    radial-gradient(
+      ellipse at 28% 18%,
+      rgba(255,255,255,.95),
+      transparent 28%
+    ),
+    linear-gradient(
+      145deg,
+      #dff8fa 0%,
+      #9ccfd5 48%,
+      #6baeb7 100%
+    );
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.8),
+    inset 0 -40px 80px rgba(20,90,100,.15),
+    0 30px 60px rgba(0,0,0,.16);
+}
+
+.cyrus-koi-water{
+  position:absolute;
+  inset:-40%;
+  background:
+    repeating-radial-gradient(
+      ellipse at center,
+      transparent 0 24px,
+      rgba(255,255,255,.13) 26px 28px
+    );
+  opacity:.7;
+  animation:koiWater 9s linear infinite;
+  transform:translateZ(-30px);
+}
+
+.cyrus-koi{
+  position:absolute;
+  width:145px;
+  height:65px;
+  border-radius:58% 48% 48% 58%;
+  transform-style:preserve-3d;
+  background:
+    radial-gradient(
+      ellipse at 30% 25%,
+      rgba(255,255,255,.9),
+      transparent 22%
+    ),
+    linear-gradient(
+      90deg,
+      #f8f8f8 0 26%,
+      #e87532 27% 56%,
+      #f8f8f8 57% 100%
+    );
+  box-shadow:
+    inset 12px 7px 14px rgba(255,255,255,.65),
+    inset -14px -14px 24px rgba(0,0,0,.2),
+    0 25px 35px rgba(0,0,0,.22);
+  will-change:transform;
+}
+
+.cyrus-koi::before{
+  content:"";
+  position:absolute;
+  right:-39px;
+  top:4px;
+  width:50px;
+  height:57px;
+  background:
+    linear-gradient(
+      145deg,
+      #f28a42,
+      #b84c1f
+    );
+  clip-path:polygon(0 50%,100% 0,78% 50%,100% 100%);
+  transform:
+    translateZ(-5px)
+    rotateY(-12deg);
+  filter:
+    drop-shadow(5px 7px 5px rgba(0,0,0,.18));
+}
+
+.cyrus-koi::after{
+  content:"";
+  position:absolute;
+  left:27px;
+  top:18px;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#080808;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.75),
+    5px 5px 12px rgba(0,0,0,.4);
+  transform:translateZ(15px);
+}
+
+.cyrus-koi .koi-scales{
+  position:absolute;
+  inset:8px 15px 8px 20px;
+  border-radius:50%;
+  background:
+    repeating-radial-gradient(
+      ellipse at center,
+      transparent 0 7px,
+      rgba(255,255,255,.18) 8px 9px
+    );
+  opacity:.65;
+  transform:translateZ(10px);
+  pointer-events:none;
+}
+
+.cyrus-koi .koi-fin-top{
+  position:absolute;
+  left:55px;
+  top:-22px;
+  width:58px;
+  height:30px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.55),
+      rgba(225,100,45,.75)
+    );
+  clip-path:polygon(0 100%,18% 20%,45% 0,72% 18%,100% 100%);
+  transform:
+    translateZ(4px)
+    rotateX(-18deg);
+  filter:drop-shadow(2px 4px 4px rgba(0,0,0,.15));
+}
+
+.koi-one{
+  left:58px;
+  top:70px;
+  animation:koiSwim1 5s ease-in-out infinite alternate;
+}
+
+.koi-two{
+  right:55px;
+  bottom:48px;
+  transform:scale(.72) translateZ(-20px);
+  animation:koiSwim2 6s ease-in-out infinite alternate;
+}
+
+@keyframes koiWater{
+  from{
+    transform:translate3d(-35px,-15px,-30px) scale(1);
+  }
+  to{
+    transform:translate3d(35px,15px,-30px) scale(1.08);
+  }
+}
+
+@keyframes koiSwim1{
+  to{
+    transform:
+      translate3d(45px,12px,20px)
+      rotateZ(7deg)
+      rotateY(-8deg)
+      scale(1.04);
+  }
+}
+
+@keyframes koiSwim2{
+  to{
+    transform:
+      translate3d(-38px,-18px,-5px)
+      rotateZ(-8deg)
+      rotateY(10deg)
+      scale(.78);
+  }
 }
 
 /* =========================
