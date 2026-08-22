@@ -3814,7 +3814,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </style>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+(() => {
 
   if (typeof THREE === "undefined") return;
 
@@ -4020,7 +4020,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { childList:true, subtree:true }
   );
 
-});
+})();
 </script>
 
 </body>
