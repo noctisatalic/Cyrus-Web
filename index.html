@@ -222,9 +222,13 @@ section {
   transition: color 0.2s, background 0.2s;
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover {
   color: var(--primary);
   background: var(--light);
+}
+
+.nav-link.active {
+  color: var(--primary);
 }
 
 .nav-actions {
@@ -1255,10 +1259,13 @@ html[data-theme="dark"] .section-tag,
 html[data-theme="dark"] .service-icon,
 html[data-theme="dark"] .mobile-menu-btn,
 html[data-theme="dark"] .nav-link:hover,
-html[data-theme="dark"] .nav-link.active,
 html[data-theme="dark"] .btn-secondary {
   background: var(--cw-soft) !important;
   border-color: var(--cw-line) !important;
+  color: var(--cw-text) !important;
+}
+
+html[data-theme="dark"] .nav-link.active {
   color: var(--cw-text) !important;
 }
 
@@ -1440,19 +1447,15 @@ html[data-theme="dark"] .nav-links .nav-link {
   color: var(--cw-text) !important;
 }
 
-html[data-theme="dark"] .nav-links .nav-link:hover,
-html[data-theme="dark"] .nav-links .nav-link.active {
+html[data-theme="dark"] .nav-links .nav-link:hover {
   color: var(--cw-text) !important;
   background: var(--cw-soft) !important;
 }
 
-/* Proses: desktop tetap tanpa block, mobile tetap mengikuti active navbar */
-@media (min-width: 769px) {
-  html[data-theme="dark"] .nav-links .nav-link[href="index.html#process"].active {
-    background: transparent !important;
-    box-shadow: none !important;
-  }
+html[data-theme="dark"] .nav-links .nav-link.active {
+  color: var(--cw-text) !important;
 }
+
 
 html[data-theme="dark"] .nav-links .cw-theme-toggle {
   color: var(--cw-text) !important;
@@ -1484,10 +1487,11 @@ html[data-theme="dark"] .clean-work-media {
 }
 
 html[data-theme="dark"] .nav-links {
-  background: rgba(10,10,10,.42) !important;
-  border-color: rgba(255,255,255,.08) !important;
-  backdrop-filter: blur(20px) saturate(120%);
-  -webkit-backdrop-filter: blur(20px) saturate(120%);
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 </style>
@@ -2274,10 +2278,13 @@ html[data-theme="dark"] .nav-links .nav-link {
   color: var(--cw-text) !important;
 }
 
-html[data-theme="dark"] .nav-links .nav-link:hover,
-html[data-theme="dark"] .nav-links .nav-link.active {
+html[data-theme="dark"] .nav-links .nav-link:hover {
   color: var(--cw-text) !important;
   background: var(--cw-soft) !important;
+}
+
+html[data-theme="dark"] .nav-links .nav-link.active {
+  color: var(--cw-text) !important;
 }
 
 
@@ -2347,6 +2354,18 @@ html[data-theme="dark"] .navbar {
 </style>
 
 
+
+
+
+
+
+
+
+\n
+
+\n
+
+\n
 
 
 </head>
