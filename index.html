@@ -1530,266 +1530,6 @@ footer {
 </style>
 
 
-<style id="cyrus-signature-hero">
-/* ===== CYRUS SIGNATURE HERO ===== */
-.hero {
-  overflow: hidden;
-  isolation: isolate;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: -20%;
-  z-index: -3;
-  background:
-    radial-gradient(circle at 72% 42%, rgba(0,0,0,.075), transparent 24%),
-    radial-gradient(circle at 88% 18%, rgba(0,0,0,.045), transparent 20%);
-  pointer-events: none;
-}
-
-.hero::after {
-  content: "";
-  position: absolute;
-  width: 520px;
-  height: 520px;
-  right: -170px;
-  top: 50%;
-  transform: translateY(-50%);
-  border: 1px solid rgba(17,17,17,.07);
-  border-radius: 50%;
-  box-shadow:
-    0 0 0 70px rgba(17,17,17,.018),
-    0 0 0 140px rgba(17,17,17,.012);
-  z-index: -2;
-  pointer-events: none;
-}
-
-.cyrus-entity {
-  position: absolute;
-  right: 4%;
-  top: 50%;
-  width: min(390px, 34vw);
-  aspect-ratio: 1;
-  transform: translateY(-50%);
-  z-index: 1;
-  pointer-events: none;
-  opacity: .92;
-}
-
-.cyrus-entity-core {
-  position: absolute;
-  inset: 12%;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 50% 45%,
-      rgba(17,17,17,.12) 0 2%,
-      rgba(17,17,17,.055) 18%,
-      rgba(17,17,17,.018) 42%,
-      transparent 68%);
-  filter: blur(.2px);
-}
-
-.cyrus-entity-orbit {
-  position: absolute;
-  inset: 2%;
-  border: 1px solid rgba(17,17,17,.09);
-  border-radius: 50%;
-  transform: rotate(-18deg) scaleY(.42);
-}
-
-.cyrus-entity-orbit:nth-child(2) {
-  transform: rotate(62deg) scaleY(.42);
-}
-
-.cyrus-entity-orbit:nth-child(3) {
-  transform: rotate(142deg) scaleY(.42);
-}
-
-.cyrus-entity-ring {
-  position: absolute;
-  inset: 27%;
-  border: 1px solid rgba(17,17,17,.14);
-  border-radius: 50%;
-  box-shadow: inset 0 0 40px rgba(17,17,17,.025);
-}
-
-.cyrus-entity-dot {
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #111;
-  box-shadow: 0 0 18px rgba(17,17,17,.22);
-}
-
-.cyrus-entity-dot.one {
-  left: 18%;
-  top: 42%;
-}
-
-.cyrus-entity-dot.two {
-  right: 18%;
-  top: 28%;
-}
-
-.cyrus-entity-dot.three {
-  right: 29%;
-  bottom: 17%;
-}
-
-.hero-content {
-  z-index: 5;
-}
-
-.hero-headline,
-.hero-subheadline,
-.hero-cta-group,
-.hero-stats,
-.hero-eyebrow {
-  position: relative;
-  z-index: 6;
-}
-
-@media (max-width: 900px) {
-  .cyrus-entity {
-    right: -8%;
-    width: 300px;
-    opacity: .42;
-  }
-}
-
-@media (max-width: 700px) {
-  .hero {
-    min-height: auto;
-    padding-top: 145px;
-    padding-bottom: 70px;
-  }
-
-  .cyrus-entity {
-    width: 240px;
-    right: -72px;
-    top: 31%;
-    opacity: .22;
-  }
-
-  .hero::after {
-    width: 300px;
-    height: 300px;
-    right: -150px;
-  }
-
-  .hero-stats {
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cyrus-entity {
-    transform: translateY(-50%) !important;
-  }
-}
-</style>
-
-
-<style id="cyrus-signature-hero-dark">
-/* ===== CYRUS SIGNATURE HERO — DARK MODE ===== */
-
-html[data-theme="dark"] .cyrus-entity {
-  opacity: 1 !important;
-  z-index: 20 !important;
-}
-
-html[data-theme="dark"] .cyrus-entity-core {
-  background:
-    radial-gradient(
-      circle at 50% 45%,
-      rgba(255,255,255,.30) 0 2%,
-      rgba(255,255,255,.14) 18%,
-      rgba(255,255,255,.055) 42%,
-      transparent 68%
-    ) !important;
-}
-
-html[data-theme="dark"] .cyrus-entity-orbit {
-  border-color: rgba(255,255,255,.28) !important;
-}
-
-html[data-theme="dark"] .cyrus-entity-ring {
-  border-color: rgba(255,255,255,.38) !important;
-  box-shadow:
-    inset 0 0 40px rgba(255,255,255,.045),
-    0 0 24px rgba(255,255,255,.035) !important;
-}
-
-html[data-theme="dark"] .cyrus-entity-dot {
-  background: #F5F5F5 !important;
-  box-shadow:
-    0 0 10px rgba(255,255,255,.65),
-    0 0 24px rgba(255,255,255,.25) !important;
-}
-
-html[data-theme="dark"] .hero::before {
-  background:
-    radial-gradient(
-      circle at 72% 42%,
-      rgba(255,255,255,.10),
-      transparent 24%
-    ),
-    radial-gradient(
-      circle at 88% 18%,
-      rgba(255,255,255,.06),
-      transparent 20%
-    ) !important;
-}
-
-html[data-theme="dark"] .hero::after {
-  border-color: rgba(255,255,255,.14) !important;
-  box-shadow:
-    0 0 0 70px rgba(255,255,255,.025),
-    0 0 0 140px rgba(255,255,255,.015) !important;
-}
-</style>
-
-
-<style id="cyrus-signature-hero-light-polish">
-/* ===== CYRUS SIGNATURE HERO — LIGHT POLISH ===== */
-
-html:not([data-theme="dark"]) .cyrus-entity {
-  opacity: 1 !important;
-}
-
-html:not([data-theme="dark"]) .cyrus-entity-core {
-  background:
-    radial-gradient(
-      circle at 50% 45%,
-      rgba(17,17,17,.20) 0 2%,
-      rgba(17,17,17,.085) 18%,
-      rgba(17,17,17,.030) 42%,
-      transparent 68%
-    ) !important;
-}
-
-html:not([data-theme="dark"]) .cyrus-entity-orbit {
-  border-color: rgba(17,17,17,.16) !important;
-}
-
-html:not([data-theme="dark"]) .cyrus-entity-ring {
-  border-color: rgba(17,17,17,.22) !important;
-  box-shadow:
-    inset 0 0 40px rgba(17,17,17,.035),
-    0 0 24px rgba(17,17,17,.025) !important;
-}
-
-html:not([data-theme="dark"]) .cyrus-entity-dot {
-  background: #111 !important;
-  box-shadow:
-    0 0 10px rgba(17,17,17,.30),
-    0 0 22px rgba(17,17,17,.10) !important;
-}
-</style>
-
 <style id="cyrus-selected-work">
 /* ================= CYRUS SELECTED WORK ================= */
 
@@ -2469,312 +2209,314 @@ html[data-theme="dark"] .form-group textarea:-webkit-autofill:focus {
 </style>
 
 
-<style id="cyrus-signature-footer">
+<style id="cyrus-hero-3d-computer">
 /* =========================================================
-   CYRUS SIGNATURE FOOTER — 3D CODE COMPUTER
+   CYRUS HERO — 3D CODE COMPUTER
+   Signature visual menggantikan legacy entity
    ========================================================= */
 
-.cyrus-footer-scene {
+.hero {
   position: relative;
-  min-height: 560px;
   overflow: hidden;
-  display: grid;
-  place-items: center;
   isolation: isolate;
-  padding: 90px 20px 70px;
-  background:
-    radial-gradient(circle at 50% 45%, rgba(17,17,17,.055), transparent 32%),
-    linear-gradient(180deg, #fff 0%, #f7f7f5 100%);
 }
 
-.cyrus-footer-scene::before {
-  content: "";
+.cyrus-hero-computer {
   position: absolute;
-  width: 620px;
-  height: 620px;
-  border: 1px solid rgba(17,17,17,.055);
-  border-radius: 50%;
-  box-shadow:
-    0 0 0 90px rgba(17,17,17,.012),
-    0 0 0 180px rgba(17,17,17,.008);
+  right: 1%;
+  top: 50%;
+  width: min(610px, 48vw);
+  height: 440px;
+  transform: translateY(-50%);
+  z-index: 2;
   pointer-events: none;
+  perspective: 1200px;
 }
 
-.cyrus-footer-caption {
-  position: absolute;
-  top: 58px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
+.cyrus-hero-computer .cyrus-code-computer {
+  width: 100%;
+  height: 100%;
+  transform: scale(.95);
+  transform-origin: center;
+}
+
+.cyrus-hero-computer .cyrus-computer-shadow {
+  bottom: 12px;
+  width: 430px;
+  max-width: 80%;
+  opacity: .65;
+}
+
+.cyrus-hero-computer .cyrus-monitor {
+  width: min(470px, 78%);
+}
+
+.hero-content {
+  position: relative;
   z-index: 5;
 }
 
-.cyrus-footer-caption span {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: #888;
+@media (max-width: 1100px) {
+  .cyrus-hero-computer {
+    right: -4%;
+    width: 500px;
+    opacity: .72;
+  }
 }
 
-.cyrus-footer-caption strong {
-  display: block;
-  font-size: clamp(26px, 4vw, 48px);
-  line-height: .95;
-  letter-spacing: -.055em;
-  font-weight: 600;
-  color: #111;
+@media (max-width: 900px) {
+  .cyrus-hero-computer {
+    right: -8%;
+    width: 430px;
+    opacity: .35;
+  }
 }
-
-/* 3D COMPUTER */
-
-.cyrus-code-computer {
-  position: relative;
-  width: min(570px, 88vw);
-  height: 390px;
-  perspective: 1100px;
-  transform-style: preserve-3d;
-  z-index: 4;
-}
-
-.cyrus-monitor {
-  position: absolute;
-  left: 50%;
-  top: 30px;
-  width: min(470px, 78vw);
-  aspect-ratio: 16 / 10;
-  transform:
-    translateX(-50%)
-    rotateX(7deg)
-    rotateY(-8deg)
-    rotateZ(0deg);
-  transform-style: preserve-3d;
-  transition: transform .8s cubic-bezier(.16,1,.3,1);
-}
-
-.cyrus-monitor-frame {
-  position: absolute;
-  inset: 0;
-  border-radius: 22px;
-  background: linear-gradient(145deg, #292929, #090909);
-  border: 1px solid rgba(255,255,255,.16);
-  box-shadow:
-    0 35px 70px rgba(0,0,0,.22),
-    inset 0 1px 0 rgba(255,255,255,.12);
-  transform: translateZ(12px);
-}
-
-.cyrus-monitor-screen {
-  position: absolute;
-  inset: 15px;
-  overflow: hidden;
-  border-radius: 12px;
-  background:
-    radial-gradient(circle at 75% 20%, rgba(255,255,255,.07), transparent 30%),
-    #101010;
-  color: #eee;
-  font-family: "DM Sans", monospace;
-  box-shadow:
-    inset 0 0 40px rgba(0,0,0,.55),
-    0 0 35px rgba(255,255,255,.025);
-  transform: translateZ(18px);
-}
-
-.cyrus-screen-header {
-  height: 34px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 0 13px;
-  border-bottom: 1px solid rgba(255,255,255,.08);
-  color: #777;
-  font-size: 8px;
-  letter-spacing: .1em;
-}
-
-.cyrus-screen-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #555;
-}
-
-.cyrus-screen-code {
-  padding: 24px;
-  font-family: monospace;
-  font-size: clamp(8px, 1.15vw, 11px);
-  line-height: 1.8;
-  letter-spacing: .02em;
-  color: #aaa;
-}
-
-.cyrus-screen-code b {
-  color: #fff;
-  font-weight: 500;
-}
-
-.cyrus-screen-code .dim {
-  color: #666;
-}
-
-.cyrus-monitor-neck {
-  position: absolute;
-  left: 50%;
-  bottom: -65px;
-  width: 58px;
-  height: 70px;
-  transform: translateX(-50%) translateZ(-4px);
-  background: linear-gradient(90deg, #101010, #303030, #101010);
-  border-radius: 4px;
-}
-
-.cyrus-monitor-base {
-  position: absolute;
-  left: 50%;
-  bottom: -85px;
-  width: 180px;
-  height: 28px;
-  transform:
-    translateX(-50%)
-    rotateX(58deg)
-    translateZ(-8px);
-  border-radius: 10px;
-  background: linear-gradient(145deg, #353535, #0b0b0b);
-  box-shadow: 0 15px 30px rgba(0,0,0,.22);
-}
-
-/* KEYBOARD */
-
-.cyrus-keyboard {
-  position: absolute;
-  left: 50%;
-  bottom: 18px;
-  width: min(390px, 70vw);
-  height: 74px;
-  transform:
-    translateX(-50%)
-    rotateX(58deg)
-    rotateZ(-2deg)
-    translateZ(30px);
-  transform-style: preserve-3d;
-  border-radius: 12px;
-  background: linear-gradient(145deg, #303030, #0c0c0c);
-  border: 1px solid rgba(255,255,255,.12);
-  box-shadow:
-    0 25px 40px rgba(0,0,0,.2),
-    inset 0 1px 0 rgba(255,255,255,.1);
-}
-
-.cyrus-keyboard::after {
-  content: "";
-  position: absolute;
-  inset: 9px;
-  border-radius: 7px;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      rgba(255,255,255,.12) 0 13px,
-      transparent 13px 17px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      rgba(255,255,255,.08) 0 9px,
-      transparent 9px 13px
-    );
-  opacity: .75;
-}
-
-/* FLOOR SHADOW */
-
-.cyrus-computer-shadow {
-  position: absolute;
-  left: 50%;
-  bottom: 2px;
-  width: 430px;
-  max-width: 75vw;
-  height: 45px;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  background: rgba(0,0,0,.12);
-  filter: blur(22px);
-}
-
-/* SIGNATURE */
-
-.cyrus-footer-signature {
-  position: absolute;
-  right: 8%;
-  bottom: 48px;
-  z-index: 6;
-  font-size: 8px;
-  font-weight: 800;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: #777;
-}
-
-/* DARK */
-
-html[data-theme="dark"] .cyrus-footer-scene {
-  background:
-    radial-gradient(circle at 50% 45%, rgba(255,255,255,.055), transparent 32%),
-    linear-gradient(180deg, #111 0%, #080808 100%);
-}
-
-html[data-theme="dark"] .cyrus-footer-scene::before {
-  border-color: rgba(255,255,255,.07);
-  box-shadow:
-    0 0 0 90px rgba(255,255,255,.012),
-    0 0 0 180px rgba(255,255,255,.007);
-}
-
-html[data-theme="dark"] .cyrus-footer-caption strong {
-  color: #f5f5f5;
-}
-
-html[data-theme="dark"] .cyrus-footer-caption span,
-html[data-theme="dark"] .cyrus-footer-signature {
-  color: #777;
-}
-
-html[data-theme="dark"] .cyrus-footer-scene .cyrus-monitor-frame {
-  box-shadow:
-    0 35px 70px rgba(0,0,0,.55),
-    inset 0 1px 0 rgba(255,255,255,.12);
-}
-
-/* MOBILE */
 
 @media (max-width: 700px) {
-  .cyrus-footer-scene {
-    min-height: 470px;
-    padding-top: 80px;
-  }
-
-  .cyrus-footer-caption {
-    top: 42px;
-  }
-
-  .cyrus-code-computer {
+  .cyrus-hero-computer {
+    position: relative;
+    right: auto;
+    top: auto;
+    width: min(520px, 120vw);
+    height: 300px;
+    margin: -35px auto -25px;
     transform: scale(.72);
+    transform-origin: center;
+    opacity: .22;
+    z-index: 1;
   }
 
-  .cyrus-footer-signature {
-    right: 50%;
-    transform: translateX(50%);
-    bottom: 28px;
-    white-space: nowrap;
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-eyebrow {
+    order: 1;
+  }
+
+  .hero-headline {
+    order: 2;
+  }
+
+  .hero-subheadline {
+    order: 3;
+  }
+
+  .hero-cta-group {
+    order: 4;
+  }
+
+  .hero-stats {
+    order: 5;
+  }
+
+  .cyrus-hero-computer {
+    order: 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cyrus-monitor {
-    transform:
-      translateX(-50%)
-      rotateX(7deg)
-      rotateY(-8deg);
+  .cyrus-hero-computer {
+    transform: translateY(-50%);
+  }
+
+  @media (max-width: 700px) {
+    .cyrus-hero-computer {
+      transform: scale(.72);
+    }
+  }
+}
+
+</style>
+
+
+<style id="cyrus-hero-computer-polish">
+/* =========================================================
+   CYRUS HERO COMPUTER — PREMIUM POLISH
+   ========================================================= */
+
+.cyrus-hero-computer {
+  right: -1%;
+  top: 51%;
+  width: min(650px, 50vw);
+  height: 470px;
+  transform: translateY(-50%);
+  opacity: 1;
+  filter: drop-shadow(0 35px 45px rgba(0,0,0,.10));
+}
+
+/* subtle atmosphere behind computer */
+.cyrus-hero-computer::before {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle,
+      rgba(0,0,0,.075) 0%,
+      rgba(0,0,0,.025) 35%,
+      transparent 68%
+    );
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* outer technical ring */
+.cyrus-hero-computer::after {
+  content: "";
+  position: absolute;
+  width: 470px;
+  height: 470px;
+  left: 51%;
+  top: 49%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(0,0,0,.065);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 55px rgba(0,0,0,.012),
+    0 0 0 110px rgba(0,0,0,.008);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* computer itself */
+.cyrus-hero-computer .cyrus-code-computer {
+  width: 100%;
+  height: 100%;
+  transform: scale(1);
+}
+
+/* monitor */
+.cyrus-hero-computer .cyrus-monitor {
+  width: min(500px, 78%);
+  top: 28px;
+}
+
+/* deeper premium monitor */
+.cyrus-hero-computer .cyrus-monitor-frame {
+  border-radius: 24px;
+  background:
+    linear-gradient(
+      145deg,
+      #383838 0%,
+      #151515 38%,
+      #080808 100%
+    );
+  box-shadow:
+    0 42px 80px rgba(0,0,0,.25),
+    0 8px 20px rgba(0,0,0,.12),
+    inset 0 1px 0 rgba(255,255,255,.18),
+    inset 0 -1px 0 rgba(0,0,0,.8);
+}
+
+/* screen reflection */
+.cyrus-hero-computer .cyrus-monitor-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      115deg,
+      rgba(255,255,255,.10),
+      transparent 22%,
+      transparent 65%,
+      rgba(255,255,255,.035)
+    );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* code gets more cinematic */
+.cyrus-hero-computer .cyrus-screen-code {
+  padding: 26px;
+  font-size: clamp(9px, 1.15vw, 12px);
+  line-height: 1.85;
+}
+
+/* keyboard */
+.cyrus-hero-computer .cyrus-keyboard {
+  width: min(410px, 72%);
+  height: 78px;
+  bottom: 14px;
+  filter: drop-shadow(0 22px 20px rgba(0,0,0,.15));
+}
+
+/* floor shadow */
+.cyrus-hero-computer .cyrus-computer-shadow {
+  bottom: 0;
+  width: 450px;
+  height: 42px;
+  opacity: .65;
+}
+
+/* dark mode */
+html[data-theme="dark"] .cyrus-hero-computer::before {
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,.055),
+      transparent 68%
+    );
+}
+
+html[data-theme="dark"] .cyrus-hero-computer::after {
+  border-color: rgba(255,255,255,.065);
+  box-shadow:
+    0 0 0 55px rgba(255,255,255,.012),
+    0 0 0 110px rgba(255,255,255,.007);
+}
+
+/* tablet */
+@media (max-width: 1100px) {
+  .cyrus-hero-computer {
+    right: -7%;
+    width: 520px;
+    opacity: .62;
+  }
+}
+
+/* mobile */
+@media (max-width: 700px) {
+  .cyrus-hero-computer {
+    position: absolute;
+    right: -105px;
+    top: 31%;
+    width: 430px;
+    height: 330px;
+    transform: translateY(-50%) scale(.72);
+    opacity: .18;
+    filter: drop-shadow(0 25px 30px rgba(0,0,0,.10));
+  }
+
+  .cyrus-hero-computer::after {
+    width: 300px;
+    height: 300px;
+  }
+
+  .cyrus-hero-computer .cyrus-monitor {
+    width: 390px;
+  }
+
+  .cyrus-hero-computer .cyrus-screen-code {
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cyrus-hero-computer {
+    transform: translateY(-50%);
+  }
+
+  @media (max-width: 700px) {
+    .cyrus-hero-computer {
+      transform: translateY(-50%) scale(.72);
+    }
   }
 }
 </style>
@@ -2824,18 +2566,50 @@ html[data-theme="dark"] .cyrus-footer-scene .cyrus-monitor-frame {
     <div class="hero-transition" aria-hidden="true"></div>
     <div class="container hero-content">
 
-<div class="cyrus-entity" aria-hidden="true">
-  <div class="cyrus-entity-core"></div>
-  <div class="cyrus-entity-orbit"></div>
-  <div class="cyrus-entity-orbit"></div>
-  <div class="cyrus-entity-orbit"></div>
-  <div class="cyrus-entity-ring"></div>
-  <span class="cyrus-entity-dot one"></span>
-  <span class="cyrus-entity-dot two"></span>
-  <span class="cyrus-entity-dot three"></span>
-</div>
 
-      <div class="hero-eyebrow">
+
+
+      <div class="cyrus-hero-computer" aria-hidden="true">
+        <div class="cyrus-computer-shadow"></div>
+        <div class="cyrus-code-computer">
+
+      <div class="cyrus-monitor">
+
+        <div class="cyrus-monitor-frame"></div>
+
+        <div class="cyrus-monitor-screen">
+
+          <div class="cyrus-screen-header">
+            <span class="cyrus-screen-dot"></span>
+            <span class="cyrus-screen-dot"></span>
+            <span class="cyrus-screen-dot"></span>
+            CYRUS / WEB.STUDIO
+          </div>
+
+          <div class="cyrus-screen-code">
+            <span class="dim">01</span> <b>const</b> experience = {<br>
+            <span class="dim">02</span>&nbsp;&nbsp;design: <b>"minimal"</b>,<br>
+            <span class="dim">03</span>&nbsp;&nbsp;code: <b>"clean"</b>,<br>
+            <span class="dim">04</span>&nbsp;&nbsp;motion: <b>"GSAP"</b>,<br>
+            <span class="dim">05</span>&nbsp;&nbsp;identity: <b>"unique"</b><br>
+            <span class="dim">06</span> };<br><br>
+            <span class="dim">07</span> <b>build</b>(experience);<br>
+            <span class="dim">08</span> <b>deploy</b>();
+          </div>
+
+        </div>
+
+        <div class="cyrus-monitor-neck"></div>
+        <div class="cyrus-monitor-base"></div>
+
+      </div>
+
+      <div class="cyrus-keyboard"></div>
+
+
+      </div>
+
+<div class="hero-eyebrow">
         <span class="line"></span>
         <span>Digital Web Studio</span>
       </div>
@@ -3116,57 +2890,7 @@ html[data-theme="dark"] .cyrus-footer-scene .cyrus-monitor-frame {
 
 <footer>
 
-  <section class="cyrus-footer-scene" aria-label="Cyrus Web signature">
 
-    <div class="cyrus-footer-caption">
-      <span>Behind The Interface</span>
-      <strong>WE BUILD<br>DIGITAL EXPERIENCES.</strong>
-    </div>
-
-    <div class="cyrus-computer-shadow"></div>
-
-    <div class="cyrus-code-computer">
-
-      <div class="cyrus-monitor">
-
-        <div class="cyrus-monitor-frame"></div>
-
-        <div class="cyrus-monitor-screen">
-
-          <div class="cyrus-screen-header">
-            <span class="cyrus-screen-dot"></span>
-            <span class="cyrus-screen-dot"></span>
-            <span class="cyrus-screen-dot"></span>
-            CYRUS / WEB.STUDIO
-          </div>
-
-          <div class="cyrus-screen-code">
-            <span class="dim">01</span> <b>const</b> experience = {<br>
-            <span class="dim">02</span>&nbsp;&nbsp;design: <b>"minimal"</b>,<br>
-            <span class="dim">03</span>&nbsp;&nbsp;code: <b>"clean"</b>,<br>
-            <span class="dim">04</span>&nbsp;&nbsp;motion: <b>"GSAP"</b>,<br>
-            <span class="dim">05</span>&nbsp;&nbsp;identity: <b>"unique"</b><br>
-            <span class="dim">06</span> };<br><br>
-            <span class="dim">07</span> <b>build</b>(experience);<br>
-            <span class="dim">08</span> <b>deploy</b>();
-          </div>
-
-        </div>
-
-        <div class="cyrus-monitor-neck"></div>
-        <div class="cyrus-monitor-base"></div>
-
-      </div>
-
-      <div class="cyrus-keyboard"></div>
-
-    </div>
-
-    <div class="cyrus-footer-signature">
-      BUILT BY CYRUS WEB
-    </div>
-
-  </section>
 
   <div class="container footer-inner">
     <div class="footer-copy">
@@ -3450,131 +3174,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-
-
-<script id="cyrus-signature-footer-motion">
-document.addEventListener("DOMContentLoaded", () => {
-  if (typeof gsap === "undefined") return;
-
-  const scene = document.querySelector(".cyrus-footer-scene");
-  const computer = document.querySelector(".cyrus-code-computer");
-  const monitor = document.querySelector(".cyrus-monitor");
-
-  if (!scene || !computer || !monitor) return;
-
-  const reduceMotion =
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  if (reduceMotion) return;
-
-  gsap.fromTo(
-    computer,
-    {
-      y: 45,
-      opacity: 0,
-      scale: .92
-    },
-    {
-      y: 0,
-      opacity: 1,
-      scale: 1,
-      duration: 1.1,
-      ease: "power3.out",
-      scrollTrigger: typeof ScrollTrigger !== "undefined"
-        ? {
-            trigger: scene,
-            start: "top 82%",
-            toggleActions: "play none none reverse"
-          }
-        : undefined
-    }
-  );
-
-  if (window.matchMedia("(pointer:fine)").matches) {
-    scene.addEventListener("mousemove", (e) => {
-      const rect = scene.getBoundingClientRect();
-
-      const x = (e.clientX - rect.left) / rect.width - .5;
-      const y = (e.clientY - rect.top) / rect.height - .5;
-
-      gsap.to(monitor, {
-        rotationY: -8 + x * 10,
-        rotationX: 7 - y * 7,
-        duration: .7,
-        ease: "power3.out",
-        overwrite: true
-      });
-    });
-
-    scene.addEventListener("mouseleave", () => {
-      gsap.to(monitor, {
-        rotationY: -8,
-        rotationX: 7,
-        duration: .9,
-        ease: "power3.out"
-      });
-    });
-  }
-});
-</script>
-
-<script id="cyrus-signature-hero-motion">
-document.addEventListener("DOMContentLoaded", () => {
-  if (typeof gsap === "undefined") return;
-
-  const entity = document.querySelector(".cyrus-entity");
-  const orbits = document.querySelectorAll(".cyrus-entity-orbit");
-  const dots = document.querySelectorAll(".cyrus-entity-dot");
-
-  if (!entity) return;
-
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  if (!reduceMotion) {
-    gsap.to(orbits, {
-      y: -8,
-      duration: 3.8,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut"
-    });
-
-    orbits.forEach((orbit, i) => {
-      gsap.to(orbit, {
-        rotation: "+=360",
-        duration: 18 + i * 7,
-        repeat: -1,
-        ease: "none"
-      });
-    });
-
-    dots.forEach((dot, i) => {
-      gsap.to(dot, {
-        scale: 1.7,
-        opacity: .45,
-        duration: 1.4 + i * .3,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        delay: i * .25
-      });
-    });
-
-    if (window.matchMedia("(pointer:fine)").matches) {
-      const moveX = gsap.quickTo(entity, "x", {
-        duration: .8,
-        ease: "power3.out"
-      });
-
-      window.addEventListener("mousemove", (e) => {
-        const x = (e.clientX / window.innerWidth - .5) * 28;
-
-        moveX(x);
-      }, { passive: true });
-    }
-  }
-});
-</script>
 
 
 <script id="cyrus-cinematic-transition">
