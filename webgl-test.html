@@ -1,29 +1,64 @@
 <!doctype html>
 <html>
-<body style="margin:0;background:#111">
-<canvas id="c" style="width:100vw;height:100vh"></canvas>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  background:white;
+  overflow:hidden;
+}
+#result{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font:700 22px Arial;
+}
+canvas{
+  display:block;
+}
+</style>
+</head>
+
+<body>
+
+<div id="result">TESTING WEBGL...</div>
 
 <script>
-const c = document.getElementById("c");
+const result=document.getElementById("result");
 
-const gl =
-  c.getContext("webgl2") ||
-  c.getContext("webgl") ||
-  c.getContext("experimental-webgl");
+try{
 
-if (!gl) {
-  document.body.innerHTML =
-    '<div style="color:white;font:20px Arial;padding:30px">WEBGL = GAGAL</div>';
-} else {
-  gl.viewport(0,0,c.width=innerWidth,c.height=innerHeight);
-  gl.clearColor(0.1,0.7,0.2,1);
-  gl.clear(gl.COLOR_BUFFER_BIT);
+  const canvas=document.createElement("canvas");
 
-  document.body.insertAdjacentHTML(
-    "beforeend",
-    '<div style="position:fixed;top:20px;left:20px;color:white;font:20px Arial">WEBGL = OK</div>'
-  );
+  const gl=
+    canvas.getContext("webgl") ||
+    canvas.getContext("experimental-webgl");
+
+  if(!gl){
+    throw new Error("WEBGL CONTEXT TIDAK TERSEDIA");
+  }
+
+  result.textContent=
+    "WEBGL AKTIF ✓";
+
+  result.style.color="green";
+
+}catch(error){
+
+  result.textContent=
+    "WEBGL ERROR: "+error.message;
+
+  result.style.color="red";
+
+  console.error(error);
 }
 </script>
+
 </body>
 </html>
