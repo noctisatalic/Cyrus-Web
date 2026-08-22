@@ -3918,7 +3918,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (typeof THREE === "undefined") return;
 
-  document.querySelectorAll(".cyrus-headphone-scene").forEach(host => {
+  function initHeadphone(host) {
+
+    if (!host || host.dataset.simple3d === "1") return;
 
     if (host.dataset.simple3d === "1") return;
     host.dataset.simple3d = "1";
@@ -4097,7 +4099,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     animate();
 
-  });
+  }
+
+  function scanHeadphones() {
+    document.querySelectorAll(".cyrus-headphone-scene").forEach(initHeadphone);
+  }
+
+  scanHeadphones();
+
+  new MutationObserver(scanHeadphones).observe(
+    document.body,
+    { childList:true, subtree:true }
+  );
 
 });
 </script>
