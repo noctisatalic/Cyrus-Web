@@ -2468,6 +2468,317 @@ html[data-theme="dark"] .form-group textarea:-webkit-autofill:focus {
 }
 </style>
 
+
+<style id="cyrus-signature-footer">
+/* =========================================================
+   CYRUS SIGNATURE FOOTER — 3D CODE COMPUTER
+   ========================================================= */
+
+.cyrus-footer-scene {
+  position: relative;
+  min-height: 560px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+  padding: 90px 20px 70px;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(17,17,17,.055), transparent 32%),
+    linear-gradient(180deg, #fff 0%, #f7f7f5 100%);
+}
+
+.cyrus-footer-scene::before {
+  content: "";
+  position: absolute;
+  width: 620px;
+  height: 620px;
+  border: 1px solid rgba(17,17,17,.055);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 90px rgba(17,17,17,.012),
+    0 0 0 180px rgba(17,17,17,.008);
+  pointer-events: none;
+}
+
+.cyrus-footer-caption {
+  position: absolute;
+  top: 58px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 5;
+}
+
+.cyrus-footer-caption span {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.cyrus-footer-caption strong {
+  display: block;
+  font-size: clamp(26px, 4vw, 48px);
+  line-height: .95;
+  letter-spacing: -.055em;
+  font-weight: 600;
+  color: #111;
+}
+
+/* 3D COMPUTER */
+
+.cyrus-code-computer {
+  position: relative;
+  width: min(570px, 88vw);
+  height: 390px;
+  perspective: 1100px;
+  transform-style: preserve-3d;
+  z-index: 4;
+}
+
+.cyrus-monitor {
+  position: absolute;
+  left: 50%;
+  top: 30px;
+  width: min(470px, 78vw);
+  aspect-ratio: 16 / 10;
+  transform:
+    translateX(-50%)
+    rotateX(7deg)
+    rotateY(-8deg)
+    rotateZ(0deg);
+  transform-style: preserve-3d;
+  transition: transform .8s cubic-bezier(.16,1,.3,1);
+}
+
+.cyrus-monitor-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #292929, #090909);
+  border: 1px solid rgba(255,255,255,.16);
+  box-shadow:
+    0 35px 70px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.12);
+  transform: translateZ(12px);
+}
+
+.cyrus-monitor-screen {
+  position: absolute;
+  inset: 15px;
+  overflow: hidden;
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 75% 20%, rgba(255,255,255,.07), transparent 30%),
+    #101010;
+  color: #eee;
+  font-family: "DM Sans", monospace;
+  box-shadow:
+    inset 0 0 40px rgba(0,0,0,.55),
+    0 0 35px rgba(255,255,255,.025);
+  transform: translateZ(18px);
+}
+
+.cyrus-screen-header {
+  height: 34px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 13px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  color: #777;
+  font-size: 8px;
+  letter-spacing: .1em;
+}
+
+.cyrus-screen-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #555;
+}
+
+.cyrus-screen-code {
+  padding: 24px;
+  font-family: monospace;
+  font-size: clamp(8px, 1.15vw, 11px);
+  line-height: 1.8;
+  letter-spacing: .02em;
+  color: #aaa;
+}
+
+.cyrus-screen-code b {
+  color: #fff;
+  font-weight: 500;
+}
+
+.cyrus-screen-code .dim {
+  color: #666;
+}
+
+.cyrus-monitor-neck {
+  position: absolute;
+  left: 50%;
+  bottom: -65px;
+  width: 58px;
+  height: 70px;
+  transform: translateX(-50%) translateZ(-4px);
+  background: linear-gradient(90deg, #101010, #303030, #101010);
+  border-radius: 4px;
+}
+
+.cyrus-monitor-base {
+  position: absolute;
+  left: 50%;
+  bottom: -85px;
+  width: 180px;
+  height: 28px;
+  transform:
+    translateX(-50%)
+    rotateX(58deg)
+    translateZ(-8px);
+  border-radius: 10px;
+  background: linear-gradient(145deg, #353535, #0b0b0b);
+  box-shadow: 0 15px 30px rgba(0,0,0,.22);
+}
+
+/* KEYBOARD */
+
+.cyrus-keyboard {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  width: min(390px, 70vw);
+  height: 74px;
+  transform:
+    translateX(-50%)
+    rotateX(58deg)
+    rotateZ(-2deg)
+    translateZ(30px);
+  transform-style: preserve-3d;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #303030, #0c0c0c);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 25px 40px rgba(0,0,0,.2),
+    inset 0 1px 0 rgba(255,255,255,.1);
+}
+
+.cyrus-keyboard::after {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border-radius: 7px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,.12) 0 13px,
+      transparent 13px 17px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,.08) 0 9px,
+      transparent 9px 13px
+    );
+  opacity: .75;
+}
+
+/* FLOOR SHADOW */
+
+.cyrus-computer-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  width: 430px;
+  max-width: 75vw;
+  height: 45px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(0,0,0,.12);
+  filter: blur(22px);
+}
+
+/* SIGNATURE */
+
+.cyrus-footer-signature {
+  position: absolute;
+  right: 8%;
+  bottom: 48px;
+  z-index: 6;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: #777;
+}
+
+/* DARK */
+
+html[data-theme="dark"] .cyrus-footer-scene {
+  background:
+    radial-gradient(circle at 50% 45%, rgba(255,255,255,.055), transparent 32%),
+    linear-gradient(180deg, #111 0%, #080808 100%);
+}
+
+html[data-theme="dark"] .cyrus-footer-scene::before {
+  border-color: rgba(255,255,255,.07);
+  box-shadow:
+    0 0 0 90px rgba(255,255,255,.012),
+    0 0 0 180px rgba(255,255,255,.007);
+}
+
+html[data-theme="dark"] .cyrus-footer-caption strong {
+  color: #f5f5f5;
+}
+
+html[data-theme="dark"] .cyrus-footer-caption span,
+html[data-theme="dark"] .cyrus-footer-signature {
+  color: #777;
+}
+
+html[data-theme="dark"] .cyrus-footer-scene .cyrus-monitor-frame {
+  box-shadow:
+    0 35px 70px rgba(0,0,0,.55),
+    inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+  .cyrus-footer-scene {
+    min-height: 470px;
+    padding-top: 80px;
+  }
+
+  .cyrus-footer-caption {
+    top: 42px;
+  }
+
+  .cyrus-code-computer {
+    transform: scale(.72);
+  }
+
+  .cyrus-footer-signature {
+    right: 50%;
+    transform: translateX(50%);
+    bottom: 28px;
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cyrus-monitor {
+    transform:
+      translateX(-50%)
+      rotateX(7deg)
+      rotateY(-8deg);
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -2804,8 +3115,64 @@ html[data-theme="dark"] .form-group textarea:-webkit-autofill:focus {
 </main>
 
 <footer>
+
+  <section class="cyrus-footer-scene" aria-label="Cyrus Web signature">
+
+    <div class="cyrus-footer-caption">
+      <span>Behind The Interface</span>
+      <strong>WE BUILD<br>DIGITAL EXPERIENCES.</strong>
+    </div>
+
+    <div class="cyrus-computer-shadow"></div>
+
+    <div class="cyrus-code-computer">
+
+      <div class="cyrus-monitor">
+
+        <div class="cyrus-monitor-frame"></div>
+
+        <div class="cyrus-monitor-screen">
+
+          <div class="cyrus-screen-header">
+            <span class="cyrus-screen-dot"></span>
+            <span class="cyrus-screen-dot"></span>
+            <span class="cyrus-screen-dot"></span>
+            CYRUS / WEB.STUDIO
+          </div>
+
+          <div class="cyrus-screen-code">
+            <span class="dim">01</span> <b>const</b> experience = {<br>
+            <span class="dim">02</span>&nbsp;&nbsp;design: <b>"minimal"</b>,<br>
+            <span class="dim">03</span>&nbsp;&nbsp;code: <b>"clean"</b>,<br>
+            <span class="dim">04</span>&nbsp;&nbsp;motion: <b>"GSAP"</b>,<br>
+            <span class="dim">05</span>&nbsp;&nbsp;identity: <b>"unique"</b><br>
+            <span class="dim">06</span> };<br><br>
+            <span class="dim">07</span> <b>build</b>(experience);<br>
+            <span class="dim">08</span> <b>deploy</b>();
+          </div>
+
+        </div>
+
+        <div class="cyrus-monitor-neck"></div>
+        <div class="cyrus-monitor-base"></div>
+
+      </div>
+
+      <div class="cyrus-keyboard"></div>
+
+    </div>
+
+    <div class="cyrus-footer-signature">
+      BUILT BY CYRUS WEB
+    </div>
+
+  </section>
+
   <div class="container footer-inner">
-    <div class="footer-copy">&copy; 2026 CyrusWeb. All rights reserved.</div>
+    <div class="footer-copy">
+      &copy; 2026 CyrusWeb. All rights reserved.
+    </div>
+
     <div class="footer-links">
       <a href="index.html">Home</a>
       <a href="layanan.html">Layanan</a>
@@ -2814,6 +3181,7 @@ html[data-theme="dark"] .form-group textarea:-webkit-autofill:focus {
       <a href="contact.html">Kontak</a>
     </div>
   </div>
+
 </footer>
 
 <!-- Skrip GSAP dan ScrollTrigger -->
@@ -3082,6 +3450,73 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+
+
+<script id="cyrus-signature-footer-motion">
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof gsap === "undefined") return;
+
+  const scene = document.querySelector(".cyrus-footer-scene");
+  const computer = document.querySelector(".cyrus-code-computer");
+  const monitor = document.querySelector(".cyrus-monitor");
+
+  if (!scene || !computer || !monitor) return;
+
+  const reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (reduceMotion) return;
+
+  gsap.fromTo(
+    computer,
+    {
+      y: 45,
+      opacity: 0,
+      scale: .92
+    },
+    {
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      duration: 1.1,
+      ease: "power3.out",
+      scrollTrigger: typeof ScrollTrigger !== "undefined"
+        ? {
+            trigger: scene,
+            start: "top 82%",
+            toggleActions: "play none none reverse"
+          }
+        : undefined
+    }
+  );
+
+  if (window.matchMedia("(pointer:fine)").matches) {
+    scene.addEventListener("mousemove", (e) => {
+      const rect = scene.getBoundingClientRect();
+
+      const x = (e.clientX - rect.left) / rect.width - .5;
+      const y = (e.clientY - rect.top) / rect.height - .5;
+
+      gsap.to(monitor, {
+        rotationY: -8 + x * 10,
+        rotationX: 7 - y * 7,
+        duration: .7,
+        ease: "power3.out",
+        overwrite: true
+      });
+    });
+
+    scene.addEventListener("mouseleave", () => {
+      gsap.to(monitor, {
+        rotationY: -8,
+        rotationX: 7,
+        duration: .9,
+        ease: "power3.out"
+      });
+    });
+  }
+});
+</script>
 
 <script id="cyrus-signature-hero-motion">
 document.addEventListener("DOMContentLoaded", () => {
