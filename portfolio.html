@@ -3903,9 +3903,39 @@ document.addEventListener("DOMContentLoaded", () => {
   width:100%;
   height:100%;
 }
+
+/* =========================================================
+   CYRUS WEBGL — HIDE LEGACY 2D OBJECTS
+   ========================================================= */
+
+.cyrus-headphone-scene .cyrus-headband,
+.cyrus-headphone-scene .cyrus-ear,
+.cyrus-headphone-scene .cyrus-ear::before,
+.cyrus-headphone-scene .cyrus-ear::after,
+.cyrus-koi-scene .koi-scales,
+.cyrus-koi-scene .koi-fin-top,
+.cyrus-koi-scene .koi-fin-side,
+.cyrus-koi-scene .koi-tail {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.cyrus-webgl-host {
+  z-index: 20 !important;
+}
+
+.cyrus-webgl-host canvas {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 21;
+}
+
 </style>
 
 <script>
+
 /* CYRUS WEBGL 3D ENGINE — VOLUME OBJECTS */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -4101,66 +4131,148 @@ document.addEventListener("DOMContentLoaded", () => {
         new THREE.Group();
 
       headphone.scale.set(
-        1.25,
-        1.25,
-        1.25
+        1.18,
+        1.18,
+        1.18
       );
 
-      group.add(
-        headphone
-      );
+      group.add(headphone);
 
-      const black =
+      /* =========================
+         PRODUCT MATERIALS
+         ========================= */
+
+      const shell =
         physical({
-          color:0x0b0c0d,
+          color:0x101214,
+          roughness:.18,
+          metalness:.42,
+          clearcoat:1,
+          clearcoatRoughness:.045
+        });
+
+      const shellDark =
+        physical({
+          color:0x050607,
+          roughness:.24,
+          metalness:.30,
+          clearcoat:.9,
+          clearcoatRoughness:.06
+        });
+
+      const metal =
+        physical({
+          color:0x8c959b,
+          roughness:.14,
+          metalness:.92,
+          clearcoat:1,
+          clearcoatRoughness:.035
+        });
+
+      const metalDark =
+        physical({
+          color:0x343a3e,
           roughness:.22,
-          metalness:.35,
-          clearcoat:.9
+          metalness:.78,
+          clearcoat:.8
         });
 
       const cushion =
         physical({
-          color:0x202124,
-          roughness:.58,
-          metalness:.05,
-          clearcoat:.45
+          color:0x242629,
+          roughness:.64,
+          metalness:.02,
+          clearcoat:.25,
+          clearcoatRoughness:.18
         });
 
-      const chrome =
+      const grille =
         physical({
-          color:0x70777b,
-          roughness:.18,
-          metalness:.8,
-          clearcoat:.8
+          color:0x16191b,
+          roughness:.32,
+          metalness:.55,
+          clearcoat:.55
         });
 
-      /* headband */
+      /* =========================
+         HEADBAND
+         ========================= */
 
       const band =
         new THREE.Mesh(
           new THREE.TorusGeometry(
-            1.32,
-            .12,
-            18,
+            1.22,
+            .115,
+            20,
             96,
             Math.PI
           ),
-          black
+          shell
         );
 
       band.rotation.z =
         Math.PI;
 
       band.position.y =
-        .35;
+        .42;
 
       band.castShadow = true;
 
-      headphone.add(
-        band
-      );
+      headphone.add(band);
 
-      /* left/right ear cups */
+      /* inner band */
+
+      const innerBand =
+        new THREE.Mesh(
+          new THREE.TorusGeometry(
+            1.095,
+            .055,
+            16,
+            96,
+            Math.PI
+          ),
+          cushion
+        );
+
+      innerBand.rotation.z =
+        Math.PI;
+
+      innerBand.position.y =
+        .38;
+
+      headphone.add(innerBand);
+
+      /* =========================
+         SLIDER ARMS
+         ========================= */
+
+      [-1,1].forEach(side => {
+
+        const slider =
+          addMesh(
+            new THREE.CylinderGeometry(
+              .065,
+              .065,
+              .72,
+              20
+            ),
+            metal,
+            headphone
+          );
+
+        slider.position.set(
+          side * 1.02,
+          -.02,
+          0
+        );
+
+        slider.rotation.z =
+          side * .12;
+      });
+
+      /* =========================
+         EAR CUPS
+         ========================= */
 
       [-1,1].forEach(side => {
 
@@ -4168,128 +4280,237 @@ document.addEventListener("DOMContentLoaded", () => {
           new THREE.Group();
 
         cup.position.set(
-          side * 1.12,
-          -.52,
+          side * 1.02,
+          -.56,
           0
         );
 
         cup.rotation.z =
           side * -.08;
 
-        headphone.add(
-          cup
-        );
+        headphone.add(cup);
+
+        /* outer shell */
 
         const outer =
           addMesh(
             new THREE.CylinderGeometry(
-              .72,
-              .72,
+              .69,
+              .69,
               .34,
-              48
+              64
             ),
-            black,
+            shell,
             cup
           );
 
         outer.rotation.z =
           Math.PI / 2;
 
-        const ring =
+        /* secondary shell */
+
+        const outerRing =
           addMesh(
             new THREE.TorusGeometry(
-              .55,
-              .075,
-              16,
-              48
+              .56,
+              .065,
+              18,
+              64
             ),
-            chrome,
+            metalDark,
             cup
           );
 
-        ring.rotation.y =
+        outerRing.rotation.y =
           Math.PI / 2;
+
+        /* metal accent ring */
+
+        const accent =
+          addMesh(
+            new THREE.TorusGeometry(
+              .47,
+              .035,
+              16,
+              64
+            ),
+            metal,
+            cup
+          );
+
+        accent.rotation.y =
+          Math.PI / 2;
+
+        /* cushion */
 
         const pad =
           addMesh(
-            new THREE.CylinderGeometry(
-              .54,
-              .54,
-              .22,
-              48
+            new THREE.TorusGeometry(
+              .43,
+              .16,
+              24,
+              64
             ),
             cushion,
             cup
           );
 
-        pad.rotation.z =
+        pad.rotation.y =
           Math.PI / 2;
 
         pad.position.x =
-          side * .12;
+          side * .18;
 
-        const inner =
+        /* inner driver */
+
+        const driver =
           addMesh(
             new THREE.CylinderGeometry(
-              .35,
-              .35,
-              .08,
+              .31,
+              .31,
+              .07,
               48
             ),
-            black,
+            shellDark,
             cup
           );
 
-        inner.rotation.z =
+        driver.rotation.z =
           Math.PI / 2;
 
-        inner.position.x =
-          side * .24;
+        driver.position.x =
+          side * .285;
 
-        const grille =
+        /* driver grille */
+
+        const driverGrille =
           addMesh(
             new THREE.CylinderGeometry(
-              .25,
-              .25,
-              .025,
-              32
+              .245,
+              .245,
+              .028,
+              48
             ),
-            chrome,
+            grille,
             cup
           );
 
-        grille.rotation.z =
+        driverGrille.rotation.z =
           Math.PI / 2;
 
-        grille.position.x =
-          side * .29;
+        driverGrille.position.x =
+          side * .33;
+
+        /* grille center */
+
+        const center =
+          addMesh(
+            new THREE.CylinderGeometry(
+              .075,
+              .075,
+              .034,
+              32
+            ),
+            metal,
+            cup
+          );
+
+        center.rotation.z =
+          Math.PI / 2;
+
+        center.position.x =
+          side * .355;
+
+        /* grille ring */
+
+        const grilleRing =
+          addMesh(
+            new THREE.TorusGeometry(
+              .22,
+              .018,
+              12,
+              40
+            ),
+            metalDark,
+            cup
+          );
+
+        grilleRing.rotation.y =
+          Math.PI / 2;
+
+        grilleRing.position.x =
+          side * .355;
+
+        /* hinge */
+
+        const hinge =
+          addMesh(
+            new THREE.CylinderGeometry(
+              .16,
+              .16,
+              .22,
+              32
+            ),
+            metal,
+            cup
+          );
+
+        hinge.rotation.z =
+          Math.PI / 2;
+
+        hinge.position.set(
+          side * -.08,
+          .62,
+          0
+        );
       });
 
-      /* bridge */
+      /* =========================
+         TOP BRIDGE / YOKE
+         ========================= */
 
       const bridge =
         new THREE.Mesh(
           new THREE.TorusGeometry(
             1.08,
             .075,
-            16,
-            64,
+            18,
+            96,
             Math.PI
           ),
-          black
+          shellDark
         );
 
       bridge.rotation.z =
         Math.PI;
 
       bridge.position.y =
-        .25;
+        .28;
 
       bridge.scale.y =
         .82;
 
-      headphone.add(
-        bridge
+      headphone.add(bridge);
+
+      /* =========================
+         CENTER ACCENT
+         ========================= */
+
+      const centerAccent =
+        addMesh(
+          new THREE.SphereGeometry(
+            .08,
+            24,
+            18
+          ),
+          metal,
+          headphone
+        );
+
+      centerAccent.position.set(
+        0,
+        .30,
+        .02
       );
 
       return headphone;
@@ -4301,77 +4522,134 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function createKoi() {
 
-      const koi =
-        new THREE.Group();
+      const koi = new THREE.Group();
 
       koi.scale.set(
-        1.45,
-        1.45,
-        1.45
+        1.30,
+        1.30,
+        1.30
       );
 
-      group.add(
+      koi.rotation.y = -0.16;
+
+      group.add(koi);
+
+      /* =====================
+         MATERIALS
+         ===================== */
+
+      const white = physical({
+        color:0xf3f0e7,
+        roughness:.25,
+        metalness:.01,
+        clearcoat:.95,
+        clearcoatRoughness:.07
+      });
+
+      const orange = physical({
+        color:0xe66b2e,
+        roughness:.22,
+        metalness:.01,
+        clearcoat:1,
+        clearcoatRoughness:.05
+      });
+
+      const dark = physical({
+        color:0x090b0c,
+        roughness:.16,
+        metalness:.04,
+        clearcoat:.9
+      });
+
+      /* =====================
+         MAIN BODY
+         ===================== */
+
+      const body = addMesh(
+        new THREE.SphereGeometry(
+          1,
+          64,
+          40
+        ),
+        white,
         koi
       );
 
-      const white =
-        physical({
-          color:0xf4f3ed,
-          roughness:.3,
-          metalness:.02,
-          clearcoat:.75
-        });
-
-      const orange =
-        physical({
-          color:0xe56d31,
-          roughness:.3,
-          metalness:.02,
-          clearcoat:.9
-        });
-
-      const dark =
-        physical({
-          color:0x111214,
-          roughness:.2,
-          metalness:.05,
-          clearcoat:.75
-        });
-
-      const body =
-        addMesh(
-          new THREE.SphereGeometry(
-            1,
-            48,
-            32
-          ),
-          white,
-          koi
-        );
-
       body.scale.set(
-        1.75,
-        .52,
-        .58
+        1.78,
+        .48,
+        .56
       );
 
-      /* orange dorsal patches */
+      body.position.x = -.04;
+
+      /* =====================
+         SHOULDER / HEAD
+         ===================== */
+
+      const head = addMesh(
+        new THREE.SphereGeometry(
+          .62,
+          48,
+          32
+        ),
+        white,
+        koi
+      );
+
+      head.position.set(
+        1.16,
+        .02,
+        0
+      );
+
+      head.scale.set(
+        1.08,
+        .86,
+        .9
+      );
+
+      const snout = addMesh(
+        new THREE.SphereGeometry(
+          .34,
+          40,
+          28
+        ),
+        white,
+        koi
+      );
+
+      snout.position.set(
+        1.58,
+        -.04,
+        0
+      );
+
+      snout.scale.set(
+        1.15,
+        .68,
+        .82
+      );
+
+      /* =====================
+         ORANGE PATTERNS
+         ===================== */
 
       [
-        [-.55,.16,.02,.62,.28,.61],
-        [.18,.19,.01,.48,.27,.58]
+        [-.82,.25,.02,.58,.23,.57],
+        [-.25,.27,.01,.50,.24,.57],
+        [.35,.22,.02,.38,.20,.54]
       ].forEach(v => {
 
-        const patch =
-          addMesh(
-            new THREE.SphereGeometry(
-              1,
-              32,
-              20
-            ),
-            orange,
-            koi
-          );
+        const patch = addMesh(
+          new THREE.SphereGeometry(
+            1,
+            40,
+            24
+          ),
+          orange,
+          koi
+        );
 
         patch.position.set(
           v[0],
@@ -4386,131 +4664,208 @@ document.addEventListener("DOMContentLoaded", () => {
         );
       });
 
-      /* head */
+      /* =====================
+         EYES
+         ===================== */
 
-      const head =
-        addMesh(
+      [-1,1].forEach(side => {
+
+        const eye = addMesh(
           new THREE.SphereGeometry(
-            .57,
-            40,
-            28
+            .09,
+            28,
+            20
+          ),
+          dark,
+          koi
+        );
+
+        eye.position.set(
+          1.43,
+          .20,
+          side * .40
+        );
+
+        const highlight = addMesh(
+          new THREE.SphereGeometry(
+            .026,
+            16,
+            12
           ),
           white,
           koi
         );
 
-      head.position.x =
-        1.18;
-
-      head.scale.set(
-        1.05,
-        .88,
-        .9
-      );
-
-      /* eyes */
-
-      [-1,1].forEach(side => {
-
-        const eye =
-          addMesh(
-            new THREE.SphereGeometry(
-              .075,
-              20,
-              16
-            ),
-            dark,
-            koi
-          );
-
-        eye.position.set(
-          1.38,
-          .18,
-          side * .37
+        highlight.position.set(
+          1.48,
+          .23,
+          side * .435
         );
       });
 
-      /* tail */
-
-      const tail =
-        new THREE.Group();
-
-      tail.position.x =
-        -1.7;
-
-      koi.add(
-        tail
-      );
-
-      const tailGeo =
-        new THREE.ConeGeometry(
-          .72,
-          1.05,
-          32
-        );
-
-      const tailMesh =
-        addMesh(
-          tailGeo,
-          white,
-          tail
-        );
-
-      tailMesh.rotation.z =
-        Math.PI / 2;
-
-      tailMesh.scale.y =
-        .7;
-
-      /* fins */
+      /* =====================
+         PECTORAL FINS
+         ===================== */
 
       [-1,1].forEach(side => {
 
-        const fin =
-          addMesh(
-            new THREE.ConeGeometry(
-              .32,
-              .75,
-              24
-            ),
-            white,
-            koi
-          );
+        const fin = addMesh(
+          new THREE.ConeGeometry(
+            .34,
+            .86,
+            32
+          ),
+          white,
+          koi
+        );
 
         fin.position.set(
-          .15,
-          -.08,
-          side * .55
+          .48,
+          -.12,
+          side * .54
         );
 
         fin.rotation.x =
-          side * 1.1;
+          side * 1.12;
 
         fin.rotation.z =
-          .25;
+          side * .22;
+
+        fin.scale.set(
+          .72,
+          1,
+          .24
+        );
       });
 
-      /* dorsal fin */
+      /* =====================
+         DORSAL FIN
+         ===================== */
 
-      const dorsal =
-        addMesh(
-          new THREE.ConeGeometry(
-            .3,
-            .65,
-            24
-          ),
-          orange,
-          koi
-        );
+      const dorsal = addMesh(
+        new THREE.ConeGeometry(
+          .28,
+          .82,
+          28
+        ),
+        orange,
+        koi
+      );
 
       dorsal.position.set(
-        -.1,
-        .5,
+        -.25,
+        .48,
         0
       );
 
       dorsal.rotation.z =
         Math.PI / 2;
+
+      dorsal.scale.set(
+        .72,
+        1,
+        .42
+      );
+
+      /* =====================
+         TAIL ROOT
+         ===================== */
+
+      const tailRoot =
+        new THREE.Group();
+
+      tailRoot.position.x =
+        -1.62;
+
+      koi.add(tailRoot);
+
+      const tailStem = addMesh(
+        new THREE.CylinderGeometry(
+          .20,
+          .34,
+          .72,
+          32
+        ),
+        white,
+        tailRoot
+      );
+
+      tailStem.rotation.z =
+        Math.PI / 2;
+
+      /* =====================
+         FORKED TAIL
+         ===================== */
+
+      [-1,1].forEach(side => {
+
+        const tail = addMesh(
+          new THREE.ConeGeometry(
+            .43,
+            .98,
+            32
+          ),
+          white,
+          tailRoot
+        );
+
+        tail.rotation.z =
+          Math.PI / 2;
+
+        tail.rotation.y =
+          side * .30;
+
+        tail.position.set(
+          -.47,
+          side * .28,
+          0
+        );
+
+        tail.scale.set(
+          .92,
+          .72,
+          .34
+        );
+      });
+
+      /* =====================
+         LOWER FINS
+         ===================== */
+
+      [-1,1].forEach(side => {
+
+        const fin = addMesh(
+          new THREE.ConeGeometry(
+            .22,
+            .52,
+            24
+          ),
+          white,
+          koi
+        );
+
+        fin.position.set(
+          -.20,
+          -.39,
+          side * .36
+        );
+
+        fin.rotation.x =
+          side * .75;
+
+        fin.scale.z =
+          .38;
+      });
+
+      /* =========================
+         SWIMMING ANIMATION RIG
+         ========================= */
+
+      koi.userData.swimParts = {
+        body: body,
+        tailRoot: tail,
+        dorsal: dorsal
+      };
 
       return koi;
     }
@@ -4622,11 +4977,42 @@ document.addEventListener("DOMContentLoaded", () => {
         .10;
 
       if (isKoi) {
-        object.rotation.z =
-          Math.sin(
-            performance.now() *
-            .0015
-          ) * .025;
+
+        const t =
+          performance.now() * 0.001;
+
+        const swim =
+          object.userData.swimParts;
+
+        if (swim) {
+
+          /* subtle body breathing */
+
+          swim.body.scale.y =
+            .47 +
+            Math.sin(t * 2.2) * .012;
+
+          /* tail propulsion */
+
+          swim.tailRoot.rotation.y =
+            Math.sin(t * 4.2) * .18;
+
+          swim.tailRoot.rotation.z =
+            Math.sin(t * 3.4) * .045;
+
+          /* dorsal fin movement */
+
+          swim.dorsal.rotation.x =
+            Math.sin(t * 2.8) * .055;
+
+          /* natural body roll */
+
+          object.rotation.z =
+            Math.sin(t * 1.35) * .022;
+
+          object.position.y +=
+            Math.sin(t * 1.7) * .0008;
+        }
       }
 
       renderer.render(
