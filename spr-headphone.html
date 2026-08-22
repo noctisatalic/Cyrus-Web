@@ -113,7 +113,254 @@ const scene =
   new THREE.Scene();
 
 scene.background =
-  new THREE.Color(0xf4f4f2);
+  new THREE.Color(0xf2f2ef);
+
+
+/* =========================================================
+   CYRUS STUDIO ENVIRONMENT
+   Minimal white product photography background
+========================================================= */
+
+const studioGroup =
+  new THREE.Group();
+
+studioGroup.name =
+  "CyrusStudioEnvironment";
+
+scene.add(studioGroup);
+
+
+/* =========================================================
+   SOFT STUDIO FLOOR
+========================================================= */
+
+const floor =
+  new THREE.Mesh(
+    new THREE.PlaneGeometry(12, 8),
+    new THREE.MeshStandardMaterial({
+      color:0xe9e9e6,
+      roughness:.88,
+      metalness:0
+    })
+  );
+
+floor.rotation.x =
+  -Math.PI / 2;
+
+floor.position.y =
+  -1.05;
+
+floor.position.z =
+  0;
+
+studioGroup.add(floor);
+
+
+/* =========================================================
+   SOFT FLOOR SHADOW
+========================================================= */
+
+const shadowCanvas =
+  document.createElement("canvas");
+
+shadowCanvas.width =
+  512;
+
+shadowCanvas.height =
+  512;
+
+const shadowCtx =
+  shadowCanvas.getContext("2d");
+
+const shadowGradient =
+  shadowCtx.createRadialGradient(
+    256,
+    256,
+    25,
+    256,
+    256,
+    230
+  );
+
+shadowGradient.addColorStop(
+  0,
+  "rgba(0,0,0,.22)"
+);
+
+shadowGradient.addColorStop(
+  .45,
+  "rgba(0,0,0,.10)"
+);
+
+shadowGradient.addColorStop(
+  1,
+  "rgba(0,0,0,0)"
+);
+
+shadowCtx.fillStyle =
+  shadowGradient;
+
+shadowCtx.fillRect(
+  0,
+  0,
+  512,
+  512
+);
+
+const shadowTexture =
+  new THREE.CanvasTexture(
+    shadowCanvas
+  );
+
+const shadow =
+  new THREE.Mesh(
+    new THREE.PlaneGeometry(
+      3.8,
+      1.55
+    ),
+    new THREE.MeshBasicMaterial({
+      map:shadowTexture,
+      transparent:true,
+      depthWrite:false,
+      opacity:.75
+    })
+  );
+
+shadow.rotation.x =
+  -Math.PI / 2;
+
+shadow.position.set(
+  0,
+  -1.035,
+  .05
+);
+
+studioGroup.add(shadow);
+
+
+/* =========================================================
+   ARCHITECTURAL LIGHT RING
+========================================================= */
+
+const studioRing =
+  new THREE.Mesh(
+    new THREE.TorusGeometry(
+      2.45,
+      .012,
+      12,
+      128
+    ),
+    new THREE.MeshBasicMaterial({
+      color:0xffffff,
+      transparent:true,
+      opacity:.20
+    })
+  );
+
+studioRing.rotation.x =
+  Math.PI / 2;
+
+studioRing.position.set(
+  0,
+  .15,
+  -1.15
+);
+
+studioRing.scale.set(
+  1.35,
+  .72,
+  1
+);
+
+studioGroup.add(studioRing);
+
+
+/* =========================================================
+   SECONDARY SOFT RING
+========================================================= */
+
+const studioRing2 =
+  new THREE.Mesh(
+    new THREE.TorusGeometry(
+      3.05,
+      .008,
+      10,
+      128
+    ),
+    new THREE.MeshBasicMaterial({
+      color:0xffffff,
+      transparent:true,
+      opacity:.11
+    })
+  );
+
+studioRing2.rotation.x =
+  Math.PI / 2;
+
+studioRing2.position.set(
+  0,
+  .18,
+  -1.25
+);
+
+studioRing2.scale.set(
+  1.25,
+  .68,
+  1
+);
+
+studioGroup.add(studioRing2);
+
+
+/* =========================================================
+   STUDIO BACK LIGHT
+========================================================= */
+
+const studioBackLight =
+  new THREE.PointLight(
+    0xffffff,
+    2.2,
+    8
+  );
+
+studioBackLight.position.set(
+  0,
+  2.4,
+  -2.5
+);
+
+studioGroup.add(
+  studioBackLight
+);
+
+
+/* =========================================================
+   LARGE SOFT KEY LIGHT
+========================================================= */
+
+const studioKeyLight =
+  new THREE.DirectionalLight(
+    0xffffff,
+    1.35
+  );
+
+studioKeyLight.position.set(
+  -3,
+  4,
+  4
+);
+
+studioGroup.add(
+  studioKeyLight
+);
+
+
+/* =========================================================
+   VERY SUBTLE AMBIENT MOTION
+========================================================= */
+
+let studioTime = 0;
+
 
 
 /* =========================================================
@@ -750,6 +997,25 @@ function animate(now = performance.now()){
 
   const t =
     clock.getElapsedTime();
+
+  studioTime = t;
+
+  if(studioGroup){
+
+    studioRing.rotation.z =
+      Math.sin(t * .12) * .035;
+
+    studioRing2.rotation.z =
+      Math.cos(t * .09) * .025;
+
+    studioBackLight.position.x =
+      Math.sin(t * .18) * .65;
+
+    studioBackLight.position.y =
+      2.4 +
+      Math.sin(t * .13) * .18;
+
+  }
 
   if(!dragging){
 
