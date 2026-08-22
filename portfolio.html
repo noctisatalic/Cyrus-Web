@@ -2648,7 +2648,6 @@ html[data-theme="dark"] .navbar {
 
 
 <!-- CYRUS-WEBGL-ENGINE -->
-<script src="https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.min.js"></script>
 
 
 
@@ -2723,7 +2722,7 @@ html[data-theme="dark"] .navbar {
 
 "use strict";
 
-function startCyrusHeadphones(){
+window.CyrusInitHeadphones = function startCyrusHeadphones(){
 
     if(typeof THREE === "undefined"){
         console.error(
@@ -4057,6 +4056,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
           grid.appendChild(article);
 
+          /*
+           * CYRUS WEBGL HEADPHONE
+           * Jalankan LANGSUNG setelah card dibuat.
+           * Tidak menunggu MutationObserver.
+           */
+
+          if (
+            visual === "audio" &&
+            typeof window.CyrusInitHeadphones === "function"
+          ) {
+            requestAnimationFrame(() => {
+              window.CyrusInitHeadphones();
+            });
+          }
+
           /* =========================
              GSAP REVEAL
              ========================= */
@@ -4337,164 +4351,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-<style id="cyrus-headphone-css3d">
 
-.cyrus-headphone-scene{
-  position:relative !important;
-  z-index:10 !important;
-  width:100% !important;
-  height:300px !important;
-  perspective:1000px !important;
-  cursor:grab !important;
-  touch-action:none !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-}
-
-.cyrus-headphone-scene:active{
-  cursor:grabbing !important;
-}
-
-.cyrus-headphone{
-  position:relative !important;
-  width:220px !important;
-  height:220px !important;
-  transform-style:preserve-3d !important;
-  transform:
-    rotateX(var(--rx, -8deg))
-    rotateY(var(--ry, -18deg))
-    translateZ(0) !important;
-  transition:transform .08s linear !important;
-  filter:drop-shadow(0 30px 25px rgba(0,0,0,.22)) !important;
-}
-
-/* HEADBAND */
-
-.cyrus-headband{
-  position:absolute !important;
-  left:31px !important;
-  top:15px !important;
-  width:158px !important;
-  height:150px !important;
-  border:15px solid #151618 !important;
-  border-bottom:0 !important;
-  border-radius:100px 100px 0 0 !important;
-  box-shadow:
-    inset 0 3px 3px rgba(255,255,255,.18),
-    0 8px 14px rgba(0,0,0,.25) !important;
-  transform:translateZ(8px) !important;
-}
-
-/* EAR CUPS */
-
-.cyrus-ear{
-  position:absolute !important;
-  top:105px !important;
-  width:72px !important;
-  height:82px !important;
-  border-radius:30px !important;
-  background:
-    radial-gradient(
-      circle at 35% 30%,
-      #444 0%,
-      #191a1c 28%,
-      #08090a 65%,
-      #020202 100%
-    ) !important;
-  box-shadow:
-    inset 5px 5px 9px rgba(255,255,255,.12),
-    inset -8px -10px 15px rgba(0,0,0,.8),
-    0 14px 20px rgba(0,0,0,.28) !important;
-  transform-style:preserve-3d !important;
-}
-
-.cyrus-ear.left{
-  left:0 !important;
-  transform:rotateY(12deg) translateZ(12px) !important;
-}
-
-.cyrus-ear.right{
-  right:0 !important;
-  transform:rotateY(-12deg) translateZ(12px) !important;
-}
-
-/* INNER DRIVER */
-
-.cyrus-ear::before{
-  content:"" !important;
-  position:absolute !important;
-  inset:13px !important;
-  border-radius:24px !important;
-  background:
-    radial-gradient(
-      circle,
-      #25272a 0%,
-      #080909 48%,
-      #000 70%
-    ) !important;
-  box-shadow:
-    inset 0 2px 5px rgba(255,255,255,.12),
-    0 2px 5px rgba(0,0,0,.8) !important;
-}
-
-.cyrus-ear::after{
-  content:"" !important;
-  position:absolute !important;
-  inset:25px !important;
-  border-radius:50% !important;
-  border:2px solid rgba(255,255,255,.12) !important;
-  box-shadow:
-    0 0 12px rgba(255,255,255,.06),
-    inset 0 0 8px rgba(255,255,255,.08) !important;
-}
-
-/* BRIDGE */
-
-.cyrus-bridge{
-  position:absolute !important;
-  left:30px !important;
-  top:118px !important;
-  width:160px !important;
-  height:22px !important;
-  border-radius:20px !important;
-  background:#111214 !important;
-  box-shadow:
-    inset 0 2px 3px rgba(255,255,255,.1),
-    0 8px 10px rgba(0,0,0,.2) !important;
-  transform:translateZ(2px) !important;
-}
-
-/* HIGHLIGHT */
-
-.cyrus-highlight{
-  position:absolute !important;
-  left:72px !important;
-  top:34px !important;
-  width:76px !important;
-  height:9px !important;
-  border-radius:50% !important;
-  background:rgba(255,255,255,.2) !important;
-  filter:blur(3px) !important;
-  transform:rotate(-8deg) translateZ(20px) !important;
-}
-
-/* FLOAT */
-
-.cyrus-headphone{
-  animation:cyrusHeadphoneFloat 4s ease-in-out infinite !important;
-}
-
-@keyframes cyrusHeadphoneFloat{
-  0%,100%{
-    margin-top:0;
-  }
-  50%{
-    margin-top:-8px;
-  }
-}
-
-</style>
 
 
 
