@@ -2555,12 +2555,15 @@ window.CyrusInitHeadphones = function startCyrusHeadphones(){
             return;
         }
 
-        host.dataset.cyrusFinal3d = "1";
+        /*
+         * Jangan tandai host sebagai selesai sebelum
+         * WebGL berhasil dibuat.
+         */
+        host.dataset.cyrusFinal3d = "initializing";
 
         /*
          * Bersihkan isi headphone 2D.
          */
-
         host.innerHTML = "";
 
         /* ==================================================
@@ -2621,6 +2624,11 @@ window.CyrusInitHeadphones = function startCyrusHeadphones(){
         host.appendChild(
             renderer.domElement
         );
+
+        /*
+         * WebGL berhasil dibuat.
+         */
+        host.dataset.cyrusFinal3d = "1";
 
         /* ==================================================
            LIGHTING
