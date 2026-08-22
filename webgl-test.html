@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<body style="margin:0;background:#111">
+<canvas id="c" style="width:100vw;height:100vh"></canvas>
+
+<script>
+const c = document.getElementById("c");
+
+const gl =
+  c.getContext("webgl2") ||
+  c.getContext("webgl") ||
+  c.getContext("experimental-webgl");
+
+if (!gl) {
+  document.body.innerHTML =
+    '<div style="color:white;font:20px Arial;padding:30px">WEBGL = GAGAL</div>';
+} else {
+  gl.viewport(0,0,c.width=innerWidth,c.height=innerHeight);
+  gl.clearColor(0.1,0.7,0.2,1);
+  gl.clear(gl.COLOR_BUFFER_BIT);
+
+  document.body.insertAdjacentHTML(
+    "beforeend",
+    '<div style="position:fixed;top:20px;left:20px;color:white;font:20px Arial">WEBGL = OK</div>'
+  );
+}
+</script>
+</body>
+</html>
