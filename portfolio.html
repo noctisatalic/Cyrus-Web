@@ -3866,13 +3866,33 @@ document.addEventListener("DOMContentLoaded", () => {
            * Tidak menunggu MutationObserver.
            */
 
-          if (
-            visual === "audio" &&
-            typeof window.CyrusInitHeadphones === "function"
-          ) {
-            requestAnimationFrame(() => {
-              window.CyrusInitHeadphones();
-            });
+          if (visual === "audio") {
+
+            const headphoneScene =
+              article.querySelector(".cyrus-headphone-scene");
+
+            if (headphoneScene) {
+
+              requestAnimationFrame(() => {
+
+                if (
+                  typeof window.CyrusInitHeadphones === "function"
+                ) {
+
+                  window.CyrusInitHeadphones();
+
+                } else {
+
+                  console.error(
+                    "CYRUS: Headphone engine belum tersedia"
+                  );
+
+                }
+
+              });
+
+            }
+
           }
 
           /* =========================
