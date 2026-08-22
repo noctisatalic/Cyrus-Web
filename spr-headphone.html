@@ -45,6 +45,13 @@ canvas{
 
 const viewer = document.getElementById("viewer");
 
+window.addEventListener("error", e => {
+  viewer.insertAdjacentHTML(
+    "beforeend",
+    '<div style="position:fixed;z-index:9999;left:10px;right:10px;top:10px;padding:12px;background:#300;color:#ff7777;font:13px monospace;border-radius:8px;white-space:pre-wrap">JS ERROR: '+String(e.message)+'</div>'
+  );
+});
+
 if (!window.THREE) {
   viewer.innerHTML =
     '<div style="color:white;font:16px Arial;padding:20px">Three.js gagal dimuat</div>';
@@ -54,6 +61,10 @@ if (!window.THREE) {
 /* =========================================================
    SCENE
 ========================================================= */
+
+if (!window.THREE) {
+  throw new Error("THREE.JS TIDAK TERLOAD");
+}
 
 const scene = new THREE.Scene();
 
