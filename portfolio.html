@@ -4017,59 +4017,6 @@ document.addEventListener("DOMContentLoaded", () => {
       renderer.domElement
     );
 
-    const runtimeBadge =
-      document.createElement("div");
-
-    runtimeBadge.textContent =
-      "WEBGL: " +
-      (isKoi ? "KOI" : "HEADPHONE") +
-      " | HOST " +
-      host.clientWidth +
-      "x" +
-      host.clientHeight +
-      " | OBJECT " +
-      object.children.length;
-
-    runtimeBadge.style.cssText = `
-      position:absolute;
-      left:8px;
-      bottom:8px;
-      z-index:9999;
-      padding:6px 9px;
-      font:10px/1.2 monospace;
-      color:#111;
-      background:rgba(255,255,255,.85);
-      border-radius:6px;
-      pointer-events:none;
-    `;
-
-    host.appendChild(runtimeBadge);
-
-    console.log(
-      "CYRUS WEBGL READY",
-      isKoi ? "KOI" : "HEADPHONE",
-      {
-        hostWidth: host.clientWidth,
-        hostHeight: host.clientHeight,
-        canvasWidth: renderer.domElement.width,
-        canvasHeight: renderer.domElement.height,
-        objectVisible: object.visible,
-        objectChildren: object.children.length,
-        cameraZ: camera.position.z,
-        objectPosition: {
-          x: object.position.x,
-          y: object.position.y,
-          z: object.position.z
-        },
-        objectScale: {
-          x: object.scale.x,
-          y: object.scale.y,
-          z: object.scale.z
-        },
-        sceneChildren: scene.children.length
-      }
-    );
-
     /* =========================
        LIGHTING
        ========================= */
