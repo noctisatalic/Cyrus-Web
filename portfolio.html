@@ -3935,7 +3935,7 @@ document.addEventListener("DOMContentLoaded", () => {
       100
     );
 
-    camera.position.z = 6;
+    camera.position.z = 4.6;
 
     const renderer = new THREE.WebGLRenderer({
       antialias:true,
@@ -4038,6 +4038,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     scene.add(headphone);
 
+    headphone.scale.set(1.18,1.18,1.18);
+    headphone.position.set(0,-.05,0);
     headphone.rotation.y = -.18;
 
     let down = false;
