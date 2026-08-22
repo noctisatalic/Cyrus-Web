@@ -525,6 +525,12 @@ function createCup(side){
 createCup(-1);
 createCup(1);
 
+product.children.forEach(child => {
+  if (child.type === "Group") {
+    child.visible = false;
+  }
+});
+
 /* =========================================================
    DRAG
 ========================================================= */
