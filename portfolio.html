@@ -1362,158 +1362,410 @@ body.nav-locked {
 }
 
 /* =========================
-   KOI 3D WATER
+   CYRUS 3D KOI — LIQUID DEPTH
    ========================= */
 
 .cyrus-koi-scene {
   position:relative;
   z-index:10;
-  width:min(500px,88vw);
-  height:280px;
+  width:min(520px,90vw);
+  height:300px;
   overflow:hidden;
-  border-radius:34px;
+  border-radius:32px;
+  perspective:1100px;
+  transform-style:preserve-3d;
+  cursor:default;
+
   background:
-    radial-gradient(circle at 30% 25%,rgba(255,255,255,.9),transparent 25%),
-    linear-gradient(145deg,#e9fbfc,#acd6da);
+    radial-gradient(
+      circle at 24% 18%,
+      rgba(255,255,255,.95),
+      transparent 23%
+    ),
+    radial-gradient(
+      circle at 76% 72%,
+      rgba(255,255,255,.35),
+      transparent 30%
+    ),
+    linear-gradient(
+      145deg,
+      #eefcfc 0%,
+      #c9e8ea 48%,
+      #9bcdd1 100%
+    );
+
   box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.75),
-    0 30px 55px rgba(0,0,0,.13);
-  transform:perspective(900px) rotateX(4deg);
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 -35px 70px rgba(45,105,112,.10),
+    0 30px 65px rgba(0,0,0,.14);
+
+  transform:
+    perspective(1100px)
+    rotateX(3deg);
+  transition:transform .45s cubic-bezier(.2,.8,.2,1);
+}
+
+.cyrus-koi-scene::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:8;
+  background:
+    linear-gradient(
+      115deg,
+      transparent 20%,
+      rgba(255,255,255,.30) 48%,
+      transparent 58%
+    );
+  transform:translateX(-110%);
+  animation:koiLightSweep 7s ease-in-out infinite;
+}
+
+@keyframes koiLightSweep {
+  0%,55% {transform:translateX(-110%);}
+  75%,100% {transform:translateX(120%);}
 }
 
 .cyrus-koi-water {
   position:absolute;
-  inset:-30%;
+  inset:-35%;
+  z-index:1;
+  pointer-events:none;
+
   background:
     repeating-radial-gradient(
-      ellipse at center,
-      transparent 0 22px,
-      rgba(255,255,255,.17) 24px 26px
+      ellipse at 50% 50%,
+      transparent 0 19px,
+      rgba(255,255,255,.13) 20px 22px,
+      transparent 23px 38px
     );
-  animation:koiWater 8s linear infinite;
+
+  opacity:.75;
+  mix-blend-mode:screen;
+  animation:koiWater 9s linear infinite;
 }
 
 @keyframes koiWater {
-  from {transform:translate(-30px,-10px) scale(1);}
-  to {transform:translate(30px,10px) scale(1.08);}
+  from {
+    transform:translate3d(-25px,-12px,0) scale(1);
+  }
+  to {
+    transform:translate3d(30px,15px,0) scale(1.08);
+  }
 }
+
+/* -------------------------
+   REALISTIC 3D FISH
+   ------------------------- */
 
 .cyrus-koi {
   position:absolute;
-  width:125px;
-  height:57px;
-  border-radius:65% 48% 48% 65%;
-  background:
-    linear-gradient(
-      90deg,
-      #fff 0 30%,
-      #f07835 31% 58%,
-      #fff 59% 100%
-    );
-  box-shadow:
-    inset 10px 7px 12px rgba(255,255,255,.7),
-    inset -12px -12px 20px rgba(0,0,0,.12),
-    0 18px 28px rgba(0,0,0,.16);
+  width:150px;
+  height:62px;
+  z-index:5;
+
   transform-style:preserve-3d;
   will-change:transform;
+
+  border-radius:
+    62% 52% 50% 64% /
+    68% 55% 55% 68%;
+
+  background:
+    radial-gradient(
+      ellipse at 34% 30%,
+      rgba(255,255,255,.95) 0 8%,
+      transparent 18%
+    ),
+    linear-gradient(
+      105deg,
+      #fafafa 0%,
+      #f4f4f4 28%,
+      #f27b36 29%,
+      #e85e25 55%,
+      #fafafa 56%,
+      #e7e7e7 100%
+    );
+
+  box-shadow:
+    inset 10px 7px 15px rgba(255,255,255,.72),
+    inset -14px -13px 22px rgba(0,0,0,.18),
+    0 19px 25px rgba(20,60,65,.20);
+
+  transition:
+    filter .3s ease;
 }
 
 .cyrus-koi::before {
   content:"";
   position:absolute;
-  right:-34px;
-  top:5px;
-  border-style:solid;
-  border-width:23px 38px 23px 0;
-  border-color:transparent rgba(239,120,53,.8) transparent transparent;
-  filter:drop-shadow(3px 5px 4px rgba(0,0,0,.1));
+  right:-39px;
+  top:7px;
+  width:0;
+  height:0;
+
+  border-top:24px solid transparent;
+  border-bottom:24px solid transparent;
+  border-right:42px solid #e66a2c;
+
+  filter:
+    drop-shadow(5px 7px 5px rgba(0,0,0,.16));
+
+  transform:
+    rotateY(-12deg)
+    translateZ(-4px);
 }
 
 .cyrus-koi::after {
   content:"";
   position:absolute;
   left:25px;
-  top:20px;
-  width:8px;
-  height:8px;
+  top:18px;
+  width:10px;
+  height:10px;
   border-radius:50%;
-  background:#111;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #fff 0 14%,
+      #111 18% 65%,
+      #000 100%
+    );
+
   box-shadow:
-    0 0 0 3px rgba(255,255,255,.55);
+    0 0 0 3px rgba(255,255,255,.5),
+    2px 3px 7px rgba(0,0,0,.25);
+}
+
+/* sisik */
+.cyrus-koi .koi-scales {
+  position:absolute;
+  inset:10px 25px 10px 34px;
+  border-radius:50%;
+  opacity:.48;
+  background:
+    repeating-linear-gradient(
+      105deg,
+      transparent 0 7px,
+      rgba(255,255,255,.55) 8px 9px,
+      transparent 10px 15px
+    );
+  transform:translateZ(7px);
+}
+
+/* sirip atas */
+.cyrus-koi .koi-fin-top {
+  position:absolute;
+  left:73px;
+  top:-20px;
+  width:48px;
+  height:32px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.72),
+      rgba(232,99,40,.78)
+    );
+  clip-path:polygon(50% 0,100% 100%,0 100%);
+  transform:
+    rotateX(-28deg)
+    translateZ(2px);
+  filter:drop-shadow(2px 4px 4px rgba(0,0,0,.15));
+}
+
+/* sirip samping */
+.cyrus-koi .koi-fin-side {
+  position:absolute;
+  left:54px;
+  top:43px;
+  width:52px;
+  height:28px;
+  background:rgba(237,109,45,.65);
+  clip-path:polygon(0 0,100% 50%,15% 100%);
+  transform:
+    rotateX(58deg)
+    rotateZ(-8deg)
+    translateZ(3px);
+  filter:blur(.2px) drop-shadow(2px 4px 4px rgba(0,0,0,.15));
+}
+
+/* ekor kedua */
+.cyrus-koi .koi-tail {
+  position:absolute;
+  right:-32px;
+  top:10px;
+  width:45px;
+  height:43px;
+  background:
+    linear-gradient(
+      145deg,
+      #f48a4b,
+      #d95120
+    );
+  clip-path:polygon(0 50%,100% 0,78% 50%,100% 100%);
+  transform:translateZ(-3px);
+  opacity:.9;
 }
 
 .koi-one {
-  left:65px;
-  top:75px;
-  animation:koiSwim1 5s ease-in-out infinite alternate;
+  left:54px;
+  top:74px;
+  animation:koiSwim1 5.5s ease-in-out infinite alternate;
 }
 
 .koi-two {
   right:55px;
-  bottom:45px;
+  bottom:48px;
   transform:scale(.72);
-  animation:koiSwim2 6s ease-in-out infinite alternate;
+  animation:koiSwim2 6.5s ease-in-out infinite alternate;
 }
 
 @keyframes koiSwim1 {
   to {
-    transform:translate(45px,12px) rotate(7deg) scale(1.04);
+    transform:
+      translate3d(42px,12px,18px)
+      rotateZ(5deg)
+      rotateY(-4deg)
+      scale(1.04);
   }
 }
 
 @keyframes koiSwim2 {
   to {
-    transform:translate(-38px,-18px) rotate(-8deg) scale(.78);
+    transform:
+      translate3d(-38px,-17px,10px)
+      rotateZ(-7deg)
+      rotateY(5deg)
+      scale(.78);
   }
 }
 
 /* =========================
-   CYRUS EXPERIMENTAL
+   CYRUS DESIGN LAB
    ========================= */
 
 .cyrus-experimental-scene {
   position:relative;
   z-index:10;
-  width:min(520px,88vw);
-  height:285px;
-  perspective:1100px;
+  width:min(520px,90vw);
+  height:300px;
+  overflow:hidden;
+  border-radius:32px;
+  perspective:1200px;
+  transform-style:preserve-3d;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(255,255,255,.95),
+      transparent 28%
+    ),
+    linear-gradient(
+      145deg,
+      #f7f7f7,
+      #e9e9e9 52%,
+      #dcdcdc
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 -30px 70px rgba(0,0,0,.08),
+    0 30px 65px rgba(0,0,0,.13);
+
+  transition:
+    transform .45s cubic-bezier(.2,.8,.2,1);
+}
+
+.cyrus-experimental-scene::before {
+  content:"CYRUS / DESIGN LAB";
+  position:absolute;
+  left:24px;
+  top:22px;
+  z-index:8;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.18em;
+  color:#777;
+}
+
+.cyrus-experimental-scene::after {
+  content:"01 — DIGITAL SYSTEM";
+  position:absolute;
+  right:24px;
+  bottom:22px;
+  z-index:8;
+  font-size:7px;
+  font-weight:800;
+  letter-spacing:.14em;
+  color:#999;
 }
 
 .cyrus-experimental-grid {
   position:absolute;
-  inset:0;
-  border-radius:30px;
+  inset:-25%;
+  opacity:.32;
+
   background:
-    linear-gradient(rgba(0,0,0,.06) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,0,0,.06) 1px,transparent 1px);
-  background-size:30px 30px;
-  transform:perspective(700px) rotateX(58deg) translateY(65px) scale(1.3);
+    linear-gradient(
+      rgba(0,0,0,.055) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.055) 1px,
+      transparent 1px
+    );
+
+  background-size:28px 28px;
+
+  transform:
+    perspective(700px)
+    rotateX(58deg)
+    translateY(70px)
+    scale(1.35);
+
   transform-origin:center bottom;
-  opacity:.55;
 }
 
 .cyrus-experimental-core {
   position:absolute;
   left:50%;
   top:50%;
-  width:145px;
-  height:145px;
-  transform:translate(-50%,-50%) rotateX(12deg) rotateY(-18deg);
+  width:150px;
+  height:150px;
+
+  transform:
+    translate(-50%,-50%)
+    rotateX(12deg)
+    rotateY(-20deg);
+
   transform-style:preserve-3d;
-  border:1px solid rgba(0,0,0,.35);
-  border-radius:30px;
+
+  border:1px solid rgba(0,0,0,.15);
+  border-radius:36px;
+
   background:
-    linear-gradient(145deg,#fff,#ddd);
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.98),
+      rgba(225,225,225,.9)
+    );
+
   box-shadow:
-    25px 35px 55px rgba(0,0,0,.18),
-    inset 0 0 30px rgba(255,255,255,.8);
-  animation:experimentalFloat 5s ease-in-out infinite alternate;
+    24px 32px 55px rgba(0,0,0,.16),
+    inset 10px 10px 22px rgba(255,255,255,.95),
+    inset -10px -12px 25px rgba(0,0,0,.08);
+
+  animation:
+    experimentalFloat 5s ease-in-out infinite alternate;
 }
 
 @keyframes experimentalFloat {
   to {
     transform:
-      translate(-50%,-56%)
+      translate(-50%,-55%)
       rotateX(17deg)
       rotateY(20deg)
       rotateZ(3deg);
@@ -1526,36 +1778,171 @@ body.nav-locked {
   inset:0;
   display:grid;
   place-items:center;
-  font-size:42px;
+
+  font-family:var(--font-display);
+  font-size:45px;
   font-weight:800;
-  letter-spacing:-.08em;
+  letter-spacing:-.09em;
+  color:#111;
 }
 
 .cyrus-experimental-core::after {
-  content:"EXPERIMENT";
+  content:"CYRUS";
   position:absolute;
   left:18px;
   bottom:15px;
   font-size:7px;
-  letter-spacing:.16em;
+  font-weight:800;
+  letter-spacing:.2em;
+  color:#888;
+}
+
+.cyrus-experimental-orbit {
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:225px;
+  height:225px;
+
+  border:1px solid rgba(0,0,0,.13);
+  border-radius:50%;
+
+  transform:
+    translate(-50%,-50%)
+    rotateX(67deg)
+    rotateZ(-15deg);
+
+  animation:
+    experimentalOrbit 10s linear infinite;
+}
+
+@keyframes experimentalOrbit {
+  to {
+    transform:
+      translate(-50%,-50%)
+      rotateX(67deg)
+      rotateZ(345deg);
+  }
+}
+
+.cyrus-experimental-orbit::before,
+.cyrus-experimental-orbit::after {
+  content:"";
+  position:absolute;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#111;
+  box-shadow:0 0 0 4px rgba(0,0,0,.06);
+}
+
+.cyrus-experimental-orbit::before {
+  left:8px;
+  top:50%;
+}
+
+.cyrus-experimental-orbit::after {
+  right:8px;
+  top:50%;
 }
 
 .cyrus-experimental-panel {
   position:absolute;
-  padding:10px 13px;
-  border:1px solid rgba(0,0,0,.12);
+  z-index:7;
+
+  padding:9px 12px;
+
+  border:1px solid rgba(0,0,0,.1);
   border-radius:14px;
-  background:rgba(255,255,255,.55);
-  backdrop-filter:blur(15px);
-  font-size:8px;
+
+  background:
+    rgba(255,255,255,.58);
+
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+
+  font-size:7px;
   font-weight:800;
-  letter-spacing:.1em;
-  box-shadow:0 15px 35px rgba(0,0,0,.08);
+  letter-spacing:.13em;
+  color:#555;
+
+  box-shadow:
+    0 15px 35px rgba(0,0,0,.08);
+
+  transition:
+    transform .5s cubic-bezier(.2,.8,.2,1);
 }
 
-.panel-a {left:5%;top:12%;}
-.panel-b {right:4%;top:28%;}
-.panel-c {left:12%;bottom:10%;}
+.panel-a {left:6%;top:27%;}
+.panel-b {right:5%;top:34%;}
+.panel-c {left:13%;bottom:20%;}
+
+html[data-theme="dark"] .cyrus-koi-scene {
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      #35494b,
+      transparent 28%
+    ),
+    linear-gradient(
+      145deg,
+      #182627,
+      #10191a
+    );
+}
+
+html[data-theme="dark"] .cyrus-experimental-scene {
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      #292929,
+      transparent 30%
+    ),
+    linear-gradient(
+      145deg,
+      #202020,
+      #111
+    );
+}
+
+html[data-theme="dark"] .cyrus-experimental-core {
+  background:
+    linear-gradient(
+      145deg,
+      #333,
+      #151515
+    );
+  border-color:rgba(255,255,255,.14);
+}
+
+html[data-theme="dark"] .cyrus-experimental-core::before {
+  color:#fff;
+}
+
+html[data-theme="dark"] .cyrus-experimental-panel {
+  background:rgba(30,30,30,.55);
+  color:#aaa;
+  border-color:rgba(255,255,255,.1);
+}
+
+@media(max-width:700px) {
+  .cyrus-koi-scene,
+  .cyrus-experimental-scene {
+    height:290px;
+  }
+
+  .cyrus-koi {
+    transform:scale(.86);
+  }
+
+  .cyrus-experimental-core {
+    transform:
+      translate(-50%,-50%)
+      rotateX(12deg)
+      rotateY(-15deg)
+      scale(.9);
+  }
+}
 
 .cyrus-project-body {
   position:relative;
@@ -2797,11 +3184,23 @@ document.addEventListener("DOMContentLoaded", () => {
                   ? `
                     <div
                       class="cyrus-koi-scene"
-                      aria-label="Interactive koi water"
+                      aria-label="Interactive 3D koi water"
                     >
                       <div class="cyrus-koi-water"></div>
-                      <div class="cyrus-koi koi-one"></div>
-                      <div class="cyrus-koi koi-two"></div>
+
+                      <div class="cyrus-koi koi-one">
+                        <span class="koi-scales"></span>
+                        <span class="koi-fin-top"></span>
+                        <span class="koi-fin-side"></span>
+                        <span class="koi-tail"></span>
+                      </div>
+
+                      <div class="cyrus-koi koi-two">
+                        <span class="koi-scales"></span>
+                        <span class="koi-fin-top"></span>
+                        <span class="koi-fin-side"></span>
+                        <span class="koi-tail"></span>
+                      </div>
                     </div>
 
                     <span class="cyrus-stage-hint">
@@ -2816,20 +3215,22 @@ document.addEventListener("DOMContentLoaded", () => {
                   ? `
                     <div
                       class="cyrus-experimental-scene"
-                      aria-label="Cyrus experimental interface"
+                      aria-label="Cyrus Design Lab"
                     >
                       <div class="cyrus-experimental-grid"></div>
+
+                      <div class="cyrus-experimental-orbit"></div>
 
                       <div class="cyrus-experimental-panel panel-a">
                         MOTION / 01
                       </div>
 
                       <div class="cyrus-experimental-panel panel-b">
-                        INTERFACE
+                        DIGITAL / 02
                       </div>
 
                       <div class="cyrus-experimental-panel panel-c">
-                        SYSTEM ONLINE
+                        SYSTEM / 03
                       </div>
 
                       <div class="cyrus-experimental-core"></div>
@@ -3039,20 +3440,58 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
           /* =========================
-             KOI CURSOR INTERACTION
+             KOI 3D CURSOR INTERACTION
              ========================= */
 
           if (visual === "koi") {
 
             const scene =
-              article.querySelector(
-                ".cyrus-koi-scene"
-              );
+              article.querySelector(".cyrus-koi-scene");
 
             const fish =
-              article.querySelectorAll(
-                ".cyrus-koi"
-              );
+              article.querySelectorAll(".cyrus-koi");
+
+            let targetX = 0;
+            let targetY = 0;
+            let currentX = 0;
+            let currentY = 0;
+
+            function animateKoi() {
+
+              currentX +=
+                (targetX - currentX) * .075;
+
+              currentY +=
+                (targetY - currentY) * .075;
+
+              scene.style.transform =
+                `perspective(1100px)
+                 rotateX(${3 - currentY * 5}deg)
+                 rotateY(${currentX * 7}deg)`;
+
+              fish.forEach((item,i) => {
+
+                const depth =
+                  i === 0 ? 1 : .72;
+
+                const base =
+                  i === 0
+                    ? "translate3d(0,0,0)"
+                    : "scale(.72)";
+
+                item.style.transform =
+                  `${base}
+                   translate3d(
+                     ${currentX * 22 * depth}px,
+                     ${currentY * 14 * depth}px,
+                     ${Math.abs(currentX) * 12 * depth}px
+                   )
+                   rotateY(${currentX * 12}deg)
+                   rotateZ(${currentY * 4}deg)`;
+              });
+
+              requestAnimationFrame(animateKoi);
+            }
 
             scene.addEventListener(
               "pointermove",
@@ -3061,48 +3500,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 const rect =
                   scene.getBoundingClientRect();
 
-                const x =
-                  (e.clientX - rect.left)
-                  / rect.width;
+                targetX =
+                  ((e.clientX - rect.left) / rect.width - .5);
 
-                const y =
-                  (e.clientY - rect.top)
-                  / rect.height;
-
-                fish.forEach((item,i) => {
-
-                  const strength =
-                    i === 0 ? 26 : 18;
-
-                  const tx =
-                    (x - .5) * strength;
-
-                  const ty =
-                    (y - .5) * strength;
-
-                  item.style.marginLeft =
-                    `${tx}px`;
-
-                  item.style.marginTop =
-                    `${ty}px`;
-                });
+                targetY =
+                  ((e.clientY - rect.top) / rect.height - .5);
               }
             );
 
             scene.addEventListener(
               "pointerleave",
               () => {
-
-                fish.forEach(item => {
-                  item.style.marginLeft = "0px";
-                  item.style.marginTop = "0px";
-                });
+                targetX = 0;
+                targetY = 0;
               }
             );
+
+            animateKoi();
           }
 
           /* =========================
-             EXPERIMENTAL PARALLAX
+             CYRUS DESIGN LAB PARALLAX
              ========================= */
 
           if (visual === "experimental") {
@@ -3117,10 +3535,63 @@ document.addEventListener("DOMContentLoaded", () => {
                 ".cyrus-experimental-core"
               );
 
+            const orbit =
+              article.querySelector(
+                ".cyrus-experimental-orbit"
+              );
+
             const panels =
               article.querySelectorAll(
                 ".cyrus-experimental-panel"
               );
+
+            let targetX = 0;
+            let targetY = 0;
+            let currentX = 0;
+            let currentY = 0;
+
+            function animateExperimental() {
+
+              currentX +=
+                (targetX - currentX) * .08;
+
+              currentY +=
+                (targetY - currentY) * .08;
+
+              scene.style.transform =
+                `perspective(1200px)
+                 rotateX(${currentY * -5}deg)
+                 rotateY(${currentX * 8}deg)`;
+
+              core.style.marginLeft =
+                `${currentX * 16}px`;
+
+              core.style.marginTop =
+                `${currentY * 12}px`;
+
+              orbit.style.marginLeft =
+                `${currentX * -10}px`;
+
+              orbit.style.marginTop =
+                `${currentY * -8}px`;
+
+              panels.forEach((panel,i) => {
+
+                const factor =
+                  (i + 1) * 7;
+
+                panel.style.transform =
+                  `translate3d(
+                    ${currentX * factor}px,
+                    ${currentY * factor}px,
+                    ${i * 4}px
+                  )`;
+              });
+
+              requestAnimationFrame(
+                animateExperimental
+              );
+            }
 
             scene.addEventListener(
               "pointermove",
@@ -3129,50 +3600,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 const rect =
                   scene.getBoundingClientRect();
 
-                const x =
-                  (e.clientX - rect.left)
-                  / rect.width - .5;
+                targetX =
+                  ((e.clientX - rect.left)
+                  / rect.width - .5);
 
-                const y =
-                  (e.clientY - rect.top)
-                  / rect.height - .5;
-
-                core.style.marginLeft =
-                  `${x * 18}px`;
-
-                core.style.marginTop =
-                  `${y * 14}px`;
-
-                panels.forEach(
-                  (panel,i) => {
-                    const factor =
-                      (i + 1) * 5;
-
-                    panel.style.transform =
-                      `translate(
-                        ${x * factor}px,
-                        ${y * factor}px
-                      )`;
-                  }
-                );
+                targetY =
+                  ((e.clientY - rect.top)
+                  / rect.height - .5);
               }
             );
 
             scene.addEventListener(
               "pointerleave",
               () => {
-
-                core.style.marginLeft = "0px";
-                core.style.marginTop = "0px";
-
-                panels.forEach(
-                  panel => {
-                    panel.style.transform =
-                      "translate(0,0)";
-                  }
-                );
+                targetX = 0;
+                targetY = 0;
               }
             );
+
+            animateExperimental();
           }
 
         });
