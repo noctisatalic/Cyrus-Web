@@ -1,27 +1,192 @@
 <!doctype html>
-<html>
+<html lang="id">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+
 <style>
 html,body{
   margin:0;
   width:100%;
   height:100%;
-  background:#050505;
+  overflow:hidden;
+  background:transparent;
 }
-#test{
-  position:absolute;
+
+#viewer{
+  position:fixed;
   inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
-  font:700 28px Arial;
+  touch-action:none;
+  cursor:grab;
+}
+
+#viewer:active{
+  cursor:grabbing;
+}
+
+canvas{
+  display:block;
+  width:100%;
+  height:100%;
 }
 </style>
 </head>
+
 <body>
-<div id="test">SPR HEADPHONE FILE OK</div>
+
+<div id="viewer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.min.js"></script>
+
+<script>
+(() => {
+
+const viewer = document.getElementById("viewer");
+
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(
+  40,
+  1,
+  0.1,
+  100
+);
+
+camera.position.z = 4;
+
+const renderer = new THREE.WebGLRenderer({
+  antialias:true,
+  alpha:true
+});
+
+renderer.setPixelRatio(
+  Math.min(window.devicePixelRatio || 1,2)
+);
+
+renderer.setSize(
+  viewer.clientWidth || 300,
+  viewer.clientHeight || 300,
+  false
+);
+
+viewer.appendChild(renderer.domElement);
+
+/* LIGHT */
+
+scene.add(
+  new THREE.HemisphereLight(
+    0xffffff,
+    0x222222,
+    3
+  )
+);
+
+const light = new THREE.DirectionalLight(
+  0xffffff,
+  4
+);
+
+light.position.set(3,4,5);
+
+scene.add(light);
+
+/* CUBE */
+
+const cube = new THREE.Mesh(
+  new THREE.BoxGeometry(1.6,1.6,1.6),
+  new THREE.MeshPhysicalMaterial({
+    color:0x202020,
+    metalness:.6,
+    roughness:.2,
+    clearcoat:1
+  })
+);
+
+scene.add(cube);
+
+/* DRAG */
+
+let dragging = false;
+let lastX = 0;
+let lastY = 0;
+
+viewer.addEventListener(
+  "pointerdown",
+  e => {
+
+    dragging = true;
+
+    lastX = e.clientX;
+    lastY = e.clientY;
+
+    viewer.setPointerCapture(e.pointerId);
+  }
+);
+
+viewer.addEventListener(
+  "pointermove",
+  e => {
+
+    if(!dragging) return;
+
+    const dx = e.clientX-lastX;
+    const dy = e.clientY-lastY;
+
+    lastX = e.clientX;
+    lastY = e.clientY;
+
+    cube.rotation.y += dx*.01;
+    cube.rotation.x += dy*.01;
+  }
+);
+
+viewer.addEventListener(
+  "pointerup",
+  e => {
+
+    dragging = false;
+
+    try{
+      viewer.releasePointerCapture(e.pointerId);
+    }catch(_){}
+  }
+);
+
+/* RESIZE */
+
+function resize(){
+
+  const w = Math.max(viewer.clientWidth,1);
+  const h = Math.max(viewer.clientHeight,1);
+
+  camera.aspect = w/h;
+
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(w,h,false);
+}
+
+window.addEventListener("resize",resize);
+
+resize();
+
+/* LOOP */
+
+function animate(){
+
+  requestAnimationFrame(animate);
+
+  if(!dragging){
+    cube.rotation.y += .004;
+  }
+
+  renderer.render(scene,camera);
+}
+
+animate();
+
+})();
+</script>
+
 </body>
 </html>
