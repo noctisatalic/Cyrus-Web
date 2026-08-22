@@ -182,8 +182,17 @@ const renderer =
     alpha:false
   });
 
+/* =========================================================
+   CYRUS MOBILE WEBGL PERFORMANCE
+========================================================= */
+
+const isMobileDevice =
+  window.matchMedia("(max-width: 768px)").matches;
+
 renderer.setPixelRatio(
-  Math.min(devicePixelRatio,2)
+  isMobileDevice
+    ? Math.min(window.devicePixelRatio, 1.35)
+    : Math.min(window.devicePixelRatio, 2)
 );
 
 renderer.setSize(
@@ -352,16 +361,7 @@ function createCup(side){
 
   cup.position.x =
     side * 1.18;
-
-  // True left/right symmetry
-  cup.scale.set(
-    side < 0 ? -1 : 1,
-    1,
-    1
-  );
-
-
-  /* BODY */
+/* BODY */
 
   const body =
     new THREE.Mesh(
@@ -698,11 +698,26 @@ renderer.domElement.addEventListener(
 const clock =
   new THREE.Clock();
 
-function animate(){
+let lastRender = 0;
 
-  requestAnimationFrame(
-    animate
-  );
+function animate(now = performance.now()){
+
+  requestAnimationFrame(animate);
+
+  const mobile =
+    window.matchMedia("(max-width: 768px)").matches;
+
+  // Desktop tetap full smooth.
+  // Mobile dibatasi sekitar 45fps agar tidak membebani
+  // main thread saat halaman sedang scroll.
+  const frameInterval =
+    mobile && !dragging ? 1000 / 45 : 0;
+
+  if(frameInterval && now - lastRender < frameInterval){
+    return;
+  }
+
+  lastRender = now;
 
   const t =
     clock.getElapsedTime();
@@ -710,7 +725,7 @@ function animate(){
   if(!dragging){
 
     product.rotation.y +=
-      .0012 + velocity;
+      (mobile ? .00065 : .0012) + velocity;
 
     velocity *= .94;
 
@@ -718,7 +733,7 @@ function animate(){
 
   product.position.y =
     -.42 +
-    Math.sin(t * .8) * .018;
+    Math.sin(t * .8) * (mobile ? .010 : .018);
 
   renderer.render(
     scene,
