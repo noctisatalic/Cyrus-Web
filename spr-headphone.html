@@ -255,65 +255,17 @@ product.rotation.y =
 const bandCurve =
   new THREE.CatmullRomCurve3([
 
-    new THREE.Vector3(
-      -1.28,
-      -.05,
-      0
-    ),
-
-    new THREE.Vector3(
-      -1.25,
-      .62,
-      0
-    ),
-
-    new THREE.Vector3(
-      -1.05,
-      1.15,
-      0
-    ),
-
-    new THREE.Vector3(
-      -.68,
-      1.52,
-      0
-    ),
-
-    new THREE.Vector3(
-      -.25,
-      1.70,
-      0
-    ),
-
-    new THREE.Vector3(
-      .25,
-      1.70,
-      0
-    ),
-
-    new THREE.Vector3(
-      .68,
-      1.52,
-      0
-    ),
-
-    new THREE.Vector3(
-      1.05,
-      1.15,
-      0
-    ),
-
-    new THREE.Vector3(
-      1.25,
-      .62,
-      0
-    ),
-
-    new THREE.Vector3(
-      1.28,
-      -.05,
-      0
-    )
+    new THREE.Vector3(-1.28,-.08,0),
+    new THREE.Vector3(-1.27,.48,0),
+    new THREE.Vector3(-1.12,.96,0),
+    new THREE.Vector3(-.82,1.34,0),
+    new THREE.Vector3(-.42,1.55,0),
+    new THREE.Vector3(0,1.61,0),
+    new THREE.Vector3(.42,1.55,0),
+    new THREE.Vector3(.82,1.34,0),
+    new THREE.Vector3(1.12,.96,0),
+    new THREE.Vector3(1.27,.48,0),
+    new THREE.Vector3(1.28,-.08,0)
 
   ]);
 
@@ -425,165 +377,271 @@ function createCup(side){
     0
   );
 
-  /* MAIN HOUSING */
+  /*
+   * Setiap ear cup mempunyai local front.
+   *
+   * LEFT  -> menghadap ke +X
+   * RIGHT -> menghadap ke -X
+   *
+   * Jadi kedua speaker saling menghadap
+   * ke arah kepala, bukan ke kamera.
+   */
+
+  const front =
+    side < 0 ? 1 : -1;
+
+  /* =======================================================
+     MAIN HOUSING
+  ======================================================= */
 
   const housing =
     new THREE.Mesh(
       new THREE.CylinderGeometry(
-        .62,
-        .62,
-        .36,
+        .60,
+        .56,
+        .38,
         96,
         1
       ),
       shellMaterial
     );
 
-  housing.rotation.x =
+  housing.rotation.y =
     Math.PI / 2;
+
+  housing.rotation.z =
+    side < 0 ? 0 : Math.PI;
 
   cup.add(housing);
 
-  /* OUTER PLATE */
+  /* =======================================================
+     BACK SHELL
+  ======================================================= */
 
-  const plate =
+  const backShell =
     new THREE.Mesh(
       new THREE.CylinderGeometry(
-        .53,
-        .53,
+        .49,
+        .52,
+        .10,
+        96
+      ),
+      shellSoftMaterial
+    );
+
+  backShell.rotation.y =
+    Math.PI / 2;
+
+  backShell.position.x =
+    -front * .20;
+
+  cup.add(backShell);
+
+  /* =======================================================
+     FRONT FACE
+  ======================================================= */
+
+  const face =
+    new THREE.Mesh(
+      new THREE.CylinderGeometry(
+        .52,
+        .52,
         .045,
         96
       ),
       shellSoftMaterial
     );
 
-  plate.rotation.x =
+  face.rotation.y =
     Math.PI / 2;
 
-  plate.position.z =
-    .205;
+  face.position.x =
+    front * .205;
 
-  cup.add(plate);
+  cup.add(face);
 
-  /* METAL OUTER RIM */
+  /* =======================================================
+     OUTER METAL RIM
+  ======================================================= */
 
   const outerRim =
     new THREE.Mesh(
       new THREE.TorusGeometry(
-        .505,
-        .055,
+        .49,
+        .052,
         24,
         96
       ),
       metalMaterial
     );
 
-  outerRim.position.z =
-    .235;
+  outerRim.rotation.y =
+    Math.PI / 2;
+
+  outerRim.position.x =
+    front * .235;
 
   cup.add(outerRim);
 
-  /* SECOND RIM */
+  /* =======================================================
+     INNER DECORATIVE RIM
+  ======================================================= */
 
   const innerRim =
     new THREE.Mesh(
       new THREE.TorusGeometry(
-        .40,
-        .035,
+        .395,
+        .030,
         20,
         80
       ),
       accentMaterial
     );
 
-  innerRim.position.z =
-    .255;
+  innerRim.rotation.y =
+    Math.PI / 2;
+
+  innerRim.position.x =
+    front * .255;
 
   cup.add(innerRim);
 
-  /* EAR CUSHION */
+  /* =======================================================
+     EAR CUSHION
+  ======================================================= */
 
   const earCushion =
     new THREE.Mesh(
       new THREE.TorusGeometry(
-        .395,
-        .135,
+        .375,
+        .125,
         32,
         96
       ),
       cushionMaterial
     );
 
-  earCushion.position.z =
-    .115;
+  earCushion.rotation.y =
+    Math.PI / 2;
+
+  earCushion.position.x =
+    front * .145;
+
+  earCushion.scale.set(
+    1,
+    1.08,
+    1.10
+  );
 
   cup.add(earCushion);
 
-  /* INNER CAVITY */
+  /* =======================================================
+     INNER EAR CAVITY
+  ======================================================= */
 
   const inner =
     new THREE.Mesh(
       new THREE.CylinderGeometry(
-        .27,
-        .27,
-        .055,
+        .255,
+        .255,
+        .035,
         80
       ),
       innerMaterial
     );
 
-  inner.rotation.x =
+  inner.rotation.y =
     Math.PI / 2;
 
-  inner.position.z =
-    .10;
+  inner.position.x =
+    front * .13;
 
   cup.add(inner);
 
-  /* SMALL INNER DRIVER */
+  /* =======================================================
+     DRIVER
+  ======================================================= */
 
   const driver =
     new THREE.Mesh(
       new THREE.CylinderGeometry(
-        .13,
-        .13,
+        .12,
+        .12,
         .025,
         64
       ),
       accentMaterial
     );
 
-  driver.rotation.x =
+  driver.rotation.y =
     Math.PI / 2;
 
-  driver.position.z =
-    .135;
+  driver.position.x =
+    front * .155;
 
   cup.add(driver);
 
-  /* CONNECTOR */
+  /* =======================================================
+     YOKE
+  ======================================================= */
 
-  const connector =
+  const yoke =
+    new THREE.Mesh(
+      new THREE.TorusGeometry(
+        .30,
+        .035,
+        16,
+        48,
+        Math.PI
+      ),
+      metalMaterial
+    );
+
+  yoke.rotation.z =
+    Math.PI / 2;
+
+  yoke.rotation.x =
+    side < 0 ? Math.PI : 0;
+
+  yoke.position.set(
+    -side * .04,
+    .05,
+    0
+  );
+
+  yoke.scale.set(
+    .72,
+    1.15,
+    1
+  );
+
+  cup.add(yoke);
+
+  /* =======================================================
+     HINGE
+  ======================================================= */
+
+  const hinge =
     new THREE.Mesh(
       new THREE.CylinderGeometry(
-        .13,
-        .13,
-        .30,
+        .085,
+        .085,
+        .18,
         40
       ),
       metalMaterial
     );
 
-  connector.rotation.z =
+  hinge.rotation.z =
     Math.PI / 2;
 
-  connector.position.set(
-    -side * .02,
-    .02,
+  hinge.position.set(
+    -side * .08,
+    .12,
     0
   );
 
-  cup.add(connector);
+  cup.add(hinge);
 
   product.add(cup);
 }
