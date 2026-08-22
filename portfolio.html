@@ -3880,1506 +3880,306 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 
-<style id="cyrus-webgl-layer">
 
-/* =========================================================
-   CYRUS WEBGL — DETERMINISTIC PRODUCT VIEWER LAYER
-   ========================================================= */
 
-.cyrus-webgl-host {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  overflow: hidden !important;
-  border-radius: inherit;
-  z-index: 100 !important;
-  pointer-events: auto !important;
-  touch-action: none !important;
+
+
+
+<style id="cyrus-simple-3d">
+.cyrus-simple-3d {
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  touch-action:none;
+  cursor:grab;
 }
 
-.cyrus-webgl-host canvas {
-  display: block !important;
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  z-index: 101 !important;
-  pointer-events: auto !important;
-  touch-action: none !important;
+.cyrus-simple-3d:active {
+  cursor:grabbing;
 }
 
-/* Hide only the old 2D visual pieces.
-   Keep the scene/container itself visible. */
-
-.cyrus-headphone-scene .cyrus-headband,
-.cyrus-headphone-scene .cyrus-ear,
-.cyrus-headphone-scene .cyrus-ear::before,
-.cyrus-headphone-scene .cyrus-ear::after,
-.cyrus-koi-scene .koi-scales,
-.cyrus-koi-scene .koi-fin-top,
-.cyrus-koi-scene .koi-fin-side,
-.cyrus-koi-scene .koi-tail {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
+.cyrus-simple-3d canvas {
+  display:block;
+  width:100%;
+  height:100%;
 }
-
 </style>
 
 <script>
-
-/* CYRUS WEBGL 3D ENGINE — VOLUME OBJECTS */
-
 document.addEventListener("DOMContentLoaded", () => {
-  if (typeof THREE === "undefined") {
-    console.warn("Cyrus WebGL: Three.js belum tersedia.");
-    return;
-  }
 
-  const hosts = document.querySelectorAll(
-    ".cyrus-headphone-scene, .cyrus-koi-scene"
+  if (typeof THREE === "undefined") return;
+
+  const host = document.querySelector(".cyrus-headphone-scene");
+
+  if (!host) return;
+
+  const scene = new THREE.Scene();
+
+  const camera = new THREE.PerspectiveCamera(
+    35,
+    1,
+    0.1,
+    100
   );
 
-  hosts.forEach(host => {
-    if (host.querySelector(".cyrus-webgl-host")) return;
-
-    const isKoi =
-      host.classList.contains("cyrus-koi-scene");
-
-    const layer =
-      document.createElement("div");
-
-    layer.className =
-      "cyrus-webgl-host";
-
-    layer.setAttribute(
-      "aria-hidden",
-      "true"
-    );
-
-    host.appendChild(layer);
-
-    const scene =
-      new THREE.Scene();
-
-    const camera =
-      new THREE.PerspectiveCamera(
-        32,
-        1,
-        0.1,
-        100
-      );
-
-    /*
-     * STUDIO PRODUCT CAMERA
-     *
-     * Koi tetap memakai framing lamanya.
-     * Headphone dibuat sedikit lebih jauh
-     * agar seluruh silhouette terlihat.
-     */
-
-    camera.position.set(
-      0,
-      isKoi ? 0 : 0.08,
-      isKoi ? 7 : 7.8
-    );
-
-    const renderer =
-      new THREE.WebGLRenderer({
-        antialias:true,
-        alpha:true,
-        powerPreference:"high-performance"
-      });
-
-    renderer.setPixelRatio(
-      Math.min(
-        window.devicePixelRatio || 1,
-        2
-      )
-    );
-
-    renderer.outputColorSpace =
-      THREE.SRGBColorSpace;
-
-    renderer.toneMapping =
-      THREE.ACESFilmicToneMapping;
-
-    renderer.toneMappingExposure =
-      1.25;
-
-    renderer.shadowMap.enabled = true;
-
-    renderer.shadowMap.type =
-      THREE.PCFSoftShadowMap;
-
-    layer.appendChild(
-      renderer.domElement
-    );
-
-    /* =========================
-       LIGHTING
-       ========================= */
-
-    /*
-     * STUDIO LIGHTING
-     *
-     * Headphone:
-     * neutral white studio lighting.
-     *
-     * Koi:
-     * existing cyan accent retained.
-     */
-
-    const hemi =
-      new THREE.HemisphereLight(
-        0xffffff,
-        isKoi ? 0x172025 : 0x050505,
-        isKoi ? 2.4 : 1.45
-      );
-
-    scene.add(hemi);
-
-
-    /*
-     * Large soft key.
-     */
-
-    const key =
-      new THREE.DirectionalLight(
-        0xffffff,
-        isKoi ? 4.5 : 5.2
-      );
-
-    key.position.set(
-      4,
-      6,
-      6
-    );
-
-    key.castShadow = true;
-
-    key.shadow.mapSize.width =
-      2048;
-
-    key.shadow.mapSize.height =
-      2048;
-
-    key.shadow.camera.near =
-      0.5;
-
-    key.shadow.camera.far =
-      20;
-
-    scene.add(key);
-
-
-    /*
-     * Neutral rim.
-     *
-     * No blue tint on headphone.
-     */
-
-    const rim =
-      new THREE.DirectionalLight(
-        isKoi ? 0x8ee8ff : 0xffffff,
-        isKoi ? 3 : 3.4
-      );
-
-    rim.position.set(
-      -5,
-      3,
-      -4
-    );
-
-    scene.add(rim);
-
-
-    /*
-     * Front fill.
-     *
-     * Slightly weaker on headphone
-     * so black materials retain depth.
-     */
-
-    const fill =
-      new THREE.PointLight(
-        isKoi ? 0x8ddde8 : 0xffffff,
-        isKoi ? 2.2 : 1.7,
-        10
-      );
-
-    fill.position.set(
-      0,
-      0.5,
-      5
-    );
-
-    scene.add(fill);
-
-
-    /*
-     * Soft top light for headphone.
-     */
-
-    if (!isKoi) {
-
-      const topLight =
-        new THREE.RectAreaLight(
-          0xffffff,
-          4.5,
-          4.5,
-          3.5
-        );
-
-      topLight.position.set(
-        0,
-        4.5,
-        2.5
-      );
-
-      topLight.lookAt(
-        0,
-        0.5,
-        0
-      );
-
-      scene.add(
-        topLight
-      );
-
-    }
-
-    const group =
-      new THREE.Group();
-
-    scene.add(group);
-
-    /* =========================
-       MATERIAL HELPERS
-       ========================= */
-
-    function physical(options) {
-      return new THREE.MeshPhysicalMaterial({
-        roughness:
-          options.roughness ?? 0.3,
-
-        metalness:
-          options.metalness ?? 0,
-
-        clearcoat:
-          options.clearcoat ?? 0.5,
-
-        clearcoatRoughness:
-          options.clearcoatRoughness ?? 0.15,
-
-        color:
-          options.color ?? 0xffffff
-      });
-    }
-
-    function addMesh(
-      geometry,
-      material,
-      parent = group
-    ) {
-      const mesh =
-        new THREE.Mesh(
-          geometry,
-          material
-        );
-
-      mesh.castShadow = true;
-      mesh.receiveShadow = true;
-
-      parent.add(mesh);
-
-      return mesh;
-    }
-
-    /* =========================
-       HEADPHONE
-       ========================= */
-
-    function createHeadphone() {
-
-      const headphone =
-        new THREE.Group();
-
-      /*
-       * STUDIO PRODUCT VIEWER
-       * Headphone dibuat sebagai volume 3D nyata.
-       */
-
-      headphone.scale.set(
-        1.0,
-        1.0,
-        1.0
-      );
-
-      group.add(
-        headphone
-      );
-
-
-      /* =========================
-         MATERIALS
-      ========================= */
-
-      const shell =
-        physical({
-          color:0x151719,
-          roughness:.22,
-          metalness:.55,
-          clearcoat:.8,
-          clearcoatRoughness:.08
-        });
-
-
-      const shellDark =
-        physical({
-          color:0x050607,
-          roughness:.34,
-          metalness:.32,
-          clearcoat:.55,
-          clearcoatRoughness:.12
-        });
-
-
-      const rubber =
-        physical({
-          color:0x030303,
-          roughness:.82,
-          metalness:.02
-        });
-
-
-      const metal =
-        physical({
-          color:0x8b8d90,
-          roughness:.22,
-          metalness:1,
-          clearcoat:.45,
-          clearcoatRoughness:.08
-        });
-
-
-      const grille =
-        physical({
-          color:0x080909,
-          roughness:.68,
-          metalness:.48
-        });
-
-
-      /* =========================
-         EAR CUP
-      ========================= */
-
-      function createEarcup(){
-
-        const cup =
-          new THREE.Group();
-
-
-        /*
-         * Main outer shell
-         */
-
-        const outer =
-          new THREE.Mesh(
-            new THREE.CylinderGeometry(
-              .72,
-              .72,
-              .34,
-              64,
-              1
-            ),
-            shell
-          );
-
-        outer.rotation.x =
-          Math.PI / 2;
-
-        outer.castShadow = true;
-        outer.receiveShadow = true;
-
-        cup.add(
-          outer
-        );
-
-
-        /*
-         * Outer bevel/rim
-         */
-
-        const rim =
-          new THREE.Mesh(
-            new THREE.TorusGeometry(
-              .59,
-              .065,
-              20,
-              64
-            ),
-            metal
-          );
-
-        rim.position.z =
-          .185;
-
-        cup.add(
-          rim
-        );
-
-
-        /*
-         * Front recessed panel
-         */
-
-        const panel =
-          new THREE.Mesh(
-            new THREE.CylinderGeometry(
-              .55,
-              .55,
-              .075,
-              64
-            ),
-            shellDark
-          );
-
-        panel.rotation.x =
-          Math.PI / 2;
-
-        panel.position.z =
-          .185;
-
-        cup.add(
-          panel
-        );
-
-
-        /*
-         * Driver grille
-         */
-
-        const driver =
-          new THREE.Mesh(
-            new THREE.CylinderGeometry(
-              .40,
-              .40,
-              .035,
-              64
-            ),
-            grille
-          );
-
-        driver.rotation.x =
-          Math.PI / 2;
-
-        driver.position.z =
-          .225;
-
-        cup.add(
-          driver
-        );
-
-
-        /*
-         * Grille ring
-         */
-
-        const grilleRing =
-          new THREE.Mesh(
-            new THREE.TorusGeometry(
-              .405,
-              .025,
-              16,
-              64
-            ),
-            metal
-          );
-
-        grilleRing.position.z =
-          .25;
-
-        cup.add(
-          grilleRing
-        );
-
-
-        /*
-         * Center driver cap
-         */
-
-        const center =
-          new THREE.Mesh(
-            new THREE.SphereGeometry(
-              .105,
-              32,
-              32
-            ),
-            shellDark
-          );
-
-        center.scale.z =
-          .35;
-
-        center.position.z =
-          .27;
-
-        cup.add(
-          center
-        );
-
-
-        /*
-         * Ear cushion.
-         *
-         * Torus gives real thickness,
-         * instead of a flat CSS circle.
-         */
-
-        const cushion =
-          new THREE.Mesh(
-            new THREE.TorusGeometry(
-              .49,
-              .145,
-              24,
-              64
-            ),
-            rubber
-          );
-
-        cushion.position.z =
-          .245;
-
-        cushion.scale.set(
-          1,
-          1.06,
-          1
-        );
-
-        cup.add(
-          cushion
-        );
-
-
-        return cup;
-      }
-
-
-      /* =========================
-         LEFT / RIGHT EARCUPS
-      ========================= */
-
-      const leftCup =
-        createEarcup();
-
-      leftCup.position.x =
-        -1.12;
-
-      leftCup.rotation.y =
-        -.08;
-
-      headphone.add(
-        leftCup
-      );
-
-
-      const rightCup =
-        createEarcup();
-
-      rightCup.position.x =
-        1.12;
-
-      rightCup.rotation.y =
-        .08;
-
-      /*
-       * Mirror the orientation.
-       */
-
-      rightCup.rotation.z =
-        Math.PI;
-
-      headphone.add(
-        rightCup
-      );
-
-
-      /* =========================
-         HEADBAND
-      ========================= */
-
-      const bandMaterial =
-        physical({
-          color:0x090a0b,
-          roughness:.27,
-          metalness:.42,
-          clearcoat:.7,
-          clearcoatRoughness:.1
-        });
-
-
-      /*
-       * Main curved headband.
-       */
-
-      const bandCurve =
-        new THREE.CatmullRomCurve3([
-
-          new THREE.Vector3(
-            -1.12,
-            .10,
-            0
-          ),
-
-          new THREE.Vector3(
-            -.92,
-            .92,
-            0
-          ),
-
-          new THREE.Vector3(
-            -.48,
-            1.38,
-            0
-          ),
-
-          new THREE.Vector3(
-            0,
-            1.56,
-            0
-          ),
-
-          new THREE.Vector3(
-            .48,
-            1.38,
-            0
-          ),
-
-          new THREE.Vector3(
-            .92,
-            .92,
-            0
-          ),
-
-          new THREE.Vector3(
-            1.12,
-            .10,
-            0
-          )
-
-        ]);
-
-
-      const band =
-        new THREE.Mesh(
-          new THREE.TubeGeometry(
-            bandCurve,
-            96,
-            .115,
-            20,
-            false
-          ),
-          bandMaterial
-        );
-
-      band.castShadow = true;
-
-      headphone.add(
-        band
-      );
-
-
-      /*
-       * Inner padded headband.
-       */
-
-      const padCurve =
-        new THREE.CatmullRomCurve3([
-
-          new THREE.Vector3(
-            -.72,
-            .86,
-            .04
-          ),
-
-          new THREE.Vector3(
-            -.35,
-            1.25,
-            .04
-          ),
-
-          new THREE.Vector3(
-            0,
-            1.36,
-            .04
-          ),
-
-          new THREE.Vector3(
-            .35,
-            1.25,
-            .04
-          ),
-
-          new THREE.Vector3(
-            .72,
-            .86,
-            .04
-          )
-
-        ]);
-
-
-      const pad =
-        new THREE.Mesh(
-          new THREE.TubeGeometry(
-            padCurve,
-            64,
-            .16,
-            20,
-            false
-          ),
-          rubber
-        );
-
-      headphone.add(
-        pad
-      );
-
-
-      /* =========================
-         SLIDERS
-      ========================= */
-
-      function createSlider(){
-
-        const slider =
-          new THREE.Mesh(
-            new THREE.BoxGeometry(
-              .14,
-              .65,
-              .12
-            ),
-            metal
-          );
-
-        slider.castShadow = true;
-
-        return slider;
-      }
-
-
-      const leftSlider =
-        createSlider();
-
-      leftSlider.position.set(
-        -.91,
-        .47,
-        0
-      );
-
-      leftSlider.rotation.z =
-        -.18;
-
-      headphone.add(
-        leftSlider
-      );
-
-
-      const rightSlider =
-        createSlider();
-
-      rightSlider.position.set(
-        .91,
-        .47,
-        0
-      );
-
-      rightSlider.rotation.z =
-        .18;
-
-      headphone.add(
-        rightSlider
-      );
-
-
-      /* =========================
-         HINGES
-      ========================= */
-
-      function createHinge(){
-
-        const hinge =
-          new THREE.Group();
-
-
-        const disc =
-          new THREE.Mesh(
-            new THREE.CylinderGeometry(
-              .14,
-              .14,
-              .11,
-              32
-            ),
-            metal
-          );
-
-        disc.rotation.z =
-          Math.PI / 2;
-
-        hinge.add(
-          disc
-        );
-
-
-        const bolt =
-          new THREE.Mesh(
-            new THREE.CylinderGeometry(
-              .045,
-              .045,
-              .125,
-              24
-            ),
-            shellDark
-          );
-
-        bolt.rotation.z =
-          Math.PI / 2;
-
-        bolt.position.x =
-          .01;
-
-        hinge.add(
-          bolt
-        );
-
-
-        return hinge;
-      }
-
-
-      const leftHinge =
-        createHinge();
-
-      leftHinge.position.set(
-        -.99,
-        .15,
-        .02
-      );
-
-      headphone.add(
-        leftHinge
-      );
-
-
-      const rightHinge =
-        createHinge();
-
-      rightHinge.position.set(
-        .99,
-        .15,
-        .02
-      );
-
-      headphone.add(
-        rightHinge
-      );
-
-
-      /* =========================
-         SIDE ARM CONNECTORS
-      ========================= */
-
-      const leftArm =
-        new THREE.Mesh(
-          new THREE.BoxGeometry(
-            .16,
-            .52,
-            .20
-          ),
-          shell
-        );
-
-      leftArm.position.set(
-        -.98,
-        .23,
-        0
-      );
-
-      leftArm.rotation.z =
-        -.08;
-
-      headphone.add(
-        leftArm
-      );
-
-
-      const rightArm =
-        leftArm.clone();
-
-      rightArm.position.x =
-        .98;
-
-      rightArm.rotation.z =
-        .08;
-
-      headphone.add(
-        rightArm
-      );
-
-
-      /* =========================
-         BRAND PLATE
-      ========================= */
-
-      const badge =
-        new THREE.Mesh(
-          new THREE.CylinderGeometry(
-            .14,
-            .14,
-            .018,
-            48
-          ),
-          metal
-        );
-
-      badge.rotation.x =
-        Math.PI / 2;
-
-      badge.position.set(
-        0,
-        1.48,
-        .10
-      );
-
-      badge.scale.set(
-        1,
-        .62,
-        1
-      );
-
-      headphone.add(
-        badge
-      );
-
-
-      /* =========================
-         ANIMATION RIG
-      ========================= */
-
-      headphone.userData.swimParts = {
-
-        body:
-          headphone,
-
-        tailRoot:
-          null,
-
-        dorsal:
-          band
-
-      };
-
-
-      /*
-       * Explicit references for future
-       * headphone animation.
-       */
-
-      headphone.userData.headphoneParts = {
-
-        leftCup,
-        rightCup,
-        band,
-        pad,
-        leftSlider,
-        rightSlider,
-        leftHinge,
-        rightHinge
-
-      };
-
-
-      return headphone;
-    }
-
-    /* =========================
-       KOI
-       ========================= */
-
-    function createKoi() {
-
-      const koi = new THREE.Group();
-
-      koi.scale.set(1.18, 1.18, 1.18);
-      koi.rotation.y = -0.12;
-
-      group.add(koi);
-
-      /* =========================
-         PREMIUM KOI MATERIALS
-         ========================= */
-
-      const white = physical({
-        color: 0xf4f1e8,
-        roughness: .28,
-        metalness: .01,
-        clearcoat: .9,
-        clearcoatRoughness: .08
-      });
-
-      const orange = physical({
-        color: 0xd95b27,
-        roughness: .24,
-        metalness: .01,
-        clearcoat: 1,
-        clearcoatRoughness: .06
-      });
-
-      const black = physical({
-        color: 0x050607,
-        roughness: .2,
-        metalness: .02,
-        clearcoat: .75
-      });
-
-      /* =========================
-         MAIN BODY
-         ========================= */
-
-      const body = addMesh(
-        new THREE.SphereGeometry(1, 64, 40),
-        white,
-        koi
-      );
-
-      body.scale.set(1.82, .47, .52);
-      body.position.set(-.08, 0, 0);
-
-      /* =========================
-         BODY ORANGE SADDLES
-         ========================= */
-
-      const patches = [
-        [-.92, .22, .47, .46, .22, .08],
-        [-.38, .24, .50, .40, .22, .07],
-        [.18, .21, .51, .34, .20, .07],
-        [.70, .15, .43, .28, .17, .06]
-      ];
-
-      patches.forEach(([x, y, z, sx, sy, sz]) => {
-
-        const patch = addMesh(
-          new THREE.SphereGeometry(1, 40, 24),
-          orange,
-          koi
-        );
-
-        patch.position.set(x, y, z);
-        patch.scale.set(sx, sy, sz);
-      });
-
-      /* =========================
-         HEAD
-         ========================= */
-
-      const head = addMesh(
-        new THREE.SphereGeometry(.62, 56, 40),
-        white,
-        koi
-      );
-
-      head.position.set(1.18, .01, 0);
-      head.scale.set(1.08, .84, .88);
-
-      const snout = addMesh(
-        new THREE.SphereGeometry(.34, 48, 32),
-        white,
-        koi
-      );
-
-      snout.position.set(1.62, -.03, 0);
-      snout.scale.set(1.25, .68, .82);
-
-      /* =========================
-         HEAD ORANGE MARK
-         ========================= */
-
-      const headPatch = addMesh(
-        new THREE.SphereGeometry(1, 40, 24),
-        orange,
-        koi
-      );
-
-      headPatch.position.set(.92, .20, .46);
-      headPatch.scale.set(.30, .20, .065);
-
-      /* =========================
-         EYES
-         ========================= */
-
-      [-1, 1].forEach(side => {
-
-        const eye = addMesh(
-          new THREE.SphereGeometry(.095, 32, 24),
-          black,
-          koi
-        );
-
-        eye.position.set(
-          1.48,
-          .18,
-          side * .43
-        );
-
-        const shine = addMesh(
-          new THREE.SphereGeometry(.027, 18, 14),
-          white,
-          koi
-        );
-
-        shine.position.set(
-          1.515,
-          .215,
-          side * .475
-        );
-      });
-
-      /* =========================
-         PECTORAL FINS
-         ========================= */
-
-      const pectoral = [];
-
-      [-1, 1].forEach(side => {
-
-        const fin = addMesh(
-          new THREE.ConeGeometry(.34, .95, 40),
-          white,
-          koi
-        );
-
-        fin.position.set(
-          .58,
-          -.10,
-          side * .50
-        );
-
-        fin.rotation.x = side * 1.28;
-        fin.rotation.z = side * .18;
-        fin.scale.set(.78, 1, .18);
-
-        pectoral.push(fin);
-      });
-
-      /* =========================
-         DORSAL FIN
-         ========================= */
-
-      const dorsal = addMesh(
-        new THREE.ConeGeometry(.27, .95, 32),
-        orange,
-        koi
-      );
-
-      dorsal.position.set(-.28, .47, 0);
-      dorsal.rotation.z = Math.PI / 2;
-      dorsal.scale.set(.75, 1, .34);
-
-      /* =========================
-         LOWER FINS
-         ========================= */
-
-      [-1, 1].forEach(side => {
-
-        const fin = addMesh(
-          new THREE.ConeGeometry(.20, .56, 28),
-          white,
-          koi
-        );
-
-        fin.position.set(
-          -.28,
-          -.38,
-          side * .34
-        );
-
-        fin.rotation.x = side * .78;
-        fin.scale.z = .30;
-      });
-
-      /* =========================
-         TAIL ROOT
-         ========================= */
-
-      const tailRoot = new THREE.Group();
-
-      tailRoot.position.set(-1.62, 0, 0);
-      koi.add(tailRoot);
-
-      const tailStem = addMesh(
-        new THREE.CylinderGeometry(.17, .30, .78, 32),
-        white,
-        tailRoot
-      );
-
-      tailStem.rotation.z = Math.PI / 2;
-
-      /* =========================
-         FORKED CAUDAL FIN
-         ========================= */
-
-      const tailParts = [];
-
-      [-1, 1].forEach(side => {
-
-        const tail = addMesh(
-          new THREE.ConeGeometry(.46, 1.12, 40),
-          white,
-          tailRoot
-        );
-
-        tail.rotation.z = Math.PI / 2;
-        tail.rotation.y = side * .34;
-
-        tail.position.set(
-          -.54,
-          side * .30,
-          0
-        );
-
-        tail.scale.set(
-          1.05,
-          .68,
-          .28
-        );
-
-        tailParts.push(tail);
-      });
-
-      /* =========================
-         SWIMMING RIG
-         ========================= */
-
-      koi.userData.swimParts = {
-        body: body,
-        tailRoot: tailRoot,
-        dorsal: dorsal,
-        pectoral: pectoral,
-        tailParts: tailParts
-      };
-
-      return koi;
-    }
-
-    const object =
-      isKoi
-        ? createKoi()
-        : createHeadphone();
-
-    /* =========================
-       STUDIO PRODUCT DRAG
-       ========================= */
-
-    let dragging = false;
-
-    let previousX = 0;
-    let previousY = 0;
-
-    let velocityY = 0;
-    let velocityX = 0;
-
-    host.addEventListener(
-      "pointerdown",
-      e => {
-
-        dragging = true;
-
-        previousX = e.clientX;
-        previousY = e.clientY;
-
-        velocityY = 0;
-        velocityX = 0;
-
-        try {
-          host.setPointerCapture(e.pointerId);
-        } catch {}
-
-      }
-    );
-
-    host.addEventListener(
-      "pointermove",
-      e => {
-
-        if (!dragging) return;
-
-        const dx =
-          e.clientX - previousX;
-
-        const dy =
-          e.clientY - previousY;
-
-        previousX = e.clientX;
-        previousY = e.clientY;
-
-        velocityY =
-          dx * 0.008;
-
-        velocityX =
-          dy * 0.003;
-
-        object.rotation.y +=
-          velocityY;
-
-        object.rotation.x +=
-          velocityX;
-
-        object.rotation.x =
-          THREE.MathUtils.clamp(
-            object.rotation.x,
-            -0.28,
-            0.28
-          );
-
-      }
-    );
-
-    function stopDragging(e) {
-
-      dragging = false;
-
-      try {
-        host.releasePointerCapture(
-          e.pointerId
-        );
-      } catch {}
-
-    }
-
-    host.addEventListener(
-      "pointerup",
-      stopDragging
-    );
-
-    host.addEventListener(
-      "pointercancel",
-      stopDragging
-    );
-
-    function resize() {
-
-      const width =
-        Math.max(
-          1,
-          host.clientWidth
-        );
-
-      const height =
-        Math.max(
-          1,
-          host.clientHeight
-        );
-
-      camera.aspect =
-        width / height;
-
-      camera.updateProjectionMatrix();
-
-      renderer.setSize(
-        width,
-        height,
-        false
-      );
-    }
-
-    const observer =
-      new ResizeObserver(
-        resize
-      );
-
-    observer.observe(host);
-
-    function animate() {
-
-      requestAnimationFrame(
-        animate
-      );
-
-      /* =========================
-         PRODUCT VIEWER INERTIA
-         ========================= */
-
-      if (!dragging) {
-
-        object.rotation.y +=
-          velocityY;
-
-        object.rotation.x +=
-          velocityX;
-
-        velocityY *= .94;
-        velocityX *= .94;
-
-        object.rotation.x =
-          THREE.MathUtils.clamp(
-            object.rotation.x,
-            -0.28,
-            0.28
-          );
-
-      }
-
-      if (isKoi) {
-
-        const t =
-          performance.now() * 0.001;
-
-        const swim =
-          object.userData.swimParts;
-
-        if (swim) {
-
-          /* subtle body breathing */
-
-          swim.body.scale.y =
-            .47 +
-            Math.sin(t * 2.2) * .012;
-
-          /* tail propulsion */
-
-          swim.tailRoot.rotation.y =
-            Math.sin(t * 4.2) * .18;
-
-          swim.tailRoot.rotation.z =
-            Math.sin(t * 3.4) * .045;
-
-          /* dorsal fin movement */
-
-          swim.dorsal.rotation.x =
-            Math.sin(t * 2.8) * .055;
-
-          /* natural body roll */
-
-          object.rotation.z =
-            Math.sin(t * 1.35) * .022;
-
-          object.position.y +=
-            Math.sin(t * 1.7) * .0008;
-        }
-      }
-
-      renderer.render(
-        scene,
-        camera
-      );
-    }
-
-    resize();
-    animate();
+  camera.position.set(0, 0, 6);
+
+  const renderer = new THREE.WebGLRenderer({
+    antialias:true,
+    alpha:true
   });
+
+  renderer.setPixelRatio(
+    Math.min(window.devicePixelRatio || 1, 2)
+  );
+
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+  host.innerHTML = "";
+  host.classList.add("cyrus-simple-3d");
+
+  host.appendChild(renderer.domElement);
+
+  /* =========================
+     LIGHT
+     ========================= */
+
+  scene.add(
+    new THREE.HemisphereLight(
+      0xffffff,
+      0x111111,
+      2
+    )
+  );
+
+  const key = new THREE.DirectionalLight(
+    0xffffff,
+    3
+  );
+
+  key.position.set(3, 4, 5);
+  scene.add(key);
+
+  const rim = new THREE.DirectionalLight(
+    0xffffff,
+    1.5
+  );
+
+  rim.position.set(-4, 2, -3);
+  scene.add(rim);
+
+  /* =========================
+     HEADPHONE
+     ========================= */
+
+  const headphone = new THREE.Group();
+
+  const black = new THREE.MeshPhysicalMaterial({
+    color:0x111214,
+    roughness:.24,
+    metalness:.35,
+    clearcoat:1
+  });
+
+  const dark = new THREE.MeshPhysicalMaterial({
+    color:0x050505,
+    roughness:.65,
+    metalness:.05
+  });
+
+  /* Headband */
+
+  const bandCurve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(-1.35, .15, 0),
+    new THREE.Vector3(-1.05, 1.15, 0),
+    new THREE.Vector3(0, 1.65, 0),
+    new THREE.Vector3(1.05, 1.15, 0),
+    new THREE.Vector3(1.35, .15, 0)
+  ]);
+
+  const band = new THREE.Mesh(
+    new THREE.TubeGeometry(
+      bandCurve,
+      48,
+      .13,
+      16,
+      false
+    ),
+    black
+  );
+
+  headphone.add(band);
+
+  /* Earcups */
+
+  [-1,1].forEach(side => {
+
+    const cup = new THREE.Group();
+
+    cup.position.set(
+      side * 1.35,
+      -.05,
+      0
+    );
+
+    const shell = new THREE.Mesh(
+      new THREE.CylinderGeometry(
+        .65,
+        .65,
+        .34,
+        48
+      ),
+      black
+    );
+
+    shell.rotation.x = Math.PI / 2;
+
+    cup.add(shell);
+
+    const cushion = new THREE.Mesh(
+      new THREE.TorusGeometry(
+        .46,
+        .12,
+        16,
+        48
+      ),
+      dark
+    );
+
+    cushion.position.z = .19;
+
+    cup.add(cushion);
+
+    const driver = new THREE.Mesh(
+      new THREE.CylinderGeometry(
+        .34,
+        .34,
+        .08,
+        48
+      ),
+      dark
+    );
+
+    driver.rotation.x = Math.PI / 2;
+    driver.position.z = .21;
+
+    cup.add(driver);
+
+    headphone.add(cup);
+  });
+
+  scene.add(headphone);
+
+  headphone.rotation.y = -.15;
+
+  /* =========================
+     DRAG
+     ========================= */
+
+  let dragging = false;
+  let lastX = 0;
+  let lastY = 0;
+
+  let velocityX = 0;
+  let velocityY = 0;
+
+  host.addEventListener("pointerdown", e => {
+
+    dragging = true;
+
+    lastX = e.clientX;
+    lastY = e.clientY;
+
+    velocityX = 0;
+    velocityY = 0;
+
+    host.setPointerCapture?.(e.pointerId);
+  });
+
+  host.addEventListener("pointermove", e => {
+
+    if (!dragging) return;
+
+    const dx = e.clientX - lastX;
+    const dy = e.clientY - lastY;
+
+    lastX = e.clientX;
+    lastY = e.clientY;
+
+    velocityX = dx * .008;
+    velocityY = dy * .004;
+
+    headphone.rotation.y += velocityX;
+    headphone.rotation.x += velocityY;
+
+    headphone.rotation.x =
+      THREE.MathUtils.clamp(
+        headphone.rotation.x,
+        -.55,
+        .55
+      );
+  });
+
+  function stop(e) {
+
+    dragging = false;
+
+    try {
+      host.releasePointerCapture?.(e.pointerId);
+    } catch {}
+  }
+
+  host.addEventListener("pointerup", stop);
+  host.addEventListener("pointercancel", stop);
+
+  /* =========================
+     RESIZE
+     ========================= */
+
+  function resize() {
+
+    const w = Math.max(host.clientWidth, 1);
+    const h = Math.max(host.clientHeight, 1);
+
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(w, h, false);
+  }
+
+  new ResizeObserver(resize).observe(host);
+
+  /* =========================
+     LOOP
+     ========================= */
+
+  function animate() {
+
+    requestAnimationFrame(animate);
+
+    if (!dragging) {
+
+      headphone.rotation.y += velocityX;
+      headphone.rotation.x += velocityY;
+
+      velocityX *= .94;
+      velocityY *= .94;
+
+      headphone.rotation.x =
+        THREE.MathUtils.clamp(
+          headphone.rotation.x,
+          -.55,
+          .55
+        );
+    }
+
+    renderer.render(scene, camera);
+  }
+
+  resize();
+  animate();
+
 });
 </script>
 
