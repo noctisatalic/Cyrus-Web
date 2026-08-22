@@ -5,13 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
 html,body{
+  margin:0;
   width:100%;
   height:100%;
   overflow:hidden;
@@ -19,9 +14,8 @@ html,body{
 }
 
 #viewer{
-  width:100%;
-  height:100%;
-  position:relative;
+  position:fixed;
+  inset:0;
   overflow:hidden;
   cursor:grab;
   touch-action:none;
@@ -32,9 +26,9 @@ html,body{
 }
 
 canvas{
+  display:block;
   width:100%;
   height:100%;
-  display:block;
 }
 </style>
 </head>
@@ -46,111 +40,55 @@ canvas{
 <script src="https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.min.js"></script>
 
 <script>
-(function(){
-
+(() => {
 "use strict";
 
-const viewer =
-document.getElementById("viewer");
+const viewer = document.getElementById("viewer");
 
-const scene =
-new THREE.Scene();
-
-const camera =
-new THREE.PerspectiveCamera(
-  32,
-  1,
-  .1,
-  100
-);
-
-camera.position.set(
-  0,
-  .05,
-  6.8
-);
-
-let renderer;
-
-try {
-
-  const canvas =
-  document.createElement("canvas");
-
-  const gl =
-  canvas.getContext("webgl2", {
-    alpha:true,
-    antialias:true,
-    powerPreference:"high-performance"
-  }) ||
-  canvas.getContext("webgl", {
-    alpha:true,
-    antialias:true,
-    powerPreference:"high-performance"
-  }) ||
-  canvas.getContext("experimental-webgl", {
-    alpha:true,
-    antialias:true
-  });
-
-  if(!gl){
-    throw new Error("WebGL tidak tersedia");
-  }
-
-  renderer =
-  new THREE.WebGLRenderer({
-    canvas:canvas,
-    context:gl,
-    antialias:true,
-    alpha:true
-  });
-
-} catch(error) {
-
-  console.error("CYRUS 3D ERROR:", error);
-
-  viewer.innerHTML = `
-    <div style="
-      width:100%;
-      height:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font:600 13px system-ui;
-      color:#777;
-      text-align:center;
-    ">
-      3D Viewer gagal dimuat
-    </div>
-  `;
-
+if (!window.THREE) {
+  viewer.innerHTML =
+    '<div style="color:white;font:16px Arial;padding:20px">Three.js gagal dimuat</div>';
   return;
 }
 
+/* =========================================================
+   SCENE
+========================================================= */
+
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(
+  32,
+  1,
+  0.1,
+  100
+);
+
+camera.position.set(0,0,6.8);
+
+/* =========================================================
+   RENDERER
+========================================================= */
+
+const renderer = new THREE.WebGLRenderer({
+  antialias:true,
+  alpha:true,
+  powerPreference:"high-performance"
+});
+
 renderer.setPixelRatio(
-  Math.min(
-    window.devicePixelRatio || 1,
-    2
-  )
+  Math.min(window.devicePixelRatio || 1,2)
 );
 
-renderer.outputColorSpace =
-THREE.SRGBColorSpace;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.15;
 
-renderer.toneMapping =
-THREE.ACESFilmicToneMapping;
+viewer.appendChild(renderer.domElement);
 
-renderer.toneMappingExposure =
-1.15;
-
-viewer.appendChild(
-  renderer.domElement
-);
-
-
-/* =========================
-   LIGHT
-========================= */
+/* =========================================================
+   LIGHTING
+========================================================= */
 
 scene.add(
   new THREE.HemisphereLight(
@@ -160,128 +98,106 @@ scene.add(
   )
 );
 
-const key =
-new THREE.DirectionalLight(
+const key = new THREE.DirectionalLight(
   0xffffff,
   4.5
 );
 
-key.position.set(
-  4,
-  5,
-  6
-);
-
+key.position.set(4,5,6);
 scene.add(key);
 
-const fill =
-new THREE.DirectionalLight(
+const fill = new THREE.DirectionalLight(
   0xffffff,
-  2.5
+  2.2
 );
 
-fill.position.set(
-  -4,
-  2,
-  4
-);
-
+fill.position.set(-4,2,4);
 scene.add(fill);
 
-const rim =
-new THREE.DirectionalLight(
+const rim = new THREE.DirectionalLight(
   0xffffff,
   3
 );
 
-rim.position.set(
-  -4,
-  4,
-  -5
-);
-
+rim.position.set(-4,4,-5);
 scene.add(rim);
 
+/* =========================================================
+   MATERIALS
+========================================================= */
 
-/* =========================
-   MATERIAL
-========================= */
-
-const shell =
+const shellMaterial =
 new THREE.MeshPhysicalMaterial({
   color:0x151719,
-  roughness:.23,
-  metalness:.62,
-  clearcoat:.8,
-  clearcoatRoughness:.16
+  roughness:.22,
+  metalness:.55,
+  clearcoat:.9,
+  clearcoatRoughness:.12
 });
 
-const rubber =
+const rubberMaterial =
 new THREE.MeshPhysicalMaterial({
-  color:0x020202,
-  roughness:.88,
+  color:0x030303,
+  roughness:.82,
   metalness:.02
 });
 
-const inner =
+const innerMaterial =
 new THREE.MeshPhysicalMaterial({
-  color:0x000000,
-  roughness:.96,
-  metalness:.01
+  color:0x010101,
+  roughness:.95,
+  metalness:0
 });
 
-const metal =
+const metalMaterial =
 new THREE.MeshPhysicalMaterial({
-  color:0x727477,
+  color:0x777777,
   roughness:.22,
   metalness:1,
-  clearcoat:.4
+  clearcoat:.45
 });
 
-
-/* =========================
+/* =========================================================
    PRODUCT
-========================= */
+========================================================= */
 
-const product =
-new THREE.Group();
+const product = new THREE.Group();
 
 scene.add(product);
 
-product.scale.set(
-  .82,
-  .82,
-  .82
-);
+product.scale.set(.82,.82,.82);
 
-product.rotation.y =
--.28;
+product.rotation.y = -.28;
 
-
-/* =========================
+/* =========================================================
    HEADBAND
-========================= */
+   Realistic continuous arch
+========================================================= */
 
 const bandCurve =
 new THREE.CatmullRomCurve3([
 
-  new THREE.Vector3(-1.25,-.25,0),
+  new THREE.Vector3(-1.25,-.18,0),
 
-  new THREE.Vector3(-1.25,.65,0),
+  new THREE.Vector3(-1.24,.55,0),
 
-  new THREE.Vector3(-.95,1.35,0),
+  new THREE.Vector3(-1.02,1.05,0),
 
-  new THREE.Vector3(-.45,1.68,0),
+  new THREE.Vector3(-.68,1.40,0),
 
-  new THREE.Vector3(0,1.77,0),
+  new THREE.Vector3(-.32,1.58,0),
 
-  new THREE.Vector3(.45,1.68,0),
+  new THREE.Vector3(0,1.63,0),
 
-  new THREE.Vector3(.95,1.35,0),
+  new THREE.Vector3(.32,1.58,0),
 
-  new THREE.Vector3(1.25,.65,0),
+  new THREE.Vector3(.68,1.40,0),
 
-  new THREE.Vector3(1.25,-.25,0)
+  new THREE.Vector3(1.02,1.05,0),
+
+  new THREE.Vector3(1.24,.55,0),
+
+  new THREE.Vector3(1.25,-.18,0)
 
 ]);
 
@@ -289,41 +205,44 @@ const band =
 new THREE.Mesh(
   new THREE.TubeGeometry(
     bandCurve,
-    100,
-    .14,
+    96,
+    .135,
     24,
     false
   ),
-  shell
+  shellMaterial
 );
 
 product.add(band);
 
-
-/* =========================
+/* =========================================================
    INNER HEAD CUSHION
-========================= */
+========================================================= */
 
 const cushionCurve =
 new THREE.CatmullRomCurve3([
 
-  new THREE.Vector3(-.92,-.05,-.01),
+  new THREE.Vector3(-.94,-.08,-.02),
 
-  new THREE.Vector3(-.92,.62,-.01),
+  new THREE.Vector3(-.93,.48,-.02),
 
-  new THREE.Vector3(-.68,1.08,-.01),
+  new THREE.Vector3(-.76,.88,-.02),
 
-  new THREE.Vector3(-.32,1.34,-.01),
+  new THREE.Vector3(-.50,1.16,-.02),
 
-  new THREE.Vector3(0,1.41,-.01),
+  new THREE.Vector3(-.20,1.29,-.02),
 
-  new THREE.Vector3(.32,1.34,-.01),
+  new THREE.Vector3(0,1.32,-.02),
 
-  new THREE.Vector3(.68,1.08,-.01),
+  new THREE.Vector3(.20,1.29,-.02),
 
-  new THREE.Vector3(.92,.62,-.01),
+  new THREE.Vector3(.50,1.16,-.02),
 
-  new THREE.Vector3(.92,-.05,-.01)
+  new THREE.Vector3(.76,.88,-.02),
+
+  new THREE.Vector3(.93,.48,-.02),
+
+  new THREE.Vector3(.94,-.08,-.02)
 
 ]);
 
@@ -331,102 +250,97 @@ const headCushion =
 new THREE.Mesh(
   new THREE.TubeGeometry(
     cushionCurve,
-    90,
-    .09,
-    20,
+    80,
+    .075,
+    18,
     false
   ),
-  rubber
+  rubberMaterial
 );
 
 product.add(headCushion);
 
-
-/* =========================
+/* =========================================================
    EAR CUP
-========================= */
+========================================================= */
 
 function createCup(side){
 
-  const cup =
-  new THREE.Group();
+  const cup = new THREE.Group();
 
-  cup.position.x =
-    side * 1.27;
+  cup.position.set(
+    side * 1.25,
+    -.18,
+    0
+  );
 
   /*
-   * Housing axis = Z.
-   * Front surface mengarah ke
-   * tengah / dalam headphone.
+   * Housing axis Z.
+   * Front surface faces camera.
    */
 
   const housing =
   new THREE.Mesh(
     new THREE.CylinderGeometry(
-      .64,
-      .64,
-      .38,
+      .60,
+      .60,
+      .36,
       72,
-      1
+      1,
+      false
     ),
-    shell
+    shellMaterial
   );
 
-  housing.rotation.x =
-    Math.PI / 2;
+  housing.rotation.x = Math.PI/2;
 
   cup.add(housing);
 
-
   /*
-   * Outer ring
+   * Outer metallic ring.
    */
 
   const outerRing =
   new THREE.Mesh(
     new THREE.TorusGeometry(
-      .50,
-      .075,
-      24,
-      80
+      .49,
+      .055,
+      20,
+      72
     ),
-    metal
+    metalMaterial
   );
 
-  outerRing.position.z =
-    side < 0 ? .18 : .18;
+  outerRing.position.z = .19;
 
   cup.add(outerRing);
 
-
   /*
-   * Deep ear cushion.
-   * Sengaja masuk ke housing.
+   * Thick ear cushion.
+   * Sengaja ditarik KE DALAM housing.
    */
 
   const earCushion =
   new THREE.Mesh(
     new THREE.TorusGeometry(
-      .405,
-      .145,
+      .39,
+      .125,
       32,
-      80
+      72
     ),
-    rubber
+    rubberMaterial
   );
 
-  earCushion.position.z =
-    .12;
+  earCushion.position.z = .125;
 
   cup.add(earCushion);
 
-
   /*
-   * Lubang telinga.
-   * Tidak menonjol keluar.
+   * Inner speaker.
+   * Tidak keluar melewati cushion.
    */
 
-  const opening =
+  const speaker =
   new THREE.Mesh(
     new THREE.CylinderGeometry(
       .285,
@@ -434,158 +348,121 @@ function createCup(side){
       .035,
       64
     ),
-    inner
+    innerMaterial
   );
 
-  opening.rotation.x =
-    Math.PI / 2;
+  speaker.rotation.x = Math.PI/2;
 
-  opening.position.z =
-    .10;
+  speaker.position.z = .11;
 
-  cup.add(opening);
-
+  cup.add(speaker);
 
   /*
-   * Rear shell sedikit menonjol
-   * ke belakang untuk memberi
-   * volume body.
+   * Speaker grille.
    */
 
-  const rear =
+  const grille =
   new THREE.Mesh(
-    new THREE.SphereGeometry(
-      .57,
-      64,
-      40
+    new THREE.TorusGeometry(
+      .23,
+      .018,
+      12,
+      48
     ),
-    shell
+    metalMaterial
   );
 
-  rear.scale.z =
-    .42;
+  grille.position.z = .135;
 
-  rear.position.z =
-    -.12;
-
-  cup.add(rear);
-
+  cup.add(grille);
 
   /*
-   * Connector pendek.
-   * Tidak ada batang besi
-   * di tengah headphone.
+   * Connector dari headband ke cup.
+   * Pendek dan berada di area sambungan,
+   * bukan batang di tengah headphone.
    */
 
   const connector =
   new THREE.Mesh(
     new THREE.CylinderGeometry(
-      .10,
-      .10,
-      .25,
+      .11,
+      .11,
+      .30,
       32
     ),
-    metal
+    metalMaterial
   );
 
-  connector.rotation.z =
-    Math.PI / 2;
+  connector.rotation.z = Math.PI/2;
 
-  connector.position.x =
-    -side * .10;
+  connector.position.set(
+    -side * .10,
+    .20,
+    0
+  );
 
   cup.add(connector);
 
-
   product.add(cup);
-
 }
 
 createCup(-1);
 createCup(1);
 
+/* =========================================================
+   DRAG ROTATION
+========================================================= */
 
-/* =========================
-   ROTATION
-========================= */
+let dragging = false;
 
-let dragging =
-false;
+let lastX = 0;
+let lastY = 0;
 
-let previousX =
-0;
-
-let previousY =
-0;
-
-let velocityY =
-0;
-
-let velocityX =
-0;
+let velocityY = 0;
+let velocityX = 0;
 
 renderer.domElement.addEventListener(
   "pointerdown",
-  function(e){
+  e => {
 
     dragging = true;
 
-    previousX =
-      e.clientX;
+    lastX = e.clientX;
+    lastY = e.clientY;
 
-    previousY =
-      e.clientY;
-
-    velocityY = 0;
     velocityX = 0;
+    velocityY = 0;
 
     renderer.domElement.setPointerCapture(
       e.pointerId
     );
-
   }
 );
 
 renderer.domElement.addEventListener(
   "pointermove",
-  function(e){
+  e => {
 
-    if(!dragging)
-      return;
+    if(!dragging) return;
 
-    const dx =
-      e.clientX -
-      previousX;
+    const dx = e.clientX-lastX;
+    const dy = e.clientY-lastY;
 
-    const dy =
-      e.clientY -
-      previousY;
+    lastX = e.clientX;
+    lastY = e.clientY;
 
-    previousX =
-      e.clientX;
+    velocityY = dx*.008;
+    velocityX = dy*.004;
 
-    previousY =
-      e.clientY;
-
-    velocityY =
-      dx * .008;
-
-    velocityX =
-      dy * .0035;
-
-    product.rotation.y +=
-      velocityY;
-
-    product.rotation.x +=
-      velocityX;
+    product.rotation.y += velocityY;
+    product.rotation.x += velocityX;
 
     product.rotation.x =
       THREE.MathUtils.clamp(
         product.rotation.x,
-        -.48,
-        .48
+        -.55,
+        .55
       );
-
   }
 );
 
@@ -594,14 +471,10 @@ function release(e){
   dragging = false;
 
   try{
-
-    renderer.domElement
-      .releasePointerCapture(
-        e.pointerId
-      );
-
+    renderer.domElement.releasePointerCapture(
+      e.pointerId
+    );
   }catch(_){}
-
 }
 
 renderer.domElement.addEventListener(
@@ -614,82 +487,65 @@ renderer.domElement.addEventListener(
   release
 );
 
-
-/* =========================
+/* =========================================================
    RESIZE
-========================= */
+========================================================= */
 
 function resize(){
 
-  const w =
-    Math.max(
-      viewer.clientWidth,
-      1
-    );
+  const width =
+    Math.max(viewer.clientWidth,1);
 
-  const h =
-    Math.max(
-      viewer.clientHeight,
-      1
-    );
+  const height =
+    Math.max(viewer.clientHeight,1);
 
   camera.aspect =
-    w / h;
+    width/height;
 
   camera.updateProjectionMatrix();
 
   renderer.setSize(
-    w,
-    h,
+    width,
+    height,
     false
   );
-
 }
 
-new ResizeObserver(
+window.addEventListener(
+  "resize",
   resize
-).observe(viewer);
+);
 
 resize();
 
+/* =========================================================
+   ANIMATION
+========================================================= */
 
-/* =========================
-   LOOP
-========================= */
-
-const clock =
-new THREE.Clock();
+const clock = new THREE.Clock();
 
 function animate(){
 
-  requestAnimationFrame(
-    animate
-  );
+  requestAnimationFrame(animate);
 
   if(!dragging){
 
-    product.rotation.y +=
-      velocityY;
-
-    product.rotation.x +=
-      velocityX;
+    product.rotation.y += velocityY;
+    product.rotation.x += velocityX;
 
     velocityY *= .94;
     velocityX *= .92;
 
     product.position.y =
       Math.sin(
-        clock.getElapsedTime() *
-        .8
-      ) * .012;
-
+        clock.getElapsedTime()*.8
+      )*.012;
   }
 
   renderer.render(
     scene,
     camera
   );
-
 }
 
 animate();
