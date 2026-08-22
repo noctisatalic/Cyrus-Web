@@ -353,6 +353,13 @@ function createCup(side){
   cup.position.x =
     side * 1.18;
 
+  // True left/right symmetry
+  cup.scale.set(
+    side < 0 ? -1 : 1,
+    1,
+    1
+  );
+
 
   /* BODY */
 
