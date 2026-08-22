@@ -2657,522 +2657,856 @@ html[data-theme="dark"] .navbar {
 
 
 
-<style id="cyrus-spr-headphone-viewer">
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.min.js"></script>
+
+
+<style id="cyrus-headphone-legacy-killer">
+
+.cyrus-headphone-scene > .cyrus-headphone{
+    display:none !important;
+}
+
+.cyrus-headphone-scene .cyrus-headband,
+.cyrus-headphone-scene .cyrus-ear,
+.cyrus-headphone-scene .cyrus-bridge,
+.cyrus-headphone-scene .cyrus-highlight{
+    display:none !important;
+}
 
 .cyrus-headphone-scene{
-  position:absolute !important;
-  inset:0 !important;
-  width:100% !important;
-  height:100% !important;
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    margin:0 !important;
+    padding:0 !important;
 
-  overflow:hidden !important;
+    overflow:hidden !important;
+    perspective:none !important;
 
-  display:block !important;
+    display:block !important;
 
-  perspective:none !important;
+    cursor:grab !important;
+    touch-action:none !important;
 
-  cursor:grab !important;
-  touch-action:none !important;
-
-  z-index:10 !important;
+    z-index:12 !important;
 }
 
 .cyrus-headphone-scene:active{
-  cursor:grabbing !important;
+    cursor:grabbing !important;
 }
 
 .cyrus-headphone-scene > canvas{
-  position:absolute !important;
-  inset:0 !important;
+    position:absolute !important;
+    inset:0 !important;
 
-  width:100% !important;
-  height:100% !important;
+    width:100% !important;
+    height:100% !important;
 
-  display:block !important;
+    display:block !important;
 
-  pointer-events:auto !important;
-}
-
-.cyrus-headphone-scene > .cyrus-headphone{
-  display:none !important;
+    pointer-events:auto !important;
 }
 
 </style>
 
 
-<script id="cyrus-spr-headphone-webgl">
-document.addEventListener("DOMContentLoaded", () => {
+<script id="cyrus-spr-headphone-final-engine">
 
-  if (typeof THREE === "undefined") {
-    console.warn("Cyrus SPR headphone: THREE.js tidak tersedia.");
-    return;
-  }
+(function(){
 
-  document.querySelectorAll(".cyrus-headphone-scene").forEach(host => {
+"use strict";
 
-    if (host.dataset.cyrusViewer === "1") return;
-    host.dataset.cyrusViewer = "1";
+function startCyrusHeadphones(){
 
-    host.innerHTML = "";
+    if(typeof THREE === "undefined"){
+        console.error(
+            "CYRUS: THREE.JS gagal dimuat."
+        );
+        return;
+    }
 
-    const scene = new THREE.Scene();
+    document
+    .querySelectorAll(".cyrus-headphone-scene")
+    .forEach(function(host){
 
-    const camera = new THREE.PerspectiveCamera(
-      32,
-      1,
-      0.1,
-      100
-    );
+        if(host.dataset.cyrusFinal3d === "1"){
+            return;
+        }
 
-    camera.position.set(0, 0, 7.2);
+        host.dataset.cyrusFinal3d = "1";
 
-    const renderer = new THREE.WebGLRenderer({
-      antialias:true,
-      alpha:true,
-      powerPreference:"high-performance"
+        /*
+         * Bersihkan isi headphone 2D.
+         */
+
+        host.innerHTML = "";
+
+        /* ==================================================
+           SCENE
+        ================================================== */
+
+        const scene =
+            new THREE.Scene();
+
+        const camera =
+            new THREE.PerspectiveCamera(
+                30,
+                1,
+                .1,
+                100
+            );
+
+        /*
+         * Jarak kamera sengaja jauh.
+         * Ini membuat headphone tidak
+         * memenuhi card.
+         */
+
+        camera.position.set(
+            0,
+            0,
+            7.8
+        );
+
+        /* ==================================================
+           RENDERER
+        ================================================== */
+
+        const renderer =
+            new THREE.WebGLRenderer({
+                antialias:true,
+                alpha:true,
+                powerPreference:
+                    "high-performance"
+            });
+
+        renderer.setPixelRatio(
+            Math.min(
+                window.devicePixelRatio || 1,
+                2
+            )
+        );
+
+        renderer.outputColorSpace =
+            THREE.SRGBColorSpace;
+
+        renderer.toneMapping =
+            THREE.ACESFilmicToneMapping;
+
+        renderer.toneMappingExposure =
+            1.15;
+
+        host.appendChild(
+            renderer.domElement
+        );
+
+        /* ==================================================
+           LIGHTING
+        ================================================== */
+
+        scene.add(
+            new THREE.HemisphereLight(
+                0xffffff,
+                0x111111,
+                2.0
+            )
+        );
+
+        const key =
+            new THREE.DirectionalLight(
+                0xffffff,
+                4.5
+            );
+
+        key.position.set(
+            4,
+            5,
+            6
+        );
+
+        scene.add(key);
+
+        const fill =
+            new THREE.DirectionalLight(
+                0xffffff,
+                2.0
+            );
+
+        fill.position.set(
+            -4,
+            2,
+            4
+        );
+
+        scene.add(fill);
+
+        const rim =
+            new THREE.DirectionalLight(
+                0xffffff,
+                3.0
+            );
+
+        rim.position.set(
+            -4,
+            4,
+            -5
+        );
+
+        scene.add(rim);
+
+        /* ==================================================
+           MATERIAL
+        ================================================== */
+
+        const shellMaterial =
+            new THREE.MeshPhysicalMaterial({
+                color:0x111214,
+                roughness:.24,
+                metalness:.62,
+                clearcoat:.8,
+                clearcoatRoughness:.18
+            });
+
+        const rubberMaterial =
+            new THREE.MeshPhysicalMaterial({
+                color:0x020202,
+                roughness:.9,
+                metalness:.02
+            });
+
+        const innerMaterial =
+            new THREE.MeshPhysicalMaterial({
+                color:0x050505,
+                roughness:.95,
+                metalness:.01
+            });
+
+        const metalMaterial =
+            new THREE.MeshPhysicalMaterial({
+                color:0x707070,
+                roughness:.25,
+                metalness:1,
+                clearcoat:.45
+            });
+
+        /* ==================================================
+           MAIN HEADPHONE
+        ================================================== */
+
+        const product =
+            new THREE.Group();
+
+        scene.add(product);
+
+        /*
+         * Sedikit mengecil supaya aman
+         * di dalam portfolio card.
+         */
+
+        product.scale.set(
+            .72,
+            .72,
+            .72
+        );
+
+        product.position.y =
+            -.02;
+
+        /*
+         * Sudut awal.
+         * Cup terlihat jelas dari depan.
+         */
+
+        product.rotation.y =
+            -.28;
+
+        /* ==================================================
+           HEADBAND
+        ================================================== */
+
+        const bandCurve =
+            new THREE.CatmullRomCurve3([
+
+                new THREE.Vector3(
+                    -1.28,
+                    -.12,
+                    0
+                ),
+
+                new THREE.Vector3(
+                    -1.25,
+                    .65,
+                    0
+                ),
+
+                new THREE.Vector3(
+                    -.95,
+                    1.28,
+                    0
+                ),
+
+                new THREE.Vector3(
+                    -.45,
+                    1.62,
+                    0
+                ),
+
+                new THREE.Vector3(
+                    0,
+                    1.70,
+                    0
+                ),
+
+                new THREE.Vector3(
+                    .45,
+                    1.62,
+                    0
+                ),
+
+                new THREE.Vector3(
+                    .95,
+                    1.28,
+                    0
+                ),
+
+                new THREE.Vector3(
+                    1.25,
+                    .65,
+                    0
+                ),
+
+                new THREE.Vector3(
+                    1.28,
+                    -.12,
+                    0
+                )
+
+            ]);
+
+        const band =
+            new THREE.Mesh(
+                new THREE.TubeGeometry(
+                    bandCurve,
+                    80,
+                    .13,
+                    20,
+                    false
+                ),
+                shellMaterial
+            );
+
+        product.add(band);
+
+        /* ==================================================
+           INNER HEAD CUSHION
+        ================================================== */
+
+        const innerBandCurve =
+            new THREE.CatmullRomCurve3([
+
+                new THREE.Vector3(
+                    -.91,
+                    .00,
+                    -.01
+                ),
+
+                new THREE.Vector3(
+                    -.89,
+                    .66,
+                    -.01
+                ),
+
+                new THREE.Vector3(
+                    -.63,
+                    1.03,
+                    -.01
+                ),
+
+                new THREE.Vector3(
+                    -.30,
+                    1.24,
+                    -.01
+                ),
+
+                new THREE.Vector3(
+                    0,
+                    1.29,
+                    -.01
+                ),
+
+                new THREE.Vector3(
+                    .30,
+                    1.24,
+                    -.01
+                ),
+
+                new THREE.Vector3(
+                    .63,
+                    1.03,
+                    -.01
+                ),
+
+                new THREE.Vector3(
+                    .89,
+                    .66,
+                    -.01
+                ),
+
+                new THREE.Vector3(
+                    .91,
+                    .00,
+                    -.01
+                )
+
+            ]);
+
+        const innerBand =
+            new THREE.Mesh(
+                new THREE.TubeGeometry(
+                    innerBandCurve,
+                    64,
+                    .075,
+                    16,
+                    false
+                ),
+                rubberMaterial
+            );
+
+        product.add(innerBand);
+
+        /* ==================================================
+           EAR CUP
+        ================================================== */
+
+        function makeCup(side){
+
+            const cup =
+                new THREE.Group();
+
+            cup.position.x =
+                side * 1.28;
+
+            /*
+             * Housing.
+             *
+             * Cylinder default axis Y.
+             * X rotation 90° membuat
+             * permukaan cup menghadap
+             * ke arah DALAM.
+             */
+
+            const housing =
+                new THREE.Mesh(
+                    new THREE.CylinderGeometry(
+                        .61,
+                        .61,
+                        .34,
+                        72
+                    ),
+                    shellMaterial
+                );
+
+            housing.rotation.x =
+                Math.PI / 2;
+
+            cup.add(housing);
+
+            /* =================================================
+               OUTER RIM
+            ================================================= */
+
+            const rim =
+                new THREE.Mesh(
+                    new THREE.TorusGeometry(
+                        .48,
+                        .085,
+                        24,
+                        72
+                    ),
+                    metalMaterial
+                );
+
+            rim.position.z =
+                .175;
+
+            cup.add(rim);
+
+            /* =================================================
+               EAR CUSHION
+            ================================================= */
+
+            const cushion =
+                new THREE.Mesh(
+                    new THREE.TorusGeometry(
+                        .40,
+                        .13,
+                        28,
+                        72
+                    ),
+                    rubberMaterial
+                );
+
+            /*
+             * CUSHION MASUK KE DALAM CUP.
+             *
+             * Tidak dibuat keluar dari housing.
+             */
+
+            cushion.position.z =
+                .105;
+
+            cup.add(cushion);
+
+            /* =================================================
+               INNER EAR
+            ================================================= */
+
+            const inner =
+                new THREE.Mesh(
+                    new THREE.CylinderGeometry(
+                        .285,
+                        .285,
+                        .045,
+                        64
+                    ),
+                    innerMaterial
+                );
+
+            inner.rotation.x =
+                Math.PI / 2;
+
+            inner.position.z =
+                .095;
+
+            cup.add(inner);
+
+            /*
+             * Tidak ada batang/besi di tengah.
+             */
+
+            product.add(cup);
+        }
+
+        makeCup(-1);
+        makeCup(1);
+
+        /* ==================================================
+           SMALL CONNECTORS
+        ================================================== */
+
+        function connector(side){
+
+            const c =
+                new THREE.Mesh(
+                    new THREE.CylinderGeometry(
+                        .12,
+                        .12,
+                        .32,
+                        32
+                    ),
+                    metalMaterial
+                );
+
+            c.position.set(
+                side * 1.28,
+                .00,
+                0
+            );
+
+            c.rotation.z =
+                Math.PI / 2;
+
+            product.add(c);
+        }
+
+        connector(-1);
+        connector(1);
+
+        /* ==================================================
+           DRAG CONTROL
+        ================================================== */
+
+        let dragging =
+            false;
+
+        let previousX =
+            0;
+
+        let previousY =
+            0;
+
+        let velocityY =
+            0;
+
+        let velocityX =
+            0;
+
+        renderer.domElement.addEventListener(
+            "pointerdown",
+            function(e){
+
+                dragging =
+                    true;
+
+                previousX =
+                    e.clientX;
+
+                previousY =
+                    e.clientY;
+
+                velocityY =
+                    0;
+
+                velocityX =
+                    0;
+
+                renderer.domElement.setPointerCapture(
+                    e.pointerId
+                );
+
+            }
+        );
+
+        renderer.domElement.addEventListener(
+            "pointermove",
+            function(e){
+
+                if(!dragging){
+                    return;
+                }
+
+                const dx =
+                    e.clientX -
+                    previousX;
+
+                const dy =
+                    e.clientY -
+                    previousY;
+
+                previousX =
+                    e.clientX;
+
+                previousY =
+                    e.clientY;
+
+                velocityY =
+                    dx * .008;
+
+                velocityX =
+                    dy * .0035;
+
+                product.rotation.y +=
+                    velocityY;
+
+                product.rotation.x +=
+                    velocityX;
+
+                product.rotation.x =
+                    THREE.MathUtils.clamp(
+                        product.rotation.x,
+                        -.42,
+                        .42
+                    );
+
+            }
+        );
+
+        function release(e){
+
+            dragging =
+                false;
+
+            try{
+
+                renderer.domElement
+                    .releasePointerCapture(
+                        e.pointerId
+                    );
+
+            }catch(_){}
+
+        }
+
+        renderer.domElement.addEventListener(
+            "pointerup",
+            release
+        );
+
+        renderer.domElement.addEventListener(
+            "pointercancel",
+            release
+        );
+
+        /* ==================================================
+           RESIZE
+        ================================================== */
+
+        function resize(){
+
+            const width =
+                Math.max(
+                    host.clientWidth,
+                    1
+                );
+
+            const height =
+                Math.max(
+                    host.clientHeight,
+                    1
+                );
+
+            camera.aspect =
+                width / height;
+
+            camera.updateProjectionMatrix();
+
+            renderer.setSize(
+                width,
+                height,
+                false
+            );
+        }
+
+        new ResizeObserver(
+            resize
+        ).observe(host);
+
+        resize();
+
+        /* ==================================================
+           ANIMATION
+        ================================================== */
+
+        const clock =
+            new THREE.Clock();
+
+        function animate(){
+
+            requestAnimationFrame(
+                animate
+            );
+
+            if(!dragging){
+
+                product.rotation.y +=
+                    velocityY;
+
+                product.rotation.x +=
+                    velocityX;
+
+                velocityY *=
+                    .94;
+
+                velocityX *=
+                    .92;
+
+                product.position.y =
+                    -.02 +
+                    Math.sin(
+                        clock.getElapsedTime() *
+                        .85
+                    ) * .012;
+            }
+
+            renderer.render(
+                scene,
+                camera
+            );
+        }
+
+        animate();
+
     });
+}
 
-    renderer.setPixelRatio(
-      Math.min(window.devicePixelRatio || 1, 2)
-    );
+/*
+ * Portfolio card dibuat oleh fetch API,
+ * jadi tunggu DOM + beri sedikit waktu
+ * agar card selesai dibuat.
+ */
 
-    renderer.setSize(
-      Math.max(host.clientWidth,1),
-      Math.max(host.clientHeight,1),
-      false
-    );
+function boot(){
 
-    renderer.outputColorSpace =
-      THREE.SRGBColorSpace;
+    if(typeof THREE === "undefined"){
 
-    renderer.toneMapping =
-      THREE.ACESFilmicToneMapping;
-
-    renderer.toneMappingExposure =
-      1.15;
-
-    host.appendChild(renderer.domElement);
-
-    /* =========================
-       LIGHT
-    ========================= */
-
-    scene.add(
-      new THREE.HemisphereLight(
-        0xffffff,
-        0x080808,
-        2
-      )
-    );
-
-    const key = new THREE.DirectionalLight(
-      0xffffff,
-      5
-    );
-
-    key.position.set(4,5,6);
-    scene.add(key);
-
-    const rim = new THREE.DirectionalLight(
-      0xffffff,
-      3
-    );
-
-    rim.position.set(-4,3,-5);
-    scene.add(rim);
-
-    const front = new THREE.PointLight(
-      0xffffff,
-      8,
-      12
-    );
-
-    front.position.set(0,1,5);
-    scene.add(front);
-
-    /* =========================
-       MATERIAL
-    ========================= */
-
-    const bodyMaterial =
-      new THREE.MeshPhysicalMaterial({
-        color:0x111214,
-        roughness:.27,
-        metalness:.55,
-        clearcoat:.75,
-        clearcoatRoughness:.2
-      });
-
-    const rubberMaterial =
-      new THREE.MeshPhysicalMaterial({
-        color:0x020202,
-        roughness:.82,
-        metalness:.02
-      });
-
-    const innerMaterial =
-      new THREE.MeshPhysicalMaterial({
-        color:0x050505,
-        roughness:.9,
-        metalness:.02
-      });
-
-    /* =========================
-       HEADPHONE
-    ========================= */
-
-    const headphone =
-      new THREE.Group();
-
-    scene.add(headphone);
-
-    /* HEADBAND
-       Lengkungan benar-benar
-       menghubungkan kedua cup.
-    */
-
-    const bandCurve =
-      new THREE.CatmullRomCurve3([
-        new THREE.Vector3(-1.28,-.05,0),
-        new THREE.Vector3(-1.24,.95,0),
-        new THREE.Vector3(-.82,1.48,0),
-        new THREE.Vector3(0,1.68,0),
-        new THREE.Vector3(.82,1.48,0),
-        new THREE.Vector3(1.24,.95,0),
-        new THREE.Vector3(1.28,-.05,0)
-      ]);
-
-    const band =
-      new THREE.Mesh(
-        new THREE.TubeGeometry(
-          bandCurve,
-          64,
-          .13,
-          20,
-          false
-        ),
-        bodyMaterial
-      );
-
-    headphone.add(band);
-
-    /* INNER HEAD CUSHION */
-
-    const cushionCurve =
-      new THREE.CatmullRomCurve3([
-        new THREE.Vector3(-.92,.15,-.01),
-        new THREE.Vector3(-.88,.78,-.01),
-        new THREE.Vector3(-.55,1.12,-.01),
-        new THREE.Vector3(0,1.24,-.01),
-        new THREE.Vector3(.55,1.12,-.01),
-        new THREE.Vector3(.88,.78,-.01),
-        new THREE.Vector3(.92,.15,-.01)
-      ]);
-
-    const cushion =
-      new THREE.Mesh(
-        new THREE.TubeGeometry(
-          cushionCurve,
-          48,
-          .075,
-          16,
-          false
-        ),
-        innerMaterial
-      );
-
-    headphone.add(cushion);
-
-    /* =========================
-       EAR CUP
-    ========================= */
-
-    function createCup(side){
-
-      const cup =
-        new THREE.Group();
-
-      cup.position.x =
-        side * 1.28;
-
-      /* Outer housing */
-
-      const housing =
-        new THREE.Mesh(
-          new THREE.CylinderGeometry(
-            .62,
-            .62,
-            .34,
-            64
-          ),
-          bodyMaterial
+        setTimeout(
+            boot,
+            100
         );
 
-      /*
-        Cylinder axis awal Y.
-        Putar X 90° supaya bidang
-        cup menghadap samping kepala.
-      */
-
-      housing.rotation.x =
-        Math.PI / 2;
-
-      cup.add(housing);
-
-      /* Rear shell */
-
-      const rear =
-        new THREE.Mesh(
-          new THREE.CylinderGeometry(
-            .53,
-            .53,
-            .12,
-            64
-          ),
-          innerMaterial
-        );
-
-      rear.rotation.x =
-        Math.PI / 2;
-
-      rear.position.z =
-        -.22;
-
-      cup.add(rear);
-
-      /* Ear cushion */
-
-      const cushion =
-        new THREE.Mesh(
-          new THREE.TorusGeometry(
-            .43,
-            .12,
-            24,
-            64
-          ),
-          rubberMaterial
-        );
-
-      /*
-        Cushion berada DI DALAM cup,
-        bukan menonjol keluar.
-      */
-
-      cushion.position.z =
-        .16;
-
-      cup.add(cushion);
-
-      /* Inner ear */
-
-      const inner =
-        new THREE.Mesh(
-          new THREE.CylinderGeometry(
-            .31,
-            .31,
-            .055,
-            48
-          ),
-          innerMaterial
-        );
-
-      inner.rotation.x =
-        Math.PI / 2;
-
-      inner.position.z =
-        .155;
-
-      cup.add(inner);
-
-      headphone.add(cup);
+        return;
     }
 
-    createCup(-1);
-    createCup(1);
-
-    /* =========================
-       SCALE / INITIAL ANGLE
-    ========================= */
-
-    headphone.scale.set(
-      .78,
-      .78,
-      .78
-    );
-
-    headphone.position.y =
-      -.05;
-
-    headphone.rotation.x =
-      -.06;
-
-    headphone.rotation.y =
-      -.32;
-
-    /* =========================
-       DRAG
-    ========================= */
-
-    let dragging = false;
-
-    let lastX = 0;
-    let lastY = 0;
-
-    let velocityY = 0;
-    let velocityX = 0;
-
-    renderer.domElement.addEventListener(
-      "pointerdown",
-      e => {
-
-        dragging = true;
-
-        lastX = e.clientX;
-        lastY = e.clientY;
-
-        velocityY = 0;
-        velocityX = 0;
-
-        renderer.domElement.setPointerCapture(
-          e.pointerId
+    const scenes =
+        document.querySelectorAll(
+            ".cyrus-headphone-scene"
         );
-      }
-    );
 
-    renderer.domElement.addEventListener(
-      "pointermove",
-      e => {
+    if(scenes.length){
 
-        if(!dragging) return;
+        startCyrusHeadphones();
 
-        const dx =
-          e.clientX - lastX;
+        return;
+    }
 
-        const dy =
-          e.clientY - lastY;
+    /*
+     * MutationObserver menangkap card
+     * yang baru dibuat oleh CMS.
+     */
 
-        lastX = e.clientX;
-        lastY = e.clientY;
+    if(!window.__cyrusHeadphoneObserver){
 
-        velocityY =
-          dx * .008;
+        window.__cyrusHeadphoneObserver =
+            new MutationObserver(
+                function(){
 
-        velocityX =
-          dy * .004;
+                    const found =
+                        document.querySelectorAll(
+                            ".cyrus-headphone-scene"
+                        );
 
-        headphone.rotation.y +=
-          velocityY;
+                    if(found.length){
+                        startCyrusHeadphones();
+                    }
 
-        headphone.rotation.x +=
-          velocityX;
+                }
+            );
 
-        headphone.rotation.x =
-          THREE.MathUtils.clamp(
-            headphone.rotation.x,
-            -.45,
-            .45
-          );
-      }
-    );
-
-    function stopDrag(e){
-
-      dragging = false;
-
-      try{
-        renderer.domElement.releasePointerCapture(
-          e.pointerId
+        window.__cyrusHeadphoneObserver.observe(
+            document.body,
+            {
+                childList:true,
+                subtree:true
+            }
         );
-      }catch(_){}
     }
+}
 
-    renderer.domElement.addEventListener(
-      "pointerup",
-      stopDrag
+if(
+    document.readyState ===
+    "loading"
+){
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        boot
     );
 
-    renderer.domElement.addEventListener(
-      "pointercancel",
-      stopDrag
-    );
+}else{
 
-    /* =========================
-       RESIZE
-    ========================= */
+    boot();
 
-    function resize(){
+}
 
-      const w =
-        Math.max(host.clientWidth,1);
-
-      const h =
-        Math.max(host.clientHeight,1);
-
-      camera.aspect =
-        w / h;
-
-      camera.updateProjectionMatrix();
-
-      renderer.setSize(
-        w,
-        h,
-        false
-      );
-    }
-
-    const observer =
-      new ResizeObserver(resize);
-
-    observer.observe(host);
-
-    resize();
-
-    /* =========================
-       ANIMATION
-    ========================= */
-
-    const clock =
-      new THREE.Clock();
-
-    function animate(){
-
-      requestAnimationFrame(
-        animate
-      );
-
-      if(!dragging){
-
-        headphone.rotation.y +=
-          velocityY;
-
-        headphone.rotation.x +=
-          velocityX;
-
-        velocityY *= .94;
-        velocityX *= .92;
-
-        headphone.position.y =
-          -.05 +
-          Math.sin(
-            clock.getElapsedTime() * .9
-          ) * .018;
-      }
-
-      renderer.render(
-        scene,
-        camera
-      );
-    }
-
-    animate();
-
-  });
-
-});
+})();
 </script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.min.js"></script>
 
 </head>
 <body>
