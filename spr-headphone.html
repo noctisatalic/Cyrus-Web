@@ -576,11 +576,15 @@ function createCup(side){
       metalMaterial
     );
 
-  yoke.rotation.z =
+  /*
+   * Yoke mengikuti bidang samping ear-cup.
+   * Jangan menghadap kamera.
+   */
+  yoke.rotation.y =
     Math.PI / 2;
 
   yoke.rotation.x =
-    side < 0 ? Math.PI : 0;
+    side < 0 ? 0 : Math.PI;
 
   yoke.position.set(
     -side * .04,
@@ -612,7 +616,7 @@ function createCup(side){
     );
 
   hinge.rotation.z =
-    Math.PI / 2;
+    side < 0 ? Math.PI / 2 : -Math.PI / 2;
 
   hinge.position.set(
     -side * .08,
