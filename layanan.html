@@ -864,35 +864,6 @@ section {
   margin-top: 32px;
 }
 
-/* Footer */
-footer {
-  padding: 40px 0;
-  border-top: 1px solid var(--line);
-  background: #FFFFFF;
-}
-
-.footer-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.footer-copy, .footer-links a {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.footer-links {
-  display: flex;
-  gap: 24px;
-}
-
-.footer-links a:hover {
-  color: var(--primary);
-}
-
 /* Responsive */
 @media(max-width: 1024px) {
   .services-grid, .pricing-grid {
@@ -1245,19 +1216,9 @@ html[data-theme="dark"] .clean-work-media {
 
 /* Text */
 html[data-theme="dark"] .faq-question,
-html[data-theme="dark"] .footer-copy,
-html[data-theme="dark"] .footer-links a {
-  color: var(--cw-text) !important;
-}
-
 /* Muted text */
 html[data-theme="dark"] .faq-answer p,
 html[data-theme="dark"] .timeline-content p,
-html[data-theme="dark"] .footer-copy,
-html[data-theme="dark"] .footer-links a {
-  color: var(--cw-muted) !important;
-}
-
 /* Borders */
 html[data-theme="dark"] footer,
 html[data-theme="dark"] .faq-item {
@@ -1509,6 +1470,230 @@ html[data-theme="dark"] .navbar {
 }
 </style>
 
+
+<style id="cyrus-global-footer">
+.cyrus-footer{
+  margin-top:80px;
+  padding:72px 0 24px;
+  border-top:1px solid var(--border);
+  background:var(--surface);
+}
+
+.cyrus-footer .container{
+  position:relative;
+}
+
+.footer-main{
+  display:grid;
+  grid-template-columns:minmax(260px,1.7fr) repeat(3,minmax(130px,1fr));
+  gap:48px;
+  padding-bottom:58px;
+}
+
+.footer-brand{
+  max-width:380px;
+}
+
+.footer-logo{
+  display:inline-flex;
+  align-items:baseline;
+  gap:3px;
+  color:var(--primary);
+  text-decoration:none;
+  font-family:var(--font-display);
+  font-size:25px;
+  font-weight:700;
+  letter-spacing:-.06em;
+}
+
+.footer-logo span{
+  font-weight:400;
+}
+
+.footer-brand p{
+  margin:18px 0 24px;
+  max-width:340px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.7;
+}
+
+.footer-cta{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 16px;
+  border:1px solid var(--border);
+  border-radius:999px;
+  color:var(--primary);
+  text-decoration:none;
+  font-size:13px;
+  transition:.25s ease;
+}
+
+.footer-cta:hover{
+  transform:translateY(-2px);
+  border-color:var(--primary);
+}
+
+.footer-column{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:10px;
+}
+
+.footer-column h3{
+  margin:0 0 8px;
+  color:var(--primary);
+  font-family:var(--font-display);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.footer-column a{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:13px;
+  line-height:1.5;
+  transition:color .2s ease,transform .2s ease;
+}
+
+.footer-column a:hover{
+  color:var(--primary);
+  transform:translateX(2px);
+}
+
+.footer-contact{
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr;
+  gap:24px;
+  padding:24px 0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+
+.footer-contact > div{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.footer-label{
+  color:var(--muted);
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.footer-contact a,
+.footer-contact > div > span:last-child{
+  color:var(--primary);
+  font-size:13px;
+  text-decoration:none;
+}
+
+.footer-contact a:hover{
+  text-decoration:underline;
+  text-underline-offset:4px;
+}
+
+.footer-status{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+}
+
+.footer-status i{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#22c55e;
+  box-shadow:0 0 0 4px rgba(34,197,94,.1);
+}
+
+.footer-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  padding-top:22px;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.footer-legal{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.footer-legal a{
+  color:var(--muted);
+  text-decoration:none;
+}
+
+.footer-legal a:hover{
+  color:var(--primary);
+}
+
+@media(max-width:800px){
+  .cyrus-footer{
+    margin-top:56px;
+    padding:54px 0 20px;
+  }
+
+  .footer-main{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:36px 24px;
+    padding-bottom:42px;
+  }
+
+  .footer-brand{
+    grid-column:1/-1;
+    max-width:100%;
+  }
+
+  .footer-contact{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+
+  .footer-bottom{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:14px;
+  }
+
+  .footer-legal{
+    flex-wrap:wrap;
+    gap:10px 16px;
+  }
+}
+
+@media(max-width:480px){
+  .footer-main{
+    grid-template-columns:1fr 1fr;
+    gap:30px 16px;
+  }
+
+  .footer-brand{
+    grid-column:1/-1;
+  }
+
+  .footer-column a{
+    font-size:12px;
+  }
+
+  .footer-contact{
+    padding:20px 0;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -1533,8 +1718,9 @@ html[data-theme="dark"] .navbar {
       <a href="layanan.html" class="nav-link active">Layanan</a>
       <a href="index.html#process" class="nav-link">Proses</a>
       <a href="pricing.html" class="nav-link">Paket</a>
-      <a href="portfolio.html" class="nav-link">Work</a>
-      <a href="testimonials.html" class="nav-link">Testimonials</a>
+      <a href="tentang.html" class="nav-link">Tentang Kami</a>
+      <a href="portfolio.html" class="nav-link">Portfolio</a>
+      <a href="testimonials.html" class="nav-link">Testimoni</a>
       <a href="faq.html" class="nav-link">FAQ</a>
       <a href="contact.html" class="nav-link">Kontak</a>
     </div>
@@ -1641,18 +1827,101 @@ html[data-theme="dark"] .navbar {
   </section>
 </main>
 
-<footer>
-  <div class="container footer-inner">
-    <div class="footer-copy">&copy; 2026 CyrusWeb. All rights reserved.</div>
-    <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="layanan.html">Layanan</a>
-      <a href="pricing.html">Paket</a>
-      <a href="faq.html">FAQ</a>
-      <a href="contact.html">Kontak</a>
+
+<footer class="cyrus-footer">
+  <div class="container">
+
+    <div class="footer-main">
+
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">CYRUS<span>WEB</span></a>
+        <p>
+          Membangun website yang membuat bisnis lebih kuat,
+          jelas, dan meyakinkan secara digital.
+        </p>
+
+        <a
+          href="https://wa.me/6281318048885?text=Halo%20CyrusWeb,%20saya%20ingin%20konsultasi%20pembuatan%20website"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-cta"
+        >
+          Mulai Project <span>→</span>
+        </a>
+      </div>
+
+      <div class="footer-column">
+        <h3>Navigasi</h3>
+        <a href="index.html">Beranda</a>
+        <a href="layanan.html">Layanan</a>
+        <a href="index.html#process">Proses</a>
+        <a href="pricing.html">Paket</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="tentang.html">Tentang Kami</a>
+        <a href="testimonials.html">Testimoni</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Kontak</a>
+      </div>
+
+      <div class="footer-column">
+        <h3>Layanan</h3>
+        <a href="layanan.html">Website Profesional</a>
+        <a href="layanan.html">Landing Page</a>
+        <a href="layanan.html">Company Profile</a>
+        <a href="layanan.html">Custom Web Development</a>
+        <a href="layanan.html">UI/UX Design</a>
+        <a href="contact.html">Maintenance</a>
+      </div>
+
+      <div class="footer-column">
+        <h3>Informasi</h3>
+        <a href="tentang.html">Tentang CyrusWeb</a>
+        <a href="ketentuan.html">Ketentuan Project</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="faq.html">Pertanyaan Umum</a>
+        <a href="contact.html">Konsultasi</a>
+      </div>
+
     </div>
+
+    <div class="footer-contact">
+      <div>
+        <span class="footer-label">HUBUNGI CYRUSWEB</span>
+        <a
+          href="https://wa.me/6281318048885?text=Halo%20CyrusWeb,%20saya%20ingin%20konsultasi%20pembuatan%20website"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          WhatsApp Customer Service ↗
+        </a>
+      </div>
+
+      <div>
+        <span class="footer-label">AREA LAYANAN</span>
+        <span>Indonesia · Remote</span>
+      </div>
+
+      <div>
+        <span class="footer-label">STATUS</span>
+        <span class="footer-status">
+          <i></i> Siap menerima project
+        </span>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 CyrusWeb. Hak cipta dilindungi.</span>
+
+      <div class="footer-legal">
+        <a href="ketentuan.html">Ketentuan</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="index.html">Kembali ke Beranda ↑</a>
+      </div>
+    </div>
+
   </div>
 </footer>
+
 
 <!-- Skrip GSAP dan ScrollTrigger -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
