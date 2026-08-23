@@ -2522,17 +2522,11 @@ html[data-theme="dark"] .hero-copy {
 
 .tech-section{
   position:relative;
-  min-height:100svh;
-  padding:90px 18px 55px;
+  min-height:auto;
+  padding:72px 18px 54px;
   overflow:hidden;
 
-  background:
-    radial-gradient(
-      circle at 50% 45%,
-      #fff 0%,
-      #f7f7f4 42%,
-      #e7e7e3 100%
-    );
+  background:transparent;
 }
 
 .tech-section::after{
@@ -2543,9 +2537,9 @@ html[data-theme="dark"] .hero-copy {
 
   background:
     radial-gradient(
-      circle at 50% 50%,
-      transparent 18%,
-      rgba(0,0,0,.045) 100%
+      ellipse at 50% 50%,
+      rgba(0,0,0,.025),
+      transparent 68%
     );
 }
 
@@ -2607,7 +2601,7 @@ html[data-theme="dark"] .hero-copy {
 
 .tech-section .header p{
   max-width:590px;
-  margin:19px auto 0;
+  margin:15px auto 0;
 
   color:#777;
   font-size:14px;
@@ -2620,9 +2614,9 @@ html[data-theme="dark"] .hero-copy {
   position:relative;
 
   width:min(1120px,100%);
-  height:650px;
+  height:530px;
 
-  margin:12px auto 0;
+  margin:0 auto;
 }
 
 .tech-section .grid{
@@ -3211,7 +3205,7 @@ html[data-theme="dark"] .hero-copy {
   position:relative;
   z-index:40;
 
-  margin-top:-4px;
+  margin-top:-18px;
 
   text-align:center;
 
@@ -3532,6 +3526,220 @@ html[data-theme="dark"] .hero-copy {
   }
 }
 </style>
+
+
+/* =========================================================
+   TECHNOLOGY ARCHITECTURE — DARK THEME
+   ========================================================= */
+
+html[data-theme="dark"] .tech-section{
+  background:transparent;
+  color:#f5f5f2;
+}
+
+html[data-theme="dark"] .tech-section::after{
+  background:
+    radial-gradient(
+      ellipse at 50% 50%,
+      rgba(255,255,255,.025),
+      transparent 70%
+    );
+}
+
+html[data-theme="dark"] .tech-section .eyebrow{
+  color:rgba(255,255,255,.48);
+}
+
+html[data-theme="dark"] .tech-section .eyebrow::before{
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(255,255,255,.06);
+}
+
+html[data-theme="dark"] .tech-section .header p{
+  color:rgba(255,255,255,.52);
+}
+
+html[data-theme="dark"] .tech-section .grid{
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,.045) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.045) 1px,
+      transparent 1px
+    );
+}
+
+html[data-theme="dark"] .tech-section .route{
+  stroke:rgba(255,255,255,.28);
+}
+
+html[data-theme="dark"] .tech-section .route-glow{
+  stroke:rgba(255,255,255,.09);
+}
+
+html[data-theme="dark"] .tech-section .route.active{
+  stroke:rgba(255,255,255,.82);
+  stroke-width:1.8;
+}
+
+html[data-theme="dark"] .tech-section .data-dot{
+  fill:#fff;
+}
+
+html[data-theme="dark"] .tech-section .node{
+  color:#f5f5f2;
+
+  background:rgba(28,28,27,.72);
+
+  border-color:rgba(255,255,255,.12);
+
+  box-shadow:
+    0 18px 42px rgba(0,0,0,.28),
+    inset 0 1px rgba(255,255,255,.08);
+}
+
+html[data-theme="dark"] .tech-section .node:hover{
+  background:rgba(40,40,39,.92);
+
+  box-shadow:
+    0 25px 55px rgba(0,0,0,.38),
+    inset 0 1px rgba(255,255,255,.12);
+}
+
+html[data-theme="dark"] .tech-section .port{
+  background:#20201f;
+  border-color:rgba(255,255,255,.35);
+  box-shadow:
+    0 0 0 3px rgba(20,20,20,.55);
+}
+
+html[data-theme="dark"] .tech-section .node:hover .port{
+  background:#fff;
+  border-color:#fff;
+}
+
+html[data-theme="dark"] .tech-section .node-logo{
+  background:#f5f5f2;
+  color:#111;
+}
+
+html[data-theme="dark"] .tech-section .node-logo text{
+  fill:#111;
+}
+
+html[data-theme="dark"] .tech-section .node-type{
+  color:rgba(255,255,255,.43);
+}
+
+html[data-theme="dark"] .tech-section .node-status{
+  background:#fff;
+}
+
+html[data-theme="dark"] .tech-section .aura{
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,.12),
+      transparent 68%
+    );
+}
+
+html[data-theme="dark"] .tech-section .orbit{
+  border-color:rgba(255,255,255,.17);
+}
+
+html[data-theme="dark"] .tech-section .orbit::after{
+  background:#fff;
+}
+
+html[data-theme="dark"] .tech-section .core-glass{
+  color:#f5f5f2;
+
+  background:
+    radial-gradient(
+      circle at 35% 25%,
+      rgba(255,255,255,.18),
+      rgba(50,50,49,.94) 58%,
+      rgba(25,25,24,.96)
+    );
+
+  border-color:rgba(255,255,255,.16);
+
+  box-shadow:
+    0 35px 80px rgba(0,0,0,.42),
+    inset 0 1px rgba(255,255,255,.18),
+    inset 0 -12px 25px rgba(0,0,0,.22);
+}
+
+html[data-theme="dark"] .tech-section .core-meta{
+  color:rgba(255,255,255,.48);
+}
+
+html[data-theme="dark"] .tech-section .core-meta i{
+  background:#fff;
+}
+
+html[data-theme="dark"] .tech-section .foot strong{
+  color:#f5f5f2;
+}
+
+html[data-theme="dark"] .tech-section .foot span{
+  color:rgba(255,255,255,.38);
+}
+
+
+/* =========================================================
+   DESKTOP COMPACT SPACING
+   ========================================================= */
+
+@media(min-width:601px){
+
+  html[data-theme="dark"] .tech-section{
+    padding-top:58px;
+    padding-bottom:42px;
+  }
+
+  .tech-section .header h1{
+    font-size:clamp(38px,5vw,62px);
+  }
+
+  .tech-section .arch{
+    height:500px;
+  }
+
+  .tech-section .foot{
+    margin-top:-28px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE — retain breathing room
+   ========================================================= */
+
+@media(max-width:600px){
+
+  .tech-section{
+    min-height:auto;
+    padding:62px 8px 48px;
+  }
+
+  .tech-section .arch{
+    height:600px;
+    margin-top:3px;
+  }
+
+  .tech-section .foot{
+    margin-top:20px;
+  }
+
+  html[data-theme="dark"] .tech-section .node{
+    background:rgba(27,27,26,.91);
+  }
+}
 <!-- ================= END TECHNOLOGY ARCHITECTURE CSS ================= -->
 
 </head>
