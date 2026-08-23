@@ -3823,75 +3823,43 @@ html[data-theme="dark"] .tech-section .foot span{
 
 .trusted-section{
   position:relative;
-  width:100%;
   overflow:hidden;
-  padding:58px 0 64px;
-  background:transparent;
-  color:var(--ink);
-}
-
-.trusted-head{
-  position:relative;
-  z-index:5;
-  width:min(720px,calc(100% - 36px));
-  margin:0 auto 30px;
-  text-align:center;
-}
-
-.trusted-eyebrow{
-  margin-bottom:13px;
-  font-family:var(--font-display);
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  color:var(--muted);
-}
-
-.trusted-head h2{
-  margin:0;
-  font-family:var(--font-display);
-  font-size:clamp(34px,5vw,58px);
-  font-weight:500;
-  line-height:.96;
-  letter-spacing:-.055em;
-}
-
-.trusted-head h2 span{
-  color:var(--muted);
+  isolation:isolate;
 }
 
 .trusted-marquee{
   position:relative;
+  width:100%;
+  overflow:hidden;
   display:flex;
   flex-direction:column;
-  gap:10px;
-  width:min(1180px,calc(100% - 28px));
-  margin:0 auto;
-  overflow:hidden;
+  gap:14px;
+  padding:4px 0;
 }
 
 .trusted-track{
   position:relative;
-  display:flex;
   width:100%;
-  height:92px;
+  height:94px;
   overflow:hidden;
-  border:1px solid rgba(17,17,17,.11);
-  border-radius:22px;
-  background:rgba(255,255,255,.32);
-  box-shadow:
-    inset 0 1px rgba(255,255,255,.7),
-    0 10px 35px rgba(0,0,0,.035);
+  display:block;
+  border-top:1px solid rgba(17,17,17,.08);
+  border-bottom:1px solid rgba(17,17,17,.08);
+  background:rgba(17,17,17,.018);
 }
 
 .trusted-stream{
-  display:flex;
-  align-items:center;
+  position:absolute;
+  top:0;
+  left:0;
   width:max-content;
   height:100%;
-  flex-shrink:0;
+  display:flex;
+  align-items:center;
   will-change:transform;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  transform:translate3d(0,0,0);
 }
 
 .trusted-set{
@@ -3901,17 +3869,9 @@ html[data-theme="dark"] .tech-section .foot span{
   flex:0 0 520px;
   width:520px;
   min-width:520px;
+  height:100%;
   gap:34px;
-  padding-right:34px;
   box-sizing:border-box;
-}
-
-.trusted-track-right .trusted-stream{
-  animation:trusted-flow-right 7s linear infinite;
-}
-
-.trusted-track-left .trusted-stream{
-  animation:trusted-flow-left 8s linear infinite;
 }
 
 .trusted-logo{
@@ -3951,74 +3911,69 @@ html[data-theme="dark"] .tech-section .foot span{
   opacity:.18;
 }
 
-@keyframes trusted-flow-right{
+/* =========================
+   ABSOLUTE DUAL-LANE MOTION
+   ========================= */
+
+.trusted-track-right .trusted-stream{
+  animation:trusted-absolute-right 7s linear infinite;
+}
+
+.trusted-track-left .trusted-stream{
+  animation:trusted-absolute-left 8s linear infinite;
+}
+
+@keyframes trusted-absolute-right{
   from{
-    transform:translate3d(-50%,0,0);
+    transform:translate3d(-520px,0,0);
   }
   to{
     transform:translate3d(0,0,0);
   }
 }
 
-@keyframes trusted-flow-left{
+@keyframes trusted-absolute-left{
   from{
     transform:translate3d(0,0,0);
   }
   to{
-    transform:translate3d(-50%,0,0);
+    transform:translate3d(-520px,0,0);
   }
 }
 
-/* Seamless marquee stabilization */
-.trusted-stream{
-  backface-visibility:hidden;
-  -webkit-backface-visibility:hidden;
-  transform:translateZ(0);
-  -webkit-transform:translateZ(0);
-}
+/* =========================
+   DARK THEME
+   ========================= */
 
 html[data-theme="dark"] .trusted-section{
   color:#f5f5f2;
 }
 
-html[data-theme="dark"] .trusted-head h2 span{
-  color:rgba(255,255,255,.46);
-}
-
 html[data-theme="dark"] .trusted-track{
-  border-color:rgba(255,255,255,.12);
-  background:rgba(255,255,255,.035);
-  box-shadow:
-    inset 0 1px rgba(255,255,255,.07),
-    0 12px 40px rgba(0,0,0,.22);
+  border-color:rgba(255,255,255,.09);
+  background:rgba(255,255,255,.018);
 }
 
 html[data-theme="dark"] .trusted-mono img{
   filter:brightness(0) invert(1);
 }
 
+html[data-theme="dark"] .trusted-color img{
+  filter:none !important;
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+
 @media(max-width:600px){
 
-  .trusted-section{
-    padding:48px 0 54px;
-  }
-
-  .trusted-head{
-    margin-bottom:24px;
-  }
-
-  .trusted-head h2{
-    font-size:clamp(32px,9vw,42px);
-  }
-
   .trusted-marquee{
-    width:calc(100% - 18px);
-    gap:8px;
+    gap:10px;
   }
 
   .trusted-track{
-    height:76px;
-    border-radius:18px;
+    height:78px;
   }
 
   .trusted-set{
@@ -4026,7 +3981,6 @@ html[data-theme="dark"] .trusted-mono img{
     width:340px;
     min-width:340px;
     gap:22px;
-    padding-right:22px;
   }
 
   .trusted-logo{
@@ -4047,14 +4001,16 @@ html[data-theme="dark"] .trusted-mono img{
   .trusted-track-left .trusted-stream{
     animation-duration:7s;
   }
+
 }
 
 @media(prefers-reduced-motion:reduce){
 
   .trusted-track-right .trusted-stream,
   .trusted-track-left .trusted-stream{
-    animation:none;
+    animation-play-state:paused;
   }
+
 }
 
 </style>
@@ -5802,80 +5758,103 @@ window.addEventListener(
 
   <div class="trusted-marquee">
 
-    <!-- TOP TRACK : RIGHT -->
+    <!-- TOP : RIGHT -->
     <div class="trusted-track trusted-track-right">
 
       <div class="trusted-stream">
 
-      <div class="trusted-set">
-        <div class="trusted-logo trusted-mono">
-          <img src="spraudio.png" alt="SPR Audio" draggable="false">
+        <div class="trusted-set">
+          <div class="trusted-logo trusted-mono">
+            <img src="spraudio.png" alt="SPR Audio" draggable="false">
+          </div>
+
+          <span class="trusted-separator"></span>
+
+          <div class="trusted-logo trusted-color">
+            <img src="ihsan-koi.png" alt="Ihsan Koi" draggable="false">
+          </div>
+
+          <span class="trusted-separator"></span>
         </div>
 
-        <span class="trusted-separator"></span>
+        <div class="trusted-set" aria-hidden="true">
+          <div class="trusted-logo trusted-mono">
+            <img src="spraudio.png" alt="">
+          </div>
 
-        <div class="trusted-logo trusted-color">
-          <img src="ihsan-koi.png" alt="Ihsan Koi" draggable="false">
+          <span class="trusted-separator"></span>
+
+          <div class="trusted-logo trusted-color">
+            <img src="ihsan-koi.png" alt="">
+          </div>
+
+          <span class="trusted-separator"></span>
         </div>
 
-        <span class="trusted-separator"></span>
-      </div>
+        <div class="trusted-set" aria-hidden="true">
+          <div class="trusted-logo trusted-mono">
+            <img src="spraudio.png" alt="">
+          </div>
 
-      <div class="trusted-set" aria-hidden="true">
-        <div class="trusted-logo trusted-mono">
-          <img src="spraudio.png" alt="">
+          <span class="trusted-separator"></span>
+
+          <div class="trusted-logo trusted-color">
+            <img src="ihsan-koi.png" alt="">
+          </div>
+
+          <span class="trusted-separator"></span>
         </div>
-
-        <span class="trusted-separator"></span>
-
-        <div class="trusted-logo trusted-color">
-          <img src="ihsan-koi.png" alt="">
-        </div>
-
-        <span class="trusted-separator"></span>
-      </div>
 
       </div>
 
     </div>
 
-
-    <!-- BOTTOM TRACK : LEFT -->
+    <!-- BOTTOM : LEFT -->
     <div class="trusted-track trusted-track-left">
 
       <div class="trusted-stream">
 
-      <div class="trusted-set">
+        <div class="trusted-set">
+          <div class="trusted-logo trusted-color">
+            <img src="ihsan-koi.png" alt="Ihsan Koi" draggable="false">
+          </div>
 
-        <div class="trusted-logo trusted-color">
-          <img src="ihsan-koi.png" alt="Ihsan Koi" draggable="false">
+          <span class="trusted-separator"></span>
+
+          <div class="trusted-logo trusted-mono">
+            <img src="spraudio.png" alt="SPR Audio" draggable="false">
+          </div>
+
+          <span class="trusted-separator"></span>
         </div>
 
-        <span class="trusted-separator"></span>
+        <div class="trusted-set" aria-hidden="true">
+          <div class="trusted-logo trusted-color">
+            <img src="ihsan-koi.png" alt="">
+          </div>
 
-        <div class="trusted-logo trusted-mono">
-          <img src="spraudio.png" alt="SPR Audio" draggable="false">
+          <span class="trusted-separator"></span>
+
+          <div class="trusted-logo trusted-mono">
+            <img src="spraudio.png" alt="">
+          </div>
+
+          <span class="trusted-separator"></span>
         </div>
 
-        <span class="trusted-separator"></span>
+        <div class="trusted-set" aria-hidden="true">
+          <div class="trusted-logo trusted-color">
+            <img src="ihsan-koi.png" alt="">
+          </div>
 
-      </div>
+          <span class="trusted-separator"></span>
 
-      <div class="trusted-set" aria-hidden="true">
+          <div class="trusted-logo trusted-mono">
+            <img src="spraudio.png" alt="">
+          </div>
 
-        <div class="trusted-logo trusted-color">
-          <img src="ihsan-koi.png" alt="">
+          <span class="trusted-separator"></span>
         </div>
-
-        <span class="trusted-separator"></span>
-
-        <div class="trusted-logo trusted-mono">
-          <img src="spraudio.png" alt="">
-        </div>
-
-        <span class="trusted-separator"></span>
-
-      </div>
 
       </div>
 
