@@ -600,6 +600,90 @@ body.nav-locked {
   }
 }
 
+
+/* =========================================================
+   CYRUSWEB — FINAL MOBILE NAV / DARK CTA / ENTITY ISOLATION
+   ========================================================= */
+
+/* --- MOBILE NAV: STICKY --- */
+@media (max-width: 768px) {
+  .navbar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 9999 !important;
+  }
+
+  .nav-wrapper {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 9999 !important;
+  }
+
+  .nav-links {
+    z-index: 10000 !important;
+  }
+
+  .mobile-menu-btn {
+    position: relative;
+    z-index: 10001 !important;
+  }
+}
+
+/* --- DARK MODE: KONSULTASI / CTA HARUS TERBACA --- */
+html[data-theme="dark"] .cta,
+html[data-theme="dark"] .cta *,
+html[data-theme="dark"] .cta h2,
+html[data-theme="dark"] .cta p,
+html[data-theme="dark"] .cta a {
+  color: var(--cw-text) !important;
+}
+
+html[data-theme="dark"] .cta a {
+  color: var(--cw-bg) !important;
+  background: var(--cw-text) !important;
+}
+
+html[data-theme="dark"] .cta a span {
+  color: var(--cw-bg) !important;
+}
+
+/* --- FOOTER CTA --- */
+html[data-theme="dark"] .footer-cta,
+html[data-theme="dark"] .footer-cta span {
+  color: var(--cw-bg) !important;
+}
+
+/* --- ISOLASI BACKGROUND ENTITY DARI BLOK KONSULTASI --- */
+.cta,
+.cta::before,
+.cta::after,
+.cta-chamber,
+.cta-chamber::before,
+.cta-chamber::after {
+  isolation: isolate;
+}
+
+.cta {
+  position: relative;
+  overflow: hidden;
+  background: var(--cw-surface) !important;
+}
+
+.cta > *,
+.cta-chamber > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Jangan biarkan dekorasi/entity global menembus CTA */
+.cta .entity,
+.cta .entity-bg,
+.cta .entity-background,
+.cta [class*="entity"],
+.cta [class*="background-entity"] {
+  display: none !important;
+}
+
 </style>
 
 <script type="application/ld+json">
