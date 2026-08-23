@@ -2487,6 +2487,1053 @@ html[data-theme="dark"] .hero-copy {
 }
 </style>
 
+
+
+<!-- ================= TECHNOLOGY ARCHITECTURE CSS ================= -->
+<style id="technology-architecture-css">
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+.tech-section{
+  --bg:#f4f4f1;
+  --ink:#111;
+  --muted:#8a8a85;
+}
+
+.tech-section{
+  width:100%;
+  min-height:100%;
+}
+
+.tech-section{
+  overflow-x:hidden;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+.tech-section{
+  position:relative;
+  min-height:100svh;
+  padding:90px 18px 55px;
+  overflow:hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      #fff 0%,
+      #f7f7f4 42%,
+      #e7e7e3 100%
+    );
+}
+
+.tech-section::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      transparent 18%,
+      rgba(0,0,0,.045) 100%
+    );
+}
+
+/* ================= HEADER ================= */
+
+.tech-section .header{
+  position:relative;
+  z-index:100;
+
+  width:min(720px,100%);
+  margin:auto;
+  text-align:center;
+
+  opacity:0;
+  transform:translateY(25px);
+
+  transition:
+    opacity 1s cubic-bezier(.16,1,.3,1),
+    transform 1s cubic-bezier(.16,1,.3,1);
+}
+
+.tech-section.active .header{
+  opacity:1;
+  transform:none;
+}
+
+.tech-section .eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  margin-bottom:16px;
+
+  color:#777;
+
+  font:9px monospace;
+  letter-spacing:.22em;
+}
+
+.tech-section .eyebrow::before{
+  content:"";
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#111;
+  box-shadow:0 0 0 4px rgba(0,0,0,.05);
+}
+
+.tech-section .header h1{
+  font-size:clamp(40px,6vw,70px);
+  line-height:.95;
+  letter-spacing:-.055em;
+  font-weight:800;
+}
+
+.tech-section .header h1 span{
+  color:#999;
+}
+
+.tech-section .header p{
+  max-width:590px;
+  margin:19px auto 0;
+
+  color:#777;
+  font-size:14px;
+  line-height:1.7;
+}
+
+/* ================= ARCH ================= */
+
+.tech-section .arch{
+  position:relative;
+
+  width:min(1120px,100%);
+  height:650px;
+
+  margin:12px auto 0;
+}
+
+.tech-section .grid{
+  position:absolute;
+  z-index:0;
+
+  left:50%;
+  top:50%;
+
+  width:930px;
+  height:530px;
+
+  transform:
+    translate(-50%,-50%)
+    perspective(700px)
+    rotateX(64deg);
+
+  background-image:
+    linear-gradient(
+      rgba(0,0,0,.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.025) 1px,
+      transparent 1px
+    );
+
+  background-size:48px 48px;
+
+  mask-image:
+    radial-gradient(
+      ellipse,
+      black,
+      transparent 72%
+    );
+}
+
+/* ================= ROUTING ================= */
+
+.tech-section .routing{
+  position:absolute;
+  inset:0;
+
+  width:100%;
+  height:100%;
+
+  z-index:10;
+
+  overflow:visible;
+
+  pointer-events:none;
+}
+
+.tech-section .route{
+  fill:none;
+
+  stroke:rgba(0,0,0,.17);
+  stroke-width:1;
+
+  stroke-linecap:round;
+  stroke-linejoin:round;
+
+  vector-effect:non-scaling-stroke;
+
+  transition:
+    stroke .25s ease,
+    stroke-width .25s ease;
+}
+
+.tech-section .route-glow{
+  fill:none;
+
+  stroke:rgba(0,0,0,.035);
+  stroke-width:7;
+
+  stroke-linecap:round;
+
+  filter:blur(3px);
+}
+
+.tech-section .route.active{
+  stroke:rgba(0,0,0,.55);
+  stroke-width:1.8;
+}
+
+.tech-section .data-dot{
+  fill:#111;
+}
+
+/* ================= CARDS ================= */
+
+.tech-section .node{
+  position:absolute;
+  z-index:30;
+
+  width:145px;
+  height:66px;
+
+  display:flex;
+  align-items:center;
+
+  padding:0 12px;
+
+  border-radius:15px;
+
+  color:#111;
+  text-decoration:none;
+
+  background:rgba(255,255,255,.78);
+
+  border:1px solid rgba(0,0,0,.09);
+
+  box-shadow:
+    0 18px 42px rgba(0,0,0,.065),
+    inset 0 1px rgba(255,255,255,.95);
+
+  backdrop-filter:blur(17px);
+  -webkit-backdrop-filter:blur(17px);
+
+  opacity:0;
+  transform:scale(.8);
+
+  transition:
+    opacity .7s ease,
+    transform .45s cubic-bezier(.16,1,.3,1),
+    background .3s ease,
+    box-shadow .3s ease;
+}
+
+.tech-section.active .node{
+  opacity:1;
+  transform:scale(1);
+}
+
+.tech-section .node:hover{
+  transform:
+    scale(1.05)
+    translateY(-3px);
+
+  background:rgba(255,255,255,.98);
+
+  box-shadow:
+    0 25px 55px rgba(0,0,0,.13),
+    inset 0 1px white;
+}
+
+/* ================= PORTS ================= */
+
+.tech-section .port{
+  position:absolute;
+
+  width:8px;
+  height:8px;
+
+  border-radius:50%;
+
+  background:#fff;
+
+  border:1px solid rgba(0,0,0,.28);
+
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.55);
+
+  z-index:50;
+
+  transition:
+    transform .25s ease,
+    background .25s ease,
+    box-shadow .25s ease;
+}
+
+.tech-section .port.right{
+  right:-4px;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+.tech-section .port.left{
+  left:-4px;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+.tech-section .port.top{
+  top:-4px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.tech-section .node:hover .port{
+  background:#111;
+}
+
+/* ================= CARD CONTENT ================= */
+
+.tech-section .node-logo{
+  width:34px;
+  height:34px;
+
+  flex:none;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:9px;
+
+  background:#111;
+  color:#fff;
+}
+
+.tech-section .node-logo svg{
+  width:20px;
+  height:20px;
+
+  fill:none;
+  stroke:currentColor;
+
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.tech-section .node-logo text{
+  fill:#fff;
+  stroke:none;
+
+  font-family:Arial,sans-serif;
+  font-weight:800;
+}
+
+.tech-section .node-info{
+  margin-left:10px;
+  min-width:0;
+}
+
+.tech-section .node-name{
+  font-size:11px;
+  font-weight:750;
+  line-height:1.1;
+  white-space:nowrap;
+}
+
+.tech-section .node-type{
+  margin-top:5px;
+
+  color:#898985;
+
+  font:6px monospace;
+  letter-spacing:.13em;
+
+  white-space:nowrap;
+}
+
+.tech-section .node-status{
+  width:4px;
+  height:4px;
+
+  margin-left:auto;
+
+  flex:none;
+
+  border-radius:50%;
+
+  background:#111;
+  opacity:.35;
+}
+
+/* ================= POSITIONS ================= */
+
+.n-next{
+  left:65px;
+  top:72px;
+}
+
+.n-react{
+  left:275px;
+  top:24px;
+}
+
+.n-ts{
+  left:485px;
+  top:58px;
+}
+
+.n-tailwind{
+  right:60px;
+  top:28px;
+}
+
+.n-github{
+  left:5px;
+  top:300px;
+}
+
+.n-vercel{
+  right:5px;
+  top:300px;
+}
+
+.n-node{
+  left:75px;
+  bottom:72px;
+}
+
+.n-prisma{
+  left:275px;
+  bottom:22px;
+}
+
+.n-postgres{
+  left:485px;
+  bottom:57px;
+}
+
+.n-neon{
+  right:60px;
+  bottom:20px;
+}
+
+.n-cloudinary{
+  left:145px;
+  top:238px;
+}
+
+.n-auth{
+  right:145px;
+  top:238px;
+}
+
+.n-resend{
+  right:90px;
+  bottom:135px;
+}
+
+/* ================= CORE ================= */
+
+.tech-section .core{
+  position:absolute;
+
+  z-index:20;
+
+  left:50%;
+  top:50%;
+
+  width:270px;
+  height:270px;
+
+  transform:
+    translate(-50%,-50%);
+
+  pointer-events:none;
+}
+
+.tech-section .aura{
+  position:absolute;
+  inset:-55px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,.95),
+      transparent 68%
+    );
+
+  filter:blur(22px);
+
+  animation:aura 4s ease-in-out infinite;
+}
+
+@keyframes aura{
+  50%{
+    opacity:.8;
+    transform:scale(1.05);
+  }
+}
+
+/* ================= ORBITS ================= */
+
+.tech-section .orbit{
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  width:220px;
+  height:220px;
+
+  border:1px solid rgba(0,0,0,.12);
+
+  border-radius:50%;
+
+  transform:
+    translate(-50%,-50%)
+    rotateX(68deg);
+
+  animation:
+    spin 13s linear infinite;
+}
+
+.tech-section .orbit.two{
+  width:270px;
+  height:270px;
+
+  transform:
+    translate(-50%,-50%)
+    rotateY(65deg)
+    rotateZ(20deg);
+
+  animation:
+    spin2 17s linear infinite;
+}
+
+.tech-section .orbit.three{
+  width:185px;
+  height:185px;
+
+  transform:
+    translate(-50%,-50%)
+    rotateX(55deg)
+    rotateY(25deg);
+
+  animation:
+    spin 10s linear infinite;
+}
+
+.tech-section .orbit::after{
+  content:"";
+
+  position:absolute;
+
+  left:50%;
+  top:-3px;
+
+  width:6px;
+  height:6px;
+
+  border-radius:50%;
+
+  background:#111;
+}
+
+@keyframes spin{
+  to{
+    transform:
+      translate(-50%,-50%)
+      rotateX(68deg)
+      rotateZ(360deg);
+  }
+}
+
+@keyframes spin2{
+  to{
+    transform:
+      translate(-50%,-50%)
+      rotateY(65deg)
+      rotateZ(-360deg);
+  }
+}
+
+/* ================= CORE GLASS ================= */
+
+.tech-section .core-glass{
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  width:145px;
+  height:145px;
+
+  transform:
+    translate(-50%,-50%);
+
+  display:flex;
+  flex-direction:column;
+
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 25%,
+      #fff,
+      rgba(238,238,234,.94) 58%,
+      rgba(205,205,201,.58)
+    );
+
+  border:1px solid rgba(0,0,0,.13);
+
+  box-shadow:
+    0 35px 80px rgba(0,0,0,.16),
+    inset 0 1px #fff,
+    inset 0 -12px 25px rgba(0,0,0,.045);
+
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+
+  animation:float 5s ease-in-out infinite;
+}
+
+@keyframes float{
+  50%{
+    transform:
+      translate(-50%,-53%);
+  }
+}
+
+/* ================= LOGO FROM GITHUB ================= */
+
+.tech-section .logo{
+  width:48px;
+  height:38px;
+
+  margin-bottom:9px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  flex-shrink:0;
+}
+
+.tech-section .logo img{
+  display:block;
+
+  width:100%;
+  height:100%;
+
+  object-fit:contain;
+
+  pointer-events:none;
+  user-select:none;
+
+  -webkit-user-drag:none;
+
+  image-rendering:auto;
+}
+
+/* ================= CORE TEXT ================= */
+
+.tech-section .core-name{
+  font-size:11px;
+  font-weight:800;
+
+  letter-spacing:.18em;
+}
+
+.tech-section .core-meta{
+  display:flex;
+  align-items:center;
+  gap:5px;
+
+  margin-top:7px;
+
+  color:#888;
+
+  font:7px monospace;
+  letter-spacing:.13em;
+}
+
+.tech-section .core-meta i{
+  width:5px;
+  height:5px;
+
+  border-radius:50%;
+
+  background:#111;
+
+  animation:pulse 1.7s infinite;
+}
+
+@keyframes pulse{
+  50%{
+    opacity:.25;
+  }
+}
+
+/* ================= FOOT ================= */
+
+.tech-section .foot{
+  position:relative;
+  z-index:40;
+
+  margin-top:-4px;
+
+  text-align:center;
+
+  opacity:0;
+  transform:translateY(15px);
+
+  transition:
+    opacity .8s 1.3s,
+    transform .8s 1.3s;
+}
+
+.tech-section.active .tech-section .foot{
+  opacity:1;
+  transform:none;
+}
+
+.tech-section .foot strong{
+  display:block;
+
+  font-size:10px;
+  letter-spacing:.08em;
+}
+
+.tech-section .foot span{
+  display:block;
+
+  margin-top:6px;
+
+  color:#999;
+
+  font:7px monospace;
+  letter-spacing:.14em;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:600px){
+
+  .tech-section{
+    min-height:100svh;
+    padding:68px 8px 50px;
+  }
+
+  .tech-section .header{
+    max-width:350px;
+  }
+
+  .tech-section .header h1{
+    font-size:38px;
+  }
+
+  .tech-section .header p{
+    margin-top:15px;
+    font-size:12px;
+  }
+
+  .tech-section .arch{
+    height:600px;
+    margin-top:3px;
+  }
+
+  .tech-section .grid{
+    width:520px;
+    height:520px;
+
+    background-size:36px 36px;
+    opacity:.45;
+  }
+
+  .tech-section .node{
+    width:112px;
+    height:51px;
+
+    padding:0 8px;
+
+    border-radius:12px;
+
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+
+    background:rgba(255,255,255,.91);
+  }
+
+  .tech-section .node-logo{
+    width:27px;
+    height:27px;
+
+    border-radius:7px;
+  }
+
+  .tech-section .node-logo svg{
+    width:16px;
+    height:16px;
+  }
+
+  .tech-section .node-info{
+    margin-left:7px;
+  }
+
+  .tech-section .node-name{
+    font-size:8.5px;
+  }
+
+  .tech-section .node-type{
+    font-size:4.7px;
+    margin-top:3px;
+  }
+
+  .tech-section .node-status{
+    width:3px;
+    height:3px;
+  }
+
+  /* MOBILE POSITIONS */
+
+  .n-next{
+    left:4px;
+    top:12px;
+  }
+
+  .n-react{
+    right:4px;
+    top:12px;
+    left:auto;
+  }
+
+  .n-ts{
+    left:4px;
+    top:84px;
+  }
+
+  .n-tailwind{
+    right:4px;
+    top:84px;
+  }
+
+  .n-github{
+    left:4px;
+    top:218px;
+  }
+
+  .n-vercel{
+    right:4px;
+    top:218px;
+  }
+
+  .n-cloudinary{
+    left:4px;
+    top:285px;
+  }
+
+  .n-auth{
+    right:4px;
+    top:285px;
+  }
+
+  .n-node{
+    left:4px;
+    bottom:103px;
+  }
+
+  .n-prisma{
+    right:4px;
+    left:auto;
+    bottom:103px;
+  }
+
+  .n-postgres{
+    left:4px;
+    bottom:36px;
+  }
+
+  .n-neon{
+    right:4px;
+    bottom:36px;
+  }
+
+  .n-resend{
+    left:50%;
+    right:auto;
+    bottom:-28px;
+
+    transform:
+      translateX(-50%)
+      scale(.8);
+  }
+
+  .tech-section.active .n-resend{
+    transform:
+      translateX(-50%)
+      scale(1);
+  }
+
+  /* MOBILE CORE */
+
+  .tech-section .core{
+    width:190px;
+    height:190px;
+
+    transform:
+      translate3d(-50%,-50%,0);
+  }
+
+  .tech-section .aura{
+    inset:-35px;
+    filter:blur(14px);
+  }
+
+  .tech-section .orbit{
+    width:165px;
+    height:165px;
+  }
+
+  .tech-section .orbit.two{
+    width:205px;
+    height:205px;
+  }
+
+  .tech-section .orbit.three{
+    width:138px;
+    height:138px;
+  }
+
+  .tech-section .core-glass{
+    width:108px;
+    height:108px;
+
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+
+    background:
+      radial-gradient(
+        circle at 35% 25%,
+        #fff,
+        #efefeb 62%,
+        #dcdcd7
+      );
+
+    box-shadow:
+      0 25px 55px rgba(0,0,0,.13),
+      inset 0 1px #fff,
+      inset 0 -8px 18px rgba(0,0,0,.045);
+
+    transform:
+      translate3d(-50%,-50%,0);
+  }
+
+  /* MOBILE LOGO */
+
+  .tech-section .logo{
+    width:36px;
+    height:29px;
+
+    margin-bottom:7px;
+  }
+
+  .tech-section .logo img{
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    display:block;
+
+    pointer-events:none;
+    user-select:none;
+
+    -webkit-user-drag:none;
+
+    image-rendering:auto;
+  }
+
+  .tech-section .core-name{
+    font-size:9px;
+  }
+
+  .tech-section .core-meta{
+    font-size:6px;
+    margin-top:5px;
+  }
+
+  .tech-section .foot{
+    margin-top:20px;
+  }
+
+  .tech-section .node:hover{
+    transform:scale(1.02);
+  }
+}
+
+/* ================= SMALL PHONE ================= */
+
+@media(max-width:370px){
+
+  .tech-section{
+    padding-top:58px;
+  }
+
+  .tech-section .header h1{
+    font-size:34px;
+  }
+
+  .tech-section .arch{
+    height:575px;
+  }
+
+  .tech-section .node{
+    width:105px;
+    height:48px;
+  }
+
+  .tech-section .node-name{
+    font-size:8px;
+  }
+
+  .tech-section .node-type{
+    font-size:4.3px;
+  }
+}
+</style>
+<!-- ================= END TECHNOLOGY ARCHITECTURE CSS ================= -->
+
 </head>
 <body>
 
@@ -2598,6 +3645,1240 @@ html[data-theme="dark"] .hero-copy {
   </div>
 </section>
 
+
+
+
+<!-- ================= TECHNOLOGY ARCHITECTURE ================= -->
+
+<section class="tech-section" id="tech">
+
+<header class="header">
+
+  <div class="eyebrow">
+    YANG KAMI PAKAI
+  </div>
+
+  <h1>
+    Teknologi yang
+    <span>menggerakkan</span>
+    setiap project.
+  </h1>
+
+  <p>
+    Kami memilih teknologi modern yang tepat untuk
+    membangun website yang cepat, scalable, aman,
+    dan siap berkembang.
+  </p>
+
+</header>
+
+
+<div class="arch" id="arch">
+
+  <div class="grid"></div>
+
+  <svg
+    class="routing"
+    id="routing"
+    aria-hidden="true"
+    preserveAspectRatio="none"
+  >
+    <g id="routes"></g>
+  </svg>
+
+
+  <!-- CYRUS CORE -->
+
+  <div class="core" id="core">
+
+    <div class="aura"></div>
+
+    <div class="orbit"></div>
+    <div class="orbit two"></div>
+    <div class="orbit three"></div>
+
+    <div class="core-glass">
+
+      <!--
+        LOGO DIBACA DARI GITHUB
+
+        File:
+        assets/cyrus-logo.png
+
+        Jadi lo cukup mengganti file PNG
+        tersebut tanpa menyentuh HTML.
+      -->
+
+      <div class="logo">
+
+        <img
+          src="assets/cyrus-logo.png"
+          alt="CyrusWeb"
+          draggable="false"
+        >
+
+      </div>
+
+      <div class="core-name">
+        CYRUSWEB
+      </div>
+
+      <div class="core-meta">
+        <i></i>
+        FULL STACK
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- NEXT -->
+
+  <a
+    class="node n-next"
+    data-tech="next"
+    data-side="right"
+    href="https://nextjs.org/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port right"></span>
+
+    <div class="node-logo">
+      <svg viewBox="0 0 24 24">
+        <path d="M4 4h16v16H4z"/>
+        <path d="M8 16V8l8 8V8"/>
+      </svg>
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">Next.js</div>
+      <div class="node-type">FRAMEWORK</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- REACT -->
+
+  <a
+    class="node n-react"
+    data-tech="react"
+    data-side="left"
+    href="https://react.dev/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port left"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+
+        <ellipse cx="12" cy="12" rx="9" ry="3.5"/>
+
+        <ellipse
+          cx="12"
+          cy="12"
+          rx="9"
+          ry="3.5"
+          transform="rotate(60 12 12)"
+        />
+
+        <ellipse
+          cx="12"
+          cy="12"
+          rx="9"
+          ry="3.5"
+          transform="rotate(120 12 12)"
+        />
+
+        <circle
+          cx="12"
+          cy="12"
+          r="1.5"
+          fill="currentColor"
+          stroke="none"
+        />
+
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">React</div>
+      <div class="node-type">FRONTEND</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- TYPESCRIPT -->
+
+  <a
+    class="node n-ts"
+    data-tech="typescript"
+    data-side="right"
+    href="https://www.typescriptlang.org/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port right"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+
+        <rect x="3" y="3" width="18" height="18"/>
+
+        <text
+          x="12"
+          y="16"
+          text-anchor="middle"
+          font-size="8"
+        >
+          TS
+        </text>
+
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">TypeScript</div>
+      <div class="node-type">LANGUAGE</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- TAILWIND -->
+
+  <a
+    class="node n-tailwind"
+    data-tech="tailwind"
+    data-side="left"
+    href="https://tailwindcss.com/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port left"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+        <path d="M4 12c3-5 7-5 10 0s6 5 8 0"/>
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">Tailwind CSS</div>
+      <div class="node-type">STYLING</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- GITHUB -->
+
+  <a
+    class="node n-github"
+    data-tech="github"
+    data-side="right"
+    href="https://github.com/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port right"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+
+        <circle cx="12" cy="12" r="8"/>
+
+        <path d="M8 16c-2-3-1-6 1-7 2-1 5-1 7 1 2 2 2 5 0 6"/>
+
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">GitHub</div>
+      <div class="node-type">SOURCE CONTROL</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- VERCEL -->
+
+  <a
+    class="node n-vercel"
+    data-tech="vercel"
+    data-side="left"
+    href="https://vercel.com/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port left"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+        <path d="M4 19 12 5l8 14Z"/>
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">Vercel</div>
+      <div class="node-type">DEPLOYMENT</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- NODE -->
+
+  <a
+    class="node n-node"
+    data-tech="nodejs"
+    data-side="right"
+    href="https://nodejs.org/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port right"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+
+        <path d="M12 3 20 7v10l-8 4-8-4V7Z"/>
+
+        <text
+          x="12"
+          y="15"
+          text-anchor="middle"
+          font-size="5"
+        >
+          JS
+        </text>
+
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">Node.js</div>
+      <div class="node-type">RUNTIME</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- PRISMA -->
+
+  <a
+    class="node n-prisma"
+    data-tech="prisma"
+    data-side="left"
+    href="https://www.prisma.io/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port left"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+
+        <path d="M5 18 12 4l7 14Z"/>
+        <path d="M12 4l3 13"/>
+
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">Prisma</div>
+      <div class="node-type">ORM</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- POSTGRES -->
+
+  <a
+    class="node n-postgres"
+    data-tech="postgres"
+    data-side="right"
+    href="https://www.postgresql.org/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port right"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+
+        <ellipse cx="12" cy="7" rx="7" ry="3"/>
+
+        <path d="M5 7v9c0 2 4 4 7 4s7-2 7-4V7"/>
+
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">PostgreSQL</div>
+      <div class="node-type">DATABASE</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- NEON -->
+
+  <a
+    class="node n-neon"
+    data-tech="neon"
+    data-side="left"
+    href="https://neon.tech/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port left"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+        <path d="m5 18 6-13 8 13h-6l-3-5"/>
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">Neon</div>
+      <div class="node-type">SERVERLESS DB</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- CLOUDINARY -->
+
+  <a
+    class="node n-cloudinary"
+    data-tech="cloudinary"
+    data-side="right"
+    href="https://cloudinary.com/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port right"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+
+        <circle cx="7" cy="13" r="3"/>
+        <circle cx="13" cy="9" r="3"/>
+        <circle cx="18" cy="14" r="3"/>
+
+        <path d="M7 13 13 9l5 5"/>
+
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">Cloudinary</div>
+      <div class="node-type">MEDIA</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- AUTH -->
+
+  <a
+    class="node n-auth"
+    data-tech="auth"
+    data-side="left"
+    href="https://authjs.dev/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port left"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+
+        <rect
+          x="6"
+          y="10"
+          width="12"
+          height="9"
+          rx="2"
+        />
+
+        <path d="M9 10V7c0-4 6-4 6 0v3"/>
+
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">Auth.js</div>
+      <div class="node-type">AUTHENTICATION</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- RESEND -->
+
+  <a
+    class="node n-resend"
+    data-tech="resend"
+    data-side="top"
+    href="https://resend.com/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port top"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+
+        <path d="M5 6h14v12H5Z"/>
+        <path d="m6 8 6 5 6-5"/>
+
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">Resend</div>
+      <div class="node-type">EMAIL API</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+</div>
+
+
+<div class="foot">
+
+  <strong>
+    Selected tools. Thoughtfully integrated.
+  </strong>
+
+  <span>
+    ONE DEVELOPMENT WORKFLOW · MULTIPLE TECHNOLOGY LAYERS
+  </span>
+
+</div>
+
+</section>
+
+<!-- ================= TECHNOLOGY ARCHITECTURE SCRIPT ================= -->
+
+<script id="technology-architecture-script">
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const section =
+  document.getElementById("tech");
+
+const arch =
+  document.getElementById("arch");
+
+const svg =
+  document.getElementById("routing");
+
+const routesLayer =
+  document.getElementById("routes");
+
+const core =
+  document.getElementById("core");
+
+const nodes =
+  [...document.querySelectorAll(".node")];
+
+
+/* =========================================================
+   INTERSECTION
+========================================================= */
+
+const io =
+  new IntersectionObserver(
+    entries => {
+
+      entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+          section.classList.add("active");
+
+        }
+
+      });
+
+    },
+    {
+      threshold:.12
+    }
+  );
+
+io.observe(section);
+
+
+/* =========================================================
+   SVG
+========================================================= */
+
+const SVG_NS =
+  "http://www.w3.org/2000/svg";
+
+
+/* =========================================================
+   CREATE ROUTE
+========================================================= */
+
+function createRoute(d,tech){
+
+  const glow =
+    document.createElementNS(
+      SVG_NS,
+      "path"
+    );
+
+  glow.classList.add("route-glow");
+  glow.dataset.tech=tech;
+  glow.setAttribute("d",d);
+
+  const path =
+    document.createElementNS(
+      SVG_NS,
+      "path"
+    );
+
+  path.classList.add("route");
+  path.dataset.tech=tech;
+  path.setAttribute("d",d);
+
+  routesLayer.appendChild(glow);
+  routesLayer.appendChild(path);
+}
+
+
+/* =========================================================
+   CLEAR
+========================================================= */
+
+function clearRoutes(){
+
+  while(routesLayer.firstChild){
+
+    routesLayer.removeChild(
+      routesLayer.firstChild
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   RECT
+========================================================= */
+
+function getArchRect(){
+
+  return arch.getBoundingClientRect();
+
+}
+
+
+/* =========================================================
+   PORT
+========================================================= */
+
+function getPortPosition(node){
+
+  const port =
+    node.querySelector(".port");
+
+  const pr =
+    port.getBoundingClientRect();
+
+  const ar =
+    getArchRect();
+
+  return {
+
+    x:
+      pr.left -
+      ar.left +
+      pr.width/2,
+
+    y:
+      pr.top -
+      ar.top +
+      pr.height/2
+
+  };
+
+}
+
+
+/* =========================================================
+   CORE
+========================================================= */
+
+function getCoreAnchor(){
+
+  const ar =
+    getArchRect();
+
+  const cr =
+    core.getBoundingClientRect();
+
+  return {
+
+    x:
+      cr.left -
+      ar.left +
+      cr.width/2,
+
+    y:
+      cr.top -
+      ar.top +
+      cr.height/2
+
+  };
+
+}
+
+
+/* =========================================================
+   ROUTING
+========================================================= */
+
+function buildRoutes(){
+
+  clearRoutes();
+
+  const mobile =
+    window.innerWidth<=600;
+
+  const c =
+    getCoreAnchor();
+
+  nodes.forEach(node=>{
+
+    const port =
+      getPortPosition(node);
+
+    const side =
+      node.dataset.side;
+
+    let d;
+
+    if(side==="right"){
+
+      const lane =
+        mobile
+        ? c.x-82
+        : c.x-150;
+
+      d=`
+        M ${port.x} ${port.y}
+
+        H ${lane}
+
+        Q
+          ${lane-18}
+          ${port.y}
+          ${lane-18}
+          ${(port.y+c.y)/2}
+
+        Q
+          ${lane-18}
+          ${c.y}
+          ${c.x-72}
+          ${c.y}
+      `;
+
+    }else if(side==="left"){
+
+      const lane =
+        mobile
+        ? c.x+82
+        : c.x+150;
+
+      d=`
+        M ${port.x} ${port.y}
+
+        H ${lane}
+
+        Q
+          ${lane+18}
+          ${port.y}
+          ${lane+18}
+          ${(port.y+c.y)/2}
+
+        Q
+          ${lane+18}
+          ${c.y}
+          ${c.x+72}
+          ${c.y}
+      `;
+
+    }else{
+
+      d=`
+        M ${port.x} ${port.y}
+
+        V ${c.y-125}
+
+        Q
+          ${port.x}
+          ${c.y-92}
+          ${c.x}
+          ${c.y-72}
+      `;
+
+    }
+
+    createRoute(
+      d,
+      node.dataset.tech
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   DRAW
+========================================================= */
+
+function animateRoutes(){
+
+  document
+    .querySelectorAll(".route")
+    .forEach((path,index)=>{
+
+      let length;
+
+      try{
+        length=
+          path.getTotalLength();
+      }catch{
+        return;
+      }
+
+      path.style.strokeDasharray=
+        length;
+
+      path.style.strokeDashoffset=
+        length;
+
+      path.animate(
+
+        [
+          {
+            strokeDashoffset:length
+          },
+          {
+            strokeDashoffset:0
+          }
+        ],
+
+        {
+          duration:850,
+          delay:300+index*55,
+          easing:"cubic-bezier(.16,1,.3,1)",
+          fill:"forwards"
+        }
+
+      );
+
+    });
+
+}
+
+
+/* =========================================================
+   DATA PACKET
+========================================================= */
+
+function sendPacket(route){
+
+  let length;
+
+  try{
+    length=
+      route.getTotalLength();
+  }catch{
+    return;
+  }
+
+  const dot =
+    document.createElementNS(
+      SVG_NS,
+      "circle"
+    );
+
+  dot.classList.add("data-dot");
+
+  dot.setAttribute(
+    "r",
+    window.innerWidth<=600 ? "1.5" : "2"
+  );
+
+  svg.appendChild(dot);
+
+  const start=
+    performance.now();
+
+  const duration=1450;
+
+  function animate(time){
+
+    const progress=
+      Math.min(
+        1,
+        (time-start)/duration
+      );
+
+    const point=
+      route.getPointAtLength(
+        progress*length
+      );
+
+    dot.setAttribute(
+      "cx",
+      point.x
+    );
+
+    dot.setAttribute(
+      "cy",
+      point.y
+    );
+
+    dot.setAttribute(
+      "opacity",
+      Math.sin(
+        progress*Math.PI
+      )*.8
+    );
+
+    if(progress<1){
+
+      requestAnimationFrame(
+        animate
+      );
+
+    }else{
+
+      dot.remove();
+
+    }
+
+  }
+
+  requestAnimationFrame(
+    animate
+  );
+
+}
+
+
+/* =========================================================
+   PACKETS
+========================================================= */
+
+function startPackets(){
+
+  const routes=
+    [...document.querySelectorAll(".route")];
+
+  routes.forEach((route,index)=>{
+
+    setTimeout(()=>{
+
+      sendPacket(route);
+
+      setInterval(()=>{
+
+        sendPacket(route);
+
+      },3600+Math.random()*1800);
+
+    },1700+index*140);
+
+  });
+
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+nodes.forEach(node=>{
+
+  const tech=
+    node.dataset.tech;
+
+  function activate(){
+
+    document
+      .querySelectorAll(".route")
+      .forEach(route=>{
+
+        route.classList.toggle(
+          "active",
+          route.dataset.tech===tech
+        );
+
+      });
+
+  }
+
+  function deactivate(){
+
+    document
+      .querySelectorAll(".route")
+      .forEach(route=>{
+
+        route.classList.remove(
+          "active"
+        );
+
+      });
+
+  }
+
+  node.addEventListener(
+    "mouseenter",
+    activate
+  );
+
+  node.addEventListener(
+    "mouseleave",
+    deactivate
+  );
+
+  node.addEventListener(
+    "touchstart",
+    activate,
+    {passive:true}
+  );
+
+});
+
+
+/* =========================================================
+   PARALLAX
+========================================================= */
+
+let targetX=0;
+let targetY=0;
+
+let currentX=0;
+let currentY=0;
+
+arch.addEventListener(
+  "pointermove",
+  event=>{
+
+    if(window.innerWidth<=600){
+      return;
+    }
+
+    const rect=
+      arch.getBoundingClientRect();
+
+    targetX=
+      event.clientX/
+      rect.width-.5;
+
+    targetY=
+      event.clientY/
+      rect.height-.5;
+
+  }
+);
+
+arch.addEventListener(
+  "pointerleave",
+  ()=>{
+
+    targetX=0;
+    targetY=0;
+
+  }
+);
+
+
+function parallax(){
+
+  currentX+=
+    (targetX-currentX)*.045;
+
+  currentY+=
+    (targetY-currentY)*.045;
+
+  if(window.innerWidth>600){
+
+    core.style.transform=
+      `
+      translate3d(-50%,-50%,0)
+      rotateX(${currentY*-3}deg)
+      rotateY(${currentX*6}deg)
+      `;
+
+  }else{
+
+    core.style.transform=
+      "translate3d(-50%,-50%,0)";
+
+  }
+
+  requestAnimationFrame(
+    parallax
+  );
+
+}
+
+
+/* =========================================================
+   RESIZE
+========================================================= */
+
+let previousWidth=
+  window.innerWidth;
+
+let resizeTimer;
+
+
+window.addEventListener(
+  "resize",
+  ()=>{
+
+    clearTimeout(
+      resizeTimer
+    );
+
+    resizeTimer=
+      setTimeout(()=>{
+
+        if(
+          Math.abs(
+            window.innerWidth-
+            previousWidth
+          )>2
+        ){
+
+          previousWidth=
+            window.innerWidth;
+
+          buildRoutes();
+
+          setTimeout(
+            animateRoutes,
+            50
+          );
+
+        }
+
+      },100);
+
+  }
+);
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+window.addEventListener(
+  "load",
+  ()=>{
+
+    requestAnimationFrame(()=>{
+
+      buildRoutes();
+
+      setTimeout(
+        animateRoutes,
+        200
+      );
+
+      startPackets();
+
+      parallax();
+
+    });
+
+  }
+);
+</script>
+
+<!-- ================= END TECHNOLOGY ARCHITECTURE ================= -->
 
   <!-- ================= SELECTED WORK ================= -->
   <section class="selected-work" id="selected-work">
