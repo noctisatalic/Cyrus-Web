@@ -6795,59 +6795,29 @@ document.addEventListener("DOMContentLoaded", () => {
   const states = [];
 
   tracks.forEach(track => {
+
     const stream = track.querySelector(".trusted-stream");
     if (!stream) return;
 
-    const sets = Array.from(
-      stream.querySelectorAll(".trusted-set")
-    );
+    const set = stream.querySelector(".trusted-set");
+    if (!set) return;
 
-    if (sets.length < 2) return;
-
-    const width = sets[0].getBoundingClientRect().width;
-
+    const width = set.getBoundingClientRect().width;
     if (!width) return;
 
-    const direction =
-      track.classList.contains("trusted-track-right")
-        ? 1
-        : -1;
-
-    const speed =
-      track.classList.contains("trusted-track-right")
-        ? 74
-        : 68;
-
-    /*
-      Semua set menjadi lane aktif.
-
-      RIGHT:
-      [-3] [-2] [-1] [0]
-
-      LEFT:
-      [0] [-1] [-2] [-3]
-
-      Setiap lane selalu berjarak tepat satu
-      lebar set sehingga tidak pernah muncul
-      celah kosong.
-    */
-
-    const positions = sets.map((_, index) => {
-      if (direction > 0) {
-        return (index - sets.length + 1) * width;
-      }
-
-      return -index * width;
-    });
+    const right =
+      track.classList.contains("trusted-track-right");
 
     states.push({
-      track,
-      sets,
+      stream,
       width,
-      direction,
-      speed,
-      positions
+      x: right ? -width : 0,
+      speed: right ? 74 : 68,
+      direction: right ? 1 : -1
     });
+
+    stream.style.transform =
+      `translate3d(${right ? -width : 0}px,0,0)`;
   });
 
   let last = performance.now();
@@ -6863,70 +6833,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
     states.forEach(state => {
 
-      const movement =
+      state.x +=
         state.speed *
         state.direction *
         dt;
 
-      for(let i = 0; i < state.sets.length; i++){
+      /*
+        RIGHT:
+        -width -> 0
+        lalu kembali tepat ke -width.
 
-        state.positions[i] += movement;
-      }
+        LEFT:
+        0 -> -width
+        lalu kembali tepat ke 0.
+
+        Karena perpindahannya tepat satu
+        SET yang identik, reset tidak terlihat.
+      */
 
       if(state.direction > 0){
 
-        /*
-          RIGHT
-
-          Kalau lane sudah keluar penuh
-          di sebelah kanan, pindahkan ke
-          belakang lane paling kiri.
-        */
-
-        for(let i = 0; i < state.sets.length; i++){
-
-          if(state.positions[i] >= state.width){
-
-            const minPosition =
-              Math.min(...state.positions);
-
-            state.positions[i] =
-              minPosition - state.width;
-          }
+        if(state.x >= 0){
+          state.x -= state.width;
         }
 
-      } else {
+      }else{
 
-        /*
-          LEFT
-
-          Kalau lane sudah keluar penuh
-          di sebelah kiri, pindahkan ke
-          belakang lane paling kanan.
-        */
-
-        for(let i = 0; i < state.sets.length; i++){
-
-          if(
-            state.positions[i] <=
-            -state.width
-          ){
-
-            const maxPosition =
-              Math.max(...state.positions);
-
-            state.positions[i] =
-              maxPosition + state.width;
-          }
+        if(state.x <= -state.width){
+          state.x += state.width;
         }
       }
 
-      for(let i = 0; i < state.sets.length; i++){
-
-        state.sets[i].style.transform =
-          `translate3d(${state.positions[i]}px,0,0)`;
-      }
-
+      state.stream.style.transform =
+        `translate3d(${state.x}px,0,0)`;
     });
 
     requestAnimationFrame(frame);
@@ -6934,23 +6873,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   requestAnimationFrame(frame);
 
-  /*
-    Recalculate width after viewport resize.
-  */
-
   window.addEventListener("resize", () => {
 
     states.forEach(state => {
 
+      const set =
+        state.stream.querySelector(".trusted-set");
+
+      if(!set) return;
+
       const newWidth =
-        state.sets[0].getBoundingClientRect().width;
+        set.getBoundingClientRect().width;
 
       if(newWidth > 0){
         state.width = newWidth;
       }
-
     });
-
   });
 
 })();
