@@ -3949,27 +3949,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (reduceMotion) return;
 
   /*
-   * HERO DEPTH
-   *
-   * Saat user mulai meninggalkan Hero,
-   * signature entity bergerak sedikit ke belakang.
-   */
-  if (entity) {
-    gsap.to(entity, {
-      y: 55,
-      scale: .88,
-      opacity: .55,
-      ease: "none",
-      scrollTrigger: {
-        trigger: hero,
-        start: "top top",
-        end: "bottom top",
-        scrub: 1.2
-      }
-    });
-  }
-
-  /*
    * SELECTED WORK ARRIVAL
    *
    * Heading masuk terlebih dahulu,
