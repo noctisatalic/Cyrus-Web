@@ -3821,16 +3821,11 @@ html[data-theme="dark"] .tech-section .foot span{
 
 <style id="cyrus-trusted-marquee">
 
-/* =========================================================
-   CYRUS TRUSTED BY
-   DUAL DIRECTION BRAND STREAM
-   ========================================================= */
-
 .trusted-section{
   position:relative;
   width:100%;
   overflow:hidden;
-  padding:64px 0 72px;
+  padding:58px 0 64px;
   background:transparent;
   color:var(--ink);
 }
@@ -3839,16 +3834,15 @@ html[data-theme="dark"] .tech-section .foot span{
   position:relative;
   z-index:5;
   width:min(720px,calc(100% - 36px));
-  margin:0 auto 34px;
+  margin:0 auto 30px;
   text-align:center;
 }
 
 .trusted-eyebrow{
-  margin-bottom:14px;
+  margin-bottom:13px;
   font-family:var(--font-display);
   font-size:10px;
   font-weight:700;
-  line-height:1;
   letter-spacing:.16em;
   text-transform:uppercase;
   color:var(--muted);
@@ -3871,30 +3865,31 @@ html[data-theme="dark"] .tech-section .foot span{
   position:relative;
   display:flex;
   flex-direction:column;
-  gap:8px;
-  width:100%;
+  gap:10px;
+  width:min(1180px,calc(100% - 28px));
+  margin:0 auto;
   overflow:hidden;
-
-  mask-image:linear-gradient(
-    90deg,
-    transparent 0%,
-    #000 8%,
-    #000 92%,
-    transparent 100%
-  );
-
-  -webkit-mask-image:linear-gradient(
-    90deg,
-    transparent 0%,
-    #000 8%,
-    #000 92%,
-    transparent 100%
-  );
 }
 
 .trusted-track{
+  position:relative;
   display:flex;
+  width:100%;
+  height:92px;
+  overflow:hidden;
+  border:1px solid rgba(17,17,17,.11);
+  border-radius:22px;
+  background:rgba(255,255,255,.32);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.7),
+    0 10px 35px rgba(0,0,0,.035);
+}
+
+.trusted-stream{
+  display:flex;
+  align-items:center;
   width:max-content;
+  height:100%;
   flex-shrink:0;
   will-change:transform;
 }
@@ -3907,47 +3902,33 @@ html[data-theme="dark"] .tech-section .foot span{
   padding-right:34px;
 }
 
-.trusted-track-right{
-  animation:trusted-right 30s linear infinite;
+.trusted-track-right .trusted-stream{
+  animation:trusted-flow-right 12s linear infinite;
 }
 
-.trusted-track-left{
-  animation:trusted-left 34s linear infinite;
+.trusted-track-left .trusted-stream{
+  animation:trusted-flow-left 14s linear infinite;
 }
 
 .trusted-logo{
   display:flex;
   align-items:center;
   justify-content:center;
-
-  width:150px;
-  height:72px;
-
-  flex-shrink:0;
-
-  transition:
-    transform .45s cubic-bezier(.16,1,.3,1),
-    opacity .45s ease;
+  width:155px;
+  height:70px;
+  flex:0 0 155px;
 }
 
 .trusted-logo img{
   display:block;
-
   width:auto;
-  max-width:130px;
-  max-height:50px;
-
+  max-width:132px;
+  max-height:48px;
   object-fit:contain;
-
   user-select:none;
   pointer-events:none;
   -webkit-user-drag:none;
 }
-
-/*
-   SPR Audio = monochrome.
-   Ihsan Koi = ORIGINAL COLORS.
-*/
 
 .trusted-mono img{
   filter:brightness(0);
@@ -3957,55 +3938,24 @@ html[data-theme="dark"] .tech-section .foot span{
   filter:none !important;
 }
 
-.trusted-logo:hover{
-  transform:translateY(-3px);
-  opacity:.8;
-}
-
 .trusted-separator{
   width:4px;
   height:4px;
   flex:0 0 4px;
-
   border-radius:50%;
-
   background:currentColor;
-  opacity:.2;
+  opacity:.18;
 }
 
-
-/* =========================================================
-   ANIMATION
-   ========================================================= */
-
-@keyframes trusted-right{
-
-  from{
-    transform:translate3d(-50%,0,0);
-  }
-
-  to{
-    transform:translate3d(0,0,0);
-  }
-
+@keyframes trusted-flow-right{
+  from{transform:translate3d(-50%,0,0)}
+  to{transform:translate3d(0,0,0)}
 }
 
-@keyframes trusted-left{
-
-  from{
-    transform:translate3d(0,0,0);
-  }
-
-  to{
-    transform:translate3d(-50%,0,0);
-  }
-
+@keyframes trusted-flow-left{
+  from{transform:translate3d(0,0,0)}
+  to{transform:translate3d(-50%,0,0)}
 }
-
-
-/* =========================================================
-   DARK THEME
-   ========================================================= */
 
 html[data-theme="dark"] .trusted-section{
   color:#f5f5f2;
@@ -4015,37 +3965,51 @@ html[data-theme="dark"] .trusted-head h2 span{
   color:rgba(255,255,255,.46);
 }
 
+html[data-theme="dark"] .trusted-track{
+  border-color:rgba(255,255,255,.12);
+  background:rgba(255,255,255,.035);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.07),
+    0 12px 40px rgba(0,0,0,.22);
+}
+
 html[data-theme="dark"] .trusted-mono img{
   filter:brightness(0) invert(1);
 }
 
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
 @media(max-width:600px){
 
   .trusted-section{
-    padding:52px 0 58px;
+    padding:48px 0 54px;
   }
 
   .trusted-head{
-    margin-bottom:26px;
+    margin-bottom:24px;
   }
 
   .trusted-head h2{
     font-size:clamp(32px,9vw,42px);
   }
 
+  .trusted-marquee{
+    width:calc(100% - 18px);
+    gap:8px;
+  }
+
+  .trusted-track{
+    height:76px;
+    border-radius:18px;
+  }
+
   .trusted-set{
-    gap:24px;
-    padding-right:24px;
+    gap:22px;
+    padding-right:22px;
   }
 
   .trusted-logo{
-    width:115px;
+    width:120px;
     height:58px;
+    flex-basis:120px;
   }
 
   .trusted-logo img{
@@ -4053,27 +4017,21 @@ html[data-theme="dark"] .trusted-mono img{
     max-height:40px;
   }
 
-  .trusted-track-right{
-    animation-duration:25s;
+  .trusted-track-right .trusted-stream{
+    animation-duration:9s;
   }
 
-  .trusted-track-left{
-    animation-duration:28s;
+  .trusted-track-left .trusted-stream{
+    animation-duration:11s;
   }
-
 }
 
 @media(prefers-reduced-motion:reduce){
 
-  .trusted-track-right,
-  .trusted-track-left{
+  .trusted-track-right .trusted-stream,
+  .trusted-track-left .trusted-stream{
     animation:none;
   }
-
-  .trusted-logo{
-    transition:none;
-  }
-
 }
 
 </style>
@@ -5824,6 +5782,8 @@ window.addEventListener(
     <!-- TOP TRACK : RIGHT -->
     <div class="trusted-track trusted-track-right">
 
+      <div class="trusted-stream">
+
       <div class="trusted-set">
         <div class="trusted-logo trusted-mono">
           <img src="spraudio.png" alt="SPR Audio" draggable="false">
@@ -5850,6 +5810,8 @@ window.addEventListener(
         </div>
 
         <span class="trusted-separator"></span>
+      </div>
+
       </div>
 
     </div>
@@ -5858,6 +5820,8 @@ window.addEventListener(
     <!-- BOTTOM TRACK : LEFT -->
     <div class="trusted-track trusted-track-left">
 
+      <div class="trusted-stream">
+
       <div class="trusted-set">
 
         <div class="trusted-logo trusted-color">
@@ -5887,6 +5851,8 @@ window.addEventListener(
         </div>
 
         <span class="trusted-separator"></span>
+
+      </div>
 
       </div>
 
