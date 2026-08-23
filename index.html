@@ -2459,6 +2459,34 @@ html[data-theme="dark"] .hero-copy {
   z-index: 6 !important;
 }
 </style>
+
+<style id="cyrus-hero-copy-layer-fix">
+/* ===== HERO COPY VISIBILITY FIX ===== */
+.hero-content {
+  position: relative;
+  z-index: 30;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 40;
+  isolation: isolate;
+}
+
+.hero-copy .hero-eyebrow,
+.hero-copy .hero-headline,
+.hero-copy .hero-subheadline,
+.hero-copy .hero-cta-group,
+.hero-copy .hero-stats {
+  position: relative;
+  z-index: 41;
+}
+
+.cyrus-entity {
+  z-index: 20;
+}
+</style>
+
 </head>
 <body>
 
