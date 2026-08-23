@@ -2258,547 +2258,207 @@ html[data-theme="dark"] .form-group textarea:-webkit-autofill:focus {
 
 
 
-<style id="cyrus-hero-v2">
+
+
+<style id="cyrus-signature-entity-clean">
 /* =========================================================
-   CYRUS HERO V2
-   Digital Product Scene
+   CYRUS SIGNATURE HERO — ENTITY
    ========================================================= */
 
-.hero {
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-content {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, .88fr) minmax(480px, 1.12fr);
-  align-items: center;
-  gap: clamp(40px, 5vw, 90px);
-  min-height: min(820px, 92vh);
-  padding-top: clamp(70px, 8vh, 110px);
-  padding-bottom: clamp(60px, 8vh, 100px);
-}
-
-/* -------------------------
-   COPY
-   ------------------------- */
-
-.hero-copy {
-  position: relative;
-  z-index: 10;
-  max-width: 690px;
-}
-
-.hero-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  margin-bottom: 24px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-}
-
-.hero-eyebrow .line {
-  width: 28px;
-  height: 1px;
-  background: currentColor;
-  opacity: .5;
-}
-
-.hero-headline {
-  margin: 0;
-  font-size: clamp(48px, 6vw, 88px);
-  line-height: .9;
-  letter-spacing: -.065em;
-  font-weight: 700;
-  max-width: 680px;
-}
-
-.hero-headline span {
-  display: block;
-  opacity: .42;
-}
-
-.hero-subheadline {
-  margin: 30px 0 0;
-  max-width: 500px;
-  font-size: clamp(14px, 1.3vw, 17px);
-  line-height: 1.7;
-  opacity: .65;
-}
-
-.hero-cta-group {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 32px;
-}
-
-.hero-stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  max-width: 620px;
-  gap: 24px;
-  margin-top: 70px;
-  padding-top: 22px;
-  border-top: 1px solid rgba(0,0,0,.1);
-}
-
-.hero-stats .stat-item {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.hero-stats strong {
-  font-size: 10px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
-
-.hero-stats span {
-  font-size: 11px;
-  line-height: 1.45;
-  opacity: .48;
-}
-
-/* -------------------------
-   STAGE
-   ------------------------- */
-
-.hero-stage {
-  position: relative;
-  min-height: 620px;
-  perspective: 1800px;
-  transform-style: preserve-3d;
-}
-
-.hero-stage-glow {
+.cyrus-entity {
   position: absolute;
-  width: 70%;
-  height: 60%;
-  left: 17%;
-  top: 20%;
-  border-radius: 50%;
-  background: radial-gradient(
-    ellipse,
-    rgba(0,0,0,.10),
-    rgba(0,0,0,.035) 45%,
-    transparent 72%
-  );
-  filter: blur(45px);
-  transform: translateZ(-180px);
-}
-
-/* -------------------------
-   PRODUCT
-   ------------------------- */
-
-.hero-product {
-  position: absolute;
-  width: min(650px, 100%);
-  aspect-ratio: 1.25;
-  left: 50%;
-  top: 50%;
-  transform:
-    translate(-50%, -50%)
-    rotateX(7deg)
-    rotateY(-11deg)
-    rotateZ(-1deg);
-  transform-style: preserve-3d;
-  transition: transform .8s cubic-bezier(.16,1,.3,1);
-  will-change: transform;
-}
-
-.hero-product-shadow {
-  position: absolute;
-  width: 75%;
-  height: 18%;
-  left: 13%;
-  bottom: 2%;
-  border-radius: 50%;
-  background: rgba(0,0,0,.22);
-  filter: blur(30px);
-  transform: translateZ(-90px);
-}
-
-/* -------------------------
-   BROWSER
-   ------------------------- */
-
-.hero-browser {
-  position: absolute;
-  inset: 8% 4% 15%;
-  overflow: hidden;
-  border-radius: 18px;
-  background: #0b0b0b;
-  border: 1px solid rgba(255,255,255,.22);
-  box-shadow:
-    0 45px 90px rgba(0,0,0,.22),
-    0 15px 30px rgba(0,0,0,.13),
-    inset 0 1px 0 rgba(255,255,255,.2);
-  transform: translateZ(45px);
-  transform-style: preserve-3d;
-}
-
-.hero-browser-bar {
-  position: relative;
-  height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 14px;
-  border-bottom: 1px solid rgba(255,255,255,.09);
-  color: rgba(255,255,255,.42);
-  font-size: 9px;
-  letter-spacing: .08em;
-}
-
-.hero-browser-dots {
-  position: absolute;
-  left: 14px;
-  display: flex;
-  gap: 5px;
-}
-
-.hero-browser-dots i {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.32);
-}
-
-.hero-browser-control {
-  position: absolute;
-  right: 14px;
-  opacity: .5;
-}
-
-.hero-browser-content {
-  position: relative;
-  height: calc(100% - 38px);
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 80% 20%, rgba(255,255,255,.09), transparent 30%),
-    linear-gradient(135deg, #151515, #070707 65%);
-  color: white;
-}
-
-.hero-browser-nav {
-  position: absolute;
-  inset: 22px 26px auto;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  font-size: 7px;
-  letter-spacing: .14em;
-  opacity: .55;
-}
-
-.hero-browser-nav strong {
-  margin-right: auto;
-  color: white;
-  font-size: 10px;
-  opacity: 1;
-}
-
-.hero-browser-main {
-  position: absolute;
-  left: 8%;
-  top: 25%;
-  z-index: 2;
-}
-
-.hero-browser-kicker {
-  font-size: 8px;
-  letter-spacing: .18em;
-  opacity: .45;
-  margin-bottom: 16px;
-}
-
-.hero-browser-title {
-  font-size: clamp(28px, 4vw, 48px);
-  line-height: .88;
-  letter-spacing: -.06em;
-  font-weight: 600;
-}
-
-.hero-browser-title em {
-  font-style: normal;
-  opacity: .42;
-}
-
-.hero-browser-line {
-  width: 90px;
-  height: 1px;
-  margin-top: 24px;
-  background: rgba(255,255,255,.5);
-}
-
-.hero-browser-meta {
-  display: flex;
-  gap: 30px;
-  margin-top: 15px;
-  font-size: 7px;
-  letter-spacing: .12em;
-  opacity: .35;
-}
-
-.hero-browser-orbit {
-  position: absolute;
-  width: 42%;
-  aspect-ratio: 1;
-  right: -8%;
-  top: 18%;
-  display: grid;
-  place-items: center;
-}
-
-.hero-orbit-ring {
-  position: absolute;
-  inset: 5%;
-  border: 1px solid rgba(255,255,255,.15);
-  border-radius: 50%;
-  transform: rotateX(65deg) rotateY(15deg);
-}
-
-.hero-orbit-core {
-  width: 62px;
-  height: 62px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.2);
-  background: rgba(255,255,255,.07);
-  backdrop-filter: blur(10px);
-  font-size: 13px;
-  letter-spacing: .08em;
-}
-
-/* -------------------------
-   PRODUCT DEPTH
-   ------------------------- */
-
-.hero-product-layer {
-  position: absolute;
-  left: 8%;
-  right: 8%;
-  bottom: 5%;
-  height: 9%;
-  border-radius: 0 0 16px 16px;
-  background: linear-gradient(
-    180deg,
-    #262626,
-    #080808
-  );
-  border: 1px solid rgba(255,255,255,.13);
-}
-
-.hero-product-layer-back {
-  transform:
-    translateZ(-8px)
-    translateY(15px)
-    scale(.94);
-  opacity: .6;
-}
-
-.hero-product-layer-mid {
-  transform:
-    translateZ(8px)
-    translateY(8px)
-    scale(.98);
-}
-
-/* -------------------------
-   FLOATING UI
-   ------------------------- */
-
-.hero-floating-card {
-  position: absolute;
-  z-index: 8;
-  width: 155px;
-  padding: 15px;
-  border: 1px solid rgba(0,0,0,.1);
-  border-radius: 13px;
-  background: rgba(255,255,255,.7);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 20px 50px rgba(0,0,0,.08);
-  transform-style: preserve-3d;
-}
-
-.hero-floating-index {
-  display: block;
-  margin-bottom: 15px;
-  font-size: 9px;
-  opacity: .4;
-}
-
-.hero-floating-card strong {
-  display: block;
-  font-size: 9px;
-  letter-spacing: .12em;
-}
-
-.hero-floating-card small {
-  display: block;
-  margin-top: 6px;
-  font-size: 10px;
-  line-height: 1.4;
-  opacity: .5;
-}
-
-.hero-floating-card-one {
-  top: 18%;
-  left: 0;
-  transform: translateZ(100px) rotate(-4deg);
-}
-
-.hero-floating-card-two {
-  right: 0;
-  bottom: 18%;
-  transform: translateZ(80px) rotate(4deg);
-}
-
-/* -------------------------
-   STAGE LABEL
-   ------------------------- */
-
-.hero-stage-label {
-  position: absolute;
-  z-index: 10;
-  font-size: 8px;
-  letter-spacing: .16em;
-  opacity: .4;
-}
-
-.hero-stage-label-top {
-  top: 7%;
   right: 4%;
+  top: 50%;
+  width: min(390px, 34vw);
+  aspect-ratio: 1;
+  transform: translateY(-50%);
+  z-index: 20;
+  pointer-events: none;
+  opacity: .92;
 }
 
-.hero-stage-status {
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  margin-right: 7px;
-  border-radius: 50%;
-  background: currentColor;
-  vertical-align: middle;
-}
-
-.hero-stage-footer {
+.cyrus-entity-core {
   position: absolute;
-  left: 4%;
-  bottom: 5%;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 8px;
-  letter-spacing: .15em;
-  opacity: .35;
+  inset: 12%;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(17,17,17,.12) 0 2%,
+      rgba(17,17,17,.055) 18%,
+      rgba(17,17,17,.018) 42%,
+      transparent 68%
+    );
+  filter: blur(.2px);
 }
 
-.hero-stage-footer i {
-  display: block;
-  width: 45px;
-  height: 1px;
-  background: currentColor;
+.cyrus-entity-orbit {
+  position: absolute;
+  inset: 2%;
+  border: 1px solid rgba(17,17,17,.09);
+  border-radius: 50%;
+  transform: rotate(-18deg) scaleY(.42);
 }
 
-/* -------------------------
-   RESPONSIVE
-   ------------------------- */
+.cyrus-entity-orbit:nth-child(2) {
+  transform: rotate(62deg) scaleY(.42);
+}
 
-@media (max-width: 1050px) {
-  .hero-content {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
+.cyrus-entity-orbit:nth-child(3) {
+  transform: rotate(142deg) scaleY(.42);
+}
 
-  .hero-copy {
-    max-width: 760px;
-  }
+.cyrus-entity-ring {
+  position: absolute;
+  inset: 27%;
+  border: 1px solid rgba(17,17,17,.14);
+  border-radius: 50%;
+  box-shadow: inset 0 0 40px rgba(17,17,17,.025);
+}
 
-  .hero-stage {
-    min-height: 560px;
-  }
+.cyrus-entity-dot {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #111;
+  box-shadow: 0 0 18px rgba(17,17,17,.22);
+}
 
-  .hero-floating-card-one {
-    left: 4%;
-  }
+.cyrus-entity-dot.one {
+  left: 18%;
+  top: 42%;
+}
 
-  .hero-floating-card-two {
-    right: 4%;
+.cyrus-entity-dot.two {
+  right: 18%;
+  top: 28%;
+}
+
+.cyrus-entity-dot.three {
+  right: 29%;
+  bottom: 17%;
+}
+
+@media (max-width: 900px) {
+  .cyrus-entity {
+    right: -8%;
+    width: 300px;
+    opacity: .42;
   }
 }
 
 @media (max-width: 700px) {
-  .hero-content {
-    display: flex;
-    flex-direction: column;
-    min-height: auto;
-    padding-top: 55px;
-  }
-
-  .hero-headline {
-    font-size: clamp(44px, 13vw, 68px);
-  }
-
-  .hero-subheadline {
-    font-size: 14px;
-  }
-
-  .hero-stats {
-    gap: 12px;
-    margin-top: 45px;
-  }
-
-  .hero-stage {
-    width: calc(100% + 30px);
-    min-height: 390px;
-    margin-left: -15px;
-    margin-top: 10px;
-  }
-
-  .hero-product {
-    width: 108%;
-  }
-
-  .hero-floating-card {
-    width: 125px;
-    padding: 11px;
-  }
-
-  .hero-floating-card-one {
-    top: 13%;
-    left: 2%;
-  }
-
-  .hero-floating-card-two {
-    right: 2%;
-    bottom: 12%;
-  }
-
-  .hero-stage-label-top {
-    top: 3%;
-    right: 5%;
-  }
-
-  .hero-browser-nav span {
-    display: none;
+  .cyrus-entity {
+    width: 240px;
+    right: -72px;
+    top: 31%;
+    opacity: .22;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-product {
-    transition: none;
+  .cyrus-entity {
+    transform: translateY(-50%) !important;
   }
 }
 </style>
 
+<style id="cyrus-signature-hero-dark">
+/* ===== CYRUS SIGNATURE HERO — DARK MODE ===== */
+
+html[data-theme="dark"] .cyrus-entity {
+  opacity: 1 !important;
+  z-index: 20 !important;
+}
+
+html[data-theme="dark"] .cyrus-entity-core {
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(255,255,255,.30) 0 2%,
+      rgba(255,255,255,.14) 18%,
+      rgba(255,255,255,.055) 42%,
+      transparent 68%
+    ) !important;
+}
+
+html[data-theme="dark"] .cyrus-entity-orbit {
+  border-color: rgba(255,255,255,.28) !important;
+}
+
+html[data-theme="dark"] .cyrus-entity-ring {
+  border-color: rgba(255,255,255,.38) !important;
+  box-shadow:
+    inset 0 0 40px rgba(255,255,255,.045),
+    0 0 24px rgba(255,255,255,.035) !important;
+}
+
+html[data-theme="dark"] .cyrus-entity-dot {
+  background: #F5F5F5 !important;
+  box-shadow:
+    0 0 10px rgba(255,255,255,.65),
+    0 0 24px rgba(255,255,255,.25) !important;
+}
+
+html[data-theme="dark"] .hero::before {
+  background:
+    radial-gradient(
+      circle at 72% 42%,
+      rgba(255,255,255,.10),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 88% 18%,
+      rgba(255,255,255,.06),
+      transparent 20%
+    ) !important;
+}
+
+html[data-theme="dark"] .hero::after {
+  border-color: rgba(255,255,255,.14) !important;
+  box-shadow:
+    0 0 0 70px rgba(255,255,255,.025),
+    0 0 0 140px rgba(255,255,255,.015) !important;
+}
+</style>
+
+<style id="cyrus-entity-stacking-fix">
+/* ===== FINAL HERO STACKING / LAYOUT FIX ===== */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Entity = visual background */
+.cyrus-entity {
+  z-index: 2 !important;
+  pointer-events: none;
+}
+
+/* Hero content stays above the entity */
+.hero-content {
+  position: relative;
+  z-index: 5;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 6;
+}
+
+/* Dark mode */
+html[data-theme="dark"] .cyrus-entity {
+  opacity: 1 !important;
+  z-index: 2 !important;
+}
+
+html[data-theme="dark"] .hero-copy {
+  z-index: 6 !important;
+}
+</style>
 </head>
 <body>
 
@@ -2844,6 +2504,17 @@ html[data-theme="dark"] .form-group textarea:-webkit-autofill:focus {
   <div class="hero-transition" aria-hidden="true"></div>
 
   <div class="container hero-content">
+
+    <div class="cyrus-entity" aria-hidden="true">
+      <div class="cyrus-entity-core"></div>
+      <div class="cyrus-entity-orbit"></div>
+      <div class="cyrus-entity-orbit"></div>
+      <div class="cyrus-entity-orbit"></div>
+      <div class="cyrus-entity-ring"></div>
+      <span class="cyrus-entity-dot one"></span>
+      <span class="cyrus-entity-dot two"></span>
+      <span class="cyrus-entity-dot three"></span>
+    </div>
 
     <div class="hero-copy">
       <div class="hero-eyebrow">
@@ -3519,62 +3190,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-<script id="cyrus-hero-computer-motion">
-document.addEventListener("DOMContentLoaded", () => {
-  if (typeof gsap === "undefined") return;
-
-  const hero = document.querySelector(".hero");
-  const computer = document.querySelector(".cyrus-hero-computer");
-  const device = document.querySelector(".cyrus-hero-device");
-
-  if (!hero || !computer || !device) return;
-
-  const reduceMotion =
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  if (reduceMotion) return;
-
-  /* Reveal only — grid remains responsible for position. */
-  gsap.fromTo(
-    computer,
-    { opacity: 0 },
-    {
-      opacity: 1,
-      duration: 1.15,
-      delay: .2,
-      ease: "power3.out"
-    }
-  );
-
-  if (!window.matchMedia("(pointer:fine)").matches) return;
-
-  const rotateX = gsap.quickTo(device, "rotationX", {
-    duration: .7,
-    ease: "power3.out"
-  });
-
-  const rotateY = gsap.quickTo(device, "rotationY", {
-    duration: .7,
-    ease: "power3.out"
-  });
-
-  hero.addEventListener("mousemove", (e) => {
-    const rect = hero.getBoundingClientRect();
-
-    const x = (e.clientX - rect.left) / rect.width - .5;
-    const y = (e.clientY - rect.top) / rect.height - .5;
-
-    rotateY(-11 + x * 8);
-    rotateX(7 - y * 5);
-  }, { passive: true });
-
-  hero.addEventListener("mouseleave", () => {
-    rotateY(-11);
-    rotateX(7);
-  });
-});
-</script>
-
 <script id="cyrus-cinematic-transition">
 document.addEventListener("DOMContentLoaded", () => {
   if (
@@ -3722,6 +3337,479 @@ document.addEventListener("DOMContentLoaded", () => {
           ease: "power3.out"
         });
       });
+    });
+  }
+});
+</script>
+
+
+
+  <!-- CYRUS HERO V2 MOTION -->
+<script id="cyrus-hero-v2-motion">
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof gsap === "undefined") return;
+
+  const hero = document.querySelector(".hero");
+  const stage = document.querySelector(".hero-stage");
+  const product = document.querySelector(".hero-product");
+  const browser = document.querySelector(".hero-browser");
+  const glow = document.querySelector(".hero-stage-glow");
+  const cardOne = document.querySelector(".hero-floating-card-one");
+  const cardTwo = document.querySelector(".hero-floating-card-two");
+  const stageLabel = document.querySelector(".hero-stage-label-top");
+  const stageFooter = document.querySelector(".hero-stage-footer");
+
+  if (!hero || !stage || !product) return;
+
+  const reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (reduceMotion) return;
+
+  /* =====================================================
+     HERO V2 — INITIAL STATE
+     ===================================================== */
+
+  gsap.set(product, {
+    opacity: 0,
+    scale: 0.86,
+    rotateX: 13,
+    rotateY: -18,
+    rotateZ: -2,
+    y: 35
+  });
+
+  gsap.set(
+    [cardOne, cardTwo, stageLabel, stageFooter],
+    {
+      opacity: 0
+    }
+  );
+
+  if (glow) {
+    gsap.set(glow, {
+      opacity: 0,
+      scale: 0.8
+    });
+  }
+
+  /* =====================================================
+     CINEMATIC PRODUCT ENTRY
+     ===================================================== */
+
+  const tl = gsap.timeline({
+    delay: 0.35,
+    defaults: {
+      ease: "power3.out"
+    }
+  });
+
+  tl.to(product, {
+    opacity: 1,
+    scale: 1,
+    rotateX: 7,
+    rotateY: -11,
+    rotateZ: -1,
+    y: 0,
+    duration: 1.45
+  })
+  .to(
+    glow,
+    {
+      opacity: 1,
+      scale: 1,
+      duration: 1.2
+    },
+    "-=1.1"
+  )
+  .to(
+    cardOne,
+    {
+      opacity: 1,
+      x: 0,
+      duration: 0.75
+    },
+    "-=0.75"
+  )
+  .to(
+    cardTwo,
+    {
+      opacity: 1,
+      x: 0,
+      duration: 0.75
+    },
+    "-=0.58"
+  )
+  .to(
+    [stageLabel, stageFooter],
+    {
+      opacity: 1,
+      duration: 0.65
+    },
+    "-=0.45"
+  );
+
+  /* =====================================================
+     PRODUCT FLOAT
+     ===================================================== */
+
+  gsap.to(product, {
+    y: -8,
+    duration: 3.8,
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut"
+  });
+
+  /* =====================================================
+     BROWSER DEPTH
+     ===================================================== */
+
+  if (browser) {
+    gsap.to(browser, {
+      y: -4,
+      duration: 4.2,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+  }
+
+  /* =====================================================
+     FLOATING CARDS
+     ===================================================== */
+
+  if (cardOne) {
+    gsap.to(cardOne, {
+      y: -10,
+      duration: 3.6,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+  }
+
+  if (cardTwo) {
+    gsap.to(cardTwo, {
+      y: 9,
+      duration: 4.1,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+  }
+
+  /* =====================================================
+     GLOW BREATHING
+     ===================================================== */
+
+  if (glow) {
+    gsap.to(glow, {
+      scale: 1.08,
+      opacity: 0.8,
+      duration: 4.5,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+  }
+
+  /* =====================================================
+     MOUSE 3D PARALLAX
+     ===================================================== */
+
+  if (window.matchMedia("(pointer:fine)").matches) {
+
+    const productX = gsap.quickTo(product, "x", {
+      duration: 0.65,
+      ease: "power3.out"
+    });
+
+    const productY = gsap.quickTo(product, "y", {
+      duration: 0.65,
+      ease: "power3.out"
+    });
+
+    const rotateX = gsap.quickTo(product, "rotationX", {
+      duration: 0.8,
+      ease: "power3.out"
+    });
+
+    const rotateY = gsap.quickTo(product, "rotationY", {
+      duration: 0.8,
+      ease: "power3.out"
+    });
+
+    const cardOneX = cardOne
+      ? gsap.quickTo(cardOne, "x", {
+          duration: 0.9,
+          ease: "power3.out"
+        })
+      : null;
+
+    const cardOneY = cardOne
+      ? gsap.quickTo(cardOne, "y", {
+          duration: 0.9,
+          ease: "power3.out"
+        })
+      : null;
+
+    const cardTwoX = cardTwo
+      ? gsap.quickTo(cardTwo, "x", {
+          duration: 1,
+          ease: "power3.out"
+        })
+      : null;
+
+    const cardTwoY = cardTwo
+      ? gsap.quickTo(cardTwo, "y", {
+          duration: 1,
+          ease: "power3.out"
+        })
+      : null;
+
+    hero.addEventListener("mousemove", (event) => {
+
+      const rect = hero.getBoundingClientRect();
+
+      const px =
+        (event.clientX - rect.left) / rect.width - 0.5;
+
+      const py =
+        (event.clientY - rect.top) / rect.height - 0.5;
+
+      productX(px * 22);
+      productY(py * 12);
+
+      rotateX(-py * 5);
+      rotateY(px * 8);
+
+      if (cardOneX) cardOneX(px * 18);
+      if (cardOneY) cardOneY(py * 12);
+
+      if (cardTwoX) cardTwoX(px * -14);
+      if (cardTwoY) cardTwoY(py * -10);
+    }, { passive: true });
+
+    hero.addEventListener("mouseleave", () => {
+
+      productX(0);
+      productY(0);
+
+      rotateX(7);
+      rotateY(-11);
+
+      if (cardOneX) cardOneX(0);
+      if (cardOneY) cardOneY(0);
+
+      if (cardTwoX) cardTwoX(0);
+      if (cardTwoY) cardTwoY(0);
+    });
+  }
+
+  /* =====================================================
+     SCROLL DEPTH
+     ===================================================== */
+
+  if (typeof ScrollTrigger !== "undefined") {
+
+    gsap.to(product, {
+      y: 80,
+      rotateX: 2,
+      rotateY: -5,
+      scale: 0.94,
+      ease: "none",
+      scrollTrigger: {
+        trigger: hero,
+        start: "top top",
+        end: "bottom top",
+        scrub: 1.2
+      }
+    });
+
+    if (cardOne) {
+      gsap.to(cardOne, {
+        y: -80,
+        ease: "none",
+        scrollTrigger: {
+          trigger: hero,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1.4
+        }
+      });
+    }
+
+    if (cardTwo) {
+      gsap.to(cardTwo, {
+        y: 70,
+        ease: "none",
+        scrollTrigger: {
+          trigger: hero,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1.5
+        }
+      });
+    }
+
+    if (glow) {
+      gsap.to(glow, {
+        y: 100,
+        scale: 1.2,
+        opacity: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: hero,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1.5
+        }
+      });
+    }
+  }
+});
+</script>
+
+  <!-- CYRUS ENTITY MOTION -->
+<script id="cyrus-entity-motion">
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof gsap === "undefined") return;
+
+  const hero = document.querySelector(".hero");
+  const entity = document.querySelector(".cyrus-entity");
+
+  if (!hero || !entity) return;
+
+  const core = entity.querySelector(".cyrus-entity-core");
+  const orbits = entity.querySelectorAll(".cyrus-entity-orbit");
+  const ring = entity.querySelector(".cyrus-entity-ring");
+  const dots = entity.querySelectorAll(".cyrus-entity-dot");
+
+  const reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (reduceMotion) return;
+
+  /* =========================================
+     CINEMATIC HERO ENTRY
+     ========================================= */
+
+  gsap.fromTo(
+    entity,
+    {
+      autoAlpha: 0,
+      scale: 0.78,
+      x: 55
+    },
+    {
+      autoAlpha: 1,
+      scale: 1,
+      x: 0,
+      duration: 1.5,
+      delay: 0.2,
+      ease: "power3.out"
+    }
+  );
+
+  /* =========================================
+     CORE — SUBTLE BREATHING
+     ========================================= */
+
+  if (core) {
+    gsap.to(core, {
+      scale: 1.08,
+      opacity: 0.72,
+      duration: 3.4,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+  }
+
+  /* =========================================
+     ORBITS — VERY SLOW ROTATION
+     ========================================= */
+
+  orbits.forEach((orbit, index) => {
+    gsap.to(orbit, {
+      rotation: index % 2 === 0 ? "+=360" : "-=360",
+      duration: 30 + index * 8,
+      repeat: -1,
+      ease: "none"
+    });
+  });
+
+  /* =========================================
+     INNER RING
+     ========================================= */
+
+  if (ring) {
+    gsap.to(ring, {
+      rotation: 360,
+      duration: 24,
+      repeat: -1,
+      ease: "none"
+    });
+  }
+
+  /* =========================================
+     PARTICLES
+     ========================================= */
+
+  dots.forEach((dot, index) => {
+    gsap.to(dot, {
+      x: index === 1 ? -8 : 6,
+      y: index % 2 === 0 ? -9 : 9,
+      duration: 2.8 + index * 0.45,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+  });
+
+  /* =========================================
+     MOUSE PARALLAX
+     ========================================= */
+
+  if (window.matchMedia("(pointer:fine)").matches) {
+
+    const moveX = gsap.quickTo(entity, "x", {
+      duration: 0.8,
+      ease: "power3.out"
+    });
+
+    const moveY = gsap.quickTo(entity, "y", {
+      duration: 0.8,
+      ease: "power3.out"
+    });
+
+    const rotate = gsap.quickTo(entity, "rotation", {
+      duration: 1,
+      ease: "power3.out"
+    });
+
+    hero.addEventListener("mousemove", (event) => {
+
+      const rect = hero.getBoundingClientRect();
+
+      const px =
+        (event.clientX - rect.left) / rect.width - 0.5;
+
+      const py =
+        (event.clientY - rect.top) / rect.height - 0.5;
+
+      moveX(px * 24);
+      moveY(py * 18);
+      rotate(px * 4);
+    }, { passive: true });
+
+    hero.addEventListener("mouseleave", () => {
+
+      moveX(0);
+      moveY(0);
+      rotate(0);
+
     });
   }
 });
