@@ -2257,6 +2257,548 @@ html[data-theme="dark"] .form-group textarea:-webkit-autofill:focus {
 
 
 
+
+<style id="cyrus-hero-v2">
+/* =========================================================
+   CYRUS HERO V2
+   Digital Product Scene
+   ========================================================= */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, .88fr) minmax(480px, 1.12fr);
+  align-items: center;
+  gap: clamp(40px, 5vw, 90px);
+  min-height: min(820px, 92vh);
+  padding-top: clamp(70px, 8vh, 110px);
+  padding-bottom: clamp(60px, 8vh, 100px);
+}
+
+/* -------------------------
+   COPY
+   ------------------------- */
+
+.hero-copy {
+  position: relative;
+  z-index: 10;
+  max-width: 690px;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 24px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.hero-eyebrow .line {
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  opacity: .5;
+}
+
+.hero-headline {
+  margin: 0;
+  font-size: clamp(48px, 6vw, 88px);
+  line-height: .9;
+  letter-spacing: -.065em;
+  font-weight: 700;
+  max-width: 680px;
+}
+
+.hero-headline span {
+  display: block;
+  opacity: .42;
+}
+
+.hero-subheadline {
+  margin: 30px 0 0;
+  max-width: 500px;
+  font-size: clamp(14px, 1.3vw, 17px);
+  line-height: 1.7;
+  opacity: .65;
+}
+
+.hero-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 620px;
+  gap: 24px;
+  margin-top: 70px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.hero-stats .stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hero-stats strong {
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.hero-stats span {
+  font-size: 11px;
+  line-height: 1.45;
+  opacity: .48;
+}
+
+/* -------------------------
+   STAGE
+   ------------------------- */
+
+.hero-stage {
+  position: relative;
+  min-height: 620px;
+  perspective: 1800px;
+  transform-style: preserve-3d;
+}
+
+.hero-stage-glow {
+  position: absolute;
+  width: 70%;
+  height: 60%;
+  left: 17%;
+  top: 20%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    rgba(0,0,0,.10),
+    rgba(0,0,0,.035) 45%,
+    transparent 72%
+  );
+  filter: blur(45px);
+  transform: translateZ(-180px);
+}
+
+/* -------------------------
+   PRODUCT
+   ------------------------- */
+
+.hero-product {
+  position: absolute;
+  width: min(650px, 100%);
+  aspect-ratio: 1.25;
+  left: 50%;
+  top: 50%;
+  transform:
+    translate(-50%, -50%)
+    rotateX(7deg)
+    rotateY(-11deg)
+    rotateZ(-1deg);
+  transform-style: preserve-3d;
+  transition: transform .8s cubic-bezier(.16,1,.3,1);
+  will-change: transform;
+}
+
+.hero-product-shadow {
+  position: absolute;
+  width: 75%;
+  height: 18%;
+  left: 13%;
+  bottom: 2%;
+  border-radius: 50%;
+  background: rgba(0,0,0,.22);
+  filter: blur(30px);
+  transform: translateZ(-90px);
+}
+
+/* -------------------------
+   BROWSER
+   ------------------------- */
+
+.hero-browser {
+  position: absolute;
+  inset: 8% 4% 15%;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #0b0b0b;
+  border: 1px solid rgba(255,255,255,.22);
+  box-shadow:
+    0 45px 90px rgba(0,0,0,.22),
+    0 15px 30px rgba(0,0,0,.13),
+    inset 0 1px 0 rgba(255,255,255,.2);
+  transform: translateZ(45px);
+  transform-style: preserve-3d;
+}
+
+.hero-browser-bar {
+  position: relative;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  border-bottom: 1px solid rgba(255,255,255,.09);
+  color: rgba(255,255,255,.42);
+  font-size: 9px;
+  letter-spacing: .08em;
+}
+
+.hero-browser-dots {
+  position: absolute;
+  left: 14px;
+  display: flex;
+  gap: 5px;
+}
+
+.hero-browser-dots i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.32);
+}
+
+.hero-browser-control {
+  position: absolute;
+  right: 14px;
+  opacity: .5;
+}
+
+.hero-browser-content {
+  position: relative;
+  height: calc(100% - 38px);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,.09), transparent 30%),
+    linear-gradient(135deg, #151515, #070707 65%);
+  color: white;
+}
+
+.hero-browser-nav {
+  position: absolute;
+  inset: 22px 26px auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 7px;
+  letter-spacing: .14em;
+  opacity: .55;
+}
+
+.hero-browser-nav strong {
+  margin-right: auto;
+  color: white;
+  font-size: 10px;
+  opacity: 1;
+}
+
+.hero-browser-main {
+  position: absolute;
+  left: 8%;
+  top: 25%;
+  z-index: 2;
+}
+
+.hero-browser-kicker {
+  font-size: 8px;
+  letter-spacing: .18em;
+  opacity: .45;
+  margin-bottom: 16px;
+}
+
+.hero-browser-title {
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: .88;
+  letter-spacing: -.06em;
+  font-weight: 600;
+}
+
+.hero-browser-title em {
+  font-style: normal;
+  opacity: .42;
+}
+
+.hero-browser-line {
+  width: 90px;
+  height: 1px;
+  margin-top: 24px;
+  background: rgba(255,255,255,.5);
+}
+
+.hero-browser-meta {
+  display: flex;
+  gap: 30px;
+  margin-top: 15px;
+  font-size: 7px;
+  letter-spacing: .12em;
+  opacity: .35;
+}
+
+.hero-browser-orbit {
+  position: absolute;
+  width: 42%;
+  aspect-ratio: 1;
+  right: -8%;
+  top: 18%;
+  display: grid;
+  place-items: center;
+}
+
+.hero-orbit-ring {
+  position: absolute;
+  inset: 5%;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 50%;
+  transform: rotateX(65deg) rotateY(15deg);
+}
+
+.hero-orbit-core {
+  width: 62px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(255,255,255,.07);
+  backdrop-filter: blur(10px);
+  font-size: 13px;
+  letter-spacing: .08em;
+}
+
+/* -------------------------
+   PRODUCT DEPTH
+   ------------------------- */
+
+.hero-product-layer {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 5%;
+  height: 9%;
+  border-radius: 0 0 16px 16px;
+  background: linear-gradient(
+    180deg,
+    #262626,
+    #080808
+  );
+  border: 1px solid rgba(255,255,255,.13);
+}
+
+.hero-product-layer-back {
+  transform:
+    translateZ(-8px)
+    translateY(15px)
+    scale(.94);
+  opacity: .6;
+}
+
+.hero-product-layer-mid {
+  transform:
+    translateZ(8px)
+    translateY(8px)
+    scale(.98);
+}
+
+/* -------------------------
+   FLOATING UI
+   ------------------------- */
+
+.hero-floating-card {
+  position: absolute;
+  z-index: 8;
+  width: 155px;
+  padding: 15px;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 13px;
+  background: rgba(255,255,255,.7);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 20px 50px rgba(0,0,0,.08);
+  transform-style: preserve-3d;
+}
+
+.hero-floating-index {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 9px;
+  opacity: .4;
+}
+
+.hero-floating-card strong {
+  display: block;
+  font-size: 9px;
+  letter-spacing: .12em;
+}
+
+.hero-floating-card small {
+  display: block;
+  margin-top: 6px;
+  font-size: 10px;
+  line-height: 1.4;
+  opacity: .5;
+}
+
+.hero-floating-card-one {
+  top: 18%;
+  left: 0;
+  transform: translateZ(100px) rotate(-4deg);
+}
+
+.hero-floating-card-two {
+  right: 0;
+  bottom: 18%;
+  transform: translateZ(80px) rotate(4deg);
+}
+
+/* -------------------------
+   STAGE LABEL
+   ------------------------- */
+
+.hero-stage-label {
+  position: absolute;
+  z-index: 10;
+  font-size: 8px;
+  letter-spacing: .16em;
+  opacity: .4;
+}
+
+.hero-stage-label-top {
+  top: 7%;
+  right: 4%;
+}
+
+.hero-stage-status {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  vertical-align: middle;
+}
+
+.hero-stage-footer {
+  position: absolute;
+  left: 4%;
+  bottom: 5%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 8px;
+  letter-spacing: .15em;
+  opacity: .35;
+}
+
+.hero-stage-footer i {
+  display: block;
+  width: 45px;
+  height: 1px;
+  background: currentColor;
+}
+
+/* -------------------------
+   RESPONSIVE
+   ------------------------- */
+
+@media (max-width: 1050px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .hero-copy {
+    max-width: 760px;
+  }
+
+  .hero-stage {
+    min-height: 560px;
+  }
+
+  .hero-floating-card-one {
+    left: 4%;
+  }
+
+  .hero-floating-card-two {
+    right: 4%;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+    padding-top: 55px;
+  }
+
+  .hero-headline {
+    font-size: clamp(44px, 13vw, 68px);
+  }
+
+  .hero-subheadline {
+    font-size: 14px;
+  }
+
+  .hero-stats {
+    gap: 12px;
+    margin-top: 45px;
+  }
+
+  .hero-stage {
+    width: calc(100% + 30px);
+    min-height: 390px;
+    margin-left: -15px;
+    margin-top: 10px;
+  }
+
+  .hero-product {
+    width: 108%;
+  }
+
+  .hero-floating-card {
+    width: 125px;
+    padding: 11px;
+  }
+
+  .hero-floating-card-one {
+    top: 13%;
+    left: 2%;
+  }
+
+  .hero-floating-card-two {
+    right: 2%;
+    bottom: 12%;
+  }
+
+  .hero-stage-label-top {
+    top: 3%;
+    right: 5%;
+  }
+
+  .hero-browser-nav span {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-product {
+    transition: none;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -2299,77 +2841,152 @@ html[data-theme="dark"] .form-group textarea:-webkit-autofill:focus {
 
 <main>
   <section class="hero" id="home">
-    <div class="hero-transition" aria-hidden="true"></div>
-    <div class="container hero-content">
+  <div class="hero-transition" aria-hidden="true"></div>
 
-<div class="cyrus-hero-computer" aria-hidden="true">
-  <div class="cyrus-hero-floor"></div>
+  <div class="container hero-content">
 
-  <div class="cyrus-hero-device">
-
-    <div class="cyrus-hero-monitor">
-      <div class="cyrus-hero-monitor-frame"></div>
-
-      <div class="cyrus-hero-screen">
-        <div class="cyrus-hero-screenbar">
-          <span class="cyrus-hero-dot"></span>
-          <span class="cyrus-hero-dot"></span>
-          <span class="cyrus-hero-dot"></span>
-          CYRUS / WEB.STUDIO
-        </div>
-
-        <div class="cyrus-hero-code">
-          <span class="num">01</span> <span class="key">const</span> experience = {<br>
-          <span class="num">02</span>&nbsp;&nbsp;design: <span class="value">"minimal"</span>,<br>
-          <span class="num">03</span>&nbsp;&nbsp;code: <span class="value">"clean"</span>,<br>
-          <span class="num">04</span>&nbsp;&nbsp;motion: <span class="value">"GSAP"</span>,<br>
-          <span class="num">05</span>&nbsp;&nbsp;identity: <span class="value">"unique"</span><br>
-          <span class="num">06</span> };<br><br>
-          <span class="num">07</span> <span class="key">build</span>(experience);<br>
-          <span class="num">08</span> <span class="key">deploy</span>();<span class="cursor"></span>
-        </div>
-      </div>
-
-      <div class="cyrus-hero-neck"></div>
-      <div class="cyrus-hero-base"></div>
-    </div>
-
-    <div class="cyrus-hero-keyboard"></div>
-
-  </div>
-</div>
-
-<div class="hero-eyebrow">
+    <div class="hero-copy">
+      <div class="hero-eyebrow">
         <span class="line"></span>
         <span>Digital Web Studio</span>
       </div>
+
       <h1 class="hero-headline">
         BUILD YOUR
         <span>DIGITAL IDENTITY.</span>
       </h1>
+
       <p class="hero-subheadline">
-        Redesigned with minimal structure, pure white aesthetics, and high-performance GSAP motion.
+        We design and build digital experiences that make ambitious
+        businesses look as good online as they are in the real world.
       </p>
+
       <div class="hero-cta-group">
-        <a href="https://wa.me/6281318048885?text=Halo%20CyrusWeb,%20saya%20ingin%20memilih%20paket%20website" target="_blank" class="btn-primary">Pilih Paket Website →</a>
-        <a href="portfolio.html#portfolio" class="btn-secondary">Lihat Selected Work</a>
+        <a
+          href="https://wa.me/6281318048885?text=Halo%20CyrusWeb,%20saya%20ingin%20memulai%20project%20website"
+          target="_blank"
+          class="btn-primary"
+        >
+          Start a Project →
+        </a>
+
+        <a
+          href="portfolio.html#portfolio"
+          class="btn-secondary"
+        >
+          Explore Work
+        </a>
       </div>
+
       <div class="hero-stats">
         <div class="stat-item">
-          <strong>01 / Design</strong>
-          <span>Spatial UI/UX layout</span>
+          <strong>01 / Strategy</strong>
+          <span>Clear digital direction</span>
         </div>
+
         <div class="stat-item">
-          <strong>02 / Build</strong>
-          <span>Clean semantic code</span>
+          <strong>02 / Design</strong>
+          <span>Distinct visual identity</span>
         </div>
+
         <div class="stat-item">
-          <strong>03 / Scale</strong>
-          <span>Ongoing maintenance</span>
+          <strong>03 / Build</strong>
+          <span>Fast production-ready code</span>
         </div>
       </div>
     </div>
-  </section>
+
+    <div class="hero-stage" aria-hidden="true">
+
+      <div class="hero-stage-glow"></div>
+
+      <div class="hero-stage-label hero-stage-label-top">
+        <span class="hero-stage-status"></span>
+        LIVE / DIGITAL EXPERIENCE
+      </div>
+
+      <div class="hero-product">
+
+        <div class="hero-product-shadow"></div>
+
+        <div class="hero-browser">
+          <div class="hero-browser-bar">
+            <div class="hero-browser-dots">
+              <i></i>
+              <i></i>
+              <i></i>
+            </div>
+
+            <span>cyrusweb.studio</span>
+
+            <div class="hero-browser-control">↗</div>
+          </div>
+
+          <div class="hero-browser-content">
+
+            <div class="hero-browser-nav">
+              <strong>CYRUS</strong>
+
+              <span>WORK</span>
+              <span>ABOUT</span>
+              <span>CONTACT</span>
+            </div>
+
+            <div class="hero-browser-main">
+
+              <div class="hero-browser-kicker">
+                DIGITAL STUDIO
+              </div>
+
+              <div class="hero-browser-title">
+                BUILD<br>
+                SOMETHING<br>
+                <em>MEMORABLE.</em>
+              </div>
+
+              <div class="hero-browser-line"></div>
+
+              <div class="hero-browser-meta">
+                <span>DESIGN / DEVELOPMENT</span>
+                <span>2026</span>
+              </div>
+
+            </div>
+
+            <div class="hero-browser-orbit">
+              <div class="hero-orbit-ring"></div>
+              <div class="hero-orbit-core">CW</div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="hero-product-layer hero-product-layer-back"></div>
+        <div class="hero-product-layer hero-product-layer-mid"></div>
+
+      </div>
+
+      <div class="hero-floating-card hero-floating-card-one">
+        <span class="hero-floating-index">01</span>
+        <strong>INTERACTION</strong>
+        <small>Motion that feels intentional.</small>
+      </div>
+
+      <div class="hero-floating-card hero-floating-card-two">
+        <span class="hero-floating-index">02</span>
+        <strong>PERFORMANCE</strong>
+        <small>Built for real users.</small>
+      </div>
+
+      <div class="hero-stage-footer">
+        <span>SCROLL TO EXPLORE</span>
+        <i></i>
+      </div>
+
+    </div>
+
+  </div>
+</section>
 
 
   <!-- ================= SELECTED WORK ================= -->
