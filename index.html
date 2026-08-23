@@ -3962,27 +3962,13 @@ html[data-theme="dark"] .tech-section .foot span{
    ABSOLUTE DUAL-LANE MOTION
    ========================= */
 
-.trusted-track-right .trusted-stream{
-  animation:trusted-absolute-right 7s linear infinite;
-}
 
+.trusted-track-right .trusted-stream,
 .trusted-track-left .trusted-stream{
-  animation:trusted-absolute-left 8s linear infinite;
+  animation:none !important;
+  transform:translate3d(0,0,0);
 }
 
-@keyframes trusted-absolute-right{
-  from{
-    transform:translate3d(-520px,0,0);
-  }
-  to{
-    transform:translate3d(0,0,0);
-  }
-}
-
-@keyframes trusted-absolute-left{
-  from{
-    transform:translate3d(0,0,0);
-  }
   to{
     transform:translate3d(-520px,0,0);
   }
@@ -6792,6 +6778,181 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     reveal();
   }
+})();
+</script>
+
+
+<script id="cyrus-trusted-infinite-engine">
+(function(){
+  "use strict";
+
+  const tracks = document.querySelectorAll(
+    ".trusted-track-right, .trusted-track-left"
+  );
+
+  if (!tracks.length) return;
+
+  const states = [];
+
+  tracks.forEach(track => {
+    const stream = track.querySelector(".trusted-stream");
+    if (!stream) return;
+
+    const sets = Array.from(
+      stream.querySelectorAll(".trusted-set")
+    );
+
+    if (sets.length < 2) return;
+
+    const width = sets[0].getBoundingClientRect().width;
+
+    if (!width) return;
+
+    const direction =
+      track.classList.contains("trusted-track-right")
+        ? 1
+        : -1;
+
+    const speed =
+      track.classList.contains("trusted-track-right")
+        ? 74
+        : 68;
+
+    /*
+      Semua set menjadi lane aktif.
+
+      RIGHT:
+      [-3] [-2] [-1] [0]
+
+      LEFT:
+      [0] [-1] [-2] [-3]
+
+      Setiap lane selalu berjarak tepat satu
+      lebar set sehingga tidak pernah muncul
+      celah kosong.
+    */
+
+    const positions = sets.map((_, index) => {
+      if (direction > 0) {
+        return (index - sets.length + 1) * width;
+      }
+
+      return -index * width;
+    });
+
+    states.push({
+      track,
+      sets,
+      width,
+      direction,
+      speed,
+      positions
+    });
+  });
+
+  let last = performance.now();
+
+  function frame(now){
+
+    const dt = Math.min(
+      (now - last) / 1000,
+      0.05
+    );
+
+    last = now;
+
+    states.forEach(state => {
+
+      const movement =
+        state.speed *
+        state.direction *
+        dt;
+
+      for(let i = 0; i < state.sets.length; i++){
+
+        state.positions[i] += movement;
+      }
+
+      if(state.direction > 0){
+
+        /*
+          RIGHT
+
+          Kalau lane sudah keluar penuh
+          di sebelah kanan, pindahkan ke
+          belakang lane paling kiri.
+        */
+
+        for(let i = 0; i < state.sets.length; i++){
+
+          if(state.positions[i] >= state.width){
+
+            const minPosition =
+              Math.min(...state.positions);
+
+            state.positions[i] =
+              minPosition - state.width;
+          }
+        }
+
+      } else {
+
+        /*
+          LEFT
+
+          Kalau lane sudah keluar penuh
+          di sebelah kiri, pindahkan ke
+          belakang lane paling kanan.
+        */
+
+        for(let i = 0; i < state.sets.length; i++){
+
+          if(
+            state.positions[i] <=
+            -state.width
+          ){
+
+            const maxPosition =
+              Math.max(...state.positions);
+
+            state.positions[i] =
+              maxPosition + state.width;
+          }
+        }
+      }
+
+      for(let i = 0; i < state.sets.length; i++){
+
+        state.sets[i].style.transform =
+          `translate3d(${state.positions[i]}px,0,0)`;
+      }
+
+    });
+
+    requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(frame);
+
+  /*
+    Recalculate width after viewport resize.
+  */
+
+  window.addEventListener("resize", () => {
+
+    states.forEach(state => {
+
+      const newWidth =
+        state.sets[0].getBoundingClientRect().width;
+
+      if(newWidth > 0){
+        state.width = newWidth;
+      }
+
+    });
+
+  });
+
 })();
 </script>
 
