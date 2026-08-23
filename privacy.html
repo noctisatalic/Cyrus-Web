@@ -851,6 +851,298 @@ html[data-theme="dark"] .cyrus-footer .footer-status {
   color: var(--cw-muted) !important;
 }
 
+
+
+/* =========================================================
+   CYRUSWEB — FINAL MOBILE NAV + FOOTER PATCH
+   Target: tentang / privacy / ketentuan
+   ========================================================= */
+
+/* ---------- MOBILE NAV FIX ---------- */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none !important;
+    position: absolute;
+    z-index: 9999;
+  }
+
+  .nav-links.mobile-open {
+    display: flex !important;
+  }
+
+  .nav-links.mobile-open .nav-link {
+    display: flex !important;
+    width: 100%;
+    align-items: center;
+  }
+
+  .mobile-menu-btn {
+    display: flex !important;
+    position: relative;
+    z-index: 10001;
+  }
+
+  .navbar {
+    position: relative;
+    z-index: 10000;
+  }
+
+  .nav-wrapper {
+    position: relative;
+    z-index: 10000;
+  }
+
+  body.nav-locked {
+    overflow: hidden;
+  }
+}
+
+/* ---------- FOOTER BASE ---------- */
+.cyrus-footer {
+  position: relative;
+  width: 100%;
+  margin-top: 80px;
+  padding: 72px 0 24px;
+  border-top: 1px solid var(--cw-line);
+  background: var(--cw-surface);
+}
+
+.cyrus-footer .container {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+  position: relative;
+}
+
+.cyrus-footer .footer-main {
+  display: grid;
+  grid-template-columns: minmax(240px, 1.35fr) repeat(3, minmax(150px, 1fr));
+  gap: 48px;
+  align-items: start;
+}
+
+.cyrus-footer .footer-brand {
+  min-width: 0;
+}
+
+.cyrus-footer .footer-logo {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--cw-text);
+  text-decoration: none;
+}
+
+.cyrus-footer .footer-logo span {
+  font-weight: 400;
+}
+
+.cyrus-footer .footer-brand p {
+  max-width: 320px;
+  margin: 0 0 24px;
+  color: var(--cw-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.cyrus-footer .footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cyrus-footer .footer-column h3 {
+  margin: 0 0 8px;
+  color: var(--cw-text);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.cyrus-footer .footer-column a,
+.cyrus-footer .footer-contact a {
+  color: var(--cw-muted);
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 1.5;
+  transition: color .2s ease, transform .2s ease;
+}
+
+.cyrus-footer .footer-column a:hover,
+.cyrus-footer .footer-contact a:hover {
+  color: var(--cw-text);
+}
+
+.cyrus-footer .footer-cta {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: var(--cw-text);
+  color: var(--cw-bg) !important;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cyrus-footer .footer-contact {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 32px;
+  margin-top: 52px;
+  padding: 26px 0;
+  border-top: 1px solid var(--cw-line);
+  border-bottom: 1px solid var(--cw-line);
+}
+
+.cyrus-footer .footer-contact > div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+
+.cyrus-footer .footer-label {
+  color: var(--cw-muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+}
+
+.cyrus-footer .footer-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--cw-text);
+  font-size: 13px;
+}
+
+.cyrus-footer .footer-status i {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.cyrus-footer .footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 24px;
+  color: var(--cw-muted);
+  font-size: 11px;
+}
+
+.cyrus-footer .footer-legal {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.cyrus-footer .footer-legal a {
+  color: var(--cw-muted);
+  text-decoration: none;
+}
+
+.cyrus-footer .footer-legal a:hover {
+  color: var(--cw-text);
+}
+
+/* ---------- MOBILE FOOTER ---------- */
+@media (max-width: 760px) {
+  .cyrus-footer {
+    margin-top: 64px;
+    padding: 52px 0 22px;
+  }
+
+  .cyrus-footer .container {
+    width: min(100% - 32px, 560px);
+  }
+
+  .cyrus-footer .footer-main {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .cyrus-footer .footer-brand p {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .cyrus-footer .footer-column {
+    gap: 8px;
+    padding-top: 4px;
+  }
+
+  .cyrus-footer .footer-column h3 {
+    margin-bottom: 7px;
+  }
+
+  .cyrus-footer .footer-column a {
+    font-size: 14px;
+    padding: 3px 0;
+  }
+
+  .cyrus-footer .footer-contact {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-top: 40px;
+    padding: 24px 0;
+  }
+
+  .cyrus-footer .footer-contact a {
+    font-size: 14px;
+  }
+
+  .cyrus-footer .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding-top: 22px;
+  }
+
+  .cyrus-footer .footer-legal {
+    justify-content: flex-start;
+    gap: 12px 18px;
+  }
+}
+
+/* ---------- SMALL PHONE ---------- */
+@media (max-width: 420px) {
+  .cyrus-footer {
+    padding-top: 44px;
+  }
+
+  .cyrus-footer .container {
+    width: min(100% - 28px, 560px);
+  }
+
+  .cyrus-footer .footer-logo {
+    font-size: 22px;
+  }
+
+  .cyrus-footer .footer-main {
+    gap: 30px;
+  }
+
+  .cyrus-footer .footer-contact {
+    margin-top: 34px;
+  }
+
+  .cyrus-footer .footer-bottom {
+    font-size: 10px;
+  }
+}
+
 </style>
 
 </head>
