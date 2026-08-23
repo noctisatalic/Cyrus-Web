@@ -103,73 +103,176 @@ a{
   margin:auto;
 }
 
-/* ================= NAVBAR ================= */
 
-nav{
-  position:sticky;
-  top:0;
-  z-index:50;
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  background:rgba(255,255,255,.82);
-  border-bottom:1px solid var(--cw-line);
+/* =========================================================
+   CYRUS NAVBAR — SYNCED WITH INDEX
+   ========================================================= */
+
+.nav-wrapper {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: min(940px, calc(100% - 24px));
 }
 
-.nav-inner{
-  min-height:70px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:24px;
+.navbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  padding: 6px 12px 6px 14px;
+  border-radius: 24px;
+  background: #FFFFFF;
+  border: 1px solid var(--cw-line);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
-.logo{
-  text-decoration:none;
-  font-size:20px;
-  font-weight:700;
-  letter-spacing:-.06em;
+.nav-brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 }
 
-.logo span{
-  font-weight:400;
+.nav-brand .brand-mark {
+  display: block;
+  color: var(--cw-text);
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 1;
 }
 
-.nav-links{
-  display:flex;
-  align-items:center;
-  gap:22px;
+.nav-links {
+  display: flex;
+  gap: 4px;
 }
 
-.nav-links a{
-  color:var(--cw-muted);
-  text-decoration:none;
-  font-size:12px;
-  transition:
-    color .2s ease,
-    transform .2s ease;
+.nav-link {
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--cw-muted);
+  text-decoration: none;
+  transition: color 0.2s, background 0.2s;
 }
 
-.nav-links a:hover{
-  color:var(--cw-text);
-  transform:translateY(-1px);
+.nav-link:hover,
+.nav-link.active {
+  color: var(--cw-text);
+  background: var(--cw-soft);
 }
 
-.nav-cta{
-  padding:10px 15px;
-  border:1px solid var(--cw-text);
-  border-radius:999px;
-  color:var(--cw-text)!important;
-  transition:
-    background .2s ease,
-    color .2s ease,
-    transform .2s ease;
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.nav-cta:hover{
-  background:var(--cw-text);
-  color:var(--cw-bg)!important;
-  transform:translateY(-2px);
+.nav-cta {
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 14px;
+  background: var(--cw-text);
+  color: var(--cw-bg) !important;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
+
+.nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(17, 17, 17, 0.15);
+}
+
+.mobile-menu-btn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--cw-soft);
+  color: var(--cw-text);
+  border: 1px solid var(--cw-line);
+  font-size: 16px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .nav-wrapper {
+    width: min(940px, calc(100% - 24px));
+  }
+
+  .navbar {
+    height: 62px;
+    padding: 6px 10px 6px 14px;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 2px;
+    background: var(--cw-surface-solid);
+    border: 1px solid var(--cw-line);
+    border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    padding: 8px;
+  }
+
+  .nav-links.mobile-open {
+    display: flex;
+    animation: navDropIn 0.22s ease;
+  }
+
+  .nav-links .nav-link {
+    padding: 13px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .nav-actions .nav-cta {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .mobile-menu-btn[aria-expanded="true"] {
+    background: var(--cw-text);
+    color: var(--cw-bg);
+  }
+}
+
+@keyframes navDropIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body.nav-locked {
+  overflow: hidden;
+}
+
 
 /* ================= HERO ================= */
 
@@ -552,7 +655,9 @@ function syncThemeColor(theme) {
 
 const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches;
   document.documentElement.dataset.theme =
-  syncThemeColor(document.documentElement.dataset.theme);\n    saved || (preferred ? "dark" : "light");
+    saved || (preferred ? "dark" : "light");
+
+  syncThemeColor(document.documentElement.dataset.theme);
 })();
 </script>
 
@@ -707,24 +812,31 @@ html[data-theme="dark"] ::selection {
 
 <body>
 
-<nav>
-  <div class="container nav-inner">
-    <a class="logo" href="index.html">CYRUS<span>WEB</span></a>
-
-    <div class="nav-links">
-      <a href="layanan.html">Layanan</a>
-      <a href="pricing.html">Paket</a>
-      <a href="portfolio.html">Portfolio</a>
-      <a href="tentang.html">Tentang Kami</a>
-      <a href="faq.html">FAQ</a>
-      <a href="contact.html" class="nav-cta">Kontak →</a>
-
+<div class="nav-wrapper">
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-mark" aria-label="Cyrus Web">CYRUS</span>
+    </a>
+    <div class="nav-links" id="nav-links-panel">
+      <a href="layanan.html" class="nav-link">Layanan</a>
+      <a href="index.html#process" class="nav-link">Proses</a>
+      <a href="pricing.html" class="nav-link">Paket</a>
+      <a href="tentang.html" class="nav-link">Tentang Kami</a>
+      <a href="portfolio.html" class="nav-link">Portfolio</a>
+      <a href="testimonials.html" class="nav-link">Testimoni</a>
+      <a href="faq.html" class="nav-link">FAQ</a>
+      <a href="contact.html" class="nav-link">Kontak</a>
+    </div>
+    <div class="nav-actions">
       <button type="button" class="cw-theme-toggle" id="cw-theme-toggle" aria-label="Ganti tema" title="Ganti tema">
-  <span class="cw-sun" aria-hidden="true">☀</span>
-  <span class="cw-moon" aria-hidden="true">☾</span>
-</button></div>
-  </div>
-</nav>
+        <span class="cw-sun">☀</span>
+        <span class="cw-moon">☾</span>
+      </button>
+      <a href="https://wa.me/6281318048885?text=Halo%20CyrusWeb,%20saya%20ingin%20memulai%20project%20website" target="_blank" class="nav-cta">Mulai Project</a>
+      <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="nav-links-panel">☰</button>
+    </div>
+  </nav>
+</div>
 
 <main>
   <section class="hero">
@@ -921,10 +1033,76 @@ html[data-theme="dark"] ::selection {
     const next = current === "dark" ? "light" : "dark";
 
     document.documentElement.dataset.theme = next;
-    syncThemeColor(document.documentElement.dataset.theme);\n    localStorage.setItem("cyrus-theme", next);
+    syncThemeColor(document.documentElement.dataset.theme);
+    localStorage.setItem("cyrus-theme", next);
   });
 })();
 </script>
+
+
+<script id="cyrus-mobile-menu-script">
+(function () {
+  const menuBtn = document.querySelector(".mobile-menu-btn");
+  const navLinksPanel = document.getElementById("nav-links-panel");
+
+  if (!menuBtn || !navLinksPanel) return;
+
+  function closeMobileMenu() {
+    navLinksPanel.classList.remove("mobile-open");
+    menuBtn.setAttribute("aria-expanded", "false");
+    menuBtn.textContent = "☰";
+    document.body.classList.remove("nav-locked");
+  }
+
+  function openMobileMenu() {
+    navLinksPanel.classList.add("mobile-open");
+    menuBtn.setAttribute("aria-expanded", "true");
+    menuBtn.textContent = "✕";
+    document.body.classList.add("nav-locked");
+  }
+
+  menuBtn.addEventListener("click", function (event) {
+    event.stopPropagation();
+
+    const isOpen =
+      navLinksPanel.classList.contains("mobile-open");
+
+    if (isOpen) {
+      closeMobileMenu();
+    } else {
+      openMobileMenu();
+    }
+  });
+
+  navLinksPanel
+    .querySelectorAll(".nav-link")
+    .forEach(function (link) {
+      link.addEventListener("click", closeMobileMenu);
+    });
+
+  document.addEventListener("click", function (event) {
+    if (
+      !navLinksPanel.contains(event.target) &&
+      !menuBtn.contains(event.target)
+    ) {
+      closeMobileMenu();
+    }
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      closeMobileMenu();
+    }
+  });
+
+  window.addEventListener("resize", function () {
+    if (window.innerWidth > 768) {
+      closeMobileMenu();
+    }
+  });
+})();
+</script>
+
 
 </body>
 </html>
