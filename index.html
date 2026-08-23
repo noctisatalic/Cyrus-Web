@@ -3818,6 +3818,266 @@ html[data-theme="dark"] .tech-section .foot span{
 
 <!-- ================= END TECHNOLOGY ARCHITECTURE CSS ================= -->
 
+
+<style id="cyrus-trusted-marquee">
+
+/* =========================================================
+   CYRUS TRUSTED BY
+   DUAL DIRECTION BRAND STREAM
+   ========================================================= */
+
+.trusted-section{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  padding:64px 0 72px;
+  background:transparent;
+  color:var(--ink);
+}
+
+.trusted-head{
+  position:relative;
+  z-index:5;
+  width:min(720px,calc(100% - 36px));
+  margin:0 auto 34px;
+  text-align:center;
+}
+
+.trusted-eyebrow{
+  margin-bottom:14px;
+  font-family:var(--font-display);
+  font-size:10px;
+  font-weight:700;
+  line-height:1;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.trusted-head h2{
+  margin:0;
+  font-family:var(--font-display);
+  font-size:clamp(34px,5vw,58px);
+  font-weight:500;
+  line-height:.96;
+  letter-spacing:-.055em;
+}
+
+.trusted-head h2 span{
+  color:var(--muted);
+}
+
+.trusted-marquee{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  width:100%;
+  overflow:hidden;
+
+  mask-image:linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+
+  -webkit-mask-image:linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+}
+
+.trusted-track{
+  display:flex;
+  width:max-content;
+  flex-shrink:0;
+  will-change:transform;
+}
+
+.trusted-set{
+  display:flex;
+  align-items:center;
+  flex-shrink:0;
+  gap:34px;
+  padding-right:34px;
+}
+
+.trusted-track-right{
+  animation:trusted-right 30s linear infinite;
+}
+
+.trusted-track-left{
+  animation:trusted-left 34s linear infinite;
+}
+
+.trusted-logo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  width:150px;
+  height:72px;
+
+  flex-shrink:0;
+
+  transition:
+    transform .45s cubic-bezier(.16,1,.3,1),
+    opacity .45s ease;
+}
+
+.trusted-logo img{
+  display:block;
+
+  width:auto;
+  max-width:130px;
+  max-height:50px;
+
+  object-fit:contain;
+
+  user-select:none;
+  pointer-events:none;
+  -webkit-user-drag:none;
+}
+
+/*
+   SPR Audio = monochrome.
+   Ihsan Koi = ORIGINAL COLORS.
+*/
+
+.trusted-mono img{
+  filter:brightness(0);
+}
+
+.trusted-color img{
+  filter:none !important;
+}
+
+.trusted-logo:hover{
+  transform:translateY(-3px);
+  opacity:.8;
+}
+
+.trusted-separator{
+  width:4px;
+  height:4px;
+  flex:0 0 4px;
+
+  border-radius:50%;
+
+  background:currentColor;
+  opacity:.2;
+}
+
+
+/* =========================================================
+   ANIMATION
+   ========================================================= */
+
+@keyframes trusted-right{
+
+  from{
+    transform:translate3d(-50%,0,0);
+  }
+
+  to{
+    transform:translate3d(0,0,0);
+  }
+
+}
+
+@keyframes trusted-left{
+
+  from{
+    transform:translate3d(0,0,0);
+  }
+
+  to{
+    transform:translate3d(-50%,0,0);
+  }
+
+}
+
+
+/* =========================================================
+   DARK THEME
+   ========================================================= */
+
+html[data-theme="dark"] .trusted-section{
+  color:#f5f5f2;
+}
+
+html[data-theme="dark"] .trusted-head h2 span{
+  color:rgba(255,255,255,.46);
+}
+
+html[data-theme="dark"] .trusted-mono img{
+  filter:brightness(0) invert(1);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:600px){
+
+  .trusted-section{
+    padding:52px 0 58px;
+  }
+
+  .trusted-head{
+    margin-bottom:26px;
+  }
+
+  .trusted-head h2{
+    font-size:clamp(32px,9vw,42px);
+  }
+
+  .trusted-set{
+    gap:24px;
+    padding-right:24px;
+  }
+
+  .trusted-logo{
+    width:115px;
+    height:58px;
+  }
+
+  .trusted-logo img{
+    max-width:105px;
+    max-height:40px;
+  }
+
+  .trusted-track-right{
+    animation-duration:25s;
+  }
+
+  .trusted-track-left{
+    animation-duration:28s;
+  }
+
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  .trusted-track-right,
+  .trusted-track-left{
+    animation:none;
+  }
+
+  .trusted-logo{
+    transition:none;
+  }
+
+}
+
+</style>
+
 </head>
 <body>
 
@@ -5550,70 +5810,86 @@ window.addEventListener(
 
 <section class="trusted-section" id="trusted-by">
 
-  <div class="trusted-inner">
+  <div class="trusted-head">
+    <div class="trusted-eyebrow">Trusted By</div>
 
-    <div class="trusted-heading">
-      <div class="trusted-eyebrow">
-        <span></span>
-        TRUSTED BY
+    <h2>
+      Brands that
+      <span>trust the craft.</span>
+    </h2>
+  </div>
+
+  <div class="trusted-marquee">
+
+    <!-- TOP TRACK : RIGHT -->
+    <div class="trusted-track trusted-track-right">
+
+      <div class="trusted-set">
+        <div class="trusted-logo trusted-mono">
+          <img src="spraudio.png" alt="SPR Audio" draggable="false">
+        </div>
+
+        <span class="trusted-separator"></span>
+
+        <div class="trusted-logo trusted-color">
+          <img src="ihsan-koi.png" alt="Ihsan Koi" draggable="false">
+        </div>
+
+        <span class="trusted-separator"></span>
       </div>
 
-      <h2>
-        Built for brands<br>
-        <em>that mean business.</em>
-      </h2>
+      <div class="trusted-set" aria-hidden="true">
+        <div class="trusted-logo trusted-mono">
+          <img src="spraudio.png" alt="">
+        </div>
 
-      <p>
-        Digital experiences created with the same attention
-        we give to every detail.
-      </p>
+        <span class="trusted-separator"></span>
+
+        <div class="trusted-logo trusted-color">
+          <img src="ihsan-koi.png" alt="">
+        </div>
+
+        <span class="trusted-separator"></span>
+      </div>
+
     </div>
 
 
-    <div class="trusted-stage">
+    <!-- BOTTOM TRACK : LEFT -->
+    <div class="trusted-track trusted-track-left">
 
-      <div class="trusted-line trusted-line-top"></div>
+      <div class="trusted-set">
 
-      <div class="trusted-brand trusted-brand-one">
-        <div class="trusted-index">01</div>
-
-        <div class="trusted-logo-wrap">
-          <img
-            src="spraudio.png"
-            alt="SPR Audio"
-            draggable="false"
-          >
+        <div class="trusted-logo trusted-color">
+          <img src="ihsan-koi.png" alt="Ihsan Koi" draggable="false">
         </div>
 
-        <span class="trusted-label">AUDIO PRODUCTION</span>
-      </div>
+        <span class="trusted-separator"></span>
 
-
-      <div class="trusted-divider" aria-hidden="true"></div>
-
-
-      <div class="trusted-brand trusted-brand-two">
-        <div class="trusted-index">02</div>
-
-        <div class="trusted-logo-wrap">
-          <img
-            src="ihsan-koi.png"
-            alt="Ihsan Koi"
-            draggable="false"
-          >
+        <div class="trusted-logo trusted-mono">
+          <img src="spraudio.png" alt="SPR Audio" draggable="false">
         </div>
 
-        <span class="trusted-label">KOI & AQUATIC</span>
+        <span class="trusted-separator"></span>
+
       </div>
 
-      <div class="trusted-line trusted-line-bottom"></div>
+      <div class="trusted-set" aria-hidden="true">
 
-    </div>
+        <div class="trusted-logo trusted-color">
+          <img src="ihsan-koi.png" alt="">
+        </div>
 
-    <div class="trusted-foot">
-      <span>SELECTED PARTNERS</span>
-      <span class="trusted-foot-dot"></span>
-      <span>DESIGNED WITH INTENT</span>
+        <span class="trusted-separator"></span>
+
+        <div class="trusted-logo trusted-mono">
+          <img src="spraudio.png" alt="">
+        </div>
+
+        <span class="trusted-separator"></span>
+
+      </div>
+
     </div>
 
   </div>
