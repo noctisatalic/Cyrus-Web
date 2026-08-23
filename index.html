@@ -3932,6 +3932,387 @@ html[data-theme="dark"] .tech-section .foot span{
 
 
 
+
+<style id="cyrus-trusted-by">
+
+/* =========================================================
+   CYRUS TRUSTED BY
+   Scoped — does not touch Navbar / Hero / Technology
+   ========================================================= */
+
+.trusted-section{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  padding:72px 24px 58px;
+  background:transparent;
+  color:var(--ink,#111);
+}
+
+.trusted-inner{
+  width:min(1180px,100%);
+  margin:0 auto;
+}
+
+.trusted-heading{
+  max-width:720px;
+  margin:0 auto 42px;
+  text-align:center;
+
+  opacity:0;
+  transform:translateY(28px);
+  transition:
+    opacity .9s cubic-bezier(.16,1,.3,1),
+    transform .9s cubic-bezier(.16,1,.3,1);
+}
+
+.trusted-section.is-visible .trusted-heading{
+  opacity:1;
+  transform:none;
+}
+
+.trusted-eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  margin-bottom:17px;
+
+  font:700 9px/1 monospace;
+  letter-spacing:.22em;
+  color:var(--muted,#888);
+}
+
+.trusted-eyebrow span{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:currentColor;
+  box-shadow:0 0 0 4px rgba(0,0,0,.045);
+}
+
+.trusted-heading h2{
+  margin:0;
+  font-size:clamp(34px,5vw,62px);
+  line-height:.94;
+  letter-spacing:-.055em;
+  font-weight:700;
+}
+
+.trusted-heading h2 em{
+  color:var(--muted,#888);
+  font-style:normal;
+}
+
+.trusted-heading p{
+  max-width:450px;
+  margin:20px auto 0;
+
+  font-size:14px;
+  line-height:1.7;
+  color:var(--muted,#888);
+}
+
+.trusted-stage{
+  position:relative;
+
+  display:grid;
+  grid-template-columns:1fr 1px 1fr;
+  align-items:stretch;
+
+  min-height:245px;
+  border-top:1px solid rgba(17,17,17,.09);
+  border-bottom:1px solid rgba(17,17,17,.09);
+}
+
+.trusted-line{
+  position:absolute;
+  left:0;
+  width:100%;
+  height:1px;
+  background:rgba(17,17,17,.06);
+  transform:scaleX(0);
+  transform-origin:center;
+  transition:transform 1.2s cubic-bezier(.16,1,.3,1);
+}
+
+.trusted-line-top{
+  top:0;
+}
+
+.trusted-line-bottom{
+  bottom:0;
+}
+
+.trusted-section.is-visible .trusted-line{
+  transform:scaleX(1);
+}
+
+.trusted-brand{
+  position:relative;
+  min-width:0;
+  padding:52px 50px 42px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  opacity:0;
+  transform:translateY(35px) scale(.97);
+
+  transition:
+    opacity .9s cubic-bezier(.16,1,.3,1),
+    transform 1s cubic-bezier(.16,1,.3,1);
+}
+
+.trusted-brand-one{
+  transition-delay:.12s;
+}
+
+.trusted-brand-two{
+  transition-delay:.24s;
+}
+
+.trusted-section.is-visible .trusted-brand{
+  opacity:1;
+  transform:none;
+}
+
+.trusted-index{
+  position:absolute;
+  top:18px;
+  left:22px;
+
+  font:9px monospace;
+  letter-spacing:.16em;
+  color:var(--muted,#888);
+}
+
+.trusted-logo-wrap{
+  width:min(260px,70%);
+  height:100px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  transition:transform .6s cubic-bezier(.16,1,.3,1);
+}
+
+.trusted-logo-wrap img{
+  display:block;
+  width:100%;
+  max-width:240px;
+  max-height:90px;
+
+  object-fit:contain;
+
+  /* Source logos are black */
+  filter:brightness(0);
+
+  user-select:none;
+  -webkit-user-drag:none;
+
+  transition:
+    filter .45s ease,
+    transform .6s cubic-bezier(.16,1,.3,1);
+}
+
+.trusted-brand:hover .trusted-logo-wrap{
+  transform:translateY(-5px);
+}
+
+.trusted-brand:hover .trusted-logo-wrap img{
+  transform:scale(1.055);
+}
+
+.trusted-label{
+  margin-top:24px;
+
+  font:700 8px/1 monospace;
+  letter-spacing:.2em;
+  color:var(--muted,#888);
+}
+
+.trusted-divider{
+  width:1px;
+  background:rgba(17,17,17,.09);
+  transform:scaleY(0);
+  transform-origin:center;
+
+  transition:transform 1s cubic-bezier(.16,1,.3,1) .18s;
+}
+
+.trusted-section.is-visible .trusted-divider{
+  transform:scaleY(1);
+}
+
+.trusted-foot{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+
+  margin-top:24px;
+
+  font:8px monospace;
+  letter-spacing:.18em;
+  color:var(--muted,#888);
+
+  opacity:0;
+  transform:translateY(12px);
+
+  transition:
+    opacity .8s ease .45s,
+    transform .8s cubic-bezier(.16,1,.3,1) .45s;
+}
+
+.trusted-section.is-visible .trusted-foot{
+  opacity:1;
+  transform:none;
+}
+
+.trusted-foot-dot{
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:currentColor;
+}
+
+
+/* =========================================================
+   DARK THEME
+   ========================================================= */
+
+html[data-theme="dark"] .trusted-section{
+  color:#f5f5f2;
+}
+
+html[data-theme="dark"] .trusted-eyebrow{
+  color:rgba(255,255,255,.48);
+}
+
+html[data-theme="dark"] .trusted-eyebrow span{
+  box-shadow:0 0 0 4px rgba(255,255,255,.055);
+}
+
+html[data-theme="dark"] .trusted-heading h2 em{
+  color:rgba(255,255,255,.45);
+}
+
+html[data-theme="dark"] .trusted-heading p,
+html[data-theme="dark"] .trusted-index,
+html[data-theme="dark"] .trusted-label,
+html[data-theme="dark"] .trusted-foot{
+  color:rgba(255,255,255,.42);
+}
+
+html[data-theme="dark"] .trusted-stage{
+  border-color:rgba(255,255,255,.1);
+}
+
+html[data-theme="dark"] .trusted-line{
+  background:rgba(255,255,255,.055);
+}
+
+html[data-theme="dark"] .trusted-divider{
+  background:rgba(255,255,255,.1);
+}
+
+html[data-theme="dark"] .trusted-logo-wrap img{
+  filter:brightness(0) invert(1);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:700px){
+
+  .trusted-section{
+    padding:58px 16px 48px;
+  }
+
+  .trusted-heading{
+    margin-bottom:32px;
+  }
+
+  .trusted-heading h2{
+    font-size:clamp(34px,10vw,48px);
+  }
+
+  .trusted-heading p{
+    font-size:13px;
+    max-width:330px;
+  }
+
+  .trusted-stage{
+    grid-template-columns:1fr;
+    min-height:0;
+  }
+
+  .trusted-brand{
+    min-height:190px;
+    padding:42px 25px 34px;
+  }
+
+  .trusted-divider{
+    width:100%;
+    height:1px;
+    transform:scaleX(0);
+    transform-origin:center;
+  }
+
+  .trusted-section.is-visible .trusted-divider{
+    transform:scaleX(1);
+  }
+
+  .trusted-logo-wrap{
+    width:min(260px,80%);
+    height:82px;
+  }
+
+  .trusted-logo-wrap img{
+    max-height:76px;
+  }
+
+  .trusted-index{
+    left:17px;
+  }
+
+  .trusted-foot{
+    flex-wrap:wrap;
+    gap:8px;
+    font-size:7px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+  .trusted-heading,
+  .trusted-brand,
+  .trusted-foot{
+    opacity:1;
+    transform:none;
+    transition:none;
+  }
+
+  .trusted-line,
+  .trusted-divider{
+    transform:none;
+    transition:none;
+  }
+
+}
+
+</style>
+
 <!-- ================= TECHNOLOGY ARCHITECTURE ================= -->
 
 <section class="tech-section" id="tech">
@@ -5164,6 +5545,81 @@ window.addEventListener(
 
 <!-- ================= END TECHNOLOGY ARCHITECTURE ================= -->
 
+
+<!-- ================= TRUSTED BY ================= -->
+
+<section class="trusted-section" id="trusted-by">
+
+  <div class="trusted-inner">
+
+    <div class="trusted-heading">
+      <div class="trusted-eyebrow">
+        <span></span>
+        TRUSTED BY
+      </div>
+
+      <h2>
+        Built for brands<br>
+        <em>that mean business.</em>
+      </h2>
+
+      <p>
+        Digital experiences created with the same attention
+        we give to every detail.
+      </p>
+    </div>
+
+
+    <div class="trusted-stage">
+
+      <div class="trusted-line trusted-line-top"></div>
+
+      <div class="trusted-brand trusted-brand-one">
+        <div class="trusted-index">01</div>
+
+        <div class="trusted-logo-wrap">
+          <img
+            src="spraudio.png"
+            alt="SPR Audio"
+            draggable="false"
+          >
+        </div>
+
+        <span class="trusted-label">AUDIO PRODUCTION</span>
+      </div>
+
+
+      <div class="trusted-divider" aria-hidden="true"></div>
+
+
+      <div class="trusted-brand trusted-brand-two">
+        <div class="trusted-index">02</div>
+
+        <div class="trusted-logo-wrap">
+          <img
+            src="ihsan-koi.png"
+            alt="Ihsan Koi"
+            draggable="false"
+          >
+        </div>
+
+        <span class="trusted-label">KOI & AQUATIC</span>
+      </div>
+
+      <div class="trusted-line trusted-line-bottom"></div>
+
+    </div>
+
+    <div class="trusted-foot">
+      <span>SELECTED PARTNERS</span>
+      <span class="trusted-foot-dot"></span>
+      <span>DESIGNED WITH INTENT</span>
+    </div>
+
+  </div>
+
+</section>
+
   <!-- ================= SELECTED WORK ================= -->
   <section class="selected-work" id="selected-work">
     <div class="container">
@@ -5988,6 +6444,39 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+</script>
+
+
+<script id="cyrus-trusted-by-script">
+(() => {
+  const section = document.querySelector("#trusted-by");
+
+  if (!section) return;
+
+  const reveal = () => {
+    section.classList.add("is-visible");
+  };
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            reveal();
+            observer.unobserve(section);
+          }
+        });
+      },
+      {
+        threshold: 0.18
+      }
+    );
+
+    observer.observe(section);
+  } else {
+    reveal();
+  }
+})();
 </script>
 
 </body>
