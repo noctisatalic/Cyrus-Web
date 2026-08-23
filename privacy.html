@@ -806,6 +806,51 @@ html[data-theme="dark"] ::selection {
   background: #f5f5f5;
   color: #111;
 }
+
+/* CyrusWeb footer dark theme */
+html[data-theme="dark"] .cyrus-footer {
+  background: var(--cw-bg) !important;
+  color: var(--cw-text) !important;
+  border-top-color: var(--cw-line) !important;
+}
+
+html[data-theme="dark"] .cyrus-footer .footer-logo,
+html[data-theme="dark"] .cyrus-footer .footer-logo span {
+  color: var(--cw-text) !important;
+}
+
+html[data-theme="dark"] .cyrus-footer .footer-brand p {
+  color: var(--cw-muted) !important;
+}
+
+html[data-theme="dark"] .cyrus-footer .footer-column h3 {
+  color: var(--cw-text) !important;
+}
+
+html[data-theme="dark"] .cyrus-footer .footer-column a {
+  color: var(--cw-muted) !important;
+}
+
+html[data-theme="dark"] .cyrus-footer .footer-column a:hover {
+  color: var(--cw-text) !important;
+}
+
+html[data-theme="dark"] .cyrus-footer .footer-label {
+  color: #777 !important;
+}
+
+html[data-theme="dark"] .cyrus-footer .footer-contact a {
+  color: var(--cw-text) !important;
+}
+
+html[data-theme="dark"] .cyrus-footer .footer-contact > div > span:not(.footer-label) {
+  color: var(--cw-muted) !important;
+}
+
+html[data-theme="dark"] .cyrus-footer .footer-status {
+  color: var(--cw-muted) !important;
+}
+
 </style>
 
 </head>
@@ -1120,6 +1165,7 @@ html[data-theme="dark"] ::selection {
   });
 })();
 </script>
+
 
 
 </body>
