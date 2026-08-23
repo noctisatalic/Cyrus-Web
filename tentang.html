@@ -1227,6 +1227,167 @@ html[data-theme="dark"] .cyrus-footer .footer-status {
   }
 }
 
+
+
+/* =========================================================
+   CYRUSWEB — FINAL OVERRIDE v2
+   Mobile navbar + CTA isolation
+   ========================================================= */
+
+/* ================= MOBILE NAV ================= */
+@media (max-width: 768px) {
+
+  /* Navbar benar-benar mengikuti viewport saat scroll */
+  .nav-wrapper {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 99999 !important;
+  }
+
+  .navbar {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    transform: none !important;
+    z-index: 100000 !important;
+  }
+
+  /* Jangan biarkan navbar terdorong ke kiri */
+  .navbar,
+  .nav-wrapper {
+    box-sizing: border-box !important;
+  }
+
+  /* Panel mobile turun tepat dari navbar */
+  .nav-links {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    transform: none !important;
+    z-index: 100001 !important;
+  }
+
+  .nav-links:not(.mobile-open) {
+    display: none !important;
+  }
+
+  .nav-links.mobile-open {
+    display: flex !important;
+  }
+
+  .mobile-menu-btn {
+    position: relative !important;
+    z-index: 100002 !important;
+  }
+
+  /* Beri ruang agar fixed navbar tidak menutup konten */
+  body {
+    padding-top: 0 !important;
+  }
+}
+
+
+/* ================= CTA ISOLATION ================= */
+
+/* CTA harus menjadi layer sendiri */
+main {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.cta {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+  z-index: 2 !important;
+  background: var(--cw-surface) !important;
+  background-image: none !important;
+}
+
+/* Bunuh seluruh dekorasi pseudo-element CTA */
+.cta::before,
+.cta::after,
+.cta-chamber::before,
+.cta-chamber::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+/* Semua isi CTA berada di atas background */
+.cta > * {
+  position: relative !important;
+  z-index: 3 !important;
+}
+
+
+/* ================= DARK CTA ================= */
+
+html[data-theme="dark"] .cta {
+  background: var(--cw-surface) !important;
+  color: var(--cw-text) !important;
+}
+
+html[data-theme="dark"] .cta h2,
+html[data-theme="dark"] .cta p {
+  color: var(--cw-text) !important;
+}
+
+html[data-theme="dark"] .cta > a {
+  color: var(--cw-bg) !important;
+  background: var(--cw-text) !important;
+  border-color: var(--cw-text) !important;
+}
+
+html[data-theme="dark"] .cta > a span {
+  color: var(--cw-bg) !important;
+}
+
+
+/* ================= REMOVE ENTITY-LIKE DECORATIONS ================= */
+
+.cta [class*="entity"],
+.cta [class*="background-entity"],
+.cta [class*="entity-bg"],
+.cta [class*="entity-background"],
+.cta .blob,
+.cta .orb,
+.cta .glow {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+
+/* ================= GLOBAL DECORATION MUST STAY BEHIND CONTENT ================= */
+
+body::before,
+body::after {
+  pointer-events: none !important;
+  z-index: -1 !important;
+}
+
+/* Hero decoration tidak boleh membuat layer menembus CTA */
+.hero::before,
+.hero::after {
+  pointer-events: none !important;
+}
+
 </style>
 
 </head>
