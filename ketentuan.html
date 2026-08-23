@@ -1076,6 +1076,458 @@ html[data-theme="dark"] .mobile-menu-btn[aria-expanded="true"] {
   color: var(--cw-bg) !important;
 }
 </style>
+
+<!-- CYRUSWEB SECONDARY VISUAL PARITY -->
+<style id="cyrus-secondary-visual-parity">
+
+/* =========================================================
+   NAVBAR — MATCH INDEX / LIQUID GLASS
+   ========================================================= */
+
+.nav-wrapper{
+  position:fixed !important;
+  top:20px !important;
+  left:50% !important;
+  transform:translateX(-50%) !important;
+  z-index:1000 !important;
+  width:min(940px,calc(100% - 24px)) !important;
+}
+
+.navbar{
+  position:relative !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  height:68px !important;
+  padding:6px 12px 6px 14px !important;
+  border-radius:24px !important;
+
+  background:rgba(255,255,255,.72) !important;
+  border:1px solid rgba(255,255,255,.65) !important;
+
+  box-shadow:
+    0 8px 32px rgba(17,17,17,.08),
+    inset 0 1px 0 rgba(255,255,255,.9) !important;
+
+  backdrop-filter:blur(22px) saturate(160%) !important;
+  -webkit-backdrop-filter:blur(22px) saturate(160%) !important;
+}
+
+.navbar::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  border-radius:inherit !important;
+  pointer-events:none !important;
+  background:linear-gradient(
+    135deg,
+    rgba(255,255,255,.55),
+    rgba(255,255,255,.12)
+  ) !important;
+}
+
+.nav-brand,
+.nav-links,
+.nav-actions{
+  position:relative !important;
+  z-index:2 !important;
+}
+
+.nav-link{
+  color:var(--cw-muted) !important;
+}
+
+.nav-link:hover,
+.nav-link.active{
+  color:var(--cw-text) !important;
+  background:rgba(17,17,17,.055) !important;
+}
+
+.nav-cta{
+  background:var(--cw-text) !important;
+  color:var(--cw-bg) !important;
+}
+
+.mobile-menu-btn{
+  background:rgba(255,255,255,.55) !important;
+  color:var(--cw-text) !important;
+  border:1px solid rgba(17,17,17,.08) !important;
+  backdrop-filter:blur(12px) !important;
+  -webkit-backdrop-filter:blur(12px) !important;
+}
+
+
+/* =========================================================
+   CTA — REMOVE OLD RECTANGULAR BLOCK / MATCH INDEX FEEL
+   ========================================================= */
+
+main .cta{
+  position:relative !important;
+  isolation:isolate !important;
+  overflow:hidden !important;
+
+  margin-top:80px !important;
+  margin-bottom:80px !important;
+  padding:64px !important;
+
+  border:1px solid rgba(17,17,17,.08) !important;
+  border-radius:32px !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.88),
+      rgba(247,247,247,.72)
+    ) !important;
+
+  box-shadow:
+    0 20px 60px rgba(17,17,17,.08),
+    inset 0 1px 0 rgba(255,255,255,.95) !important;
+
+  backdrop-filter:blur(24px) saturate(150%) !important;
+  -webkit-backdrop-filter:blur(24px) saturate(150%) !important;
+}
+
+main .cta::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:-35% !important;
+  z-index:-1 !important;
+  pointer-events:none !important;
+
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(17,17,17,.045),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 85% 75%,
+      rgba(17,17,17,.035),
+      transparent 42%
+    ) !important;
+}
+
+main .cta h2{
+  position:relative !important;
+  z-index:2 !important;
+  color:var(--cw-text) !important;
+}
+
+main .cta p{
+  position:relative !important;
+  z-index:2 !important;
+  color:var(--cw-muted) !important;
+}
+
+main .cta > a{
+  position:relative !important;
+  z-index:3 !important;
+
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  margin-top:24px !important;
+  padding:14px 20px !important;
+
+  border-radius:14px !important;
+
+  background:var(--cw-text) !important;
+  color:var(--cw-bg) !important;
+
+  font-size:13px !important;
+  font-weight:600 !important;
+  text-decoration:none !important;
+
+  box-shadow:0 8px 24px rgba(17,17,17,.12) !important;
+  transition:transform .2s ease,box-shadow .2s ease !important;
+}
+
+main .cta > a:hover{
+  transform:translateY(-2px) !important;
+  box-shadow:0 12px 30px rgba(17,17,17,.18) !important;
+}
+
+
+/* =========================================================
+   FOOTER — MATCH INDEX STRUCTURE
+   ========================================================= */
+
+.cyrus-footer{
+  margin-top:80px !important;
+  padding:72px 0 24px !important;
+  border-top:1px solid var(--cw-line) !important;
+  background:var(--cw-surface) !important;
+}
+
+.cyrus-footer .container{
+  position:relative !important;
+}
+
+.footer-main{
+  display:grid !important;
+  grid-template-columns:minmax(260px,1.7fr) repeat(3,minmax(130px,1fr)) !important;
+  gap:48px !important;
+  padding-bottom:58px !important;
+}
+
+.footer-brand{
+  max-width:380px !important;
+}
+
+.footer-logo{
+  display:inline-flex !important;
+  align-items:baseline !important;
+  gap:3px !important;
+  color:var(--cw-text) !important;
+  text-decoration:none !important;
+  font-family:var(--font-display) !important;
+  font-size:25px !important;
+  font-weight:700 !important;
+  letter-spacing:-.06em !important;
+}
+
+.footer-logo span{
+  font-weight:400 !important;
+}
+
+.footer-brand p{
+  margin:18px 0 24px !important;
+  max-width:340px !important;
+  color:var(--cw-muted) !important;
+  font-size:14px !important;
+  line-height:1.7 !important;
+}
+
+.footer-cta{
+  display:inline-flex !important;
+  align-items:center !important;
+  gap:12px !important;
+  padding:12px 16px !important;
+  border:1px solid var(--cw-line) !important;
+  border-radius:999px !important;
+  color:var(--cw-text) !important;
+  text-decoration:none !important;
+  font-size:13px !important;
+}
+
+.footer-column{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  gap:10px !important;
+}
+
+.footer-column h3{
+  margin:0 0 8px !important;
+  color:var(--cw-text) !important;
+  font-family:var(--font-display) !important;
+  font-size:11px !important;
+  font-weight:600 !important;
+  letter-spacing:.12em !important;
+  text-transform:uppercase !important;
+}
+
+.footer-column a{
+  color:var(--cw-muted) !important;
+  text-decoration:none !important;
+  font-size:13px !important;
+  line-height:1.5 !important;
+}
+
+.footer-column a:hover{
+  color:var(--cw-text) !important;
+}
+
+.footer-contact{
+  display:grid !important;
+  grid-template-columns:1.5fr 1fr 1fr !important;
+  gap:24px !important;
+  padding:24px 0 !important;
+  border-top:1px solid var(--cw-line) !important;
+  border-bottom:1px solid var(--cw-line) !important;
+}
+
+.footer-contact > div{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:7px !important;
+}
+
+.footer-label{
+  color:var(--cw-muted) !important;
+  font-size:9px !important;
+  font-weight:600 !important;
+  letter-spacing:.14em !important;
+  text-transform:uppercase !important;
+}
+
+.footer-contact a,
+.footer-contact > div > span:last-child{
+  color:var(--cw-text) !important;
+  font-size:13px !important;
+  text-decoration:none !important;
+}
+
+.footer-status{
+  display:inline-flex !important;
+  align-items:center !important;
+  gap:7px !important;
+}
+
+.footer-bottom{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:24px !important;
+  padding-top:22px !important;
+  color:var(--cw-muted) !important;
+  font-size:11px !important;
+}
+
+.footer-legal{
+  display:flex !important;
+  align-items:center !important;
+  gap:18px !important;
+}
+
+.footer-legal a{
+  color:var(--cw-muted) !important;
+}
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+html[data-theme="dark"] .navbar{
+  background:rgba(20,20,20,.72) !important;
+  border-color:rgba(255,255,255,.11) !important;
+
+  box-shadow:
+    0 10px 35px rgba(0,0,0,.30),
+    inset 0 1px 0 rgba(255,255,255,.06) !important;
+}
+
+html[data-theme="dark"] .navbar::before{
+  background:linear-gradient(
+    135deg,
+    rgba(255,255,255,.08),
+    rgba(255,255,255,.015)
+  ) !important;
+}
+
+html[data-theme="dark"] main .cta{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(28,28,28,.88),
+      rgba(18,18,18,.78)
+    ) !important;
+
+  border-color:rgba(255,255,255,.11) !important;
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.06) !important;
+}
+
+html[data-theme="dark"] main .cta::before{
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255,255,255,.045),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 85% 75%,
+      rgba(255,255,255,.025),
+      transparent 42%
+    ) !important;
+}
+
+html[data-theme="dark"] .mobile-menu-btn{
+  background:rgba(30,30,30,.72) !important;
+  border-color:rgba(255,255,255,.11) !important;
+}
+
+html[data-theme="dark"] .footer-logo,
+html[data-theme="dark"] .footer-column h3,
+html[data-theme="dark"] .footer-contact a,
+html[data-theme="dark"] .footer-contact > div > span:last-child{
+  color:var(--cw-text) !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:800px){
+
+  .navbar{
+    height:62px !important;
+    padding:6px 10px 6px 14px !important;
+  }
+
+  main .cta{
+    margin-top:56px !important;
+    margin-bottom:70px !important;
+    padding:42px 28px !important;
+    border-radius:24px !important;
+  }
+
+  .footer-main{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:36px 24px !important;
+    padding-bottom:42px !important;
+  }
+
+  .footer-brand{
+    grid-column:1/-1 !important;
+    max-width:100% !important;
+  }
+
+  .footer-contact{
+    grid-template-columns:1fr !important;
+    gap:18px !important;
+  }
+
+  .footer-bottom{
+    align-items:flex-start !important;
+    flex-direction:column !important;
+    gap:14px !important;
+  }
+
+  .footer-legal{
+    flex-wrap:wrap !important;
+    gap:10px 16px !important;
+  }
+}
+
+@media(max-width:480px){
+
+  main .cta{
+    padding:34px 22px !important;
+    border-radius:22px !important;
+  }
+
+  .footer-main{
+    grid-template-columns:1fr 1fr !important;
+    gap:30px 16px !important;
+  }
+
+  .footer-column a{
+    font-size:12px !important;
+  }
+
+  .footer-contact{
+    padding:20px 0 !important;
+  }
+}
+
+</style>
 </head>
 
 <body>
