@@ -601,90 +601,7 @@ body.nav-locked {
 }
 
 
-/* =========================================================
-   CYRUSWEB — FINAL MOBILE NAV / DARK CTA / ENTITY ISOLATION
-   ========================================================= */
 
-/* --- MOBILE NAV: STICKY --- */
-@media (max-width: 768px) {
-  .navbar {
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 9999 !important;
-  }
-
-  .nav-wrapper {
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 9999 !important;
-  }
-
-  .nav-links {
-    z-index: 10000 !important;
-  }
-
-  .mobile-menu-btn {
-    position: relative;
-    z-index: 10001 !important;
-  }
-}
-
-/* --- DARK MODE: KONSULTASI / CTA HARUS TERBACA --- */
-html[data-theme="dark"] .cta,
-html[data-theme="dark"] .cta *,
-html[data-theme="dark"] .cta h2,
-html[data-theme="dark"] .cta p,
-html[data-theme="dark"] .cta a {
-  color: var(--cw-text) !important;
-}
-
-html[data-theme="dark"] .cta a {
-  color: var(--cw-bg) !important;
-  background: var(--cw-text) !important;
-}
-
-html[data-theme="dark"] .cta a span {
-  color: var(--cw-bg) !important;
-}
-
-/* --- FOOTER CTA --- */
-html[data-theme="dark"] .footer-cta,
-html[data-theme="dark"] .footer-cta span {
-  color: var(--cw-bg) !important;
-}
-
-/* --- ISOLASI BACKGROUND ENTITY DARI BLOK KONSULTASI --- */
-.cta,
-.cta::before,
-.cta::after,
-.cta-chamber,
-.cta-chamber::before,
-.cta-chamber::after {
-  isolation: isolate;
-}
-
-.cta {
-  position: relative;
-  overflow: hidden;
-  background: var(--cw-surface) !important;
-}
-
-.cta > *,
-.cta-chamber > * {
-  position: relative;
-  z-index: 2;
-}
-
-/* Jangan biarkan dekorasi/entity global menembus CTA */
-.cta .entity,
-.cta .entity-bg,
-.cta .entity-background,
-.cta [class*="entity"],
-.cta [class*="background-entity"] {
-  display: none !important;
-}
-
-</style>
 
 <script type="application/ld+json">
 {
@@ -724,6 +641,7 @@ html[data-theme="dark"] .footer-cta span {
   ]
 }
 </script>
+</style>
 <script id="cyrus-theme-boot">
 (function () {
   const saved = localStorage.getItem("cyrus-theme");
@@ -937,457 +855,224 @@ html[data-theme="dark"] .cyrus-footer .footer-status {
 
 
 
+
+
+
+</style>
+
+<style id="cyrus-mobile-sync-final">
 /* =========================================================
-   CYRUSWEB — FINAL MOBILE NAV + FOOTER PATCH
-   Target: tentang / privacy / ketentuan
+   CYRUSWEB — MOBILE NAV + FOOTER SYNC
+   Same behavior as the main CyrusWeb pages
    ========================================================= */
 
-/* ---------- MOBILE NAV FIX ---------- */
 @media (max-width: 768px) {
+
+  /* NAVBAR */
+  .nav-wrapper {
+    position: fixed !important;
+    top: 12px !important;
+    left: 12px !important;
+    right: 12px !important;
+    width: auto !important;
+    margin: 0 !important;
+    transform: none !important;
+    z-index: 10000 !important;
+  }
+
+  .navbar {
+    width: 100% !important;
+    height: 62px !important;
+    box-sizing: border-box !important;
+    padding: 6px 10px 6px 14px !important;
+    border-radius: 20px !important;
+  }
+
   .nav-links {
     display: none !important;
-    position: absolute;
-    z-index: 9999;
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    padding: 8px !important;
+    margin: 0 !important;
+    border-radius: 18px !important;
+    background: var(--cw-surface-solid, #fff) !important;
+    border: 1px solid var(--cw-line) !important;
+    box-shadow: 0 16px 40px rgba(0,0,0,.12) !important;
+    z-index: 10001 !important;
   }
 
   .nav-links.mobile-open {
     display: flex !important;
   }
 
-  .nav-links.mobile-open .nav-link {
+  .nav-links .nav-link {
     display: flex !important;
-    width: 100%;
-    align-items: center;
+    width: 100% !important;
+    min-height: 46px !important;
+    box-sizing: border-box !important;
+    align-items: center !important;
+    padding: 12px 14px !important;
+    font-size: 14px !important;
+    border-radius: 12px !important;
+  }
+
+  .nav-actions {
+    margin-left: auto !important;
+  }
+
+  .nav-actions .nav-cta {
+    display: none !important;
   }
 
   .mobile-menu-btn {
     display: flex !important;
-    position: relative;
-    z-index: 10001;
-  }
-
-  .navbar {
-    position: relative;
-    z-index: 10000;
-  }
-
-  .nav-wrapper {
-    position: relative;
-    z-index: 10000;
-  }
-
-  body.nav-locked {
-    overflow: hidden;
-  }
-}
-
-/* ---------- FOOTER BASE ---------- */
-.cyrus-footer {
-  position: relative;
-  width: 100%;
-  margin-top: 80px;
-  padding: 72px 0 24px;
-  border-top: 1px solid var(--cw-line);
-  background: var(--cw-surface);
-}
-
-.cyrus-footer .container {
-  width: min(1120px, calc(100% - 40px));
-  margin: 0 auto;
-  position: relative;
-}
-
-.cyrus-footer .footer-main {
-  display: grid;
-  grid-template-columns: minmax(240px, 1.35fr) repeat(3, minmax(150px, 1fr));
-  gap: 48px;
-  align-items: start;
-}
-
-.cyrus-footer .footer-brand {
-  min-width: 0;
-}
-
-.cyrus-footer .footer-logo {
-  display: inline-block;
-  margin-bottom: 16px;
-  font-size: 24px;
-  line-height: 1;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  color: var(--cw-text);
-  text-decoration: none;
-}
-
-.cyrus-footer .footer-logo span {
-  font-weight: 400;
-}
-
-.cyrus-footer .footer-brand p {
-  max-width: 320px;
-  margin: 0 0 24px;
-  color: var(--cw-muted);
-  font-size: 14px;
-  line-height: 1.7;
-}
-
-.cyrus-footer .footer-column {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.cyrus-footer .footer-column h3 {
-  margin: 0 0 8px;
-  color: var(--cw-text);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-
-.cyrus-footer .footer-column a,
-.cyrus-footer .footer-contact a {
-  color: var(--cw-muted);
-  text-decoration: none;
-  font-size: 13px;
-  line-height: 1.5;
-  transition: color .2s ease, transform .2s ease;
-}
-
-.cyrus-footer .footer-column a:hover,
-.cyrus-footer .footer-contact a:hover {
-  color: var(--cw-text);
-}
-
-.cyrus-footer .footer-cta {
-  display: inline-flex;
-  width: fit-content;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 18px;
-  border-radius: 14px;
-  background: var(--cw-text);
-  color: var(--cw-bg) !important;
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.cyrus-footer .footer-contact {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
-  gap: 32px;
-  margin-top: 52px;
-  padding: 26px 0;
-  border-top: 1px solid var(--cw-line);
-  border-bottom: 1px solid var(--cw-line);
-}
-
-.cyrus-footer .footer-contact > div {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  min-width: 0;
-}
-
-.cyrus-footer .footer-label {
-  color: var(--cw-muted);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .1em;
-}
-
-.cyrus-footer .footer-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  color: var(--cw-text);
-  font-size: 13px;
-}
-
-.cyrus-footer .footer-status i {
-  width: 7px;
-  height: 7px;
-  flex: 0 0 7px;
-  border-radius: 50%;
-  background: currentColor;
-}
-
-.cyrus-footer .footer-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding-top: 24px;
-  color: var(--cw-muted);
-  font-size: 11px;
-}
-
-.cyrus-footer .footer-legal {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  gap: 18px;
-}
-
-.cyrus-footer .footer-legal a {
-  color: var(--cw-muted);
-  text-decoration: none;
-}
-
-.cyrus-footer .footer-legal a:hover {
-  color: var(--cw-text);
-}
-
-/* ---------- MOBILE FOOTER ---------- */
-@media (max-width: 760px) {
-  .cyrus-footer {
-    margin-top: 64px;
-    padding: 52px 0 22px;
-  }
-
-  .cyrus-footer .container {
-    width: min(100% - 32px, 560px);
-  }
-
-  .cyrus-footer .footer-main {
-    grid-template-columns: 1fr;
-    gap: 34px;
-  }
-
-  .cyrus-footer .footer-brand p {
-    max-width: 100%;
-    margin-bottom: 20px;
-  }
-
-  .cyrus-footer .footer-column {
-    gap: 8px;
-    padding-top: 4px;
-  }
-
-  .cyrus-footer .footer-column h3 {
-    margin-bottom: 7px;
-  }
-
-  .cyrus-footer .footer-column a {
-    font-size: 14px;
-    padding: 3px 0;
-  }
-
-  .cyrus-footer .footer-contact {
-    grid-template-columns: 1fr;
-    gap: 22px;
-    margin-top: 40px;
-    padding: 24px 0;
-  }
-
-  .cyrus-footer .footer-contact a {
-    font-size: 14px;
-  }
-
-  .cyrus-footer .footer-bottom {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    padding-top: 22px;
-  }
-
-  .cyrus-footer .footer-legal {
-    justify-content: flex-start;
-    gap: 12px 18px;
-  }
-}
-
-/* ---------- SMALL PHONE ---------- */
-@media (max-width: 420px) {
-  .cyrus-footer {
-    padding-top: 44px;
-  }
-
-  .cyrus-footer .container {
-    width: min(100% - 28px, 560px);
-  }
-
-  .cyrus-footer .footer-logo {
-    font-size: 22px;
-  }
-
-  .cyrus-footer .footer-main {
-    gap: 30px;
-  }
-
-  .cyrus-footer .footer-contact {
-    margin-top: 34px;
-  }
-
-  .cyrus-footer .footer-bottom {
-    font-size: 10px;
-  }
-}
-
-
-
-/* =========================================================
-   CYRUSWEB — FINAL OVERRIDE v2
-   Mobile navbar + CTA isolation
-   ========================================================= */
-
-/* ================= MOBILE NAV ================= */
-@media (max-width: 768px) {
-
-  /* Navbar benar-benar mengikuti viewport saat scroll */
-  .nav-wrapper {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    height: auto !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    z-index: 99999 !important;
-  }
-
-  .navbar {
+    width: 40px !important;
+    height: 40px !important;
+    flex: 0 0 40px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 12px !important;
+    cursor: pointer !important;
     position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    width: 100% !important;
-    margin: 0 auto !important;
-    transform: none !important;
-    z-index: 100000 !important;
+    z-index: 10002 !important;
   }
 
-  /* Jangan biarkan navbar terdorong ke kiri */
-  .navbar,
-  .nav-wrapper {
+  /* FOOTER */
+  .cyrus-footer {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    margin-top: 64px !important;
+    padding: 52px 0 22px !important;
+  }
+
+  .cyrus-footer .container {
+    width: min(100% - 32px, 560px) !important;
+    margin: 0 auto !important;
     box-sizing: border-box !important;
   }
 
-  /* Panel mobile turun tepat dari navbar */
-  .nav-links {
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    max-width: none !important;
-    margin: 0 !important;
-    transform: none !important;
-    z-index: 100001 !important;
+  .cyrus-footer .footer-main {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 34px !important;
+    padding-bottom: 40px !important;
   }
 
-  .nav-links:not(.mobile-open) {
-    display: none !important;
+  .cyrus-footer .footer-brand {
+    max-width: 100% !important;
   }
 
-  .nav-links.mobile-open {
+  .cyrus-footer .footer-brand p {
+    max-width: 100% !important;
+    margin-bottom: 20px !important;
+  }
+
+  .cyrus-footer .footer-column {
     display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
   }
 
-  .mobile-menu-btn {
-    position: relative !important;
-    z-index: 100002 !important;
+  .cyrus-footer .footer-column h3 {
+    margin-bottom: 7px !important;
   }
 
-  /* Beri ruang agar fixed navbar tidak menutup konten */
-  body {
-    padding-top: 0 !important;
+  .cyrus-footer .footer-column a {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    padding: 3px 0 !important;
+  }
+
+  .cyrus-footer .footer-contact {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 22px !important;
+    margin-top: 40px !important;
+    padding: 24px 0 !important;
+  }
+
+  .cyrus-footer .footer-contact > div {
+    min-width: 0 !important;
+  }
+
+  .cyrus-footer .footer-contact a {
+    font-size: 14px !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .cyrus-footer .footer-bottom {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+    padding-top: 22px !important;
+  }
+
+  .cyrus-footer .footer-legal {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+    gap: 10px 18px !important;
   }
 }
 
+@media (max-width: 420px) {
 
-/* ================= CTA ISOLATION ================= */
+  .nav-wrapper {
+    top: 10px !important;
+    left: 10px !important;
+    right: 10px !important;
+  }
 
-/* CTA harus menjadi layer sendiri */
-main {
-  position: relative !important;
-  z-index: 1 !important;
+  .navbar {
+    height: 60px !important;
+    border-radius: 19px !important;
+  }
+
+  .cyrus-footer {
+    margin-top: 56px !important;
+    padding: 44px 0 20px !important;
+  }
+
+  .cyrus-footer .container {
+    width: calc(100% - 28px) !important;
+  }
+
+  .cyrus-footer .footer-main {
+    gap: 30px !important;
+  }
+
+  .cyrus-footer .footer-logo {
+    font-size: 22px !important;
+  }
+
+  .cyrus-footer .footer-contact {
+    margin-top: 34px !important;
+    gap: 20px !important;
+  }
+
+  .cyrus-footer .footer-bottom {
+    font-size: 10px !important;
+  }
 }
 
-.cta {
-  position: relative !important;
-  isolation: isolate !important;
-  overflow: hidden !important;
-  z-index: 2 !important;
-  background: var(--cw-surface) !important;
-  background-image: none !important;
+/* DARK MODE */
+html[data-theme="dark"] .nav-links {
+  background: #151515 !important;
+  border-color: rgba(255,255,255,.09) !important;
+  box-shadow: 0 18px 42px rgba(0,0,0,.35) !important;
 }
 
-/* Bunuh seluruh dekorasi pseudo-element CTA */
-.cta::before,
-.cta::after,
-.cta-chamber::before,
-.cta-chamber::after {
-  content: none !important;
-  display: none !important;
-  background: none !important;
-  background-image: none !important;
-  box-shadow: none !important;
-}
-
-/* Semua isi CTA berada di atas background */
-.cta > * {
-  position: relative !important;
-  z-index: 3 !important;
-}
-
-
-/* ================= DARK CTA ================= */
-
-html[data-theme="dark"] .cta {
-  background: var(--cw-surface) !important;
-  color: var(--cw-text) !important;
-}
-
-html[data-theme="dark"] .cta h2,
-html[data-theme="dark"] .cta p {
-  color: var(--cw-text) !important;
-}
-
-html[data-theme="dark"] .cta > a {
-  color: var(--cw-bg) !important;
+html[data-theme="dark"] .mobile-menu-btn[aria-expanded="true"] {
   background: var(--cw-text) !important;
-  border-color: var(--cw-text) !important;
-}
-
-html[data-theme="dark"] .cta > a span {
   color: var(--cw-bg) !important;
 }
-
-
-/* ================= REMOVE ENTITY-LIKE DECORATIONS ================= */
-
-.cta [class*="entity"],
-.cta [class*="background-entity"],
-.cta [class*="entity-bg"],
-.cta [class*="entity-background"],
-.cta .blob,
-.cta .orb,
-.cta .glow {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-}
-
-
-/* ================= GLOBAL DECORATION MUST STAY BEHIND CONTENT ================= */
-
-body::before,
-body::after {
-  pointer-events: none !important;
-  z-index: -1 !important;
-}
-
-/* Hero decoration tidak boleh membuat layer menembus CTA */
-.hero::before,
-.hero::after {
-  pointer-events: none !important;
-}
-
 </style>
 
 </head>
