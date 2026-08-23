@@ -1347,14 +1347,7 @@ html[data-theme="dark"] .cw-theme-toggle .cw-moon {
 </style>
 
 
-<script>
-(function () {
-  const saved = localStorage.getItem("cyrus-theme");
-  const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  document.documentElement.dataset.theme =
-    saved || (preferred ? "dark" : "light");
-})();
-</script>
+
 
 <style>
 

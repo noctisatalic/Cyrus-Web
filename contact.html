@@ -1253,14 +1253,7 @@ html[data-theme="dark"] .nav-cta {
 
 </style>
 
-<script>
-(function () {
-  const saved = localStorage.getItem("cyrus-theme");
-  const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  document.documentElement.dataset.theme =
-    saved || (preferred ? "dark" : "light");
-})();
-</script>
+
 
 <style id="cyrus-theme-engine">
 :root {
