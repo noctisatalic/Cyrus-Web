@@ -1072,6 +1072,24 @@ html[data-theme="dark"] ::selection {
 </script>
 
 
+
+<script id="cyrus-active-nav-script">
+(function () {
+  const currentPage =
+    window.location.pathname.split("/").pop() || "index.html";
+
+  document.querySelectorAll(".nav-link").forEach(function (link) {
+    const href = link.getAttribute("href") || "";
+    const linkPage = href.split("/").pop().split("#")[0] || "index.html";
+
+    if (linkPage === currentPage) {
+      link.classList.add("active");
+      link.setAttribute("aria-current", "page");
+    }
+  });
+})();
+</script>
+
 <script id="cyrus-mobile-menu-script">
 (function () {
   const menuBtn = document.querySelector(".mobile-menu-btn");

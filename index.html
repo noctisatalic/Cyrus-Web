@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +21,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&display=swap" rel="stylesheet">
+
+
+<script id="cyrus-theme-boot">
+(function () {
+  const saved = localStorage.getItem("cyrus-theme");
+  const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  document.documentElement.dataset.theme =
+    saved || (preferred ? "dark" : "light");
+})();
+</script>
 
 <style>
 :root {
@@ -1207,7 +1218,7 @@ html[data-theme="dark"] {
   --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.30);
 
   /* Theme engine aliases */
-  --cw-bg:#ffffff;
+  --cw-bg:#0b0b0b;
   --cw-surface: rgba(24,24,24,.78);
   --cw-surface-solid: #151515;
   --cw-text: var(--primary);
