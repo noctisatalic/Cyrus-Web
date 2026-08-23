@@ -3897,17 +3897,21 @@ html[data-theme="dark"] .tech-section .foot span{
 .trusted-set{
   display:flex;
   align-items:center;
-  flex-shrink:0;
+  justify-content:center;
+  flex:0 0 520px;
+  width:520px;
+  min-width:520px;
   gap:34px;
   padding-right:34px;
+  box-sizing:border-box;
 }
 
 .trusted-track-right .trusted-stream{
-  animation:trusted-flow-right 12s linear infinite;
+  animation:trusted-flow-right 7s linear infinite;
 }
 
 .trusted-track-left .trusted-stream{
-  animation:trusted-flow-left 14s linear infinite;
+  animation:trusted-flow-left 8s linear infinite;
 }
 
 .trusted-logo{
@@ -3948,13 +3952,29 @@ html[data-theme="dark"] .tech-section .foot span{
 }
 
 @keyframes trusted-flow-right{
-  from{transform:translate3d(-50%,0,0)}
-  to{transform:translate3d(0,0,0)}
+  from{
+    transform:translate3d(-50%,0,0);
+  }
+  to{
+    transform:translate3d(0,0,0);
+  }
 }
 
 @keyframes trusted-flow-left{
-  from{transform:translate3d(0,0,0)}
-  to{transform:translate3d(-50%,0,0)}
+  from{
+    transform:translate3d(0,0,0);
+  }
+  to{
+    transform:translate3d(-50%,0,0);
+  }
+}
+
+/* Seamless marquee stabilization */
+.trusted-stream{
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  transform:translateZ(0);
+  -webkit-transform:translateZ(0);
 }
 
 html[data-theme="dark"] .trusted-section{
@@ -4002,6 +4022,9 @@ html[data-theme="dark"] .trusted-mono img{
   }
 
   .trusted-set{
+    flex-basis:340px;
+    width:340px;
+    min-width:340px;
     gap:22px;
     padding-right:22px;
   }
@@ -4018,11 +4041,11 @@ html[data-theme="dark"] .trusted-mono img{
   }
 
   .trusted-track-right .trusted-stream{
-    animation-duration:9s;
+    animation-duration:6s;
   }
 
   .trusted-track-left .trusted-stream{
-    animation-duration:11s;
+    animation-duration:7s;
   }
 }
 
