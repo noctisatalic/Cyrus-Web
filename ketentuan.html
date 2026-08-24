@@ -1078,457 +1078,349 @@ html[data-theme="dark"] .mobile-menu-btn[aria-expanded="true"] {
 </style>
 
 <!-- CYRUSWEB SECONDARY VISUAL PARITY -->
-<style id="cyrus-secondary-visual-parity">
 
-/* =========================================================
-   NAVBAR — MATCH INDEX / LIQUID GLASS
-   ========================================================= */
 
-.nav-wrapper{
-  position:fixed !important;
-  top:20px !important;
-  left:50% !important;
-  transform:translateX(-50%) !important;
-  z-index:1000 !important;
-  width:min(940px,calc(100% - 24px)) !important;
+
+
+
+/* ============================================================
+   CYRUSWEB — PRICING MASTER SYNC
+   Generated automatically. Do not edit manually.
+   ============================================================ */
+
+<style id="cyrus-pricing-master-sync">
+
+.nav-wrapper {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: min(940px, calc(100% - 24px));
+}
+.navbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  padding: 6px 12px 6px 14px;
+  border-radius: 24px;
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+}
+.nav-links {
+  display: flex;
+  gap: 4px;
+}
+.nav-link {
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color 0.2s, background 0.2s;
+}
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-cta {
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 14px;
+  background: var(--primary);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.mobile-menu-btn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--light);
+  border: 1px solid var(--line);
+  font-size: 16px;
+  align-items: center;
+  justify-content: center;
+}
+.nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(17, 17, 17, 0.15);
+}
+@keyframes navDropIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media(max-width:768px){
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 2px;
+    background: #FFFFFF;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    padding: 8px;
+  }
+  .nav-links.mobile-open {
+    display: flex;
+    animation: navDropIn 0.22s ease;
+  }
+  .nav-links .nav-link {
+    padding: 13px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    width: 100%;
+  }
+  .mobile-menu-btn {
+    display: flex;
+  }
+  .mobile-menu-btn[aria-expanded="true"] {
+    background: var(--primary);
+    color: var(--white);
+  }
 }
 
-.navbar{
-  position:relative !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:space-between !important;
-  height:68px !important;
-  padding:6px 12px 6px 14px !important;
-  border-radius:24px !important;
-
-  background:rgba(255,255,255,.72) !important;
-  border:1px solid rgba(255,255,255,.65) !important;
-
-  box-shadow:
-    0 8px 32px rgba(17,17,17,.08),
-    inset 0 1px 0 rgba(255,255,255,.9) !important;
-
-  backdrop-filter:blur(22px) saturate(160%) !important;
-  -webkit-backdrop-filter:blur(22px) saturate(160%) !important;
-}
-
-.navbar::before{
-  content:"" !important;
-  position:absolute !important;
-  inset:0 !important;
-  border-radius:inherit !important;
-  pointer-events:none !important;
-  background:linear-gradient(
-    135deg,
-    rgba(255,255,255,.55),
-    rgba(255,255,255,.12)
-  ) !important;
-}
-
-.nav-brand,
-.nav-links,
-.nav-actions{
-  position:relative !important;
-  z-index:2 !important;
-}
-
-.nav-link{
-  color:var(--cw-muted) !important;
-}
-
-.nav-link:hover,
-.nav-link.active{
-  color:var(--cw-text) !important;
-  background:rgba(17,17,17,.055) !important;
-}
-
-.nav-cta{
-  background:var(--cw-text) !important;
-  color:var(--cw-bg) !important;
-}
-
-.mobile-menu-btn{
-  background:rgba(255,255,255,.55) !important;
-  color:var(--cw-text) !important;
-  border:1px solid rgba(17,17,17,.08) !important;
-  backdrop-filter:blur(12px) !important;
-  -webkit-backdrop-filter:blur(12px) !important;
-}
-
-
-/* =========================================================
-   CTA — REMOVE OLD RECTANGULAR BLOCK / MATCH INDEX FEEL
-   ========================================================= */
-
-main .cta{
-  position:relative !important;
-  isolation:isolate !important;
-  overflow:hidden !important;
-
-  margin-top:80px !important;
-  margin-bottom:80px !important;
-  padding:64px !important;
-
-  border:1px solid rgba(17,17,17,.08) !important;
-  border-radius:32px !important;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,.88),
-      rgba(247,247,247,.72)
-    ) !important;
-
-  box-shadow:
-    0 20px 60px rgba(17,17,17,.08),
-    inset 0 1px 0 rgba(255,255,255,.95) !important;
-
-  backdrop-filter:blur(24px) saturate(150%) !important;
-  -webkit-backdrop-filter:blur(24px) saturate(150%) !important;
-}
-
-main .cta::before{
-  content:"" !important;
-  position:absolute !important;
-  inset:-35% !important;
-  z-index:-1 !important;
-  pointer-events:none !important;
-
-  background:
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(17,17,17,.045),
-      transparent 38%
-    ),
-    radial-gradient(
-      circle at 85% 75%,
-      rgba(17,17,17,.035),
-      transparent 42%
-    ) !important;
-}
-
-main .cta h2{
-  position:relative !important;
-  z-index:2 !important;
-  color:var(--cw-text) !important;
-}
-
-main .cta p{
-  position:relative !important;
-  z-index:2 !important;
-  color:var(--cw-muted) !important;
-}
-
-main .cta > a{
-  position:relative !important;
-  z-index:3 !important;
-
-  display:inline-flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-
-  margin-top:24px !important;
-  padding:14px 20px !important;
-
-  border-radius:14px !important;
-
-  background:var(--cw-text) !important;
-  color:var(--cw-bg) !important;
-
-  font-size:13px !important;
-  font-weight:600 !important;
-  text-decoration:none !important;
-
-  box-shadow:0 8px 24px rgba(17,17,17,.12) !important;
-  transition:transform .2s ease,box-shadow .2s ease !important;
-}
-
-main .cta > a:hover{
-  transform:translateY(-2px) !important;
-  box-shadow:0 12px 30px rgba(17,17,17,.18) !important;
-}
-
-
-/* =========================================================
-   FOOTER — MATCH INDEX STRUCTURE
-   ========================================================= */
-
-.cyrus-footer{
-  margin-top:80px !important;
-  padding:72px 0 24px !important;
-  border-top:1px solid var(--cw-line) !important;
-  background:var(--cw-surface) !important;
-}
-
-.cyrus-footer .container{
-  position:relative !important;
-}
-
-.footer-main{
-  display:grid !important;
-  grid-template-columns:minmax(260px,1.7fr) repeat(3,minmax(130px,1fr)) !important;
-  gap:48px !important;
-  padding-bottom:58px !important;
-}
-
-.footer-brand{
-  max-width:380px !important;
-}
-
-.footer-logo{
-  display:inline-flex !important;
-  align-items:baseline !important;
-  gap:3px !important;
-  color:var(--cw-text) !important;
-  text-decoration:none !important;
-  font-family:var(--font-display) !important;
-  font-size:25px !important;
-  font-weight:700 !important;
-  letter-spacing:-.06em !important;
-}
-
-.footer-logo span{
-  font-weight:400 !important;
-}
-
-.footer-brand p{
-  margin:18px 0 24px !important;
-  max-width:340px !important;
-  color:var(--cw-muted) !important;
-  font-size:14px !important;
-  line-height:1.7 !important;
-}
-
-.footer-cta{
-  display:inline-flex !important;
-  align-items:center !important;
-  gap:12px !important;
-  padding:12px 16px !important;
-  border:1px solid var(--cw-line) !important;
-  border-radius:999px !important;
-  color:var(--cw-text) !important;
-  text-decoration:none !important;
-  font-size:13px !important;
-}
-
-.footer-column{
-  display:flex !important;
-  flex-direction:column !important;
-  align-items:flex-start !important;
-  gap:10px !important;
-}
-
-.footer-column h3{
-  margin:0 0 8px !important;
-  color:var(--cw-text) !important;
-  font-family:var(--font-display) !important;
-  font-size:11px !important;
-  font-weight:600 !important;
-  letter-spacing:.12em !important;
-  text-transform:uppercase !important;
-}
-
-.footer-column a{
-  color:var(--cw-muted) !important;
-  text-decoration:none !important;
-  font-size:13px !important;
-  line-height:1.5 !important;
-}
-
-.footer-column a:hover{
-  color:var(--cw-text) !important;
-}
-
-.footer-contact{
-  display:grid !important;
-  grid-template-columns:1.5fr 1fr 1fr !important;
-  gap:24px !important;
-  padding:24px 0 !important;
-  border-top:1px solid var(--cw-line) !important;
-  border-bottom:1px solid var(--cw-line) !important;
-}
-
-.footer-contact > div{
-  display:flex !important;
-  flex-direction:column !important;
-  gap:7px !important;
-}
-
-.footer-label{
-  color:var(--cw-muted) !important;
-  font-size:9px !important;
-  font-weight:600 !important;
-  letter-spacing:.14em !important;
-  text-transform:uppercase !important;
-}
-
-.footer-contact a,
-.footer-contact > div > span:last-child{
-  color:var(--cw-text) !important;
-  font-size:13px !important;
-  text-decoration:none !important;
-}
-
-.footer-status{
-  display:inline-flex !important;
-  align-items:center !important;
-  gap:7px !important;
-}
-
-.footer-bottom{
-  display:flex !important;
-  align-items:center !important;
-  justify-content:space-between !important;
-  gap:24px !important;
-  padding-top:22px !important;
-  color:var(--cw-muted) !important;
-  font-size:11px !important;
-}
-
-.footer-legal{
-  display:flex !important;
-  align-items:center !important;
-  gap:18px !important;
-}
-
-.footer-legal a{
-  color:var(--cw-muted) !important;
-}
-
-
-/* =========================================================
-   DARK MODE
-   ========================================================= */
-
-html[data-theme="dark"] .navbar{
-  background:rgba(20,20,20,.72) !important;
-  border-color:rgba(255,255,255,.11) !important;
-
-  box-shadow:
-    0 10px 35px rgba(0,0,0,.30),
-    inset 0 1px 0 rgba(255,255,255,.06) !important;
-}
-
-html[data-theme="dark"] .navbar::before{
-  background:linear-gradient(
-    135deg,
-    rgba(255,255,255,.08),
-    rgba(255,255,255,.015)
-  ) !important;
-}
-
-html[data-theme="dark"] main .cta{
-  background:
-    linear-gradient(
-      135deg,
-      rgba(28,28,28,.88),
-      rgba(18,18,18,.78)
-    ) !important;
-
-  border-color:rgba(255,255,255,.11) !important;
-
-  box-shadow:
-    0 20px 60px rgba(0,0,0,.28),
-    inset 0 1px 0 rgba(255,255,255,.06) !important;
-}
-
-html[data-theme="dark"] main .cta::before{
-  background:
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(255,255,255,.045),
-      transparent 38%
-    ),
-    radial-gradient(
-      circle at 85% 75%,
-      rgba(255,255,255,.025),
-      transparent 42%
-    ) !important;
-}
-
-html[data-theme="dark"] .mobile-menu-btn{
-  background:rgba(30,30,30,.72) !important;
-  border-color:rgba(255,255,255,.11) !important;
-}
-
-html[data-theme="dark"] .footer-logo,
-html[data-theme="dark"] .footer-column h3,
-html[data-theme="dark"] .footer-contact a,
-html[data-theme="dark"] .footer-contact > div > span:last-child{
-  color:var(--cw-text) !important;
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media(max-width:800px){
+@media(max-width:768px){
+  .nav-wrapper{
+    width:min(940px,calc(100% - 24px));
+  }
 
   .navbar{
     height:68px !important;
     padding:6px 12px 6px 14px !important;
-  }
-
-  main .cta{
-    margin-top:56px !important;
-    margin-bottom:70px !important;
-    padding:42px 28px !important;
     border-radius:24px !important;
   }
 
-  .footer-main{
-    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-    gap:36px 24px !important;
-    padding-bottom:42px !important;
+  .nav-links{
+    display:none;
   }
 
+  .nav-links.mobile-open{
+    display:flex;
+  }
+
+  .mobile-menu-btn{
+    display:flex;
+    width:40px !important;
+    height:40px !important;
+    border-radius:12px !important;
+    align-items:center;
+    justify-content:center;
+  }
+}
+
+body.nav-locked{
+  overflow:hidden;
+}
+
+
+html[data-theme="dark"] .navbar {
+  background: rgba(10,10,10,.42) !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+  box-shadow: 0 10px 35px rgba(0,0,0,.22) !important;
+  backdrop-filter: blur(24px) saturate(125%);
+  -webkit-backdrop-filter: blur(24px) saturate(125%);
+}
+  html[data-theme="dark"] .nav-links {
+    background: #151515 !important;
+    border: 1px solid rgba(255,255,255,.09) !important;
+    box-shadow: 0 18px 40px rgba(0,0,0,.35) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+html[data-theme="dark"] .nav-link {
+  color: var(--cw-muted);
+}
+
+.cta-section {
+  padding-bottom: 140px;
+}
+.cta-chamber {
+  position: relative;
+  border-radius: 40px;
+  padding: 80px 40px;
+  text-align: center;
+  overflow: hidden;
+}
+.cta-chamber h2 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6.5vw, 76px);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+  font-weight: 500;
+  margin-top: 20px;
+}
+.cta-chamber p {
+  max-width: 480px;
+  margin: 20px auto 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+}
+.cta-chamber .hero-cta-group {
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.cyrus-footer{
+  margin-top:80px;
+  padding:72px 0 24px;
+  border-top:1px solid var(--border);
+  background:var(--cw-surface);
+}
+.cyrus-footer .container{
+  position:relative;
+}
+.footer-main{
+  display:grid;
+  grid-template-columns:minmax(260px,1.7fr) repeat(3,minmax(130px,1fr));
+  gap:48px;
+  padding-bottom:58px;
+}
+.footer-brand{
+  max-width:380px;
+}
+.footer-logo{
+  display:inline-flex;
+  align-items:baseline;
+  gap:3px;
+  color:var(--primary);
+  text-decoration:none;
+  font-family:var(--font-display);
+  font-size:25px;
+  font-weight:700;
+  letter-spacing:-.06em;
+}
+.footer-column{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:10px;
+}
+.footer-column h3{
+  margin:0 0 8px;
+  color:var(--primary);
+  font-family:var(--font-display);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.footer-column a{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:13px;
+  line-height:1.5;
+  transition:color .2s ease,transform .2s ease;
+}
+.footer-contact{
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr;
+  gap:24px;
+  padding:24px 0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.footer-contact > div{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+.footer-label{
+  color:var(--muted);
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.footer-status{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+}
+.footer-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  padding-top:22px;
+  color:var(--muted);
+  font-size:11px;
+}
+.footer-legal{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+.footer-legal a{
+  color:var(--muted);
+  text-decoration:none;
+}
+.footer-cta{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 16px;
+  border:1px solid var(--border);
+  border-radius:999px;
+  color:var(--primary);
+  text-decoration:none;
+  font-size:13px;
+  transition:.25s ease;
+}
+
+@media(max-width:800px){
+  .cyrus-footer{
+    margin-top:56px;
+    padding:54px 0 20px;
+  }
+  .footer-main{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:36px 24px;
+    padding-bottom:42px;
+  }
   .footer-brand{
-    grid-column:1/-1 !important;
-    max-width:100% !important;
+    grid-column:1/-1;
+    max-width:100%;
   }
-
   .footer-contact{
-    grid-template-columns:1fr !important;
-    gap:18px !important;
+    grid-template-columns:1fr;
+    gap:18px;
   }
-
   .footer-bottom{
-    align-items:flex-start !important;
-    flex-direction:column !important;
-    gap:14px !important;
+    align-items:flex-start;
+    flex-direction:column;
+    gap:14px;
   }
-
   .footer-legal{
-    flex-wrap:wrap !important;
-    gap:10px 16px !important;
+    flex-wrap:wrap;
+    gap:10px 16px;
   }
 }
 
-@media(max-width:480px){
 
-  main .cta{
-    padding:34px 22px !important;
-    border-radius:22px !important;
-  }
-
-  .footer-main{
-    grid-template-columns:1fr 1fr !important;
-    gap:30px 16px !important;
-  }
-
-  .footer-column a{
-    font-size:12px !important;
-  }
-
-  .footer-contact{
-    padding:20px 0 !important;
-  }
-}
+/* ------------------------------------------------------------
+   SECONDARY PAGE ACTIVE NAV
+   ------------------------------------------------------------ */
 
 </style>
-
 
 </head>
 
@@ -1669,16 +1561,32 @@ html[data-theme="dark"] .footer-contact > div > span:last-child{
 
   </section>
 
-  <section class="container cta">
-    <h2>Punya project website?</h2>
-    <p>
-      Ceritakan kebutuhan bisnis Anda kepada CyrusWeb.
-      Kami akan membantu menentukan arah website yang paling tepat.
-    </p>
-    <a href="https://wa.me/6281318048885?text=Halo%20CyrusWeb,%20saya%20ingin%20konsultasi%20pembuatan%20website" target="_blank" rel="noopener noreferrer">
-      Konsultasi Sekarang →
-    </a>
-  </section>
+  <section class="cta-section" id="order">
+  <div class="container">
+    <div class="cta-chamber liquid-glass">
+      <div class="section-tag"><span></span>Start a Project</div>
+      <h2>Your business.<br>Better online.</h2>
+      <p>
+        Punya visi atau ide website? Mari wujudkan bersama CyrusWeb
+        menjadi pengalaman digital yang memukau.
+      </p>
+
+      <div class="hero-cta-group">
+        <a
+          href="https://wa.me/6281318048885?text=Halo%20CyrusWeb,%20saya%20ingin%20konsultasi%20pembuatan%20website"
+          target="_blank"
+          class="btn-primary"
+        >
+          Konsultasi Sekarang →
+        </a>
+
+        <a href="index.html#home" class="btn-secondary">
+          Kembali ke Atas
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 
 <footer class="cyrus-footer">
@@ -1852,11 +1760,9 @@ html[data-theme="dark"] .footer-contact > div > span:last-child{
     }
   });
 
-  navLinksPanel
-    .querySelectorAll(".nav-link")
-    .forEach(function (link) {
-      link.addEventListener("click", closeMobileMenu);
-    });
+  navLinksPanel.querySelectorAll(".nav-link").forEach(function (link) {
+    link.addEventListener("click", closeMobileMenu);
+  });
 
   document.addEventListener("click", function (event) {
     if (
@@ -1880,8 +1786,5 @@ html[data-theme="dark"] .footer-contact > div > span:last-child{
   });
 })();
 </script>
-
-
-
 </body>
 </html>
