@@ -294,13 +294,26 @@ section {
 
 /* Hero Section */
 .hero {
-  min-height: 85vh;
+  min-height: 88vh;
   display: flex;
   align-items: center;
-  padding-top: 160px;
-  padding-bottom: 80px;
+  padding-top: 190px;
+  padding-bottom: 100px;
   position: relative;
   background: #FFFFFF;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 11;
+  width: 100%;
+  min-width: 0;
+}
+
+.hero-headline {
+  overflow-wrap: break-word;
+  word-break: normal;
+  max-width: 100%;
 }
 
 .hero-content {
@@ -5013,6 +5026,108 @@ html[data-theme="dark"] .trusted-logo-wrap img{
     transition:none;
   }
 
+}
+
+
+/* ================= HERO SPACING + MOBILE SAFETY ================= */
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding-top: 165px;
+    padding-bottom: 88px;
+    align-items: flex-start;
+    overflow: hidden;
+  }
+
+  .hero-content {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .hero-copy {
+    width: 100%;
+    min-width: 0;
+    position: relative;
+    z-index: 10;
+  }
+
+  .cyrus-entity {
+    width: 250px;
+    right: -105px;
+    top: 15%;
+    opacity: .22;
+    z-index: 1;
+  }
+
+  .hero-headline {
+    font-size: clamp(40px, 12vw, 62px);
+    line-height: 0.98;
+    letter-spacing: -0.042em;
+    max-width: 100%;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .hero-subheadline {
+    max-width: 100%;
+    font-size: 14px;
+    line-height: 1.75;
+    margin-top: 28px;
+  }
+
+  .hero-cta-group {
+    margin-top: 34px;
+    width: 100%;
+  }
+
+  .hero-cta-group .btn-primary,
+  .hero-cta-group .btn-secondary {
+    max-width: 100%;
+  }
+
+  .hero-stats {
+    margin-top: 56px;
+    padding-top: 28px;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero {
+    padding-top: 150px;
+    padding-bottom: 76px;
+  }
+
+  .hero-headline {
+    font-size: clamp(36px, 11.5vw, 46px);
+    line-height: 1;
+    letter-spacing: -0.038em;
+  }
+
+  .hero-subheadline {
+    font-size: 13px;
+    line-height: 1.7;
+    margin-top: 24px;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+  }
+
+  .cyrus-entity {
+    width: 210px;
+    right: -95px;
+    top: 12%;
+    opacity: .16;
+  }
+
+  .hero-cta-group .btn-primary,
+  .hero-cta-group .btn-secondary {
+    width: 100%;
+  }
 }
 
 </style>
