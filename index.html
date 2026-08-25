@@ -4317,11 +4317,11 @@ html[data-theme="dark"] .trusted-eyebrow{
     </a>
     <div class="nav-links" id="nav-links-panel">
       <a href="layanan.html" class="nav-link">Layanan</a>
-      <a href="index.html#process" class="nav-link">Proses</a>
+      <a href="index.html#home" class="nav-link">Home</a>
       <a href="pricing.html" class="nav-link">Paket</a>
       <a href="tentang.html" class="nav-link">Tentang Kami</a>
       <a href="portfolio.html" class="nav-link">Portfolio</a>
-      <a href="testimonials.html" class="nav-link">Testimoni</a>
+
       <a href="faq.html" class="nav-link">FAQ</a>
       <a href="contact.html" class="nav-link">Kontak</a>
     </div>
@@ -6376,7 +6376,22 @@ window.addEventListener(
     </div>
   </section>
 
-  <section class="cta-section" id="order">
+  <!-- Testimonials -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-tag"><span></span>Testimonials</div>
+    <h2 class="section-title">Apa kata klien<br>tentang CyrusWeb.</h2>
+    <p class="section-desc">
+      Pengalaman dan pendapat client yang telah bekerja bersama CyrusWeb.
+    </p>
+
+    <div class="testimonial-grid" id="testimonials-grid">
+      <div class="testimonial-loading">Memuat testimonials...</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="order">
     <div class="container">
       <div class="cta-chamber liquid-glass">
         <div class="section-tag"><span></span>Mulai Project</div>
@@ -6418,7 +6433,7 @@ window.addEventListener(
         <h3>Navigasi</h3>
         <a href="index.html">Beranda</a>
         <a href="layanan.html">Layanan</a>
-        <a href="index.html#process">Proses</a>
+        <a href="index.html#home">Home</a>
         <a href="pricing.html">Paket</a>
         <a href="portfolio.html">Portfolio</a>
         <a href="tentang.html">Tentang Kami</a>
@@ -7197,6 +7212,107 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 })();
+</script>
+
+<script>
+/* --- Dynamic Testimonials CMS --- */
+document.addEventListener("DOMContentLoaded", () => {
+  const testimonialsGrid = document.querySelector("#testimonials-grid");
+  if (!testimonialsGrid) return;
+
+  fetch("https://cyrusweb.vercel.app/api/testimonials?t=" + Date.now(), {
+    cache: "no-store"
+  })
+    .then(res => {
+      if (!res.ok) throw new Error("Testimonials API error");
+      return res.json();
+    })
+    .then(result => {
+      if (!result.success || !Array.isArray(result.data)) {
+        throw new Error("Format testimonials tidak valid");
+      }
+
+      if (result.data.length === 0) {
+        testimonialsGrid.innerHTML =
+          '<div class="testimonial-loading">Belum ada testimonial tersedia.</div>';
+        return;
+      }
+
+      testimonialsGrid.innerHTML = "";
+
+      result.data
+        .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+        .forEach(item => {
+          const card = document.createElement("article");
+          card.className = "testimonial-card";
+
+          const top = document.createElement("div");
+          top.className = "testimonial-top";
+
+          const person = document.createElement("div");
+          person.className = "testimonial-person";
+
+          if (item.avatarUrl) {
+            const img = document.createElement("img");
+            img.className = "testimonial-avatar";
+            img.src = item.avatarUrl;
+            img.alt = item.clientName || "Client";
+            img.loading = "lazy";
+            person.appendChild(img);
+          } else {
+            const fallback = document.createElement("div");
+            fallback.className =
+              "testimonial-avatar testimonial-avatar-fallback";
+            fallback.textContent =
+              (item.clientName || "C").charAt(0).toUpperCase();
+            person.appendChild(fallback);
+          }
+
+          const identity = document.createElement("div");
+
+          const name = document.createElement("div");
+          name.className = "testimonial-name";
+          name.textContent = item.clientName || "Client";
+
+          const role = document.createElement("div");
+          role.className = "testimonial-role";
+          role.textContent = item.clientRole || "";
+
+          identity.appendChild(name);
+          identity.appendChild(role);
+          person.appendChild(identity);
+
+          const rating = document.createElement("div");
+          rating.className = "testimonial-rating";
+          rating.textContent =
+            "★".repeat(
+              Math.max(0, Math.min(5, Number(item.rating) || 0))
+            );
+
+          top.appendChild(person);
+          top.appendChild(rating);
+
+          const content = document.createElement("p");
+          content.className = "testimonial-content";
+          content.textContent = item.content || "";
+
+          const company = document.createElement("div");
+          company.className = "testimonial-company";
+          company.textContent = item.company || "";
+
+          card.appendChild(top);
+          card.appendChild(content);
+          card.appendChild(company);
+
+          testimonialsGrid.appendChild(card);
+        });
+    })
+    .catch(error => {
+      console.error("Testimonials load error:", error);
+      testimonialsGrid.innerHTML =
+        '<div class="testimonial-loading">Testimonials sedang tidak dapat dimuat.</div>';
+    });
+});
 </script>
 
 </body>
