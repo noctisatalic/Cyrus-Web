@@ -2070,6 +2070,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.querySelectorAll(".faq-question").forEach((other) => {
           if (other !== button) {
             other.setAttribute("aria-expanded", "false");
+            other.classList.remove("open");
             other.querySelector(".faq-icon").textContent = "+";
             const otherAnswer = other.parentElement.querySelector(".faq-answer");
             if (otherAnswer) otherAnswer.hidden = true;
@@ -2078,6 +2079,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         button.setAttribute("aria-expanded", String(!isOpen));
         button.querySelector(".faq-icon").textContent = isOpen ? "+" : "−";
+        article.classList.toggle("open", !isOpen);
         answer.hidden = isOpen;
       });
 
