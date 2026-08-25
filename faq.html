@@ -2013,5 +2013,105 @@ html[data-theme="dark"] .navbar {
 })();
 </script>
 
+
+<script id="cyrus-faq-loader">
+document.addEventListener("DOMContentLoaded", async () => {
+  const faqList = document.getElementById("faq-list");
+  if (!faqList) return;
+
+  try {
+    const response = await fetch(
+      "https://cyrusweb.vercel.app/api/faq?t=" + Date.now(),
+      {
+        method: "GET",
+        cache: "no-store"
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("FAQ API error: " + response.status);
+    }
+
+    const result = await response.json();
+
+    if (!result.success || !Array.isArray(result.data)) {
+      throw new Error("Format FAQ tidak valid");
+    }
+
+    if (result.data.length === 0) {
+      faqList.innerHTML =
+        '<div class="faq-loading">Belum ada FAQ yang tersedia.</div>';
+      return;
+    }
+
+    faqList.innerHTML = "";
+
+    result.data.forEach((item, index) => {
+      const article = document.createElement("article");
+      article.className = "faq-item";
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "faq-question";
+      button.setAttribute("aria-expanded", "false");
+      button.innerHTML = `
+        <span>${escapeHtml(item.question || "Pertanyaan")}</span>
+        <span class="faq-icon">+</span>
+      `;
+
+      const answer = document.createElement("div");
+      answer.className = "faq-answer";
+      answer.hidden = true;
+      answer.innerHTML = `<p>${formatAnswer(item.answer || "")}</p>`;
+
+      button.addEventListener("click", () => {
+        const isOpen = button.getAttribute("aria-expanded") === "true";
+
+        document.querySelectorAll(".faq-question").forEach((other) => {
+          if (other !== button) {
+            other.setAttribute("aria-expanded", "false");
+            other.querySelector(".faq-icon").textContent = "+";
+            const otherAnswer = other.parentElement.querySelector(".faq-answer");
+            if (otherAnswer) otherAnswer.hidden = true;
+          }
+        });
+
+        button.setAttribute("aria-expanded", String(!isOpen));
+        button.querySelector(".faq-icon").textContent = isOpen ? "+" : "−";
+        answer.hidden = isOpen;
+      });
+
+      article.appendChild(button);
+      article.appendChild(answer);
+      faqList.appendChild(article);
+    });
+
+  } catch (error) {
+    console.error("FAQ loader error:", error);
+
+    faqList.innerHTML = `
+      <div class="faq-loading">
+        FAQ belum dapat dimuat. Silakan coba lagi beberapa saat.
+      </div>
+    `;
+  }
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function formatAnswer(value) {
+    return escapeHtml(value)
+      .replace(/\n/g, "<br>")
+      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+  }
+});
+</script>
+
 </body>
 </html>
