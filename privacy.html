@@ -810,48 +810,25 @@ html[data-theme="dark"] ::selection {
 }
 
 /* CyrusWeb footer dark theme */
-html[data-theme="dark"] .cyrus-footer {
-  background: var(--cw-bg) !important;
-  color: var(--cw-text) !important;
-  border-top-color: var(--cw-line) !important;
-}
 
-html[data-theme="dark"] .cyrus-footer .footer-logo,
-html[data-theme="dark"] .cyrus-footer .footer-logo span {
-  color: var(--cw-text) !important;
-}
 
-html[data-theme="dark"] .cyrus-footer .footer-brand p {
-  color: var(--cw-muted) !important;
-}
 
-html[data-theme="dark"] .cyrus-footer .footer-column h3 {
-  color: var(--cw-text) !important;
-}
 
-html[data-theme="dark"] .cyrus-footer .footer-column a {
-  color: var(--cw-muted) !important;
-}
 
-html[data-theme="dark"] .cyrus-footer .footer-column a:hover {
-  color: var(--cw-text) !important;
-}
 
-html[data-theme="dark"] .cyrus-footer .footer-label {
-  color: #777 !important;
-}
 
-html[data-theme="dark"] .cyrus-footer .footer-contact a {
-  color: var(--cw-text) !important;
-}
 
-html[data-theme="dark"] .cyrus-footer .footer-contact > div > span:not(.footer-label) {
-  color: var(--cw-muted) !important;
-}
 
-html[data-theme="dark"] .cyrus-footer .footer-status {
-  color: var(--cw-muted) !important;
-}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -959,68 +936,27 @@ html[data-theme="dark"] .cyrus-footer .footer-status {
     box-sizing: border-box !important;
   }
 
-  .cyrus-footer .footer-main {
-    display: grid !important;
-    gap: 34px !important;
-    padding-bottom: 40px !important;
-  }
 
-  .cyrus-footer .footer-brand {
-    max-width: 100% !important;
-  }
 
-  .cyrus-footer .footer-brand p {
-    max-width: 100% !important;
-    margin-bottom: 20px !important;
-  }
 
-  .cyrus-footer .footer-column {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 8px !important;
-  }
 
-  .cyrus-footer .footer-column h3 {
-    margin-bottom: 7px !important;
-  }
 
-  .cyrus-footer .footer-column a {
-    font-size: 14px !important;
-    line-height: 1.5 !important;
-    padding: 3px 0 !important;
-  }
 
-  .cyrus-footer .footer-contact {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 22px !important;
-    margin-top: 40px !important;
-    padding: 24px 0 !important;
-  }
 
-  .cyrus-footer .footer-contact > div {
-    min-width: 0 !important;
-  }
 
-  .cyrus-footer .footer-contact a {
-    font-size: 14px !important;
-    overflow-wrap: anywhere !important;
-  }
 
-  .cyrus-footer .footer-bottom {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 16px !important;
-    padding-top: 22px !important;
-  }
 
-  .cyrus-footer .footer-legal {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: flex-start !important;
-    gap: 10px 18px !important;
-  }
+
+
+
+
+
+
+
+
+
+
+
 }
 
 @media (max-width: 420px) {
@@ -1045,22 +981,13 @@ html[data-theme="dark"] .cyrus-footer .footer-status {
     width: calc(100% - 28px) !important;
   }
 
-  .cyrus-footer .footer-main {
-    gap: 30px !important;
-  }
 
-  .cyrus-footer .footer-logo {
-    font-size: 22px !important;
-  }
 
-  .cyrus-footer .footer-contact {
-    margin-top: 34px !important;
-    gap: 20px !important;
-  }
 
-  .cyrus-footer .footer-bottom {
-    font-size: 10px !important;
-  }
+
+
+
+
 }
 
 /* DARK MODE */
@@ -1444,41 +1371,53 @@ html[data-theme="dark"] .nav-link {
     margin-top:56px;
     padding:54px 0 20px;
   }
+
   .footer-main{
     grid-template-columns:repeat(2,minmax(0,1fr));
     gap:36px 24px;
     padding-bottom:42px;
   }
+
   .footer-brand{
     grid-column:1/-1;
     max-width:100%;
-  }
-
-  .footer-main{
-    grid-template-columns:1fr 1fr;
-    gap:30px 16px;
   }
 
   .footer-contact{
     grid-template-columns:1fr;
     gap:18px;
   }
+
   .footer-bottom{
     align-items:flex-start;
     flex-direction:column;
     gap:14px;
   }
+
   .footer-legal{
     flex-wrap:wrap;
     gap:10px 16px;
   }
 }
 
+@media(max-width:480px){
+  .footer-main{
+    grid-template-columns:1fr 1fr;
+    gap:30px 16px;
+  }
 
-/* ------------------------------------------------------------
-   SECONDARY PAGE ACTIVE NAV
-   ------------------------------------------------------------ */
+  .footer-brand{
+    grid-column:1/-1;
+  }
 
+  .footer-column a{
+    font-size:12px;
+  }
+
+  .footer-contact{
+    padding:20px 0;
+  }
+}
 </style>
 
 
