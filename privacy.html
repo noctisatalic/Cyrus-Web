@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Privacy Policy | CyrusWeb</title>
-<meta name="description" content="Kebijakan privasi CyrusWeb mengenai informasi yang diberikan melalui website, komunikasi project, penggunaan data, dan layanan pihak ketiga.">
+<title>Kebijakan Privasi | CyrusWeb</title>
+<meta name="description" content="Kebijakan Privasi CyrusWeb mengenai pengumpulan, penggunaan, perlindungan, dan pengelolaan informasi pengguna.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#ffffff" id="cyrus-theme-color">
 
@@ -13,1598 +13,229 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="id_ID">
 <meta property="og:site_name" content="CyrusWeb">
-<meta property="og:title" content="Privacy Policy | CyrusWeb">
-<meta property="og:description" content="Kebijakan privasi CyrusWeb mengenai informasi yang diberikan melalui website, komunikasi project, penggunaan data, dan layanan pihak ketiga.">
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Privacy Policy | CyrusWeb">
-<meta name="twitter:description" content="Kebijakan privasi CyrusWeb mengenai informasi yang diberikan melalui website, komunikasi project, penggunaan data, dan layanan pihak ketiga.">
+<meta property="og:title" content="Kebijakan Privasi | CyrusWeb">
+<meta property="og:description" content="Kebijakan Privasi CyrusWeb mengenai pengelolaan informasi pengguna.">
 
 <link rel="canonical" href="https://noctisatalic.github.io/Cyrus-Web/privacy.html">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="static-pages.css">
 
-<style>
-
-/* =========================================================
-   CYRUSWEB EDITORIAL SYSTEM — P1.12
-   Shared visual language for secondary pages
-   ========================================================= */
-
-:root{
-  --cw-bg:#ffffff;
-  --cw-surface:#ffffff;
-  --cw-surface-solid:#ffffff;
-  --cw-soft:#f7f7f7;
-  --cw-text:#111111;
-  --cw-muted:#6b6b6b;
-  --cw-line:rgba(17,17,17,.08);
-
-  --primary:#111;
-  --muted:#666;
-  --glass-border:rgba(17,17,17,.08);
-  --glass-shadow:0 10px 30px rgba(0,0,0,.03);
-
-  --cta-glow:var(--cta-glow);
-  --cta-ring-soft:var(--cta-ring-soft);
-  --cta-ring-faint:var(--cta-ring-faint);
-  --cta-shadow:var(--cta-shadow);
-  --cta-shadow-hover:var(--cta-shadow-hover);
-
-  --light:#f7f7f7;
-  --line:rgba(17,17,17,.08);
-
-  --font-display:"Instrument Sans",sans-serif;
-}
-
-*{
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  margin:0;
-  background:var(--cw-bg);
-  color:var(--cw-text);
-  font-family:var(--font-display);
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
-
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-1;
-  background:
-    radial-gradient(
-      circle at 82% 8%,
-      rgba(17,17,17,.055),
-      transparent 24%
-    ),
-    radial-gradient(
-      circle at 8% 42%,
-      rgba(17,17,17,.025),
-      transparent 28%
-    );
-}
-
-a{
-  color:inherit;
-}
-
-.container{
-  width:min(1120px,calc(100% - 36px));
-  margin:auto;
-}
-
-
-/* =========================================================
-   CYRUS NAVBAR — SYNCED WITH INDEX
-   ========================================================= */
-
-.nav-wrapper {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  width: min(940px, calc(100% - 24px));
-}
-
-.navbar {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 68px;
-  padding: 6px 12px 6px 14px;
-  border-radius: 24px;
-  background: var(--cw-surface);
-  border: 1px solid var(--cw-line);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-}
-
-.nav-brand {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
-
-.nav-brand .brand-mark {
-  display: block;
-  color: var(--cw-text);
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.06em;
-  line-height: 1;
-}
-
-.nav-links {
-  display: flex;
-  gap: 4px;
-}
-
-.nav-link {
-  padding: 8px 14px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--cw-muted);
-  text-decoration: none;
-  transition: color 0.2s, background 0.2s;
-}
-
-.nav-link:hover,
-.nav-link.active {
-  color: var(--cw-text);
-  background: var(--cw-soft);
-}
-
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.nav-cta {
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 14px;
-  background: var(--cw-text);
-  color: var(--cw-bg) !important;
-  font-size: 12px;
-  font-weight: 600;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.nav-cta:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(17, 17, 17, 0.15);
-}
-
-.mobile-menu-btn {
-  display: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: var(--cw-soft);
-  color: var(--cw-text);
-  border: 1px solid var(--cw-line);
-  font-size: 16px;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-@media (max-width: 768px) {
-  .nav-wrapper {
-    width: min(940px, calc(100% - 24px));
-  }
-
-  .navbar {
-    height: 68px;
-    padding: 6px 12px 6px 14px;
-  }
-
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: calc(100% + 10px);
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    gap: 2px;
-    background: var(--cw-surface-solid);
-    border: 1px solid var(--cw-line);
-    border-radius: 18px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-    padding: 8px;
-  }
-
-  .nav-links.mobile-open {
-    display: flex;
-    animation: navDropIn 0.22s ease;
-  }
-
-  .nav-links .nav-link {
-    padding: 13px 14px;
-    border-radius: 12px;
-    font-size: 14px;
-    width: 100%;
-  }
-
-  .nav-actions .nav-cta {
-    display: none;
-  }
-
-  .mobile-menu-btn {
-    display: flex;
-  }
-
-  .mobile-menu-btn[aria-expanded="true"] {
-    background: var(--cw-text);
-    color: var(--cw-bg);
-  }
-}
-
-@keyframes navDropIn {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-body.nav-locked {
-  overflow: hidden;
-}
-
-
-/* ================= HERO ================= */
-
-.hero{
-  position:relative;
-  isolation:isolate;
-  overflow:hidden;
-  padding:125px 0 105px;
-  border-bottom:1px solid var(--cw-line);
-}
-
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:-20%;
-  z-index:-2;
-  pointer-events:none;
-  background:
-    radial-gradient(
-      circle at 78% 38%,
-      rgba(0,0,0,.075),
-      transparent 22%
-    ),
-    radial-gradient(
-      circle at 91% 12%,
-      rgba(0,0,0,.045),
-      transparent 19%
-    );
-}
-
-.hero::after{
-  content:"";
-  position:absolute;
-  width:520px;
-  height:520px;
-  right:-170px;
-  top:50%;
-  transform:translateY(-50%);
-  border:1px solid rgba(17,17,17,.065);
-  border-radius:50%;
-  box-shadow:
-    0 0 0 70px rgba(17,17,17,.016),
-    0 0 0 140px rgba(17,17,17,.010);
-  z-index:-1;
-  pointer-events:none;
-}
-
-.eyebrow{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  color:var(--cw-muted);
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-}
-
-.eyebrow i{
-  width:24px;
-  height:1px;
-  background:var(--cw-muted);
-}
-
-.hero h1{
-  max-width:920px;
-  margin:24px 0 26px;
-  font-size:clamp(52px,8vw,100px);
-  line-height:.92;
-  letter-spacing:-.06em;
-  font-weight:500;
-}
-
-.hero p{
-  max-width:650px;
-  margin:0;
-  color:var(--cw-muted);
-  font-size:clamp(15px,1.8vw,17px);
-  line-height:1.75;
-}
-
-/* ================= INFORMATION CONTENT ================= */
-
-.info-grid{
-  display:grid;
-  gap:0;
-  padding:25px 0 100px;
-}
-
-.info-card{
-  position:relative;
-  display:grid;
-  grid-template-columns:100px minmax(0,720px);
-  gap:34px;
-  padding:48px 0;
-  border-bottom:1px solid var(--cw-line);
-  transition:
-    padding-left .25s ease,
-    background .25s ease;
-}
-
-.info-card::before{
-  content:"";
-  position:absolute;
-  left:-18px;
-  top:0;
-  bottom:0;
-  width:2px;
-  background:var(--cw-text);
-  transform:scaleY(0);
-  transform-origin:center;
-  transition:transform .25s ease;
-}
-
-.info-card:hover{
-  padding-left:12px;
-}
-
-.info-card:hover::before{
-  transform:scaleY(1);
-}
-
-.info-number{
-  color:var(--cw-muted);
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:.12em;
-}
-
-.info-card h2{
-  margin:0 0 13px;
-  font-size:clamp(28px,3.5vw,42px);
-  line-height:1.02;
-  letter-spacing:-.05em;
-  font-weight:500;
-}
-
-.info-card p{
-  margin:0;
-  max-width:680px;
-  color:var(--cw-muted);
-  font-size:15px;
-  line-height:1.8;
-}
-
-/* ================= CTA ================= */
-
-.cta{
-  position:relative;
-  overflow:hidden;
-  margin:0 0 100px;
-  padding:64px 56px;
-  border:1px solid var(--cw-line);
-  border-radius:28px;
-  background:
-    radial-gradient(
-      circle at 90% 15%,
-      var(--cta-glow),
-      transparent 30%
-    ),
-    linear-gradient(145deg,var(--cw-surface),var(--cw-soft));
-}
-
-.cta::after{
-  content:"";
-  position:absolute;
-  width:260px;
-  height:260px;
-  right:-100px;
-  bottom:-150px;
-  border:1px solid var(--glass-border);
-  border-radius:50%;
-  box-shadow:
-    0 0 0 45px var(--cta-ring-soft),
-    0 0 0 90px var(--cta-ring-faint);
-  pointer-events:none;
-}
-
-.cta h2{
-  position:relative;
-  z-index:1;
-  margin:0 0 14px;
-  font-size:clamp(34px,5vw,58px);
-  line-height:.98;
-  letter-spacing:-.055em;
-  font-weight:500;
-}
-
-.cta p{
-  position:relative;
-  z-index:1;
-  max-width:610px;
-  margin:0;
-  color:var(--cw-muted);
-  line-height:1.75;
-}
-
-.cta a{
-  position:relative;
-  z-index:2;
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  margin-top:24px;
-  padding:0 22px;
-  height:50px;
-  border-radius:15px;
-  background:var(--cw-text);
-  color:var(--cw-bg);
-  text-decoration:none;
-  font-size:13px;
-  font-weight:600;
-  box-shadow:0 8px 20px var(--cta-shadow);
-  transition:
-    transform .2s ease,
-    box-shadow .2s ease;
-}
-
-.cta a:hover{
-  transform:translateY(-2px);
-  box-shadow:0 12px 28px var(--cta-shadow-hover);
-}
-
-/* ================= FOOTER ================= */
-
-.cyrus-footer{
-  margin-top:80px;
-  padding:72px 0 24px;
-  border-top:1px solid var(--cw-line);
-  background:var(--cw-surface);
-}
-
-.cyrus-footer .container{
-  position:relative;
-}
-
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:760px){
-
-  .container{
-    width:min(100% - 28px,1120px);
-  }
-
-  .nav-links a:not(.nav-cta){
-    display:none;
-  }
-
-  .hero{
-    padding:82px 0 68px;
-  }
-
-  .hero h1{
-    font-size:clamp(48px,15vw,72px);
-  }
-
-  .hero::after{
-    width:360px;
-    height:360px;
-    right:-180px;
-  }
-
-  .info-grid{
-    padding-bottom:70px;
-  }
-
-  .info-card{
-    grid-template-columns:1fr;
-    gap:13px;
-    padding:34px 0;
-  }
-
-  .info-card:hover{
-    padding-left:8px;
-  }
-
-  .cta{
-    margin-bottom:70px;
-    padding:34px 26px;
-    border-radius:22px;
-  }
-
-  .cta h2{
-    font-size:clamp(34px,10vw,48px);
-  }
-}
-
-@media(max-width:480px){
-
-  .nav-inner{
-    min-height:64px;
-  }
-
-  .logo{
-    font-size:18px;
-  }
-
-  .nav-cta{
-    padding:9px 13px;
-  }
-
-  .hero{
-    padding:72px 0 58px;
-  }
-
-  .hero h1{
-    margin-top:20px;
-    font-size:48px;
-  }
-
-  .hero p{
-    font-size:15px;
-  }
-
-  .info-card h2{
-    font-size:30px;
-  }
-
-  .info-card p{
-    font-size:14px;
-  }
-
-  .cta{
-    padding:30px 22px;
-  }
-}
-
-
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebPage",
-      "@id": "https://noctisatalic.github.io/Cyrus-Web/privacy.html#webpage",
-      "url": "https://noctisatalic.github.io/Cyrus-Web/privacy.html",
-      "name": "Privacy Policy | CyrusWeb",
-      "description": "Kebijakan privasi CyrusWeb mengenai informasi dan data yang diberikan melalui website.",
-      "isPartOf": {
-        "@id": "https://noctisatalic.github.io/Cyrus-Web/#website"
-      },
-      "about": {
-        "@id": "https://noctisatalic.github.io/Cyrus-Web/#organization"
-      }
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": "https://noctisatalic.github.io/Cyrus-Web/privacy.html#breadcrumb",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Beranda",
-          "item": "https://noctisatalic.github.io/Cyrus-Web/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Privacy Policy | CyrusWeb",
-          "item": "https://noctisatalic.github.io/Cyrus-Web/privacy.html"
-        }
-      ]
-    }
-  ]
-}
-</script>
-</style>
-<script id="cyrus-theme-boot">
-(function () {
+<script>
+(function(){
   const saved = localStorage.getItem("cyrus-theme");
-  const themeColor = document.getElementById("cyrus-theme-color");
-
-function syncThemeColor(theme) {
-  if (!themeColor) return;
-  themeColor.setAttribute(
-    "content",
-    theme === "dark" ? "#0b0b0b" : "#ffffff"
-  );
-}
-
-const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches;
   document.documentElement.dataset.theme =
     saved || (preferred ? "dark" : "light");
-
-  syncThemeColor(document.documentElement.dataset.theme);
 })();
 </script>
 
-
-<style id="cyrus-theme-engine">
-:root {
-  --cw-bg: #ffffff;
-  --cw-surface: #ffffff;
-  --cw-surface-solid: #ffffff;
-  --cw-soft: #f7f7f7;
-  --cw-text: #111111;
-  --cw-muted: #6b6b6b;
-  --cw-line: rgba(17,17,17,.08);
-}
-
-html[data-theme="dark"] {
-  --cw-bg: #0b0b0b;
-  --cw-surface: rgba(24,24,24,.88);
-  --cw-surface-solid: #151515;
-  --cw-soft: #181818;
-  --cw-text: #f5f5f5;
-  --cw-muted: #a0a0a0;
-  --cw-line: rgba(255,255,255,.11);
-
-  --primary: #f5f5f5;
-  --light: #181818;
-  --line: rgba(255,255,255,.11);
-  --glass-border: rgba(255,255,255,.11);
-  --glass-shadow: 0 10px 30px rgba(0,0,0,.30);
-
-  --cta-glow:rgba(255,255,255,.045);
-  --cta-ring-soft:rgba(255,255,255,.018);
-  --cta-ring-faint:rgba(255,255,255,.010);
-  --cta-shadow:rgba(0,0,0,.30);
-  --cta-shadow-hover:rgba(0,0,0,.42);
-}
-
-html[data-theme="dark"],
-html[data-theme="dark"] body {
-  background: var(--cw-bg) !important;
-  color: var(--cw-text) !important;
-  color-scheme: dark;
-}
-
-html[data-theme="dark"] nav,
-html[data-theme="dark"] footer {
-  background: var(--cw-bg) !important;
-  color: var(--cw-text) !important;
-  border-color: var(--cw-line) !important;
-}
-
-html[data-theme="dark"] main,
-html[data-theme="dark"] section,
-html[data-theme="dark"] .hero {
-  background: transparent !important;
-  color: var(--cw-text);
-}
-
-html[data-theme="dark"] h1,
-html[data-theme="dark"] h2,
-html[data-theme="dark"] h3,
-html[data-theme="dark"] h4,
-html[data-theme="dark"] strong,
-html[data-theme="dark"] .logo {
-  color: var(--cw-text) !important;
-}
-
-html[data-theme="dark"] p,
-html[data-theme="dark"] li,
-html[data-theme="dark"] .muted,
-html[data-theme="dark"] .section-desc,
-html[data-theme="dark"] .eyebrow {
-  color: var(--cw-muted) !important;
-}
-
-html[data-theme="dark"] a:not(.nav-cta) {
-  color: var(--cw-text);
-}
-
-html[data-theme="dark"] .nav-links a {
-  color: var(--cw-muted);
-}
-
-html[data-theme="dark"] .nav-links a:hover,
-html[data-theme="dark"] .nav-links a.active {
-  color: var(--cw-text) !important;
-}
-
-html[data-theme="dark"] .nav-cta {
-  background: #f5f5f5 !important;
-  color: #111 !important;
-}
-
-html[data-theme="dark"] .card,
-html[data-theme="dark"] .content-card,
-html[data-theme="dark"] .glass,
-html[data-theme="dark"] .liquid-glass,
-html[data-theme="dark"] article,
-html[data-theme="dark"] .info-card,
-html[data-theme="dark"] .faq-item {
-  background: var(--cw-surface) !important;
-  color: var(--cw-text) !important;
-  border-color: var(--cw-line) !important;
-  box-shadow: var(--glass-shadow);
-}
-
-html[data-theme="dark"] .cw-theme-toggle {
-  background: var(--cw-soft);
-  border-color: var(--cw-line);
-  color: var(--cw-text);
-}
-
-.cw-theme-toggle {
-  width: 40px;
-  height: 40px;
-  flex: 0 0 40px;
-  border-radius: 12px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--line);
-  background: var(--light);
-  color: var(--primary);
-  font-size: 15px;
-  cursor: pointer;
-  transition: transform .2s, background .2s, color .2s;
-}
-
-.cw-theme-toggle:hover {
-  transform: translateY(-1px);
-}
-
-.cw-theme-toggle .cw-moon {
-  display: none;
-}
-
-html[data-theme="dark"] .cw-theme-toggle .cw-sun {
-  display: none;
-}
-
-html[data-theme="dark"] .cw-theme-toggle .cw-moon {
-  display: inline;
-}
-
-html[data-theme="dark"] ::selection {
-  background: #f5f5f5;
-  color: #111;
-}
-
-/* CyrusWeb footer dark theme */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</style>
-
-
-
-<style id="cyrus-mobile-sync-final">
-/* =========================================================
-   CYRUSWEB — MOBILE NAV + FOOTER SYNC
-   Same behavior as the main CyrusWeb pages
-   ========================================================= */
-
-@media (max-width: 768px) {
-
-  /* NAVBAR */
-  .nav-wrapper {
-    position: fixed !important;
-    top: 12px !important;
-    left: 12px !important;
-    right: 12px !important;
-    width: auto !important;
-    margin: 0 !important;
-    transform: none !important;
-    z-index: 10000 !important;
-  }
-
-  .navbar {
-    width: 100% !important;
-    height: 62px !important;
-    box-sizing: border-box !important;
-    padding: 6px 10px 6px 14px !important;
-    border-radius: 20px !important;
-  }
-
-  .nav-links {
-    display: none !important;
-    position: absolute !important;
-    top: calc(100% + 8px) !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    flex-direction: column !important;
-    gap: 2px !important;
-    padding: 8px !important;
-    margin: 0 !important;
-    border-radius: 18px !important;
-    background: var(--cw-surface-solid, #fff) !important;
-    border: 1px solid var(--cw-line) !important;
-    box-shadow: 0 16px 40px rgba(0,0,0,.12) !important;
-    z-index: 10001 !important;
-  }
-
-  .nav-links.mobile-open {
-    display: flex !important;
-  }
-
-  .nav-links .nav-link {
-    display: flex !important;
-    width: 100% !important;
-    min-height: 46px !important;
-    box-sizing: border-box !important;
-    align-items: center !important;
-    padding: 12px 14px !important;
-    font-size: 14px !important;
-    border-radius: 12px !important;
-  }
-
-  .nav-actions {
-    margin-left: auto !important;
-  }
-
-  .nav-actions .nav-cta {
-    display: none !important;
-  }
-
-  .mobile-menu-btn {
-    display: flex !important;
-    width: 40px !important;
-    height: 40px !important;
-    flex: 0 0 40px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    border-radius: 12px !important;
-    cursor: pointer !important;
-    position: relative !important;
-    z-index: 10002 !important;
-  }
-
-  /* FOOTER */
-  .cyrus-footer {
-    width: 100% !important;
-    box-sizing: border-box !important;
-    margin-top: 64px !important;
-    padding: 52px 0 22px !important;
-  }
-
-  .cyrus-footer .container {
-    width: min(100% - 32px, 560px) !important;
-    margin: 0 auto !important;
-    box-sizing: border-box !important;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-@media (max-width: 420px) {
-
-  .nav-wrapper {
-    top: 10px !important;
-    left: 10px !important;
-    right: 10px !important;
-  }
-
-  .navbar {
-    height: 60px !important;
-    border-radius: 19px !important;
-  }
-
-  .cyrus-footer {
-    margin-top: 56px !important;
-    padding: 44px 0 20px !important;
-  }
-
-  .cyrus-footer .container {
-    width: calc(100% - 28px) !important;
-  }
-
-
-
-
-
-
-
-
-}
-
-/* DARK MODE */
-html[data-theme="dark"] .nav-links {
-  background: #151515 !important;
-  border-color: rgba(255,255,255,.09) !important;
-  box-shadow: 0 18px 42px rgba(0,0,0,.35) !important;
-}
-
-html[data-theme="dark"] .mobile-menu-btn[aria-expanded="true"] {
-  background: var(--cw-text) !important;
-  color: var(--cw-bg) !important;
-}
-</style>
-
-<!-- CYRUSWEB SECONDARY VISUAL PARITY -->
-
-
-
-
-
-<style id="cyrus-pricing-master-sync">
-
-.nav-wrapper {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  width: min(940px, calc(100% - 24px));
-}
-.navbar {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 68px;
-  padding: 6px 12px 6px 14px;
-  border-radius: 24px;
-  background: #FFFFFF;
-  border: 1px solid var(--line);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-}
-.nav-brand {
-  display: flex;
-  align-items: center;
-}
-.nav-links {
-  display: flex;
-  gap: 4px;
-}
-.nav-link {
-  padding: 8px 14px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--muted);
-  transition: color 0.2s, background 0.2s;
-}
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.nav-cta {
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 14px;
-  background: var(--primary);
-  color: var(--white);
-  font-size: 12px;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.mobile-menu-btn {
-  display: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: var(--light);
-  border: 1px solid var(--line);
-  font-size: 16px;
-  align-items: center;
-  justify-content: center;
-}
-.nav-cta:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(17, 17, 17, 0.15);
-}
-@keyframes navDropIn {
-  from { opacity: 0; transform: translateY(-8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-html[data-theme="dark"] .navbar {
-  background: rgba(10,10,10,.42) !important;
-  border: 1px solid rgba(255,255,255,.08) !important;
-  box-shadow: 0 10px 35px rgba(0,0,0,.22) !important;
-  backdrop-filter: blur(24px) saturate(125%);
-  -webkit-backdrop-filter: blur(24px) saturate(125%);
-}
-  html[data-theme="dark"] .nav-links {
-    background: #151515 !important;
-    border: 1px solid rgba(255,255,255,.09) !important;
-    box-shadow: 0 18px 40px rgba(0,0,0,.35) !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
-html[data-theme="dark"] .nav-link {
-  color: var(--cw-muted);
-}
-
-.cta-section {
-  padding-bottom: 140px;
-}
-.cta-chamber {
-  position: relative;
-  border-radius: 40px;
-  padding: 80px 40px;
-  text-align: center;
-  overflow: hidden;
-}
-.cta-chamber h2 {
-  font-family: var(--font-display);
-  font-size: clamp(40px, 6.5vw, 76px);
-  line-height: 0.95;
-  letter-spacing: -0.05em;
-  font-weight: 500;
-  margin-top: 20px;
-}
-.cta-chamber p {
-  max-width: 480px;
-  margin: 20px auto 0;
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.75;
-}
-.cta-chamber .hero-cta-group {
-  justify-content: center;
-  margin-top: 32px;
-}
-
-.cyrus-footer{
-  margin-top:80px;
-  padding:72px 0 24px;
-  border-top:1px solid var(--border);
-  background:var(--cw-surface);
-}
-.cyrus-footer .container{
-  position:relative;
-}
-.footer-main{
-  display:grid;
-  grid-template-columns:minmax(260px,1.7fr) repeat(3,minmax(130px,1fr));
-  gap:48px;
-  padding-bottom:58px;
-}
-
-.footer-brand{
-  max-width:380px;
-}
-
-.footer-logo{
-  display:inline-flex;
-  align-items:baseline;
-  gap:3px;
-  color:var(--primary);
-  text-decoration:none;
-  font-family:var(--font-display);
-  font-size:25px;
-  font-weight:700;
-  letter-spacing:-.06em;
-}
-
-.footer-logo span{
-  font-weight:400;
-}
-
-.footer-brand p{
-  margin:18px 0 24px;
-  max-width:340px;
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.7;
-}
-
-.footer-cta{
-  display:inline-flex;
-  align-items:center;
-  gap:12px;
-  padding:12px 16px;
-  border:1px solid var(--border);
-  border-radius:999px;
-  color:var(--primary);
-  text-decoration:none;
-  font-size:13px;
-  transition:.25s ease;
-}
-
-.footer-cta:hover{
-  transform:translateY(-2px);
-  border-color:var(--primary);
-}
-
-.footer-column{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  gap:10px;
-}
-
-.footer-column h3{
-  margin:0 0 8px;
-  color:var(--primary);
-  font-family:var(--font-display);
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-}
-
-.footer-column a{
-  color:var(--muted);
-  text-decoration:none;
-  font-size:13px;
-  line-height:1.5;
-  transition:color .2s ease,transform .2s ease;
-}
-
-.footer-column a:hover{
-  color:var(--primary);
-  transform:translateX(2px);
-}
-
-.footer-contact{
-  display:grid;
-  grid-template-columns:1.5fr 1fr 1fr;
-  gap:24px;
-  padding:24px 0;
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-}
-
-.footer-contact > div{
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-}
-
-.footer-label{
-  color:var(--muted);
-  font-size:9px;
-  font-weight:600;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-}
-
-.footer-contact a,
-.footer-contact > div > span:last-child{
-  color:var(--primary);
-  font-size:13px;
-  text-decoration:none;
-}
-
-.footer-contact a:hover{
-  text-decoration:underline;
-  text-underline-offset:4px;
-}
-
-.footer-status{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-}
-
-.footer-status i{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#22c55e;
-  box-shadow:0 0 0 4px rgba(34,197,94,.1);
-}
-
-.footer-bottom{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:24px;
-  padding-top:22px;
-  color:var(--muted);
-  font-size:11px;
-}
-
-.footer-legal{
-  display:flex;
-  align-items:center;
-  gap:18px;
-}
-
-.footer-legal a{
-  color:var(--muted);
-  text-decoration:none;
-}
-
-.footer-legal a:hover{
-  color:var(--primary);
-}
-
-@media(max-width:800px){
-  .cyrus-footer{
-    margin-top:56px;
-    padding:54px 0 20px;
-  }
-
-  .footer-main{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:36px 24px;
-    padding-bottom:42px;
-  }
-
-  .footer-brand{
-    grid-column:1/-1;
-    max-width:100%;
-  }
-
-  .footer-contact{
-    grid-template-columns:1fr;
-    gap:18px;
-  }
-
-  .footer-bottom{
-    align-items:flex-start;
-    flex-direction:column;
-    gap:14px;
-  }
-
-  .footer-legal{
-    flex-wrap:wrap;
-    gap:10px 16px;
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"PrivacyPolicy",
+  "name":"Kebijakan Privasi CyrusWeb",
+  "url":"https://noctisatalic.github.io/Cyrus-Web/privacy.html",
+  "isPartOf":{
+    "@type":"WebSite",
+    "name":"CyrusWeb",
+    "url":"https://noctisatalic.github.io/Cyrus-Web/"
   }
 }
-
-@media(max-width:480px){
-  .footer-main{
-    grid-template-columns:1fr 1fr;
-    gap:30px 16px;
-  }
-
-  .footer-brand{
-    grid-column:1/-1;
-  }
-
-  .footer-column a{
-    font-size:12px;
-  }
-
-  .footer-contact{
-    padding:20px 0;
-  }
-}
-</style>
-
-
-<style id="cyrus-pricing-parity-final">
-/* ============================================================
-   CYRUSWEB — PRICING VISUAL PARITY FINAL
-   Navbar / Footer / CTA
-   ============================================================ */
-
-/* ---------- NAVBAR ---------- */
-
-.navbar {
-  background: rgba(255,255,255,.72) !important;
-  border: 1px solid rgba(17,17,17,.08) !important;
-  box-shadow: 0 10px 35px rgba(0,0,0,.08) !important;
-  backdrop-filter: blur(24px) saturate(125%);
-  -webkit-backdrop-filter: blur(24px) saturate(125%);
-}
-
-.navbar::before,
-.navbar::after,
-.nav-wrapper::before,
-.nav-wrapper::after {
-  background: none !important;
-  box-shadow: none !important;
-  content: none !important;
-}
-
-.nav-links {
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-}
-
-.nav-link {
-  white-space: nowrap;
-}
-
-@media (min-width: 769px) {
-  .nav-links {
-    display: flex !important;
-    align-items: center !important;
-    gap: 4px !important;
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-  }
-
-  .nav-links .nav-link {
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    border-radius: 999px !important;
-  }
-
-  .nav-actions {
-    background: transparent !important;
-  }
-}
-
-/* ---------- MOBILE NAV ---------- */
-
-@media (max-width: 768px) {
-  .nav-links {
-    background: #fff !important;
-    border: 1px solid rgba(17,17,17,.08) !important;
-    box-shadow: 0 14px 35px rgba(0,0,0,.12) !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
-
-  .nav-links .nav-link {
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-  }
-
-  html[data-theme="dark"] .nav-links {
-    background: #151515 !important;
-    border: 1px solid rgba(255,255,255,.09) !important;
-    box-shadow: 0 18px 40px rgba(0,0,0,.35) !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
-}
-
-/* ---------- DARK NAVBAR ---------- */
-
-html[data-theme="dark"] .navbar {
-  background: rgba(10,10,10,.42) !important;
-  border: 1px solid rgba(255,255,255,.08) !important;
-  box-shadow: 0 10px 35px rgba(0,0,0,.22) !important;
-  backdrop-filter: blur(24px) saturate(125%);
-  -webkit-backdrop-filter: blur(24px) saturate(125%);
-}
-
-/* ---------- CTA ---------- */
-
-.cta-section {
-  position: relative;
-}
-
-.cta-section .container {
-  position: relative;
-}
-
-.cta-chamber {
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.cta-chamber .hero-cta-group {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-</style>
-
+</script>
 </head>
 
 <body>
 
 <div class="nav-wrapper">
-  <nav class="navbar">
-    <a href="index.html" class="nav-brand">
-      <span class="brand-mark" aria-label="Cyrus Web">CYRUS</span>
-    </a>
-    <div class="nav-links" id="nav-links-panel">
-      <a href="layanan.html" class="nav-link">Layanan</a>
-      <a href="index.html#home" class="nav-link">Home</a>
-      <a href="pricing.html" class="nav-link">Paket</a>
-      <a href="tentang.html" class="nav-link">Tentang Kami</a>
-      <a href="portfolio.html" class="nav-link">Portfolio</a>
+  <nav class="navbar" aria-label="Navigasi utama">
 
-      <a href="faq.html" class="nav-link">FAQ</a>
-      <a href="contact.html" class="nav-link">Kontak</a>
+    <a class="nav-brand" href="index.html" aria-label="CyrusWeb">
+      <span class="brand-mark">CyrusWeb</span>
+    </a>
+
+    <div class="nav-links" id="navLinks">
+      <a class="nav-link" href="index.html">Beranda</a>
+      <a class="nav-link" href="layanan.html">Layanan</a>
+      <a class="nav-link" href="portfolio.html">Portfolio</a>
+      <a class="nav-link" href="tentang.html">Tentang</a>
     </div>
+
     <div class="nav-actions">
-      <button type="button" class="cw-theme-toggle" id="cw-theme-toggle" aria-label="Ganti tema" title="Ganti tema">
+      <a class="nav-cta" href="kontak.html">Mulai Project</a>
+
+      <button class="cw-theme-toggle" type="button" aria-label="Ubah tema">
         <span class="cw-sun">☀</span>
         <span class="cw-moon">☾</span>
       </button>
-      <a href="https://wa.me/6281318048885?text=Halo%20CyrusWeb,%20saya%20ingin%20memulai%20project%20website" target="_blank" class="nav-cta">Mulai Project</a>
-      <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="nav-links-panel">☰</button>
+
+      <button class="mobile-menu-btn" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="navLinks">
+        ☰
+      </button>
     </div>
+
   </nav>
 </div>
 
 <main>
-  <section class="hero">
-    <div class="container">
-      <div class="eyebrow"><i></i>Privacy Policy</div>
-      <h1>Data Anda diperlakukan dengan jelas dan bertanggung jawab.</h1>
-      <p>Kebijakan ini menjelaskan secara sederhana bagaimana CyrusWeb menangani informasi yang diberikan melalui website dan kanal komunikasi kami.</p>
-    </div>
-  </section>
 
-  <section class="container info-grid">
-
-        <article class="info-card">
-          <span class="info-number">01</span>
-          <div>
-            <h2>Informasi yang Dikirim</h2>
-            <p>Informasi dapat diberikan ketika Anda menghubungi CyrusWeb, misalnya nama, nomor WhatsApp, email, kebutuhan project, dan informasi lain yang Anda pilih untuk dikirim.</p>
-          </div>
-        </article>
-
-        <article class="info-card">
-          <span class="info-number">02</span>
-          <div>
-            <h2>Penggunaan Informasi</h2>
-            <p>Informasi digunakan untuk merespons pertanyaan, memahami kebutuhan project, memberikan penawaran, melakukan komunikasi, dan menjalankan layanan yang diminta.</p>
-          </div>
-        </article>
-
-        <article class="info-card">
-          <span class="info-number">03</span>
-          <div>
-            <h2>Pihak Ketiga</h2>
-            <p>Beberapa fungsi website dapat menggunakan layanan pihak ketiga seperti hosting, analitik, font, komunikasi, atau layanan teknis lainnya sesuai kebutuhan website.</p>
-          </div>
-        </article>
-
-        <article class="info-card">
-          <span class="info-number">04</span>
-          <div>
-            <h2>Keamanan</h2>
-            <p>Kami berupaya menjaga informasi yang diterima dengan langkah teknis dan operasional yang wajar. Namun tidak ada sistem online yang dapat dijamin sepenuhnya bebas dari risiko.</p>
-          </div>
-        </article>
-
-        <article class="info-card">
-          <span class="info-number">05</span>
-          <div>
-            <h2>Penyimpanan</h2>
-            <p>Informasi hanya disimpan selama diperlukan untuk kebutuhan komunikasi, pelayanan, administrasi, atau kewajiban lain yang relevan.</p>
-          </div>
-        </article>
-
-        <article class="info-card">
-          <span class="info-number">06</span>
-          <div>
-            <h2>Hak Pengguna</h2>
-            <p>Anda dapat meminta informasi mengenai data yang berkaitan dengan komunikasi Anda dengan CyrusWeb dan meminta koreksi apabila terdapat informasi yang tidak sesuai.</p>
-          </div>
-        </article>
-
-        <article class="info-card">
-          <span class="info-number">07</span>
-          <div>
-            <h2>Perubahan Kebijakan</h2>
-            <p>Kebijakan ini dapat diperbarui apabila terdapat perubahan layanan, teknologi, atau kebutuhan operasional. Versi terbaru akan ditampilkan pada halaman ini.</p>
-          </div>
-        </article>
-
-        <article class="info-card">
-          <span class="info-number">08</span>
-          <div>
-            <h2>Kontak</h2>
-            <p>Untuk pertanyaan mengenai privasi atau penggunaan informasi, silakan hubungi CyrusWeb melalui halaman Kontak atau WhatsApp Customer Service.</p>
-          </div>
-        </article>
-
-  </section>
-
-  <section class="cta-section" id="order">
+<section class="legal-hero">
   <div class="container">
-    <div class="cta-chamber liquid-glass">
-      <div class="section-tag"><span></span>Start a Project</div>
-      <h2>Your business.<br>Better online.</h2>
-      <p>
-        Punya visi atau ide website? Mari wujudkan bersama CyrusWeb
-        menjadi pengalaman digital yang memukau.
-      </p>
 
-      <div class="hero-cta-group">
-        <a
-          href="https://wa.me/6281318048885?text=Halo%20CyrusWeb,%20saya%20ingin%20konsultasi%20pembuatan%20website"
-          target="_blank"
-          class="btn-primary"
-        >
-          Konsultasi Sekarang →
-        </a>
+    <div class="eyebrow">LEGAL / PRIVACY</div>
 
-        <a href="index.html#home" class="btn-secondary">
-          Kembali ke Atas
-        </a>
-      </div>
+    <h1>
+      Kebijakan Privasi
+    </h1>
+
+    <p class="hero-lead">
+      Kami menghargai kepercayaan yang Anda berikan kepada CyrusWeb.
+      Halaman ini menjelaskan bagaimana informasi digunakan, dilindungi,
+      dan dikelola ketika Anda berinteraksi dengan layanan kami.
+    </p>
+
+    <div class="legal-meta">
+      <span>Terakhir diperbarui</span>
+      <strong>26 Agustus 2026</strong>
     </div>
+
   </div>
 </section>
+
+<section class="legal-content">
+  <div class="container legal-layout">
+
+    <aside class="legal-index">
+      <span>DAFTAR ISI</span>
+      <a href="#informasi">Informasi yang Dikumpulkan</a>
+      <a href="#penggunaan">Penggunaan Informasi</a>
+      <a href="#penyimpanan">Penyimpanan Data</a>
+      <a href="#keamanan">Keamanan</a>
+      <a href="#pihak-ketiga">Pihak Ketiga</a>
+      <a href="#hak">Hak Pengguna</a>
+      <a href="#perubahan">Perubahan Kebijakan</a>
+      <a href="#kontak">Hubungi Kami</a>
+    </aside>
+
+    <article class="legal-document">
+
+      <div class="legal-intro">
+        <p>
+          Kebijakan ini berlaku untuk website dan layanan digital CyrusWeb.
+          Dengan menggunakan website kami, Anda memahami praktik yang
+          dijelaskan dalam kebijakan ini.
+        </p>
+      </div>
+
+      <section id="informasi">
+        <span class="legal-number">01</span>
+        <h2>Informasi yang Dikumpulkan</h2>
+        <p>
+          CyrusWeb dapat menerima informasi yang Anda berikan secara langsung,
+          misalnya ketika menghubungi kami, meminta penawaran, mengirimkan
+          detail project, atau menggunakan formulir komunikasi.
+        </p>
+        <p>
+          Informasi tersebut dapat mencakup nama, alamat email, nomor
+          WhatsApp, nama bisnis, kebutuhan project, serta informasi lain
+          yang secara sukarela Anda berikan.
+        </p>
+      </section>
+
+      <section id="penggunaan">
+        <span class="legal-number">02</span>
+        <h2>Penggunaan Informasi</h2>
+        <p>
+          Informasi digunakan untuk memahami kebutuhan Anda, memberikan
+          respons, menyiapkan penawaran, mengelola project, meningkatkan
+          layanan, serta menjaga keamanan dan kualitas website.
+        </p>
+        <ul>
+          <li>Merespons pertanyaan dan permintaan layanan.</li>
+          <li>Mengelola komunikasi terkait project.</li>
+          <li>Meningkatkan pengalaman pengguna.</li>
+          <li>Mendeteksi penyalahgunaan dan aktivitas yang tidak wajar.</li>
+        </ul>
+      </section>
+
+      <section id="penyimpanan">
+        <span class="legal-number">03</span>
+        <h2>Penyimpanan Data</h2>
+        <p>
+          Informasi hanya disimpan selama diperlukan untuk tujuan yang
+          relevan, kebutuhan operasional, kewajiban hukum, atau penyelesaian
+          layanan yang sedang berjalan.
+        </p>
+      </section>
+
+      <section id="keamanan">
+        <span class="legal-number">04</span>
+        <h2>Keamanan</h2>
+        <p>
+          CyrusWeb berupaya menggunakan langkah teknis dan operasional yang
+          wajar untuk melindungi informasi dari akses, perubahan,
+          pengungkapan, atau penggunaan yang tidak sah.
+        </p>
+        <p>
+          Namun, tidak ada sistem internet yang dapat dijamin aman
+          sepenuhnya. Karena itu, pengguna juga perlu menjaga keamanan
+          perangkat dan informasi yang digunakan untuk berkomunikasi dengan
+          kami.
+        </p>
+      </section>
+
+      <section id="pihak-ketiga">
+        <span class="legal-number">05</span>
+        <h2>Pihak Ketiga</h2>
+        <p>
+          Dalam operasional tertentu, CyrusWeb dapat menggunakan layanan
+          pihak ketiga seperti penyedia hosting, analitik, email, penyimpanan
+          media, atau layanan pendukung lainnya.
+        </p>
+        <p>
+          Pihak ketiga tersebut dapat memproses data sesuai dengan fungsi
+          layanan mereka dan kebijakan privasi masing-masing.
+        </p>
+      </section>
+
+      <section id="hak">
+        <span class="legal-number">06</span>
+        <h2>Hak Pengguna</h2>
+        <p>
+          Anda dapat meminta informasi mengenai data yang berkaitan dengan
+          komunikasi Anda dengan CyrusWeb dan, jika memungkinkan secara
+          hukum serta teknis, meminta koreksi atau penghapusan informasi
+          tersebut.
+        </p>
+      </section>
+
+      <section id="perubahan">
+        <span class="legal-number">07</span>
+        <h2>Perubahan Kebijakan</h2>
+        <p>
+          Kebijakan ini dapat diperbarui dari waktu ke waktu untuk
+          menyesuaikan perubahan layanan, teknologi, maupun kebutuhan
+          operasional. Versi terbaru akan ditampilkan pada halaman ini.
+        </p>
+      </section>
+
+      <section id="kontak">
+        <span class="legal-number">08</span>
+        <h2>Hubungi Kami</h2>
+        <p>
+          Jika Anda memiliki pertanyaan mengenai kebijakan privasi atau
+          penggunaan informasi, silakan hubungi CyrusWeb melalui kanal
+          komunikasi resmi yang tersedia pada website.
+        </p>
+      </section>
+
+    </article>
+
+  </div>
+</section>
+
 </main>
 
 <footer class="cyrus-footer">
@@ -1613,196 +244,119 @@ html[data-theme="dark"] .navbar {
     <div class="footer-main">
 
       <div class="footer-brand">
-        <a href="index.html" class="footer-logo">CYRUS<span>WEB</span></a>
+        <a class="footer-logo" href="index.html">
+          Cyrus<span>Web</span>
+        </a>
         <p>
-          Membangun website yang membuat bisnis lebih kuat,
-          jelas, dan meyakinkan secara digital.
+          Studio web digital yang membangun pengalaman digital profesional
+          melalui strategi, desain, teknologi, dan detail.
         </p>
-
-        <a
-          href="https://wa.me/6281318048885?text=Halo%20CyrusWeb,%20saya%20ingin%20konsultasi%20pembuatan%20website"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="footer-cta"
-        >
-          Mulai Project <span>→</span>
+        <a class="footer-cta" href="kontak.html">
+          Mulai Project <span>↗</span>
         </a>
       </div>
 
       <div class="footer-column">
-        <h3>Navigasi</h3>
+        <h3>Explore</h3>
         <a href="index.html">Beranda</a>
         <a href="layanan.html">Layanan</a>
-        <a href="index.html#home">Home</a>
-        <a href="pricing.html">Paket</a>
         <a href="portfolio.html">Portfolio</a>
-        <a href="tentang.html">Tentang Kami</a>
-        <a href="testimonials.html">Testimoni</a>
-        <a href="faq.html">FAQ</a>
-        <a href="contact.html">Kontak</a>
+        <a href="tentang.html">Tentang</a>
       </div>
 
       <div class="footer-column">
-        <h3>Layanan</h3>
-        <a href="layanan.html">Website Profesional</a>
-        <a href="layanan.html">Landing Page</a>
-        <a href="layanan.html">Company Profile</a>
-        <a href="layanan.html">Custom Web Development</a>
-        <a href="layanan.html">UI/UX Design</a>
-        <a href="contact.html">Maintenance</a>
+        <h3>Information</h3>
+        <a href="privacy.html">Privacy</a>
+        <a href="ketentuan.html">Ketentuan</a>
+        <a href="kontak.html">Kontak</a>
       </div>
 
       <div class="footer-column">
-        <h3>Informasi</h3>
-        <a href="tentang.html">Tentang CyrusWeb</a>
-        <a href="ketentuan.html">Ketentuan Project</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="faq.html">Pertanyaan Umum</a>
-        <a href="contact.html">Konsultasi</a>
+        <h3>Studio</h3>
+        <a href="mailto:hello@cyrusweb.id">Email</a>
+        <span>Indonesia</span>
       </div>
 
     </div>
 
     <div class="footer-contact">
       <div>
-        <span class="footer-label">HUBUNGI CYRUSWEB</span>
-        <a
-          href="https://wa.me/6281318048885?text=Halo%20CyrusWeb,%20saya%20ingin%20konsultasi%20pembuatan%20website"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          WhatsApp Customer Service ↗
-        </a>
-      </div>
-
-      <div>
-        <span class="footer-label">AREA LAYANAN</span>
-        <span>Indonesia · Remote</span>
-      </div>
-
-      <div>
         <span class="footer-label">STATUS</span>
-        <span class="footer-status">
-          <i></i> Siap menerima project
-        </span>
+        <span class="footer-status"><i></i> Available for selected projects</span>
+      </div>
+      <div>
+        <span class="footer-label">EMAIL</span>
+        <a href="mailto:hello@cyrusweb.id">hello@cyrusweb.id</a>
+      </div>
+      <div>
+        <span class="footer-label">LOCATION</span>
+        <span>Indonesia</span>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <span>&copy; 2026 CyrusWeb. Hak cipta dilindungi.</span>
-
+      <span>© 2026 CyrusWeb. All rights reserved.</span>
       <div class="footer-legal">
-        <a href="ketentuan.html">Ketentuan</a>
         <a href="privacy.html">Privacy</a>
-        <a href="index.html">Kembali ke Beranda ↑</a>
+        <a href="ketentuan.html">Terms</a>
       </div>
     </div>
 
   </div>
 </footer>
 
-<script id="cyrus-theme-toggle-script">
-(function () {
-  const themeToggle = document.getElementById("cw-theme-toggle");
-  if (!themeToggle) return;
+<script>
+(function(){
 
-  themeToggle.addEventListener("click", function () {
-    const current =
-      document.documentElement.dataset.theme || "light";
+  const toggle = document.querySelector(".cw-theme-toggle");
+  const menuBtn = document.querySelector(".mobile-menu-btn");
+  const navLinks = document.querySelector(".nav-links");
+  const meta = document.getElementById("cyrus-theme-color");
 
-    const next = current === "dark" ? "light" : "dark";
+  function applyTheme(theme){
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("cyrus-theme", theme);
 
-    document.documentElement.dataset.theme = next;
-    const themeColor = document.getElementById("cyrus-theme-color");
-    if (themeColor) {
-      themeColor.setAttribute(
+    if(meta){
+      meta.setAttribute(
         "content",
-        next === "dark" ? "#0b0b0b" : "#ffffff"
+        theme === "dark" ? "#0b0b0b" : "#ffffff"
       );
     }
-    localStorage.setItem("cyrus-theme", next);
-  });
-})();
-</script>
+  }
 
+  if(toggle){
+    toggle.addEventListener("click", function(){
+      const current = document.documentElement.dataset.theme || "light";
+      applyTheme(current === "dark" ? "light" : "dark");
+    });
+  }
 
+  if(menuBtn && navLinks){
+    menuBtn.addEventListener("click", function(){
+      const open = navLinks.classList.toggle("mobile-open");
+      menuBtn.setAttribute("aria-expanded", String(open));
+    });
 
-<script id="cyrus-active-nav-script">
-(function () {
-  const currentPage =
-    window.location.pathname.split("/").pop() || "index.html";
+    navLinks.querySelectorAll(".nav-link").forEach(function(link){
+      link.addEventListener("click", function(){
+        navLinks.classList.remove("mobile-open");
+        menuBtn.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
 
-  document.querySelectorAll(".nav-link").forEach(function (link) {
-    const href = link.getAttribute("href") || "";
-    const linkPage = href.split("/").pop().split("#")[0] || "index.html";
+  const currentPath = location.pathname.split("/").pop() || "index.html";
 
-    if (linkPage === currentPage) {
+  document.querySelectorAll(".nav-link").forEach(function(link){
+    const href = link.getAttribute("href");
+    if(href === currentPath){
       link.classList.add("active");
-      link.setAttribute("aria-current", "page");
     }
   });
+
 })();
 </script>
 
-<script id="cyrus-mobile-menu-script">
-(function () {
-  const menuBtn = document.querySelector(".mobile-menu-btn");
-  const navLinksPanel = document.getElementById("nav-links-panel");
-
-  if (!menuBtn || !navLinksPanel) return;
-
-  function closeMobileMenu() {
-    navLinksPanel.classList.remove("mobile-open");
-    menuBtn.setAttribute("aria-expanded", "false");
-    menuBtn.textContent = "☰";
-    document.body.classList.remove("nav-locked");
-  }
-
-  function openMobileMenu() {
-    navLinksPanel.classList.add("mobile-open");
-    menuBtn.setAttribute("aria-expanded", "true");
-    menuBtn.textContent = "✕";
-    document.body.classList.add("nav-locked");
-  }
-
-  menuBtn.addEventListener("click", function (event) {
-    event.stopPropagation();
-
-    const isOpen =
-      navLinksPanel.classList.contains("mobile-open");
-
-    if (isOpen) {
-      closeMobileMenu();
-    } else {
-      openMobileMenu();
-    }
-  });
-
-  navLinksPanel.querySelectorAll(".nav-link").forEach(function (link) {
-    link.addEventListener("click", closeMobileMenu);
-  });
-
-  document.addEventListener("click", function (event) {
-    if (
-      !navLinksPanel.contains(event.target) &&
-      !menuBtn.contains(event.target)
-    ) {
-      closeMobileMenu();
-    }
-  });
-
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") {
-      closeMobileMenu();
-    }
-  });
-
-  window.addEventListener("resize", function () {
-    if (window.innerWidth > 768) {
-      closeMobileMenu();
-    }
-  });
-})();
-</script>
 </body>
 </html>
