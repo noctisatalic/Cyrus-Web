@@ -2225,10 +2225,75 @@ html[data-theme="dark"] .nav-cta {
 /* ---------- CTA ---------- */
 
 .about-cta{
-  padding:clamp(100px,14vw,190px) 0;
+  position:relative;
+  padding:0 0 140px;
   text-align:center;
+  background:transparent;
+  color:var(--primary);
+}
+
+.about-cta .container{
+  width:min(1180px,calc(100% - 32px));
+  margin:0 auto;
+}
+
+.about-cta .cta-chamber{
+  position:relative;
+  border-radius:40px;
+  padding:80px 40px;
+  text-align:center;
+  overflow:hidden;
   background:var(--primary);
   color:var(--cw-bg);
+}
+
+.about-cta .cta-chamber::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 0%,
+      rgba(255,255,255,.10),
+      transparent 42%);
+}
+
+.about-cta .cta-chamber > *{
+  position:relative;
+  z-index:2;
+}
+
+.about-cta .eyebrow{
+  color:rgba(255,255,255,.48);
+}
+
+.about-cta h2{
+  max-width:900px;
+  margin:20px auto 0;
+  font-family:var(--font-display);
+  font-size:clamp(40px,6.5vw,76px);
+  line-height:.95;
+  letter-spacing:-.05em;
+  font-weight:500;
+}
+
+.about-cta h2 em{
+  display:block;
+  color:rgba(255,255,255,.48);
+  font-style:normal;
+}
+
+.about-cta p{
+  max-width:480px;
+  margin:20px auto 0;
+  color:rgba(255,255,255,.62);
+  font-size:15px;
+  line-height:1.75;
+}
+
+.about-cta .footer-cta{
+  display:inline-flex;
+  margin-top:32px;
 }
 
 .about-cta .eyebrow{
@@ -2334,7 +2399,8 @@ html[data-theme="dark"] .process-row:hover .process-arrow{
 
   .about-hero{
     min-height:auto;
-    padding-top:110px;
+    padding-top:82px;
+    padding-bottom:64px;
   }
 
   .about-hero-meta{
@@ -2865,8 +2931,10 @@ html[data-theme="dark"] .trusted-eyebrow{
 .arch{
   position:relative;
   width:min(1180px,calc(100% - 32px));
-  height:820px;
+  height:760px;
   margin:0 auto;
+  overflow:hidden;
+  contain:layout paint;
   border:1px solid rgba(17,17,17,.08);
   border-radius:40px;
   overflow:hidden;
@@ -3104,8 +3172,10 @@ html[data-theme="dark"] .trusted-eyebrow{
 .node{
   position:absolute;
   z-index:12;
-  width:210px;
+  width:190px;
+  max-width:190px;
   min-height:76px;
+  box-sizing:border-box;
   display:flex;
   align-items:center;
   gap:13px;
@@ -3213,24 +3283,6 @@ html[data-theme="dark"] .trusted-eyebrow{
   transform:translateX(-50%);
 }
 
-.n-next{top:9%;right:9%}
-.n-react{top:9%;left:9%}
-.n-ts{top:28%;right:5%}
-.n-tailwind{top:28%;left:5%}
-.n-github{top:48%;right:2%}
-.n-vercel{top:48%;left:2%}
-.n-node{bottom:27%;right:5%}
-.n-prisma{bottom:27%;left:5%}
-.n-postgres{bottom:9%;right:9%}
-.n-neon{bottom:9%;left:9%}
-.n-cloudinary{top:67%;right:15%}
-.n-auth{top:67%;left:15%}
-
-.n-resend{
-  top:2%;
-  left:50%;
-  transform:translateX(-50%);
-}
 
 .n-resend:hover{
   transform:translateX(-50%) translateY(-5px) scale(1.025);
@@ -3315,18 +3367,6 @@ html[data-theme="dark"] .port{
 @media(max-width:900px){
   .arch{height:760px}
   .node{width:185px}
-  .n-next{right:4%}
-  .n-react{left:4%}
-  .n-ts{right:1%}
-  .n-tailwind{left:1%}
-  .n-github{right:0}
-  .n-vercel{left:0}
-  .n-cloudinary{right:8%}
-  .n-auth{left:8%}
-  .n-node{right:1%}
-  .n-prisma{left:1%}
-  .n-postgres{right:4%}
-  .n-neon{left:4%}
 }
 
 @media(max-width:600px){
@@ -3354,8 +3394,10 @@ html[data-theme="dark"] .port{
 
   .arch{
     width:calc(100% - 20px);
-    height:920px;
+    height:900px;
     border-radius:28px;
+    overflow:hidden;
+    contain:layout paint;
   }
 
   .core{
@@ -3382,11 +3424,13 @@ html[data-theme="dark"] .port{
   }
 
   .node{
-    width:148px;
+    width:138px;
+    max-width:138px;
     min-height:62px;
-    padding:9px 10px;
-    gap:9px;
+    padding:9px 9px;
+    gap:8px;
     border-radius:15px;
+    box-sizing:border-box;
   }
 
   .node-logo{
@@ -3414,32 +3458,6 @@ html[data-theme="dark"] .port{
     flex-basis:5px;
   }
 
-  .n-resend{top:7%}
-  .n-react{top:15%;left:4%}
-  .n-next{top:15%;right:4%}
-  .n-tailwind{top:29%;left:2%}
-  .n-ts{top:29%;right:2%}
-  .n-auth{top:43%;left:1%}
-  .n-cloudinary{top:43%;right:1%}
-  .n-prisma{bottom:29%;left:2%}
-  .n-node{bottom:29%;right:2%}
-  .n-neon{bottom:15%;left:4%}
-  .n-postgres{bottom:15%;right:4%}
-
-  .n-github{
-    bottom:4%;
-    left:50%;
-    transform:translateX(-50%);
-  }
-
-  .n-vercel{
-    top:4%;
-    left:50%;
-    transform:translateX(-50%);
-  }
-
-  .n-github:hover,
-  .n-vercel:hover{
     transform:translateX(-50%) translateY(-5px) scale(1.025);
   }
 
@@ -3457,6 +3475,427 @@ html[data-theme="dark"] .port{
 }
 
 </style>
+
+<style id="cyrus-final-layout-fix">
+
+/* =========================================================
+   CYRUSWEB — FINAL ABOUT LAYOUT
+   HERO / CTA / TECHNOLOGY ARCHITECTURE
+   ========================================================= */
+
+/* ---------- HERO ---------- */
+
+.about-hero{
+  min-height:clamp(620px,88vh,900px);
+  padding-top:clamp(52px,7vw,88px);
+  padding-bottom:clamp(72px,9vw,120px);
+}
+
+@media(max-width:800px){
+  .about-hero{
+    min-height:auto;
+    padding-top:48px;
+    padding-bottom:72px;
+  }
+}
+
+
+/* ---------- CTA — MATCH LAYANAN DNA ---------- */
+
+.about-cta{
+  padding:0 0 140px;
+  background:transparent;
+  color:var(--primary);
+  text-align:left;
+}
+
+.about-cta .container{
+  width:min(1180px,calc(100% - 32px));
+  margin:0 auto;
+}
+
+.about-cta{
+  position:relative;
+}
+
+.about-cta::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+.about-cta .cta-chamber{
+  position:relative;
+  border-radius:40px;
+  padding:80px 40px;
+  text-align:center;
+  overflow:hidden;
+  background:var(--primary);
+  color:var(--cw-bg);
+}
+
+.about-cta .eyebrow{
+  color:rgba(255,255,255,.48);
+}
+
+.about-cta h2{
+  max-width:1000px;
+  margin:20px auto 0;
+  font-family:var(--font-display);
+  font-size:clamp(40px,6.5vw,76px);
+  line-height:.95;
+  letter-spacing:-.05em;
+  font-weight:500;
+}
+
+.about-cta h2 em{
+  display:block;
+  color:rgba(255,255,255,.48);
+  font-style:normal;
+}
+
+.about-cta p{
+  max-width:480px;
+  margin:20px auto 0;
+  color:rgba(255,255,255,.62);
+  font-size:15px;
+  line-height:1.75;
+}
+
+.about-cta .footer-cta{
+  display:inline-flex;
+  margin-top:32px;
+}
+
+@media(max-width:600px){
+  .about-cta{
+    padding-bottom:80px;
+  }
+
+  .about-cta .container{
+    width:calc(100% - 20px);
+  }
+
+  .about-cta .cta-chamber{
+    border-radius:28px;
+    padding:58px 20px;
+  }
+
+  .about-cta h2{
+    font-size:clamp(40px,12vw,62px);
+  }
+}
+
+
+/* =========================================================
+   TECHNOLOGY ARCHITECTURE
+   NEVER ALLOW NODE OVERFLOW / OVERLAP
+   ========================================================= */
+
+.arch{
+  width:min(1180px,calc(100% - 32px));
+  height:760px;
+  overflow:hidden;
+  contain:layout paint;
+}
+
+.node{
+  width:190px;
+  max-width:190px;
+  min-width:0;
+  box-sizing:border-box;
+}
+
+
+/* ---------- DESKTOP NODE MAP ---------- */
+
+/* upper layer */
+.n-resend{
+  top:4%;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.n-react{
+  top:12%;
+  left:7%;
+}
+
+.n-next{
+  top:12%;
+  right:7%;
+}
+
+/* second layer */
+.n-tailwind{
+  top:30%;
+  left:5%;
+}
+
+.n-ts{
+  top:30%;
+  right:5%;
+}
+
+/* middle-lower layer */
+.n-vercel{
+  top:49%;
+  left:3%;
+  transform:none;
+}
+
+.n-github{
+  top:49%;
+  right:3%;
+  transform:none;
+}
+
+/* lower-middle */
+.n-auth{
+  top:67%;
+  left:7%;
+}
+
+.n-cloudinary{
+  top:67%;
+  right:7%;
+}
+
+/* bottom layer */
+.n-neon{
+  bottom:6%;
+  left:7%;
+}
+
+.n-postgres{
+  bottom:6%;
+  right:7%;
+}
+
+.n-prisma{
+  bottom:24%;
+  left:5%;
+}
+
+.n-node{
+  bottom:24%;
+  right:5%;
+}
+
+
+/* ---------- KEEP HOVER FROM BREAKING CENTERED RESEND ---------- */
+
+.n-resend:hover{
+  transform:translateX(-50%) translateY(-5px) scale(1.025);
+}
+
+
+/* =========================================================
+   MOBILE ARCHITECTURE
+   Vertical spacing is deliberately generous.
+   Abstract network remains, but blocks never collide.
+   ========================================================= */
+
+@media(max-width:900px){
+
+  .arch{
+    width:calc(100% - 20px);
+    height:900px;
+    border-radius:28px;
+  }
+
+  .node{
+    width:148px;
+    max-width:148px;
+    min-height:62px;
+    padding:9px 10px;
+  }
+
+  /* top */
+  .n-resend{
+    top:3%;
+    left:50%;
+    transform:translateX(-50%);
+  }
+
+  .n-vercel{
+    top:11%;
+    left:3%;
+  }
+
+  .n-next{
+    top:11%;
+    right:3%;
+  }
+
+  /* upper-middle */
+  .n-react{
+    top:27%;
+    left:3%;
+  }
+
+  .n-ts{
+    top:27%;
+    right:3%;
+  }
+
+  /* middle */
+  .n-tailwind{
+    top:42%;
+    left:3%;
+  }
+
+  .n-github{
+    top:42%;
+    right:3%;
+  }
+
+  /* lower-middle */
+  .n-auth{
+    top:58%;
+    left:3%;
+  }
+
+  .n-cloudinary{
+    top:58%;
+    right:3%;
+  }
+
+  /* lower */
+  .n-prisma{
+    bottom:17%;
+    left:3%;
+  }
+
+  .n-node{
+    bottom:17%;
+    right:3%;
+  }
+
+  .n-neon{
+    bottom:4%;
+    left:3%;
+  }
+
+  .n-postgres{
+    bottom:4%;
+    right:3%;
+  }
+
+  /* keep centered resend */
+  .n-resend:hover{
+    transform:translateX(-50%) translateY(-5px) scale(1.025);
+  }
+
+}
+
+
+/* ---------- SMALL PHONE ---------- */
+
+@media(max-width:600px){
+
+  .arch{
+    height:920px;
+    width:calc(100% - 16px);
+  }
+
+  .core{
+    width:150px;
+    height:150px;
+    top:50%;
+  }
+
+  .node{
+    width:142px;
+    max-width:142px;
+  }
+
+  .n-resend{
+    top:3%;
+  }
+
+  .n-vercel,
+  .n-next{
+    top:12%;
+  }
+
+  .n-react,
+  .n-ts{
+    top:28%;
+  }
+
+  .n-tailwind,
+  .n-github{
+    top:43%;
+  }
+
+  .n-auth,
+  .n-cloudinary{
+    top:59%;
+  }
+
+  .n-prisma,
+  .n-node{
+    bottom:17%;
+  }
+
+  .n-neon,
+  .n-postgres{
+    bottom:4%;
+  }
+
+}
+
+
+/* ---------- EXTRA NARROW DEVICES ---------- */
+
+@media(max-width:380px){
+
+  .arch{
+    height:940px;
+  }
+
+  .node{
+    width:132px;
+    max-width:132px;
+    padding-left:8px;
+    padding-right:8px;
+  }
+
+  .n-vercel,
+  .n-next{
+    top:11%;
+  }
+
+  .n-react,
+  .n-ts{
+    top:27%;
+  }
+
+  .n-tailwind,
+  .n-github{
+    top:42%;
+  }
+
+  .n-auth,
+  .n-cloudinary{
+    top:58%;
+  }
+
+}
+
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media(prefers-reduced-motion:reduce){
+  .node{
+    transition:none !important;
+  }
+}
+
+</style>
+
 </head>
 <body>
 
