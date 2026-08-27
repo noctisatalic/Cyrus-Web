@@ -1645,10 +1645,19 @@ html[data-theme="dark"] .nav-cta {
 }
 
 .about-hero{
-  min-height:clamp(620px,88vh,900px);
-  display:flex;
-  align-items:flex-end;
-  padding:clamp(120px,15vw,190px) 0 clamp(72px,9vw,120px);
+  padding:100px 0 96px;
+}
+
+@media(max-width:800px){
+  .about-hero{
+    padding:96px 0 72px;
+  }
+}
+
+@media(max-width:480px){
+  .about-hero{
+    padding:104px 0 64px;
+  }
 }
 
 .about-hero::before{
@@ -2288,14 +2297,7 @@ html[data-theme="dark"] .process-row:hover .process-arrow{
 /* ---------- MOBILE ---------- */
 
 @media(max-width:800px){
-
-  .about-hero{
-    min-height:auto;
-    padding-top:82px;
-    padding-bottom:64px;
-  }
-
-  .about-hero-meta{
+.about-hero-meta{
     margin-bottom:28px;
   }
 
@@ -3369,30 +3371,6 @@ html[data-theme="dark"] .port{
    CYRUSWEB — FINAL ABOUT LAYOUT
    HERO / CTA / TECHNOLOGY ARCHITECTURE
    ========================================================= */
-
-/* ---------- HERO — FINAL SPACING ---------- */
-
-.about-hero{
-  min-height:clamp(620px,88vh,900px);
-  padding-top:clamp(96px,9vw,128px);
-  padding-bottom:clamp(72px,9vw,120px);
-}
-
-@media(max-width:800px){
-  .about-hero{
-    min-height:auto;
-    padding-top:96px;
-    padding-bottom:72px;
-  }
-}
-
-@media(max-width:480px){
-  .about-hero{
-    padding-top:104px;
-    padding-bottom:64px;
-  }
-}
-
 
 /* =========================================================
    TECHNOLOGY ARCHITECTURE
