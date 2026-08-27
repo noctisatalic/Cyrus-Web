@@ -18,10 +18,7 @@
 
 <link rel="canonical" href="https://noctisatalic.github.io/Cyrus-Web/ketentuan.html">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&display=swap" rel="stylesheet">
-
 <script>
 (function(){
   const saved = localStorage.getItem("cyrus-theme");
@@ -48,6 +45,170 @@
 
 <link rel="stylesheet" href="cyrus-static.css">
 
+<!-- CYRUSWEB MASTER DNA -->
+
+
+<!-- /CYRUSWEB MASTER DNA -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&display=swap" rel="stylesheet">
+<script id="cyrus-theme-boot">
+(function () {
+  const saved = localStorage.getItem("cyrus-theme");
+  const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  document.documentElement.dataset.theme =
+    saved || (preferred ? "dark" : "light");
+})();
+</script>
+<style id="cyrus-theme-engine">
+:root {
+  --cw-bg: #ffffff;
+  --cw-surface: rgba(255,255,255,.78);
+  --cw-surface-solid: #ffffff;
+  --cw-text: #111111;
+  --cw-muted: #666666;
+  --cw-line: rgba(17,17,17,.09);
+  --cw-soft: #f5f5f5;
+}
+
+html[data-theme="dark"] {
+  /* Original CyrusWeb design tokens */
+  --primary: #F5F5F5;
+  --bg: #0B0B0B;
+  --white: #F5F5F5;
+  --muted: #A0A0A0;
+  --light: #181818;
+  --line: rgba(255, 255, 255, 0.11);
+  --glass-border: rgba(255, 255, 255, 0.11);
+  --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.30);
+
+  /* Theme engine aliases */
+  --cw-bg:#0b0b0b;
+  --cw-surface: rgba(24,24,24,.78);
+  --cw-surface-solid: #151515;
+  --cw-text: var(--primary);
+  --cw-muted: var(--muted);
+  --cw-line: var(--line);
+  --cw-soft: var(--light);
+}
+
+html[data-theme="dark"],
+html[data-theme="dark"] body {
+  background: var(--cw-bg) !important;
+  color: var(--cw-text);
+}
+
+html[data-theme="dark"] body {
+  color-scheme: dark;
+}
+
+html[data-theme="dark"] .liquid-glass,
+html[data-theme="dark"] .price-card,
+html[data-theme="dark"] .service-card,
+html[data-theme="dark"] .process-card {
+  background: var(--cw-surface) !important;
+  border-color: var(--cw-line) !important;
+  color: var(--cw-text);
+}
+
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] section {
+  background: transparent;
+}
+
+html[data-theme="dark"] .section-tag,
+html[data-theme="dark"] .service-icon,
+html[data-theme="dark"] .mobile-menu-btn,
+html[data-theme="dark"] .nav-link:hover,
+html[data-theme="dark"] .nav-link.active,
+html[data-theme="dark"] .btn-secondary {
+  background: var(--cw-soft) !important;
+  border-color: var(--cw-line) !important;
+  color: var(--cw-text) !important;
+}
+
+html[data-theme="dark"] .hero-headline,
+html[data-theme="dark"] .section-title,
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] strong {
+  color: var(--cw-text);
+}
+
+html[data-theme="dark"] p,
+html[data-theme="dark"] .muted,
+html[data-theme="dark"] .section-desc,
+html[data-theme="dark"] .hero-subheadline,
+html[data-theme="dark"] .stat-item span {
+  color: var(--cw-muted);
+}
+
+html[data-theme="dark"] .nav-link {
+  color: var(--cw-muted);
+}
+
+html[data-theme="dark"] .nav-cta,
+html[data-theme="dark"] .btn-primary {
+  background: #f5f5f5 !important;
+  color: #111 !important;
+}
+
+html[data-theme="dark"] .cs-float-btn {
+  background: #151515;
+  border-color: var(--cw-line);
+}
+
+html[data-theme="dark"] .cs-float-btn svg {
+  fill: #f5f5f5;
+}
+
+html[data-theme="dark"] .cursor {
+  background: #f5f5f5;
+}
+
+html[data-theme="dark"] .cursor-ring {
+  border-color: rgba(255,255,255,.3);
+}
+
+html[data-theme="dark"] ::selection {
+  background: #f5f5f5;
+  color: #111;
+}
+
+.cw-theme-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  background: var(--light);
+  color: var(--primary);
+  font-size: 15px;
+  transition: transform .2s, background .2s, color .2s;
+}
+
+.cw-theme-toggle:hover {
+  transform: translateY(-1px);
+}
+
+.cw-theme-toggle .cw-moon {
+  display: none;
+}
+
+html[data-theme="dark"] .cw-theme-toggle .cw-sun {
+  display: none;
+}
+
+html[data-theme="dark"] .cw-theme-toggle .cw-moon {
+  display: inline;
+}
+</style>
+
 <style id="cyrus-footer-layout-fix">
 html, body {
   min-height: 100%;
@@ -66,6 +227,57 @@ main {
 footer {
   margin-top: auto !important;
   flex-shrink: 0;
+}
+</style>
+
+<style id="cyrus-navbar-global-final">
+/* ===== CYRUS GLOBAL NAVBAR FINAL ===== */
+
+/* Navbar utama — glass tanpa block/seam tambahan */
+.navbar {
+  background: rgba(255,255,255,.72) !important;
+  border: 1px solid rgba(17,17,17,.08) !important;
+  box-shadow: 0 10px 35px rgba(0,0,0,.08) !important;
+  backdrop-filter: blur(24px) saturate(125%);
+  -webkit-backdrop-filter: blur(24px) saturate(125%);
+}
+
+/* Mobile dropdown — SELALU SOLID */
+@media (max-width: 768px) {
+  .nav-links {
+    background: #FFFFFF !important;
+    border: 1px solid rgba(17,17,17,.08) !important;
+    box-shadow: 0 14px 35px rgba(0,0,0,.12) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  html[data-theme="dark"] .nav-links {
+    background: #151515 !important;
+    border: 1px solid rgba(255,255,255,.09) !important;
+    box-shadow: 0 18px 40px rgba(0,0,0,.35) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* Dark navbar — tetap glass */
+html[data-theme="dark"] .navbar {
+  background: rgba(10,10,10,.42) !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+  box-shadow: 0 10px 35px rgba(0,0,0,.22) !important;
+  backdrop-filter: blur(24px) saturate(125%);
+  -webkit-backdrop-filter: blur(24px) saturate(125%);
+}
+
+/* Hilangkan pseudo-element yang bisa menghasilkan block/seam */
+.navbar::before,
+.navbar::after,
+.nav-wrapper::before,
+.nav-wrapper::after {
+  background: none !important;
+  box-shadow: none !important;
+  content: none !important;
 }
 </style>
 
@@ -307,7 +519,7 @@ footer {
       <span class="brand-mark">CyrusWeb</span>
     </a>
 
-    <div class="nav-links" id="navLinks">
+    <div class="nav-links" id="nav-links-panel">
       <a class="nav-link" href="index.html">Beranda</a>
       <a class="nav-link" href="layanan.html">Layanan</a>
       <a class="nav-link" href="portfolio.html">Portfolio</a>
@@ -322,7 +534,7 @@ footer {
         <span class="cw-moon">☾</span>
       </button>
 
-      <button class="mobile-menu-btn" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="navLinks">
+      <button class="mobile-menu-btn" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="nav-links-panel">
         ☰
       </button>
     </div>
