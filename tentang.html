@@ -22,8 +22,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="static-pages.css">
-<link rel="stylesheet" href="static-pages-premium.css">
 
 <script>
 (function(){
@@ -70,9 +68,67 @@
   ]
 }
 </script>
+<style>
+/* Custom Cursor */
+.cursor, .cursor-ring {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s;
+}
+.cursor {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(17, 17, 17, 0.25);
+  border-radius: 50%;
+  transition: width 0.3s, height 0.3s, background 0.3s;
+}
+.cursor-ring.active {
+  width: 54px;
+  height: 54px;
+  background: rgba(17, 17, 17, 0.03);
+  border-color: rgba(17, 17, 17, 0.15);
+}
+
+/* CyrusWeb Cursor — Dark Mode DNA */
+html[data-theme="dark"] .cursor {
+  background: #f5f5f5;
+}
+
+html[data-theme="dark"] .cursor-ring {
+  border-color: rgba(255,255,255,.3);
+}
+
+html[data-theme="dark"] .cursor-ring.active {
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.25);
+}
+
+/* Touch devices */
+@media (hover:none), (pointer:coarse) {
+  .cursor,
+  .cursor-ring {
+    display:none !important;
+  }
+}
+
+</style>
+
 </head>
 
 <body>
+
+
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
 
 <div class="nav-wrapper">
   <nav class="navbar">
@@ -93,7 +149,7 @@
         <span class="cw-moon">☾</span>
       </button>
 
-      <a href="kontak.html" class="nav-cta">Mulai Project</a>
+      <a href="contact.html" class="nav-cta">Mulai Project</a>
 
       <button class="mobile-menu-btn" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="navLinks">☰</button>
     </div>
@@ -199,7 +255,7 @@
     <span class="eyebrow">READY WHEN YOU ARE</span>
     <h2>Punya sesuatu yang ingin dibangun?</h2>
     <p>Mari ubah ide bisnis Anda menjadi pengalaman digital yang layak dipercaya.</p>
-    <a href="kontak.html" class="footer-cta">Mulai Project <span>↗</span></a>
+    <a href="contact.html" class="footer-cta">Mulai Project <span>↗</span></a>
   </div>
 </section>
 
@@ -215,7 +271,7 @@
           Studio web digital untuk bisnis yang ingin tampil lebih profesional
           dan membangun kepercayaan melalui pengalaman digital.
         </p>
-        <a href="kontak.html" class="footer-cta">Diskusikan Project <span>↗</span></a>
+        <a href="contact.html" class="footer-cta">Diskusikan Project <span>↗</span></a>
       </div>
 
       <div class="footer-column">
@@ -234,7 +290,7 @@
 
       <div class="footer-column">
         <h3>Contact</h3>
-        <a href="kontak.html">Mulai Project</a>
+        <a href="contact.html">Mulai Project</a>
       </div>
 
     </div>
@@ -303,6 +359,58 @@
 
   syncTheme();
 })();
+</script>
+
+
+<!-- CyrusWeb Cursor — GSAP DNA -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof gsap === "undefined") return;
+
+  const cursor = document.querySelector(".cursor");
+  const ring = document.querySelector(".cursor-ring");
+
+  if (!cursor || !ring) return;
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let ringX = mouseX;
+  let ringY = mouseY;
+
+  window.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    gsap.to(cursor, {
+      x: mouseX,
+      y: mouseY,
+      duration: 0.05,
+      ease: "power2.out"
+    });
+  });
+
+  gsap.ticker.add(() => {
+    ringX += (mouseX - ringX) * 0.15;
+    ringY += (mouseY - ringY) * 0.15;
+
+    ring.style.left = ringX + "px";
+    ring.style.top = ringY + "px";
+  });
+
+  document
+    .querySelectorAll("a, button, input, textarea, select, .info-card, .premium-cta")
+    .forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        ring.classList.add("active");
+      });
+
+      el.addEventListener("mouseleave", () => {
+        ring.classList.remove("active");
+      });
+    });
+});
 </script>
 
 </body>
