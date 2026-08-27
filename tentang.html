@@ -3370,19 +3370,26 @@ html[data-theme="dark"] .port{
    HERO / CTA / TECHNOLOGY ARCHITECTURE
    ========================================================= */
 
-/* ---------- HERO ---------- */
+/* ---------- HERO — FINAL SPACING ---------- */
 
 .about-hero{
   min-height:clamp(620px,88vh,900px);
-  padding-top:clamp(20px,3vw,42px);
+  padding-top:clamp(96px,9vw,128px);
   padding-bottom:clamp(72px,9vw,120px);
 }
 
 @media(max-width:800px){
   .about-hero{
     min-height:auto;
-    padding-top:24px;
+    padding-top:96px;
     padding-bottom:72px;
+  }
+}
+
+@media(max-width:480px){
+  .about-hero{
+    padding-top:104px;
+    padding-bottom:64px;
   }
 }
 
