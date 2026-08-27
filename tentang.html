@@ -68,59 +68,9 @@
   ]
 }
 </script>
-<style>
-/* Custom Cursor */
-.cursor, .cursor-ring {
-  position: fixed;
-  pointer-events: none;
-  z-index: 99999;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.2s;
-}
-.cursor {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--primary);
-}
-.cursor-ring {
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(17, 17, 17, 0.25);
-  border-radius: 50%;
-  transition: width 0.3s, height 0.3s, background 0.3s;
-}
-.cursor-ring.active {
-  width: 54px;
-  height: 54px;
-  background: rgba(17, 17, 17, 0.03);
-  border-color: rgba(17, 17, 17, 0.15);
-}
 
-/* CyrusWeb Cursor — Dark Mode DNA */
-html[data-theme="dark"] .cursor {
-  background: #f5f5f5;
-}
 
-html[data-theme="dark"] .cursor-ring {
-  border-color: rgba(255,255,255,.3);
-}
-
-html[data-theme="dark"] .cursor-ring.active {
-  background: rgba(255,255,255,.08);
-  border-color: rgba(255,255,255,.25);
-}
-
-/* Touch devices */
-@media (hover:none), (pointer:coarse) {
-  .cursor,
-  .cursor-ring {
-    display:none !important;
-  }
-}
-
-</style>
-
+<link rel="stylesheet" href="cyrus-static.css">
 </head>
 
 <body>
