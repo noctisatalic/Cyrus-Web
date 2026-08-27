@@ -4503,6 +4503,68 @@ html[data-theme="dark"] .trusted-eyebrow{
   ]
 }
 </script>
+
+<style id="cyrus-page-theme-fix">
+/* ===== CYRUS PAGE THEME FIX ===== */
+
+html[data-theme="dark"] body {
+  background: var(--cw-bg) !important;
+  color: var(--cw-text) !important;
+}
+
+/* Main white surfaces */
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] footer,
+html[data-theme="dark"] .cs-float-btn,
+html[data-theme="dark"] .clean-work-card {
+  background: var(--cw-surface-solid) !important;
+}
+
+/* Cards / panels */
+html[data-theme="dark"] .liquid-glass,
+html[data-theme="dark"] .service-card,
+html[data-theme="dark"] .process-card,
+html[data-theme="dark"] .price-card,
+html[data-theme="dark"] .testimonial-card,
+html[data-theme="dark"] .faq-item,
+html[data-theme="dark"] .update-panel,
+html[data-theme="dark"] .contact-form-panel {
+  background: var(--cw-surface) !important;
+  border-color: var(--cw-line) !important;
+}
+
+/* Soft surfaces */
+html[data-theme="dark"] .dash-box,
+html[data-theme="dark"] .faq-icon,
+html[data-theme="dark"] .clean-work-media {
+  background: var(--cw-soft) !important;
+}
+
+/* Text */
+html[data-theme="dark"] .faq-question,
+/* Muted text */
+html[data-theme="dark"] .faq-answer p,
+html[data-theme="dark"] .timeline-content p,
+/* Borders */
+html[data-theme="dark"] footer,
+html[data-theme="dark"] .faq-item {
+  border-color: var(--cw-line) !important;
+}
+
+/* Images/media must stay unaffected */
+html[data-theme="dark"] img,
+html[data-theme="dark"] video {
+  filter: none !important;
+}
+
+/* Keep primary buttons readable */
+html[data-theme="dark"] .btn-primary,
+html[data-theme="dark"] .nav-cta {
+  background: #f5f5f5 !important;
+  color: #111 !important;
+}
+
+</style>
 </head>
 <body>
 
