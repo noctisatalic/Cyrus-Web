@@ -2222,114 +2222,6 @@ html[data-theme="dark"] .nav-cta {
 }
 
 
-/* ---------- CTA ---------- */
-
-.about-cta{
-  position:relative;
-  padding:0 0 140px;
-  text-align:center;
-  background:transparent;
-  color:var(--primary);
-}
-
-.about-cta .container{
-  width:min(1180px,calc(100% - 32px));
-  margin:0 auto;
-}
-
-.about-cta .cta-chamber{
-  position:relative;
-  border-radius:40px;
-  padding:80px 40px;
-  text-align:center;
-  overflow:hidden;
-  background:var(--primary);
-  color:var(--cw-bg);
-}
-
-.about-cta .cta-chamber::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:
-    radial-gradient(circle at 50% 0%,
-      rgba(255,255,255,.10),
-      transparent 42%);
-}
-
-.about-cta .cta-chamber > *{
-  position:relative;
-  z-index:2;
-}
-
-.about-cta .eyebrow{
-  color:rgba(255,255,255,.48);
-}
-
-.about-cta h2{
-  max-width:900px;
-  margin:20px auto 0;
-  font-family:var(--font-display);
-  font-size:clamp(40px,6.5vw,76px);
-  line-height:.95;
-  letter-spacing:-.05em;
-  font-weight:500;
-}
-
-.about-cta h2 em{
-  display:block;
-  color:rgba(255,255,255,.48);
-  font-style:normal;
-}
-
-.about-cta p{
-  max-width:480px;
-  margin:20px auto 0;
-  color:rgba(255,255,255,.62);
-  font-size:15px;
-  line-height:1.75;
-}
-
-.about-cta .footer-cta{
-  display:inline-flex;
-  margin-top:32px;
-}
-
-.about-cta .eyebrow{
-  color:rgba(255,255,255,.48);
-}
-
-.about-cta h2{
-  max-width:1000px;
-  margin:28px auto 0;
-  font-family:var(--font-display);
-  font-size:clamp(58px,9vw,126px);
-  line-height:.86;
-  letter-spacing:-.075em;
-  font-weight:500;
-}
-
-.about-cta h2 em{
-  display:block;
-  color:rgba(255,255,255,.48);
-  font-style:normal;
-}
-
-.about-cta p{
-  max-width:560px;
-  margin:36px auto 0;
-  color:rgba(255,255,255,.62);
-  font-size:16px;
-  line-height:1.7;
-}
-
-.about-cta .footer-cta{
-  display:inline-flex;
-  margin-top:38px;
-}
-
-
 /* ---------- DARK MODE ---------- */
 
 html[data-theme="dark"] .about-hero::before{
@@ -2547,11 +2439,6 @@ html[data-theme="dark"] .process-row:hover .process-arrow{
   .process-arrow{
     display:none;
   }
-
-  .about-cta h2{
-    font-size:clamp(52px,15vw,76px);
-  }
-
 }
 
 </style>
@@ -3487,103 +3374,15 @@ html[data-theme="dark"] .port{
 
 .about-hero{
   min-height:clamp(620px,88vh,900px);
-  padding-top:clamp(52px,7vw,88px);
+  padding-top:clamp(20px,3vw,42px);
   padding-bottom:clamp(72px,9vw,120px);
 }
 
 @media(max-width:800px){
   .about-hero{
     min-height:auto;
-    padding-top:48px;
+    padding-top:24px;
     padding-bottom:72px;
-  }
-}
-
-
-/* ---------- CTA — MATCH LAYANAN DNA ---------- */
-
-.about-cta{
-  padding:0 0 140px;
-  background:transparent;
-  color:var(--primary);
-  text-align:left;
-}
-
-.about-cta .container{
-  width:min(1180px,calc(100% - 32px));
-  margin:0 auto;
-}
-
-.about-cta{
-  position:relative;
-}
-
-.about-cta::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-}
-
-.about-cta .cta-chamber{
-  position:relative;
-  border-radius:40px;
-  padding:80px 40px;
-  text-align:center;
-  overflow:hidden;
-  background:var(--primary);
-  color:var(--cw-bg);
-}
-
-.about-cta .eyebrow{
-  color:rgba(255,255,255,.48);
-}
-
-.about-cta h2{
-  max-width:1000px;
-  margin:20px auto 0;
-  font-family:var(--font-display);
-  font-size:clamp(40px,6.5vw,76px);
-  line-height:.95;
-  letter-spacing:-.05em;
-  font-weight:500;
-}
-
-.about-cta h2 em{
-  display:block;
-  color:rgba(255,255,255,.48);
-  font-style:normal;
-}
-
-.about-cta p{
-  max-width:480px;
-  margin:20px auto 0;
-  color:rgba(255,255,255,.62);
-  font-size:15px;
-  line-height:1.75;
-}
-
-.about-cta .footer-cta{
-  display:inline-flex;
-  margin-top:32px;
-}
-
-@media(max-width:600px){
-  .about-cta{
-    padding-bottom:80px;
-  }
-
-  .about-cta .container{
-    width:calc(100% - 20px);
-  }
-
-  .about-cta .cta-chamber{
-    border-radius:28px;
-    padding:58px 20px;
-  }
-
-  .about-cta h2{
-    font-size:clamp(40px,12vw,62px);
   }
 }
 
@@ -5087,25 +4886,31 @@ html[data-theme="dark"] .port{
 
 </section>
 
-<section class="about-cta">
+<section class="cta-section" id="order">
   <div class="container">
+    <div class="cta-chamber liquid-glass">
+      <div class="section-tag"><span></span>Start a Project</div>
 
-    <span class="eyebrow">SIAP MEMULAI?</span>
+      <h2>Your business.<br>Better online.</h2>
 
-    <h2>
-      Punya sesuatu
-      <em>yang ingin dibangun?</em>
-    </h2>
+      <p>
+        Punya visi atau ide website? Mari wujudkan bersama CyrusWeb
+        menjadi pengalaman digital yang memukau.
+      </p>
 
-    <p>
-      Mari ubah ide bisnis Anda menjadi pengalaman digital yang
-      terlihat serius, bekerja dengan tujuan, dan layak dipercaya.
-    </p>
+      <div class="hero-cta-group">
+        <a
+          href="https://wa.me/6281318048885?text=Halo%20CyrusWeb,%20saya%20ingin%20konsultasi%20pembuatan%20website"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-primary"
+        >Konsultasi Sekarang →</a>
 
-    <a href="contact.html" class="footer-cta">
-      Mulai Proyek <span>↗</span>
-    </a>
-
+        <a href="index.html#home" class="btn-secondary">
+          Kembali ke Atas
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 
