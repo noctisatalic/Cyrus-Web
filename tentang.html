@@ -2494,53 +2494,6 @@ html[data-theme="dark"] .process-row:hover .process-arrow{
 <!-- =========================================================
      CYRUSWEB ABOUT — TECHNOLOGY + TRUSTED SYSTEM
      ========================================================= -->
-<style id="cyrus-about-tech-kepercayaaned">
-
-.about-technology{
-  padding-bottom:clamp(80px,10vw,140px);
-}
-
-.about-tech-intro,
-.about-kepercayaaned-intro{
-  position:relative;
-  z-index:5;
-}
-
-.about-technology .tech-section,
-.about-kepercayaaned .kepercayaaned-section{
-  margin-top:0;
-}
-
-.about-kepercayaaned{
-  padding-top:clamp(80px,10vw,140px);
-}
-
-.about-kepercayaaned .kepercayaaned-section{
-  padding-top:20px;
-}
-
-.about-tech-intro .about-section-label,
-.about-kepercayaaned-intro .about-section-label{
-  margin-bottom:35px;
-}
-
-@media(max-width:800px){
-
-  .about-tech-intro .about-section-label,
-  .about-kepercayaaned-intro .about-section-label{
-    margin-bottom:25px;
-  }
-
-}
-
-html[data-theme="dark"] .about-technology,
-html[data-theme="dark"] .about-kepercayaaned{
-  border-color:rgba(255,255,255,.10);
-}
-
-</style>
-
-
 <script type="application/ld+json" id="cyrus-about-schema">
 {
   "@context": "https://schema.org",
@@ -2567,6 +2520,260 @@ html[data-theme="dark"] .about-kepercayaaned{
      CYRUSWEB ABOUT — TECHNOLOGY + TRUSTED SYSTEM
      ========================================================= -->
 
+
+<style id="cyrus-trusted-marquee">
+
+.trusted-section{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+}
+
+.trusted-head{
+  position:relative;
+  z-index:5;
+  width:min(1180px,calc(100% - 48px));
+  margin:0 auto 30px;
+  text-align:center;
+}
+
+.trusted-eyebrow{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin-bottom:16px;
+  font-size:11px;
+  line-height:1;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.trusted-eyebrow::before{
+  content:"";
+  width:24px;
+  height:1px;
+  flex:0 0 24px;
+  background:currentColor;
+  opacity:.7;
+}
+
+.trusted-head h2{
+  margin:0 auto;
+  max-width:620px;
+  font-family:var(--font-display);
+  font-size:clamp(38px,5vw,62px);
+  line-height:.94;
+  letter-spacing:-.055em;
+  font-weight:500;
+  color:var(--primary);
+}
+
+.trusted-head h2 span{
+  display:block;
+  color:var(--muted);
+}
+
+.trusted-marquee{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  padding:4px 0;
+}
+
+.trusted-track{
+  position:relative;
+  width:100%;
+  height:94px;
+  overflow:hidden;
+  display:block;
+  border-top:1px solid rgba(17,17,17,.08);
+  border-bottom:1px solid rgba(17,17,17,.08);
+  background:rgba(17,17,17,.018);
+}
+
+.trusted-stream{
+  position:absolute;
+  top:0;
+  left:0;
+  width:max-content;
+  height:100%;
+  display:flex;
+  align-items:center;
+  will-change:transform;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  transform:translate3d(0,0,0);
+}
+
+.trusted-set{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 520px;
+  width:520px;
+  min-width:520px;
+  height:100%;
+  gap:34px;
+  box-sizing:border-box;
+}
+
+.trusted-logo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:155px;
+  height:70px;
+  flex:0 0 155px;
+}
+
+.trusted-logo img{
+  display:block;
+  width:auto;
+  max-width:132px;
+  max-height:48px;
+  object-fit:contain;
+  user-select:none;
+  pointer-events:none;
+  -webkit-user-drag:none;
+}
+
+.trusted-mono img{
+  filter:brightness(0);
+}
+
+.trusted-color img{
+  filter:none !important;
+}
+
+.trusted-separator{
+  width:4px;
+  height:4px;
+  flex:0 0 4px;
+  border-radius:50%;
+  background:currentColor;
+  opacity:.18;
+}
+
+/* =========================
+   ABSOLUTE DUAL-LANE MOTION
+   ========================= */
+
+
+.trusted-track-right .trusted-stream,
+.trusted-track-left .trusted-stream{
+  animation:none !important;
+  transform:translate3d(0,0,0);
+}
+
+  to{
+    transform:translate3d(-520px,0,0);
+  }
+}
+
+/* =========================
+   DARK THEME
+   ========================= */
+
+html[data-theme="dark"] .trusted-section{
+  color:#f5f5f2;
+}
+
+html[data-theme="dark"] .trusted-track{
+  border-color:rgba(255,255,255,.09);
+  background:rgba(255,255,255,.018);
+}
+
+html[data-theme="dark"] .trusted-mono img{
+  filter:brightness(0) invert(1);
+}
+
+html[data-theme="dark"] .trusted-color img{
+  filter:none !important;
+}
+
+html[data-theme="dark"] .trusted-head h2{
+  color:#f5f5f2;
+}
+
+html[data-theme="dark"] .trusted-head h2 span{
+  color:rgba(255,255,255,.46);
+}
+
+html[data-theme="dark"] .trusted-eyebrow{
+  color:rgba(255,255,255,.48);
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media(max-width:600px){
+
+  .trusted-head{
+    width:calc(100% - 32px);
+    margin-bottom:22px;
+  }
+
+  .trusted-head h2{
+    font-size:clamp(34px,10vw,46px);
+  }
+
+  .trusted-eyebrow{
+    margin-bottom:13px;
+  }
+
+  .trusted-marquee{
+    gap:10px;
+  }
+
+  .trusted-track{
+    height:78px;
+  }
+
+  .trusted-set{
+    flex-basis:340px;
+    width:340px;
+    min-width:340px;
+    gap:22px;
+  }
+
+  .trusted-logo{
+    width:120px;
+    height:58px;
+    flex-basis:120px;
+  }
+
+  .trusted-logo img{
+    max-width:105px;
+    max-height:40px;
+  }
+
+  .trusted-track-right .trusted-stream{
+    animation-duration:6s;
+  }
+
+  .trusted-track-left .trusted-stream{
+    animation-duration:7s;
+  }
+
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  .trusted-track-right .trusted-stream,
+  .trusted-track-left .trusted-stream{
+    animation-play-state:paused;
+  }
+
+}
+
+</style>
 
 <style id="cyrus-technology-architecture">
 
@@ -4320,30 +4527,12 @@ html[data-theme="dark"] .port{
      ABOUT — TRUSTED BY
      ========================================================= -->
 
-<section class="about-section about-kepercayaaned" id="about-kepercayaaned-by">
 
-  <div class="about-kepercayaaned-copy">
-    <span class="eyebrow">DIPERCAYAKAN OLEH</span>
-    <h2>Beberapa proyek yang<br><em>kami bangun bersama.</em></h2>
-    <p>
-      Setiap proyek memiliki kebutuhan dan karakter yang berbeda.
-      Bagian ini menampilkan beberapa brand dan proyek yang menjadi
-      bagian dari perjalanan CyrusWeb dalam membangun pengalaman digital.
-    </p>
-  </div>
+<!-- ================= TRUSTED BY ================= -->
+<section class="trusted-section" id="trusted-by">
 
-
-  <div class="container about-kepercayaaned-intro">
-    <div class="about-section-label">
-      <span>09 / KEPERCAYAAN</span>
-      <span>PROYEK DAN BRAND YANG KAMI KERJAKAN</span>
-    </div>
-  </div>
-
-  <section class="kepercayaaned-section" id="kepercayaaned-by">
-
-  <div class="kepercayaaned-head">
-    <div class="kepercayaaned-eyebrow">Dipercayakan Oleh</div>
+  <div class="trusted-head">
+    <div class="trusted-eyebrow">Dipercayakan Oleh</div>
 
     <h2>
       Brand yang
@@ -4351,53 +4540,53 @@ html[data-theme="dark"] .port{
     </h2>
   </div>
 
-  <div class="kepercayaaned-marquee">
+  <div class="trusted-marquee">
 
     <!-- TOP : RIGHT -->
-    <div class="kepercayaaned-track kepercayaaned-track-right">
+    <div class="trusted-track trusted-track-right">
 
-      <div class="kepercayaaned-stream">
+      <div class="trusted-stream">
 
-        <div class="kepercayaaned-set">
-          <div class="kepercayaaned-logo kepercayaaned-mono">
+        <div class="trusted-set">
+          <div class="trusted-logo trusted-mono">
             <img src="spraudio.png" alt="SPR Audio" draggable="false">
           </div>
 
-          <span class="kepercayaaned-separator"></span>
+          <span class="trusted-separator"></span>
 
-          <div class="kepercayaaned-logo kepercayaaned-color">
+          <div class="trusted-logo trusted-color">
             <img src="ihsan-koi.png" alt="Ihsan Koi" draggable="false">
           </div>
 
-          <span class="kepercayaaned-separator"></span>
+          <span class="trusted-separator"></span>
         </div>
 
-        <div class="kepercayaaned-set" aria-hidden="true">
-          <div class="kepercayaaned-logo kepercayaaned-mono">
+        <div class="trusted-set" aria-hidden="true">
+          <div class="trusted-logo trusted-mono">
             <img src="spraudio.png" alt="">
           </div>
 
-          <span class="kepercayaaned-separator"></span>
+          <span class="trusted-separator"></span>
 
-          <div class="kepercayaaned-logo kepercayaaned-color">
+          <div class="trusted-logo trusted-color">
             <img src="ihsan-koi.png" alt="">
           </div>
 
-          <span class="kepercayaaned-separator"></span>
+          <span class="trusted-separator"></span>
         </div>
 
-        <div class="kepercayaaned-set" aria-hidden="true">
-          <div class="kepercayaaned-logo kepercayaaned-mono">
+        <div class="trusted-set" aria-hidden="true">
+          <div class="trusted-logo trusted-mono">
             <img src="spraudio.png" alt="">
           </div>
 
-          <span class="kepercayaaned-separator"></span>
+          <span class="trusted-separator"></span>
 
-          <div class="kepercayaaned-logo kepercayaaned-color">
+          <div class="trusted-logo trusted-color">
             <img src="ihsan-koi.png" alt="">
           </div>
 
-          <span class="kepercayaaned-separator"></span>
+          <span class="trusted-separator"></span>
         </div>
 
       </div>
@@ -4405,50 +4594,50 @@ html[data-theme="dark"] .port{
     </div>
 
     <!-- BOTTOM : LEFT -->
-    <div class="kepercayaaned-track kepercayaaned-track-left">
+    <div class="trusted-track trusted-track-left">
 
-      <div class="kepercayaaned-stream">
+      <div class="trusted-stream">
 
-        <div class="kepercayaaned-set">
-          <div class="kepercayaaned-logo kepercayaaned-color">
+        <div class="trusted-set">
+          <div class="trusted-logo trusted-color">
             <img src="ihsan-koi.png" alt="Ihsan Koi" draggable="false">
           </div>
 
-          <span class="kepercayaaned-separator"></span>
+          <span class="trusted-separator"></span>
 
-          <div class="kepercayaaned-logo kepercayaaned-mono">
+          <div class="trusted-logo trusted-mono">
             <img src="spraudio.png" alt="SPR Audio" draggable="false">
           </div>
 
-          <span class="kepercayaaned-separator"></span>
+          <span class="trusted-separator"></span>
         </div>
 
-        <div class="kepercayaaned-set" aria-hidden="true">
-          <div class="kepercayaaned-logo kepercayaaned-color">
+        <div class="trusted-set" aria-hidden="true">
+          <div class="trusted-logo trusted-color">
             <img src="ihsan-koi.png" alt="">
           </div>
 
-          <span class="kepercayaaned-separator"></span>
+          <span class="trusted-separator"></span>
 
-          <div class="kepercayaaned-logo kepercayaaned-mono">
+          <div class="trusted-logo trusted-mono">
             <img src="spraudio.png" alt="">
           </div>
 
-          <span class="kepercayaaned-separator"></span>
+          <span class="trusted-separator"></span>
         </div>
 
-        <div class="kepercayaaned-set" aria-hidden="true">
-          <div class="kepercayaaned-logo kepercayaaned-color">
+        <div class="trusted-set" aria-hidden="true">
+          <div class="trusted-logo trusted-color">
             <img src="ihsan-koi.png" alt="">
           </div>
 
-          <span class="kepercayaaned-separator"></span>
+          <span class="trusted-separator"></span>
 
-          <div class="kepercayaaned-logo kepercayaaned-mono">
+          <div class="trusted-logo trusted-mono">
             <img src="spraudio.png" alt="">
           </div>
 
-          <span class="kepercayaaned-separator"></span>
+          <span class="trusted-separator"></span>
         </div>
 
       </div>
@@ -4456,8 +4645,6 @@ html[data-theme="dark"] .port{
     </div>
 
   </div>
-
-</section>
 
 </section>
 
@@ -5268,9 +5455,10 @@ window.addEventListener(
      Migrated from homepage DNA
      ========================================================= -->
 
-<script id="cyrus-kepercayaaned-by-script">
+
+<script id="cyrus-trusted-by-script">
 (() => {
-  const section = document.querySelector("#kepercayaaned-by");
+  const section = document.querySelector("#trusted-by");
 
   if (!section) return;
 
@@ -5300,12 +5488,12 @@ window.addEventListener(
 })();
 </script>
 
-<script id="cyrus-kepercayaaned-infinite-engine">
+<script id="cyrus-trusted-infinite-engine">
 (function(){
   "use strict";
 
   const tracks = document.querySelectorAll(
-    ".kepercayaaned-track-right, .kepercayaaned-track-left"
+    ".trusted-track-right, .trusted-track-left"
   );
 
   if (!tracks.length) return;
@@ -5314,17 +5502,17 @@ window.addEventListener(
 
   tracks.forEach(track => {
 
-    const stream = track.querySelector(".kepercayaaned-stream");
+    const stream = track.querySelector(".trusted-stream");
     if (!stream) return;
 
-    const set = stream.querySelector(".kepercayaaned-set");
+    const set = stream.querySelector(".trusted-set");
     if (!set) return;
 
     const width = set.getBoundingClientRect().width;
     if (!width) return;
 
     const right =
-      track.classList.contains("kepercayaaned-track-right");
+      track.classList.contains("trusted-track-right");
 
     states.push({
       stream,
@@ -5396,7 +5584,7 @@ window.addEventListener(
     states.forEach(state => {
 
       const set =
-        state.stream.querySelector(".kepercayaaned-set");
+        state.stream.querySelector(".trusted-set");
 
       if(!set) return;
 
@@ -5411,7 +5599,6 @@ window.addEventListener(
 
 })();
 </script>
-
 <script id="cyrus-mobile-menu-script">
 (function () {
   const menuBtn = document.querySelector(".mobile-menu-btn");
