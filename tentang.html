@@ -1618,6 +1618,925 @@ html[data-theme="dark"] .nav-cta {
   white-space:nowrap;
 }
 </style>
+
+<!-- =========================================================
+     CYRUSWEB ABOUT — PREMIUM EDITORIAL SYSTEM
+     ========================================================= -->
+<style id="cyrus-about-premium">
+
+/* ---------- FOUNDATION ---------- */
+
+.about-hero,
+.about-section,
+.about-cta{
+  position:relative;
+  overflow:hidden;
+}
+
+.about-hero .container,
+.about-section .container,
+.about-cta .container{
+  position:relative;
+  z-index:2;
+}
+
+.about-hero{
+  min-height:clamp(620px,88vh,900px);
+  display:flex;
+  align-items:flex-end;
+  padding:clamp(120px,15vw,190px) 0 clamp(72px,9vw,120px);
+}
+
+.about-hero::before{
+  content:"";
+  position:absolute;
+  width:620px;
+  height:620px;
+  top:-280px;
+  right:-180px;
+  border-radius:50%;
+  background:radial-gradient(
+    circle,
+    rgba(0,0,0,.075),
+    transparent 68%
+  );
+  pointer-events:none;
+}
+
+.about-hero-meta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  margin-bottom:34px;
+  padding-bottom:16px;
+  border-bottom:1px solid rgba(17,17,17,.10);
+}
+
+.about-hero-index,
+.about-hero-note,
+.about-section-label,
+.about-stat span,
+.standard-meta span:last-child{
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.about-hero h1{
+  max-width:1100px;
+  margin:0;
+  font-family:var(--font-display);
+  font-size:clamp(64px,10.5vw,148px);
+  line-height:.84;
+  letter-spacing:-.075em;
+  font-weight:500;
+  color:var(--primary);
+}
+
+.about-hero h1 em{
+  display:block;
+  color:var(--muted);
+  font-style:normal;
+}
+
+.about-hero-bottom{
+  display:grid;
+  grid-template-columns:minmax(0,560px) auto;
+  justify-content:space-between;
+  align-items:end;
+  gap:40px;
+  margin-top:56px;
+}
+
+.about-hero .hero-lead{
+  max-width:560px;
+  margin:0;
+  font-size:clamp(16px,1.7vw,20px);
+  line-height:1.65;
+  color:var(--muted);
+}
+
+.about-hero-note{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  white-space:nowrap;
+}
+
+.status-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:currentColor;
+  box-shadow:0 0 0 5px rgba(17,17,17,.06);
+}
+
+
+/* ---------- SECTIONS ---------- */
+
+.about-section{
+  padding:clamp(90px,11vw,160px) 0;
+  border-top:1px solid rgba(17,17,17,.08);
+}
+
+.about-section-label{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:72px;
+}
+
+.about-section-label span:first-child{
+  color:var(--primary);
+  font-variant-numeric:tabular-nums;
+}
+
+
+/* ---------- INTRO ---------- */
+
+.about-intro{
+  background:rgba(17,17,17,.018);
+}
+
+.about-intro-grid{
+  display:grid;
+  grid-template-columns:minmax(280px,.85fr) minmax(0,1.15fr);
+  gap:clamp(50px,9vw,140px);
+}
+
+.about-intro-title h2,
+.about-philosophy h2,
+.about-process-heading h2,
+.about-audience h2{
+  margin:18px 0 0;
+  font-family:var(--font-display);
+  font-size:clamp(44px,6vw,82px);
+  line-height:.94;
+  letter-spacing:-.06em;
+  font-weight:500;
+  color:var(--primary);
+}
+
+.about-intro-title h2 span,
+.about-philosophy h2 span,
+.about-process-heading h2 span,
+.about-audience h2 em{
+  display:block;
+  color:var(--muted);
+  font-style:normal;
+}
+
+.about-intro-copy{
+  max-width:650px;
+}
+
+.about-intro-copy p,
+.about-philosophy-copy p{
+  margin:0 0 24px;
+  font-size:clamp(16px,1.5vw,19px);
+  line-height:1.75;
+  color:var(--muted);
+}
+
+.about-intro-copy p:last-child,
+.about-philosophy-copy p:last-child{
+  margin-bottom:0;
+}
+
+.about-intro-copy .lead-copy{
+  color:var(--primary);
+  font-size:clamp(19px,2vw,25px);
+  line-height:1.55;
+}
+
+
+/* ---------- STATS ---------- */
+
+.about-stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  margin-top:100px;
+  border-top:1px solid rgba(17,17,17,.10);
+  border-bottom:1px solid rgba(17,17,17,.10);
+}
+
+.about-stat{
+  min-height:190px;
+  padding:28px 26px;
+  border-right:1px solid rgba(17,17,17,.10);
+  transition:
+    background .4s cubic-bezier(.16,1,.3,1),
+    transform .4s cubic-bezier(.16,1,.3,1);
+}
+
+.about-stat:last-child{
+  border-right:0;
+}
+
+.about-stat:hover{
+  background:rgba(17,17,17,.035);
+  transform:translateY(-4px);
+}
+
+.about-stat strong{
+  display:block;
+  margin-bottom:28px;
+  font-family:var(--font-display);
+  font-size:42px;
+  font-weight:500;
+  letter-spacing:-.06em;
+}
+
+.about-stat p{
+  max-width:190px;
+  margin:10px 0 0;
+  font-size:14px;
+  line-height:1.6;
+  color:var(--muted);
+}
+
+
+/* ---------- PHILOSOPHY ---------- */
+
+.about-philosophy{
+  background:var(--cw-bg);
+}
+
+.about-philosophy-grid{
+  display:grid;
+  grid-template-columns:minmax(280px,.9fr) minmax(0,1.1fr);
+  gap:clamp(50px,10vw,150px);
+}
+
+.about-philosophy-copy{
+  max-width:650px;
+}
+
+.philosophy-statement{
+  margin-top:100px;
+  padding-top:28px;
+  border-top:1px solid rgba(17,17,17,.10);
+}
+
+.philosophy-statement span{
+  display:block;
+  margin-bottom:20px;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.15em;
+  color:var(--muted);
+}
+
+.philosophy-statement strong{
+  display:block;
+  max-width:900px;
+  font-family:var(--font-display);
+  font-size:clamp(34px,5vw,68px);
+  line-height:.98;
+  letter-spacing:-.06em;
+  font-weight:500;
+}
+
+.philosophy-statement em{
+  color:var(--muted);
+  font-style:normal;
+}
+
+
+/* ---------- PRINCIPLES ---------- */
+
+.about-principles{
+  background:rgba(17,17,17,.022);
+}
+
+.about-section-heading{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(260px,420px);
+  align-items:end;
+  gap:60px;
+  margin-bottom:70px;
+}
+
+.about-section-heading h2{
+  margin:18px 0 0;
+  font-family:var(--font-display);
+  font-size:clamp(48px,6vw,86px);
+  line-height:.9;
+  letter-spacing:-.065em;
+  font-weight:500;
+}
+
+.about-section-heading h2 em{
+  color:var(--muted);
+  font-style:normal;
+}
+
+.about-section-heading > p{
+  margin:0;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.7;
+}
+
+.about-principle-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+
+.about-principle-card{
+  position:relative;
+  min-height:370px;
+  padding:30px;
+  border:1px solid rgba(17,17,17,.10);
+  border-radius:24px;
+  background:rgba(255,255,255,.45);
+  overflow:hidden;
+  transition:
+    transform .5s cubic-bezier(.16,1,.3,1),
+    border-color .5s ease,
+    background .5s ease;
+}
+
+.about-principle-card::after{
+  content:"";
+  position:absolute;
+  width:220px;
+  height:220px;
+  right:-100px;
+  bottom:-100px;
+  border-radius:50%;
+  background:radial-gradient(
+    circle,
+    rgba(0,0,0,.08),
+    transparent 70%
+  );
+  transition:transform .6s cubic-bezier(.16,1,.3,1);
+}
+
+.about-principle-card:hover{
+  transform:translateY(-7px);
+  border-color:rgba(17,17,17,.20);
+  background:rgba(255,255,255,.72);
+}
+
+.about-principle-card:hover::after{
+  transform:scale(1.5);
+}
+
+.principle-top{
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.13em;
+}
+
+.principle-icon{
+  margin-top:58px;
+  font-size:34px;
+  line-height:1;
+  color:var(--primary);
+}
+
+.about-principle-card h3{
+  margin:28px 0 12px;
+  font-family:var(--font-display);
+  font-size:34px;
+  line-height:1;
+  letter-spacing:-.045em;
+  font-weight:500;
+}
+
+.about-principle-card p{
+  max-width:420px;
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.7;
+}
+
+
+/* ---------- PROCESS ---------- */
+
+.about-process-heading{
+  max-width:800px;
+  margin-bottom:80px;
+}
+
+.about-process-list{
+  border-top:1px solid rgba(17,17,17,.10);
+}
+
+.process-row{
+  display:grid;
+  grid-template-columns:100px minmax(0,1fr) 40px;
+  align-items:center;
+  gap:30px;
+  min-height:145px;
+  padding:28px 0;
+  border-bottom:1px solid rgba(17,17,17,.10);
+  transition:
+    padding .45s cubic-bezier(.16,1,.3,1),
+    background .45s ease;
+}
+
+.process-row:hover{
+  padding-left:22px;
+  padding-right:22px;
+  background:rgba(17,17,17,.025);
+}
+
+.process-number{
+  font-family:var(--font-display);
+  font-size:28px;
+  letter-spacing:-.04em;
+  color:var(--muted);
+}
+
+.process-main h3{
+  margin:0 0 8px;
+  font-family:var(--font-display);
+  font-size:clamp(25px,3vw,38px);
+  line-height:1;
+  letter-spacing:-.045em;
+  font-weight:500;
+}
+
+.process-main p{
+  max-width:650px;
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.65;
+}
+
+.process-arrow{
+  display:grid;
+  place-items:center;
+  width:38px;
+  height:38px;
+  border:1px solid rgba(17,17,17,.12);
+  border-radius:50%;
+  transition:
+    transform .45s cubic-bezier(.16,1,.3,1),
+    background .45s ease;
+}
+
+.process-row:hover .process-arrow{
+  transform:rotate(45deg);
+  background:var(--primary);
+  color:var(--cw-bg);
+}
+
+
+/* ---------- STANDARD ---------- */
+
+.about-standard{
+  background:rgba(17,17,17,.025);
+}
+
+.standard-panel{
+  position:relative;
+  padding:clamp(40px,7vw,90px);
+  border:1px solid rgba(17,17,17,.11);
+  border-radius:32px;
+  background:rgba(255,255,255,.48);
+  overflow:hidden;
+}
+
+.standard-panel::before{
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  right:-220px;
+  top:-260px;
+  border-radius:50%;
+  background:radial-gradient(
+    circle,
+    rgba(0,0,0,.07),
+    transparent 68%
+  );
+}
+
+.standard-meta{
+  position:relative;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  padding-bottom:30px;
+  border-bottom:1px solid rgba(17,17,17,.10);
+}
+
+.standard-panel h2{
+  position:relative;
+  max-width:1100px;
+  margin:65px 0;
+  font-family:var(--font-display);
+  font-size:clamp(45px,7vw,96px);
+  line-height:.91;
+  letter-spacing:-.07em;
+  font-weight:500;
+}
+
+.standard-footer{
+  position:relative;
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:40px;
+  padding-top:30px;
+  border-top:1px solid rgba(17,17,17,.10);
+}
+
+.standard-footer p{
+  max-width:600px;
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.7;
+}
+
+.standard-footer span{
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.14em;
+  white-space:nowrap;
+}
+
+
+/* ---------- AUDIENCE ---------- */
+
+.audience-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-top:1px solid rgba(17,17,17,.10);
+  border-bottom:1px solid rgba(17,17,17,.10);
+}
+
+.audience-grid article{
+  min-height:300px;
+  padding:30px 26px;
+  border-right:1px solid rgba(17,17,17,.10);
+  transition:background .4s ease;
+}
+
+.audience-grid article:last-child{
+  border-right:0;
+}
+
+.audience-grid article:hover{
+  background:rgba(17,17,17,.03);
+}
+
+.audience-grid article > span{
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.14em;
+  color:var(--muted);
+}
+
+.audience-grid h3{
+  margin:90px 0 12px;
+  font-family:var(--font-display);
+  font-size:32px;
+  line-height:1;
+  letter-spacing:-.045em;
+  font-weight:500;
+}
+
+.audience-grid p{
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.65;
+}
+
+
+/* ---------- CTA ---------- */
+
+.about-cta{
+  padding:clamp(100px,14vw,190px) 0;
+  text-align:center;
+  background:var(--primary);
+  color:var(--cw-bg);
+}
+
+.about-cta .eyebrow{
+  color:rgba(255,255,255,.48);
+}
+
+.about-cta h2{
+  max-width:1000px;
+  margin:28px auto 0;
+  font-family:var(--font-display);
+  font-size:clamp(58px,9vw,126px);
+  line-height:.86;
+  letter-spacing:-.075em;
+  font-weight:500;
+}
+
+.about-cta h2 em{
+  display:block;
+  color:rgba(255,255,255,.48);
+  font-style:normal;
+}
+
+.about-cta p{
+  max-width:560px;
+  margin:36px auto 0;
+  color:rgba(255,255,255,.62);
+  font-size:16px;
+  line-height:1.7;
+}
+
+.about-cta .footer-cta{
+  display:inline-flex;
+  margin-top:38px;
+}
+
+
+/* ---------- DARK MODE ---------- */
+
+html[data-theme="dark"] .about-hero::before{
+  background:radial-gradient(
+    circle,
+    rgba(255,255,255,.07),
+    transparent 68%
+  );
+}
+
+html[data-theme="dark"] .about-hero-meta,
+html[data-theme="dark"] .about-section,
+html[data-theme="dark"] .about-stats,
+html[data-theme="dark"] .about-process-list,
+html[data-theme="dark"] .audience-grid,
+html[data-theme="dark"] .philosophy-statement,
+html[data-theme="dark"] .standard-meta,
+html[data-theme="dark"] .standard-footer{
+  border-color:rgba(255,255,255,.10);
+}
+
+html[data-theme="dark"] .about-intro,
+html[data-theme="dark"] .about-principles,
+html[data-theme="dark"] .about-standard{
+  background:rgba(255,255,255,.018);
+}
+
+html[data-theme="dark"] .about-stat{
+  border-color:rgba(255,255,255,.10);
+}
+
+html[data-theme="dark"] .about-stat:hover,
+html[data-theme="dark"] .audience-grid article:hover,
+html[data-theme="dark"] .process-row:hover{
+  background:rgba(255,255,255,.035);
+}
+
+html[data-theme="dark"] .about-principle-card,
+html[data-theme="dark"] .standard-panel{
+  border-color:rgba(255,255,255,.11);
+  background:rgba(255,255,255,.035);
+}
+
+html[data-theme="dark"] .about-principle-card:hover{
+  border-color:rgba(255,255,255,.22);
+  background:rgba(255,255,255,.055);
+}
+
+html[data-theme="dark"] .about-principle-card::after,
+html[data-theme="dark"] .standard-panel::before{
+  background:radial-gradient(
+    circle,
+    rgba(255,255,255,.08),
+    transparent 70%
+  );
+}
+
+html[data-theme="dark"] .process-row:hover .process-arrow{
+  background:#fff;
+  color:#111;
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width:800px){
+
+  .about-hero{
+    min-height:auto;
+    padding-top:110px;
+  }
+
+  .about-hero-meta{
+    margin-bottom:28px;
+  }
+
+  .about-hero-bottom{
+    grid-template-columns:1fr;
+    gap:28px;
+    margin-top:40px;
+  }
+
+  .about-hero-note{
+    white-space:normal;
+  }
+
+  .about-section{
+    padding:82px 0;
+  }
+
+  .about-section-label{
+    margin-bottom:48px;
+  }
+
+  .about-intro-grid,
+  .about-philosophy-grid,
+  .about-section-heading{
+    grid-template-columns:1fr;
+    gap:40px;
+  }
+
+  .about-stats{
+    grid-template-columns:repeat(2,1fr);
+    margin-top:65px;
+  }
+
+  .about-stat{
+    min-height:170px;
+  }
+
+  .about-stat:nth-child(2){
+    border-right:0;
+  }
+
+  .about-stat:nth-child(-n+2){
+    border-bottom:1px solid rgba(17,17,17,.10);
+  }
+
+  .about-principle-grid{
+    grid-template-columns:1fr;
+  }
+
+  .about-principle-card{
+    min-height:320px;
+  }
+
+  .process-row{
+    grid-template-columns:55px minmax(0,1fr) 34px;
+    gap:15px;
+    min-height:130px;
+  }
+
+  .process-row:hover{
+    padding-left:12px;
+    padding-right:12px;
+  }
+
+  .standard-panel{
+    padding:30px 24px;
+    border-radius:24px;
+  }
+
+  .standard-panel h2{
+    margin:45px 0;
+  }
+
+  .standard-footer{
+    display:block;
+  }
+
+  .standard-footer span{
+    display:block;
+    margin-top:24px;
+  }
+
+  .audience-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .audience-grid article{
+    min-height:250px;
+  }
+
+  .audience-grid article:nth-child(2){
+    border-right:0;
+  }
+
+  .audience-grid article:nth-child(-n+2){
+    border-bottom:1px solid rgba(17,17,17,.10);
+  }
+
+  .audience-grid h3{
+    margin-top:65px;
+  }
+}
+
+@media(max-width:520px){
+
+  .about-hero h1{
+    font-size:clamp(55px,16vw,82px);
+  }
+
+  .about-hero-meta{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .about-stats,
+  .audience-grid{
+    grid-template-columns:1fr;
+  }
+
+  .about-stat,
+  .audience-grid article{
+    border-right:0;
+    border-bottom:1px solid rgba(17,17,17,.10);
+  }
+
+  .about-stat:last-child,
+  .audience-grid article:last-child{
+    border-bottom:0;
+  }
+
+  .about-principle-card{
+    min-height:300px;
+    padding:25px;
+  }
+
+  .process-row{
+    grid-template-columns:40px minmax(0,1fr);
+  }
+
+  .process-arrow{
+    display:none;
+  }
+
+  .about-cta h2{
+    font-size:clamp(52px,15vw,76px);
+  }
+
+}
+
+</style>
+
+
+
+<!-- =========================================================
+     CYRUSWEB ABOUT — TECHNOLOGY + TRUSTED SYSTEM
+     ========================================================= -->
+<style id="cyrus-about-tech-trusted">
+
+.about-technology{
+  padding-bottom:clamp(80px,10vw,140px);
+}
+
+.about-tech-intro,
+.about-trusted-intro{
+  position:relative;
+  z-index:5;
+}
+
+.about-technology .tech-section,
+.about-trusted .trusted-section{
+  margin-top:0;
+}
+
+.about-trusted{
+  padding-top:clamp(80px,10vw,140px);
+}
+
+.about-trusted .trusted-section{
+  padding-top:20px;
+}
+
+.about-tech-intro .about-section-label,
+.about-trusted-intro .about-section-label{
+  margin-bottom:35px;
+}
+
+@media(max-width:800px){
+
+  .about-tech-intro .about-section-label,
+  .about-trusted-intro .about-section-label{
+    margin-bottom:25px;
+  }
+
+}
+
+html[data-theme="dark"] .about-technology,
+html[data-theme="dark"] .about-trusted{
+  border-color:rgba(255,255,255,.10);
+}
+
+</style>
+
 </head>
 <body>
 
@@ -1652,104 +2571,1176 @@ html[data-theme="dark"] .nav-cta {
 
 <main>
 
-<section class="static-hero">
+<!-- =========================================================
+     ABOUT HERO
+     ========================================================= -->
+<section class="about-hero">
   <div class="container">
-    <span class="eyebrow">ABOUT CYRUSWEB</span>
+
+    <div class="about-hero-meta">
+      <span class="eyebrow">ABOUT CYRUSWEB</span>
+      <span class="about-hero-index">01 / IDENTITY</span>
+    </div>
 
     <h1>
-      Kami tidak sekadar<br>
+      Kami tidak sekadar
       <em>membuat website.</em>
     </h1>
 
-    <p class="hero-lead">
-      CyrusWeb hadir untuk membantu bisnis memiliki identitas digital
-      yang terlihat serius, terasa meyakinkan, dan bekerja dengan tujuan
-      yang jelas.
-    </p>
+    <div class="about-hero-bottom">
+      <p class="hero-lead">
+        CyrusWeb adalah studio web digital yang menggabungkan strategi,
+        desain, teknologi, dan pengalaman pengguna untuk membantu bisnis
+        membangun kehadiran digital yang terlihat serius dan layak dipercaya.
+      </p>
+
+      <div class="about-hero-note">
+        <span class="status-dot"></span>
+        <span>DESIGN · DEVELOPMENT · DIGITAL EXPERIENCE</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<section class="editorial-section">
+
+<!-- =========================================================
+     WHO WE ARE
+     ========================================================= -->
+<section class="about-section about-intro">
   <div class="container">
-    <div class="editorial-grid">
+
+    <div class="about-section-label">
+      <span>02</span>
+      <span>WHO WE ARE</span>
+    </div>
+
+    <div class="about-intro-grid">
+
+      <div class="about-intro-title">
+        <span class="eyebrow">CYRUSWEB</span>
+        <h2>
+          Membangun website
+          <span>yang punya alasan.</span>
+        </h2>
+      </div>
+
+      <div class="about-intro-copy">
+        <p class="lead-copy">
+          Bagi kami, website bukan sekadar halaman digital yang dipenuhi
+          visual. Website adalah tempat sebuah bisnis memperkenalkan dirinya,
+          menjelaskan nilainya, membangun kepercayaan, dan mengarahkan
+          pengunjung menuju sebuah keputusan.
+        </p>
+
+        <p>
+          Karena itu CyrusWeb mengerjakan website dengan pendekatan yang
+          menyatukan desain dan teknologi sejak awal. Struktur informasi,
+          visual, interaksi, performa, responsive behavior, hingga detail
+          kecil dalam pengalaman pengguna dipikirkan sebagai satu kesatuan.
+        </p>
+
+        <p>
+          Hasil akhirnya bukan hanya website yang terlihat modern, tetapi
+          pengalaman digital yang memiliki tujuan dan dapat berkembang
+          mengikuti kebutuhan bisnis.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="about-stats">
+
+      <div class="about-stat">
+        <strong>01</strong>
+        <span>STRATEGY</span>
+        <p>Memahami tujuan sebelum menentukan solusi.</p>
+      </div>
+
+      <div class="about-stat">
+        <strong>02</strong>
+        <span>DESIGN</span>
+        <p>Mengubah positioning menjadi pengalaman visual.</p>
+      </div>
+
+      <div class="about-stat">
+        <strong>03</strong>
+        <span>DEVELOPMENT</span>
+        <p>Membangun interface yang cepat dan responsif.</p>
+      </div>
+
+      <div class="about-stat">
+        <strong>04</strong>
+        <span>EXPERIENCE</span>
+        <p>Membuat setiap interaksi memiliki tujuan.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =========================================================
+     PHILOSOPHY
+     ========================================================= -->
+<section class="about-section about-philosophy">
+  <div class="container">
+
+    <div class="about-section-label">
+      <span>03</span>
+      <span>OUR PHILOSOPHY</span>
+    </div>
+
+    <div class="about-philosophy-grid">
+
       <div>
-        <span class="section-index">01 / PHILOSOPHY</span>
+        <span class="eyebrow">THE WAY WE THINK</span>
+        <h2>
+          Website yang baik
+          <span>bekerja sebelum berbicara.</span>
+        </h2>
       </div>
 
-      <div class="editorial-copy">
-        <h2>Website yang baik bukan hanya indah ketika pertama kali dilihat.</h2>
-
+      <div class="about-philosophy-copy">
         <p>
-          Website adalah titik pertemuan antara brand, calon pelanggan,
-          informasi, dan keputusan. Karena itu setiap bagian harus memiliki
-          alasan — mulai dari struktur halaman, tipografi, visual, hingga
-          bagaimana seseorang menemukan tombol yang ingin mereka tekan.
+          Pengunjung biasanya membentuk kesan dalam waktu yang sangat singkat.
+          Sebelum membaca seluruh isi halaman, mereka sudah menilai apakah
+          sebuah bisnis terlihat profesional, jelas, dan dapat dipercaya.
         </p>
 
         <p>
-          CyrusWeb menggabungkan pendekatan desain modern dengan pemikiran
-          produk dan teknologi web untuk menghasilkan pengalaman digital
-          yang terasa sederhana di permukaan, tetapi matang di baliknya.
+          Itulah mengapa kami tidak memulai pekerjaan hanya dari warna,
+          gambar, atau animasi. Kami mulai dari pertanyaan yang lebih penting:
+          <strong>apa yang harus dipahami pengunjung, apa yang harus mereka
+          rasakan, dan tindakan apa yang ingin mereka lakukan?</strong>
+        </p>
+
+        <p>
+          Dari sana desain, copy, struktur halaman, teknologi, dan interaction
+          dibangun untuk mendukung tujuan tersebut.
         </p>
       </div>
+
     </div>
+
+    <div class="philosophy-statement">
+      <span>THE CYRUS APPROACH</span>
+      <strong>
+        Simple on the surface.
+        <em>Thoughtful underneath.</em>
+      </strong>
+    </div>
+
   </div>
 </section>
 
-<section class="editorial-section soft-section">
+
+<!-- =========================================================
+     PRINCIPLES
+     ========================================================= -->
+<section class="about-section about-principles">
   <div class="container">
-    <div class="section-heading">
-      <span class="eyebrow">WHAT WE VALUE</span>
-      <h2>Empat prinsip dalam setiap project.</h2>
+
+    <div class="about-section-heading">
+      <div>
+        <span class="eyebrow">WHAT WE VALUE</span>
+        <h2>Empat prinsip dalam<br><em>setiap project.</em></h2>
+      </div>
+
+      <p>
+        Standar yang menjadi dasar ketika kami menentukan bagaimana sebuah
+        website harus terlihat, terasa, dan bekerja.
+      </p>
     </div>
 
-    <div class="principle-grid">
-      <article class="info-card">
-        <span>01</span>
+    <div class="about-principle-grid">
+
+      <article class="about-principle-card">
+        <div class="principle-top">
+          <span>01</span>
+          <span>01 / 04</span>
+        </div>
+        <div class="principle-icon">◌</div>
         <h3>Clarity</h3>
-        <p>Pesan bisnis harus mudah dipahami tanpa membuat pengunjung berpikir terlalu lama.</p>
+        <p>
+          Pesan bisnis harus mudah dipahami. Struktur informasi dibuat agar
+          pengunjung dapat menemukan apa yang mereka cari tanpa kebingungan.
+        </p>
       </article>
 
-      <article class="info-card">
-        <span>02</span>
+      <article class="about-principle-card">
+        <div class="principle-top">
+          <span>02</span>
+          <span>02 / 04</span>
+        </div>
+        <div class="principle-icon">⌁</div>
         <h3>Precision</h3>
-        <p>Detail kecil seperti spacing, hierarchy, interaction, dan responsive behavior menentukan kualitas.</p>
+        <p>
+          Detail menentukan kualitas. Typography, spacing, hierarchy,
+          responsive behavior, dan interaction diperlakukan dengan presisi.
+        </p>
       </article>
 
-      <article class="info-card">
-        <span>03</span>
+      <article class="about-principle-card">
+        <div class="principle-top">
+          <span>03</span>
+          <span>03 / 04</span>
+        </div>
+        <div class="principle-icon">↗</div>
         <h3>Performance</h3>
-        <p>Visual premium tetap harus terasa cepat, ringan, dan nyaman digunakan di berbagai perangkat.</p>
+        <p>
+          Visual premium tidak boleh mengorbankan kecepatan. Website harus
+          tetap ringan, responsif, dan nyaman digunakan di berbagai perangkat.
+        </p>
       </article>
 
-      <article class="info-card">
-        <span>04</span>
+      <article class="about-principle-card">
+        <div class="principle-top">
+          <span>04</span>
+          <span>04 / 04</span>
+        </div>
+        <div class="principle-icon">✦</div>
         <h3>Purpose</h3>
-        <p>Setiap halaman dibuat dengan tujuan yang jelas: membangun trust, menjelaskan value, atau menghasilkan action.</p>
+        <p>
+          Setiap halaman harus mempunyai tujuan: membangun trust, menjelaskan
+          value, memperkuat brand, atau mendorong sebuah action.
+        </p>
       </article>
+
     </div>
+
   </div>
 </section>
 
-<section class="editorial-section">
+
+<!-- =========================================================
+     HOW WE BUILD
+     ========================================================= -->
+<section class="about-section about-process">
   <div class="container">
-    <div class="manifesto">
-      <span class="eyebrow">OUR STANDARD</span>
+
+    <div class="about-section-label">
+      <span>04</span>
+      <span>HOW WE BUILD</span>
+    </div>
+
+    <div class="about-process-heading">
+      <span class="eyebrow">FROM IDEA TO EXPERIENCE</span>
       <h2>
-        “Kalau sebuah website terlihat biasa,
-        mengapa pelanggan harus menganggap bisnis
-        di baliknya luar biasa?”
+        Setiap project
+        <span>dibangun bertahap.</span>
       </h2>
     </div>
+
+    <div class="about-process-list">
+
+      <article class="process-row">
+        <div class="process-number">01</div>
+        <div class="process-main">
+          <h3>Discovery & Strategy</h3>
+          <p>
+            Memahami bisnis, target audience, positioning, kebutuhan,
+            dan tujuan website sebelum masuk ke visual.
+          </p>
+        </div>
+        <span class="process-arrow">↗</span>
+      </article>
+
+      <article class="process-row">
+        <div class="process-number">02</div>
+        <div class="process-main">
+          <h3>Structure & UX</h3>
+          <p>
+            Menentukan information architecture, user flow, hierarchy,
+            dan struktur halaman agar pengalaman terasa jelas.
+          </p>
+        </div>
+        <span class="process-arrow">↗</span>
+      </article>
+
+      <article class="process-row">
+        <div class="process-number">03</div>
+        <div class="process-main">
+          <h3>Visual Design</h3>
+          <p>
+            Mengembangkan visual identity, typography, composition,
+            interaction, dan detail interface yang sesuai karakter brand.
+          </p>
+        </div>
+        <span class="process-arrow">↗</span>
+      </article>
+
+      <article class="process-row">
+        <div class="process-number">04</div>
+        <div class="process-main">
+          <h3>Development & Optimization</h3>
+          <p>
+            Mengubah desain menjadi website nyata dengan fokus pada
+            responsiveness, performance, accessibility, dan maintainability.
+          </p>
+        </div>
+        <span class="process-arrow">↗</span>
+      </article>
+
+    </div>
+
   </div>
 </section>
 
-<section class="premium-cta">
+
+<!-- =========================================================
+     STANDARD
+     ========================================================= -->
+<section class="about-section about-standard">
   <div class="container">
+
+    <div class="standard-panel">
+
+      <div class="standard-meta">
+        <span class="eyebrow">OUR STANDARD</span>
+        <span>CYRUSWEB / 2026</span>
+      </div>
+
+      <h2>
+        Kalau sebuah website
+        terlihat biasa,
+        mengapa pelanggan harus
+        menganggap bisnis
+        di baliknya luar biasa?
+      </h2>
+
+      <div class="standard-footer">
+        <p>
+          Kami percaya kualitas digital bukan hanya tentang membuat sesuatu
+          terlihat mahal. Kualitas adalah ketika strategi, visual, teknologi,
+          dan pengalaman pengguna bekerja sebagai satu sistem.
+        </p>
+
+        <span>— CYRUSWEB</span>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =========================================================
+     WHO WE BUILD FOR
+     ========================================================= -->
+<section class="about-section about-audience">
+  <div class="container">
+
+    <div class="about-section-heading">
+      <div>
+        <span class="eyebrow">BUILT FOR BUSINESS</span>
+        <h2>
+          Dibangun untuk
+          <em>berbagai kebutuhan.</em>
+        </h2>
+      </div>
+
+      <p>
+        Kami merancang pengalaman digital berdasarkan kebutuhan project,
+        bukan memaksakan satu template untuk semua bisnis.
+      </p>
+    </div>
+
+    <div class="audience-grid">
+
+      <article>
+        <span>01</span>
+        <h3>Business</h3>
+        <p>
+          Website profesional untuk memperkuat kehadiran dan kredibilitas
+          bisnis di dunia digital.
+        </p>
+      </article>
+
+      <article>
+        <span>02</span>
+        <h3>Brand</h3>
+        <p>
+          Digital experience yang membantu sebuah brand mempunyai identitas
+          visual yang lebih kuat dan konsisten.
+        </p>
+      </article>
+
+      <article>
+        <span>03</span>
+        <h3>Service</h3>
+        <p>
+          Website layanan yang menjelaskan value dengan jelas dan membantu
+          calon pelanggan mengambil keputusan.
+        </p>
+      </article>
+
+      <article>
+        <span>04</span>
+        <h3>Product</h3>
+        <p>
+          Interface digital untuk produk, platform, dan kebutuhan web custom
+          yang membutuhkan pengalaman pengguna lebih matang.
+        </p>
+      </article>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =========================================================
+     CTA
+     ========================================================= -->
+
+<!-- =========================================================
+     ABOUT — TECHNOLOGY
+     ========================================================= -->
+<section class="about-section about-technology" id="about-technology">
+
+  <div class="container about-tech-intro">
+    <div class="about-section-label">
+      <span>08 / TEKNOLOGI</span>
+      <span>TEKNOLOGI YANG KAMI GUNAKAN</span>
+    </div>
+  </div>
+
+  <section class="tech-section" id="tech">
+
+<header class="header">
+
+  <div class="eyebrow">
+    YANG KAMI PAKAI
+  </div>
+
+  <h2>
+    Teknologi yang
+    <span>menggerakkan</span>
+    setiap project.
+  </h2>
+
+  <p>
+    Kami memilih teknologi modern yang tepat untuk
+    membangun website yang cepat, scalable, aman,
+    dan siap berkembang.
+  </p>
+
+</header>
+
+
+<div class="arch" id="arch">
+
+  <div class="grid"></div>
+
+  <svg
+    class="routing"
+    id="routing"
+    aria-hidden="true"
+    preserveAspectRatio="none"
+  >
+    <g id="routes"></g>
+  </svg>
+
+
+  <!-- CYRUS CORE -->
+
+  <div class="core" id="core">
+
+    <div class="aura"></div>
+
+    <div class="orbit"></div>
+    <div class="orbit two"></div>
+    <div class="orbit three"></div>
+
+    <div class="core-glass">
+
+      <!--
+        LOGO DIBACA DARI GITHUB
+
+        File:
+        cyrus-logo.png
+
+        Jadi lo cukup mengganti file PNG
+        tersebut tanpa menyentuh HTML.
+      -->
+
+      <div class="logo">
+
+        <img
+          src="cyrus-logo.png"
+          alt="CyrusWeb"
+          draggable="false"
+        >
+
+      </div>
+
+      <div class="core-name">
+        CYRUSWEB
+      </div>
+
+      <div class="core-meta">
+        <i></i>
+        FULL STACK
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- NEXT -->
+
+  <a
+    class="node n-next"
+    data-tech="next"
+    data-side="right"
+    href="https://nextjs.org/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port right"></span>
+
+    <div class="node-logo">
+      <svg viewBox="0 0 24 24">
+        <path d="M4 4h16v16H4z"/>
+        <path d="M8 16V8l8 8V8"/>
+      </svg>
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">Next.js</div>
+      <div class="node-type">FRAMEWORK</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- REACT -->
+
+  <a
+    class="node n-react"
+    data-tech="react"
+    data-side="left"
+    href="https://react.dev/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port left"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+
+        <ellipse cx="12" cy="12" rx="9" ry="3.5"/>
+
+        <ellipse
+          cx="12"
+          cy="12"
+          rx="9"
+          ry="3.5"
+          transform="rotate(60 12 12)"
+        />
+
+        <ellipse
+          cx="12"
+          cy="12"
+          rx="9"
+          ry="3.5"
+          transform="rotate(120 12 12)"
+        />
+
+        <circle
+          cx="12"
+          cy="12"
+          r="1.5"
+          fill="currentColor"
+          stroke="none"
+        />
+
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">React</div>
+      <div class="node-type">FRONTEND</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- TYPESCRIPT -->
+
+  <a
+    class="node n-ts"
+    data-tech="typescript"
+    data-side="right"
+    href="https://www.typescriptlang.org/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port right"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+
+        <rect x="3" y="3" width="18" height="18"/>
+
+        <text
+          x="12"
+          y="16"
+          text-anchor="middle"
+          font-size="8"
+        >
+          TS
+        </text>
+
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">TypeScript</div>
+      <div class="node-type">LANGUAGE</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- TAILWIND -->
+
+  <a
+    class="node n-tailwind"
+    data-tech="tailwind"
+    data-side="left"
+    href="https://tailwindcss.com/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port left"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+        <path d="M4 12c3-5 7-5 10 0s6 5 8 0"/>
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">Tailwind CSS</div>
+      <div class="node-type">STYLING</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- GITHUB -->
+
+  <a
+    class="node n-github"
+    data-tech="github"
+    data-side="right"
+    href="https://github.com/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port right"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+
+        <circle cx="12" cy="12" r="8"/>
+
+        <path d="M8 16c-2-3-1-6 1-7 2-1 5-1 7 1 2 2 2 5 0 6"/>
+
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">GitHub</div>
+      <div class="node-type">SOURCE CONTROL</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- VERCEL -->
+
+  <a
+    class="node n-vercel"
+    data-tech="vercel"
+    data-side="left"
+    href="https://vercel.com/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port left"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+        <path d="M4 19 12 5l8 14Z"/>
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">Vercel</div>
+      <div class="node-type">DEPLOYMENT</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- NODE -->
+
+  <a
+    class="node n-node"
+    data-tech="nodejs"
+    data-side="right"
+    href="https://nodejs.org/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port right"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+
+        <path d="M12 3 20 7v10l-8 4-8-4V7Z"/>
+
+        <text
+          x="12"
+          y="15"
+          text-anchor="middle"
+          font-size="5"
+        >
+          JS
+        </text>
+
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">Node.js</div>
+      <div class="node-type">RUNTIME</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- PRISMA -->
+
+  <a
+    class="node n-prisma"
+    data-tech="prisma"
+    data-side="left"
+    href="https://www.prisma.io/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port left"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+
+        <path d="M5 18 12 4l7 14Z"/>
+        <path d="M12 4l3 13"/>
+
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">Prisma</div>
+      <div class="node-type">ORM</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- POSTGRES -->
+
+  <a
+    class="node n-postgres"
+    data-tech="postgres"
+    data-side="right"
+    href="https://www.postgresql.org/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port right"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+
+        <ellipse cx="12" cy="7" rx="7" ry="3"/>
+
+        <path d="M5 7v9c0 2 4 4 7 4s7-2 7-4V7"/>
+
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">PostgreSQL</div>
+      <div class="node-type">DATABASE</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- NEON -->
+
+  <a
+    class="node n-neon"
+    data-tech="neon"
+    data-side="left"
+    href="https://neon.tech/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port left"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+        <path d="m5 18 6-13 8 13h-6l-3-5"/>
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">Neon</div>
+      <div class="node-type">SERVERLESS DB</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- CLOUDINARY -->
+
+  <a
+    class="node n-cloudinary"
+    data-tech="cloudinary"
+    data-side="right"
+    href="https://cloudinary.com/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port right"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+
+        <circle cx="7" cy="13" r="3"/>
+        <circle cx="13" cy="9" r="3"/>
+        <circle cx="18" cy="14" r="3"/>
+
+        <path d="M7 13 13 9l5 5"/>
+
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">Cloudinary</div>
+      <div class="node-type">MEDIA</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- AUTH -->
+
+  <a
+    class="node n-auth"
+    data-tech="auth"
+    data-side="left"
+    href="https://authjs.dev/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port left"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+
+        <rect
+          x="6"
+          y="10"
+          width="12"
+          height="9"
+          rx="2"
+        />
+
+        <path d="M9 10V7c0-4 6-4 6 0v3"/>
+
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">Auth.js</div>
+      <div class="node-type">AUTHENTICATION</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+
+  <!-- RESEND -->
+
+  <a
+    class="node n-resend"
+    data-tech="resend"
+    data-side="top"
+    href="https://resend.com/"
+    target="_blank"
+    rel="noopener"
+  >
+
+    <span class="port top"></span>
+
+    <div class="node-logo">
+
+      <svg viewBox="0 0 24 24">
+
+        <path d="M5 6h14v12H5Z"/>
+        <path d="m6 8 6 5 6-5"/>
+
+      </svg>
+
+    </div>
+
+    <div class="node-info">
+      <div class="node-name">Resend</div>
+      <div class="node-type">EMAIL API</div>
+    </div>
+
+    <span class="node-status"></span>
+
+  </a>
+
+</div>
+
+
+<div class="foot">
+
+  <strong>
+    Selected tools. Thoughtfully integrated.
+  </strong>
+
+  <span>
+    SATU ALUR DEVELOPMENT · BERBAGAI TEKNOLOGI TERINTEGRASI
+  </span>
+
+</div>
+
+</section>
+
+</section>
+
+
+<!-- =========================================================
+     ABOUT — TRUSTED BY
+     ========================================================= -->
+<section class="about-section about-trusted" id="about-trusted-by">
+
+  <div class="container about-trusted-intro">
+    <div class="about-section-label">
+      <span>09 / KEPERCAYAAN</span>
+      <span>PROYEK DAN BRAND YANG KAMI KERJAKAN</span>
+    </div>
+  </div>
+
+  <section class="trusted-section" id="trusted-by">
+
+  <div class="trusted-head">
+    <div class="trusted-eyebrow">Dipercayakan Oleh</div>
+
+    <h2>
+      Brand yang
+      <span>percaya pada kualitas pengerjaan.</span>
+    </h2>
+  </div>
+
+  <div class="trusted-marquee">
+
+    <!-- TOP : RIGHT -->
+    <div class="trusted-track trusted-track-right">
+
+      <div class="trusted-stream">
+
+        <div class="trusted-set">
+          <div class="trusted-logo trusted-mono">
+            <img src="spraudio.png" alt="SPR Audio" draggable="false">
+          </div>
+
+          <span class="trusted-separator"></span>
+
+          <div class="trusted-logo trusted-color">
+            <img src="ihsan-koi.png" alt="Ihsan Koi" draggable="false">
+          </div>
+
+          <span class="trusted-separator"></span>
+        </div>
+
+        <div class="trusted-set" aria-hidden="true">
+          <div class="trusted-logo trusted-mono">
+            <img src="spraudio.png" alt="">
+          </div>
+
+          <span class="trusted-separator"></span>
+
+          <div class="trusted-logo trusted-color">
+            <img src="ihsan-koi.png" alt="">
+          </div>
+
+          <span class="trusted-separator"></span>
+        </div>
+
+        <div class="trusted-set" aria-hidden="true">
+          <div class="trusted-logo trusted-mono">
+            <img src="spraudio.png" alt="">
+          </div>
+
+          <span class="trusted-separator"></span>
+
+          <div class="trusted-logo trusted-color">
+            <img src="ihsan-koi.png" alt="">
+          </div>
+
+          <span class="trusted-separator"></span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- BOTTOM : LEFT -->
+    <div class="trusted-track trusted-track-left">
+
+      <div class="trusted-stream">
+
+        <div class="trusted-set">
+          <div class="trusted-logo trusted-color">
+            <img src="ihsan-koi.png" alt="Ihsan Koi" draggable="false">
+          </div>
+
+          <span class="trusted-separator"></span>
+
+          <div class="trusted-logo trusted-mono">
+            <img src="spraudio.png" alt="SPR Audio" draggable="false">
+          </div>
+
+          <span class="trusted-separator"></span>
+        </div>
+
+        <div class="trusted-set" aria-hidden="true">
+          <div class="trusted-logo trusted-color">
+            <img src="ihsan-koi.png" alt="">
+          </div>
+
+          <span class="trusted-separator"></span>
+
+          <div class="trusted-logo trusted-mono">
+            <img src="spraudio.png" alt="">
+          </div>
+
+          <span class="trusted-separator"></span>
+        </div>
+
+        <div class="trusted-set" aria-hidden="true">
+          <div class="trusted-logo trusted-color">
+            <img src="ihsan-koi.png" alt="">
+          </div>
+
+          <span class="trusted-separator"></span>
+
+          <div class="trusted-logo trusted-mono">
+            <img src="spraudio.png" alt="">
+          </div>
+
+          <span class="trusted-separator"></span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+</section>
+
+<section class="about-cta">
+  <div class="container">
+
     <span class="eyebrow">READY WHEN YOU ARE</span>
-    <h2>Punya sesuatu yang ingin dibangun?</h2>
-    <p>Mari ubah ide bisnis Anda menjadi pengalaman digital yang layak dipercaya.</p>
-    <a href="contact.html" class="footer-cta">Mulai Project <span>↗</span></a>
+
+    <h2>
+      Punya sesuatu
+      <em>yang ingin dibangun?</em>
+    </h2>
+
+    <p>
+      Mari ubah ide bisnis Anda menjadi pengalaman digital yang
+      terlihat serius, bekerja dengan tujuan, dan layak dipercaya.
+    </p>
+
+    <a href="contact.html" class="footer-cta">
+      Mulai Project <span>↗</span>
+    </a>
+
   </div>
 </section>
 
@@ -1877,6 +3868,808 @@ html[data-theme="dark"] .nav-cta {
     document.documentElement.dataset.theme = next;
     localStorage.setItem("cyrus-theme", next);
   });
+})();
+</script>
+
+
+<!-- =========================================================
+     CYRUSWEB — TECHNOLOGY ARCHITECTURE ENGINE
+     Migrated from homepage DNA
+     ========================================================= -->
+
+<script id="technology-architecture-script">
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const section =
+  document.getElementById("tech");
+
+const arch =
+  document.getElementById("arch");
+
+const svg =
+  document.getElementById("routing");
+
+const routesLayer =
+  document.getElementById("routes");
+
+const core =
+  document.getElementById("core");
+
+const nodes =
+  [...document.querySelectorAll(".node")];
+
+
+/* =========================================================
+   INTERSECTION
+========================================================= */
+
+const io =
+  new IntersectionObserver(
+    entries => {
+
+      entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+          section.classList.add("active");
+
+        }
+
+      });
+
+    },
+    {
+      threshold:.12
+    }
+  );
+
+io.observe(section);
+
+
+/* =========================================================
+   SVG
+========================================================= */
+
+const SVG_NS =
+  "http://www.w3.org/2000/svg";
+
+
+/* =========================================================
+   CREATE ROUTE
+========================================================= */
+
+function createRoute(d,tech){
+
+  const glow =
+    document.createElementNS(
+      SVG_NS,
+      "path"
+    );
+
+  glow.classList.add("route-glow");
+  glow.dataset.tech=tech;
+  glow.setAttribute("d",d);
+
+  const path =
+    document.createElementNS(
+      SVG_NS,
+      "path"
+    );
+
+  path.classList.add("route");
+  path.dataset.tech=tech;
+  path.setAttribute("d",d);
+
+  routesLayer.appendChild(glow);
+  routesLayer.appendChild(path);
+}
+
+
+/* =========================================================
+   CLEAR
+========================================================= */
+
+function clearRoutes(){
+
+  while(routesLayer.firstChild){
+
+    routesLayer.removeChild(
+      routesLayer.firstChild
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   RECT
+========================================================= */
+
+function getArchRect(){
+
+  return arch.getBoundingClientRect();
+
+}
+
+
+/* =========================================================
+   PORT
+========================================================= */
+
+function getPortPosition(node){
+
+  const port =
+    node.querySelector(".port");
+
+  const pr =
+    port.getBoundingClientRect();
+
+  const ar =
+    getArchRect();
+
+  return {
+
+    x:
+      pr.left -
+      ar.left +
+      pr.width/2,
+
+    y:
+      pr.top -
+      ar.top +
+      pr.height/2
+
+  };
+
+}
+
+
+/* =========================================================
+   CORE
+========================================================= */
+
+function getCoreAnchor(){
+
+  const ar =
+    getArchRect();
+
+  const cr =
+    core.getBoundingClientRect();
+
+  return {
+
+    x:
+      cr.left -
+      ar.left +
+      cr.width/2,
+
+    y:
+      cr.top -
+      ar.top +
+      cr.height/2
+
+  };
+
+}
+
+
+/* =========================================================
+   ROUTING
+========================================================= */
+
+function buildRoutes(){
+
+  clearRoutes();
+
+  const mobile =
+    window.innerWidth<=600;
+
+  const c =
+    getCoreAnchor();
+
+  nodes.forEach(node=>{
+
+    const port =
+      getPortPosition(node);
+
+    const side =
+      node.dataset.side;
+
+    let d;
+
+    if(side==="right"){
+
+      const lane =
+        mobile
+        ? c.x-82
+        : c.x-150;
+
+      d=`
+        M ${port.x} ${port.y}
+
+        H ${lane}
+
+        Q
+          ${lane-18}
+          ${port.y}
+          ${lane-18}
+          ${(port.y+c.y)/2}
+
+        Q
+          ${lane-18}
+          ${c.y}
+          ${c.x-72}
+          ${c.y}
+      `;
+
+    }else if(side==="left"){
+
+      const lane =
+        mobile
+        ? c.x+82
+        : c.x+150;
+
+      d=`
+        M ${port.x} ${port.y}
+
+        H ${lane}
+
+        Q
+          ${lane+18}
+          ${port.y}
+          ${lane+18}
+          ${(port.y+c.y)/2}
+
+        Q
+          ${lane+18}
+          ${c.y}
+          ${c.x+72}
+          ${c.y}
+      `;
+
+    }else{
+
+      d=`
+        M ${port.x} ${port.y}
+
+        V ${c.y-125}
+
+        Q
+          ${port.x}
+          ${c.y-92}
+          ${c.x}
+          ${c.y-72}
+      `;
+
+    }
+
+    createRoute(
+      d,
+      node.dataset.tech
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   DRAW
+========================================================= */
+
+function animateRoutes(){
+
+  document
+    .querySelectorAll(".route")
+    .forEach((path,index)=>{
+
+      let length;
+
+      try{
+        length=
+          path.getTotalLength();
+      }catch{
+        return;
+      }
+
+      path.style.strokeDasharray=
+        length;
+
+      path.style.strokeDashoffset=
+        length;
+
+      path.animate(
+
+        [
+          {
+            strokeDashoffset:length
+          },
+          {
+            strokeDashoffset:0
+          }
+        ],
+
+        {
+          duration:850,
+          delay:300+index*55,
+          easing:"cubic-bezier(.16,1,.3,1)",
+          fill:"forwards"
+        }
+
+      );
+
+    });
+
+}
+
+
+/* =========================================================
+   DATA PACKET
+========================================================= */
+
+function sendPacket(route){
+
+  let length;
+
+  try{
+    length=
+      route.getTotalLength();
+  }catch{
+    return;
+  }
+
+  const dot =
+    document.createElementNS(
+      SVG_NS,
+      "circle"
+    );
+
+  dot.classList.add("data-dot");
+
+  dot.setAttribute(
+    "r",
+    window.innerWidth<=600 ? "1.5" : "2"
+  );
+
+  svg.appendChild(dot);
+
+  const start=
+    performance.now();
+
+  const duration=1450;
+
+  function animate(time){
+
+    const progress=
+      Math.min(
+        1,
+        (time-start)/duration
+      );
+
+    const point=
+      route.getPointAtLength(
+        progress*length
+      );
+
+    dot.setAttribute(
+      "cx",
+      point.x
+    );
+
+    dot.setAttribute(
+      "cy",
+      point.y
+    );
+
+    dot.setAttribute(
+      "opacity",
+      Math.sin(
+        progress*Math.PI
+      )*.8
+    );
+
+    if(progress<1){
+
+      requestAnimationFrame(
+        animate
+      );
+
+    }else{
+
+      dot.remove();
+
+    }
+
+  }
+
+  requestAnimationFrame(
+    animate
+  );
+
+}
+
+
+/* =========================================================
+   PACKETS
+========================================================= */
+
+function startPackets(){
+
+  const routes=
+    [...document.querySelectorAll(".route")];
+
+  routes.forEach((route,index)=>{
+
+    setTimeout(()=>{
+
+      sendPacket(route);
+
+      setInterval(()=>{
+
+        sendPacket(route);
+
+      },3600+Math.random()*1800);
+
+    },1700+index*140);
+
+  });
+
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+nodes.forEach(node=>{
+
+  const tech=
+    node.dataset.tech;
+
+  function activate(){
+
+    document
+      .querySelectorAll(".route")
+      .forEach(route=>{
+
+        route.classList.toggle(
+          "active",
+          route.dataset.tech===tech
+        );
+
+      });
+
+  }
+
+  function deactivate(){
+
+    document
+      .querySelectorAll(".route")
+      .forEach(route=>{
+
+        route.classList.remove(
+          "active"
+        );
+
+      });
+
+  }
+
+  node.addEventListener(
+    "mouseenter",
+    activate
+  );
+
+  node.addEventListener(
+    "mouseleave",
+    deactivate
+  );
+
+  node.addEventListener(
+    "touchstart",
+    activate,
+    {passive:true}
+  );
+
+});
+
+
+/* =========================================================
+   PARALLAX
+========================================================= */
+
+let targetX=0;
+let targetY=0;
+
+let currentX=0;
+let currentY=0;
+
+arch.addEventListener(
+  "pointermove",
+  event=>{
+
+    if(window.innerWidth<=600){
+      return;
+    }
+
+    const rect=
+      arch.getBoundingClientRect();
+
+    targetX=
+      event.clientX/
+      rect.width-.5;
+
+    targetY=
+      event.clientY/
+      rect.height-.5;
+
+  }
+);
+
+arch.addEventListener(
+  "pointerleave",
+  ()=>{
+
+    targetX=0;
+    targetY=0;
+
+  }
+);
+
+
+function parallax(){
+
+  currentX+=
+    (targetX-currentX)*.045;
+
+  currentY+=
+    (targetY-currentY)*.045;
+
+  if(window.innerWidth>600){
+
+    core.style.transform=
+      `
+      translate3d(-50%,-50%,0)
+      rotateX(${currentY*-3}deg)
+      rotateY(${currentX*6}deg)
+      `;
+
+  }else{
+
+    core.style.transform=
+      "translate3d(-50%,-50%,0)";
+
+  }
+
+  requestAnimationFrame(
+    parallax
+  );
+
+}
+
+
+/* =========================================================
+   RESIZE
+========================================================= */
+
+let previousWidth=
+  window.innerWidth;
+
+let resizeTimer;
+
+
+window.addEventListener(
+  "resize",
+  ()=>{
+
+    clearTimeout(
+      resizeTimer
+    );
+
+    resizeTimer=
+      setTimeout(()=>{
+
+        if(
+          Math.abs(
+            window.innerWidth-
+            previousWidth
+          )>2
+        ){
+
+          previousWidth=
+            window.innerWidth;
+
+          buildRoutes();
+
+          setTimeout(
+            animateRoutes,
+            50
+          );
+
+        }
+
+      },100);
+
+  }
+);
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+window.addEventListener(
+  "load",
+  ()=>{
+
+    requestAnimationFrame(()=>{
+
+      buildRoutes();
+
+      setTimeout(
+        animateRoutes,
+        200
+      );
+
+      startPackets();
+
+      parallax();
+
+    });
+
+  }
+);
+</script>
+
+<!-- =========================================================
+     CYRUSWEB — TRUSTED BY ENGINE
+     Migrated from homepage DNA
+     ========================================================= -->
+
+<script id="cyrus-trusted-by-script">
+(() => {
+  const section = document.querySelector("#trusted-by");
+
+  if (!section) return;
+
+  const reveal = () => {
+    section.classList.add("is-visible");
+  };
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            reveal();
+            observer.unobserve(section);
+          }
+        });
+      },
+      {
+        threshold: 0.18
+      }
+    );
+
+    observer.observe(section);
+  } else {
+    reveal();
+  }
+})();
+</script>
+
+<script id="cyrus-trusted-infinite-engine">
+(function(){
+  "use strict";
+
+  const tracks = document.querySelectorAll(
+    ".trusted-track-right, .trusted-track-left"
+  );
+
+  if (!tracks.length) return;
+
+  const states = [];
+
+  tracks.forEach(track => {
+
+    const stream = track.querySelector(".trusted-stream");
+    if (!stream) return;
+
+    const set = stream.querySelector(".trusted-set");
+    if (!set) return;
+
+    const width = set.getBoundingClientRect().width;
+    if (!width) return;
+
+    const right =
+      track.classList.contains("trusted-track-right");
+
+    states.push({
+      stream,
+      width,
+      x: right ? -width : 0,
+      speed: right ? 74 : 68,
+      direction: right ? 1 : -1
+    });
+
+    stream.style.transform =
+      `translate3d(${right ? -width : 0}px,0,0)`;
+  });
+
+  let last = performance.now();
+
+  function frame(now){
+
+    const dt = Math.min(
+      (now - last) / 1000,
+      0.05
+    );
+
+    last = now;
+
+    states.forEach(state => {
+
+      state.x +=
+        state.speed *
+        state.direction *
+        dt;
+
+      /*
+        RIGHT:
+        -width -> 0
+        lalu kembali tepat ke -width.
+
+        LEFT:
+        0 -> -width
+        lalu kembali tepat ke 0.
+
+        Karena perpindahannya tepat satu
+        SET yang identik, reset tidak terlihat.
+      */
+
+      if(state.direction > 0){
+
+        if(state.x >= 0){
+          state.x -= state.width;
+        }
+
+      }else{
+
+        if(state.x <= -state.width){
+          state.x += state.width;
+        }
+      }
+
+      state.stream.style.transform =
+        `translate3d(${state.x}px,0,0)`;
+    });
+
+    requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(frame);
+
+  window.addEventListener("resize", () => {
+
+    states.forEach(state => {
+
+      const set =
+        state.stream.querySelector(".trusted-set");
+
+      if(!set) return;
+
+      const newWidth =
+        set.getBoundingClientRect().width;
+
+      if(newWidth > 0){
+        state.width = newWidth;
+      }
+    });
+  });
+
 })();
 </script>
 
