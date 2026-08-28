@@ -607,6 +607,45 @@ section {
   min-height: 50px;
 }
 
+.price-audience {
+  margin: 20px 0 18px;
+  padding: 14px 15px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(0,0,0,.025);
+}
+
+.price-audience span {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 8px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: .14em;
+  color: var(--muted);
+}
+
+.price-audience strong {
+  display: block;
+  font-size: 11px;
+  line-height: 1.55;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.price-feature-title {
+  margin: 18px 0 10px;
+  font-size: 8px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: .14em;
+  color: var(--muted);
+}
+
+html[data-theme="dark"] .price-audience {
+  background: rgba(255,255,255,.025);
+}
+
 .price-features {
   list-style: none;
   margin: 24px 0;
@@ -1959,6 +1998,26 @@ document.addEventListener("DOMContentLoaded", () => {
             ? "Halo CyrusWeb, saya ingin konsultasi paket Custom"
             : "Halo CyrusWeb, saya berminat paket " + item.name;
 
+        const packageName = String(item.name || "").toLowerCase();
+
+        let audience = "";
+        if (packageName.includes("starter")) {
+          audience = "Personal, usaha kecil, dan kebutuhan website sederhana";
+        } else if (packageName.includes("business") || packageName.includes("bisnis")) {
+          audience = "UMKM, brand, jasa, dan bisnis yang ingin tampil profesional";
+        } else if (packageName.includes("professional") || packageName.includes("pro")) {
+          audience = "Bisnis berkembang yang membutuhkan website lebih premium";
+        } else if (packageName.includes("custom")) {
+          audience = "Kebutuhan khusus, fitur custom, dan sistem sesuai kebutuhan";
+        }
+
+        const audienceBlock = audience
+          ? '<div class="price-audience">' +
+            '<span>COCOK UNTUK</span>' +
+            '<strong>' + audience + '</strong>' +
+            '</div>'
+          : "";
+
         card.innerHTML =
           (item.highlighted
             ? '<span class="price-badge">POPULAR</span>'
@@ -1974,6 +2033,8 @@ document.addEventListener("DOMContentLoaded", () => {
           '<p class="price-desc">' +
           (item.description || "") +
           '</p>' +
+          audienceBlock +
+          '<div class="price-feature-title">YANG ANDA DAPATKAN</div>' +
           '<ul class="price-features">' +
           features +
           '</ul>' +
