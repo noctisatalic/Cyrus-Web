@@ -1757,14 +1757,16 @@ html[data-theme="dark"] .nav-cta {
 
 .about-section-label{
   display:flex;
-  justify-content:space-between;
-  gap:20px;
+  align-items:center;
   margin-bottom:72px;
 }
 
-.about-section-label span:first-child{
-  color:var(--primary);
-  font-variant-numeric:tabular-nums;
+.about-section-label span{
+  color:var(--muted);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
 }
 
 
@@ -2064,12 +2066,6 @@ html[data-theme="dark"] .nav-cta {
   background:rgba(17,17,17,.025);
 }
 
-.process-number{
-  font-family:var(--font-display);
-  font-size:28px;
-  letter-spacing:-.04em;
-  color:var(--muted);
-}
 
 .process-main h3{
   margin:0 0 8px;
@@ -3678,6 +3674,164 @@ html[data-theme="dark"] .port{
   }
 }
 
+
+/* =========================================================
+   CYRUSWEB — ABOUT MOTION SYSTEM
+   Premium / smooth / lightweight / mobile friendly
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   REVEAL BASE
+   Konten tetap terlihat jika JS gagal.
+   JS hanya menambahkan .about-motion-ready.
+   --------------------------------------------------------- */
+
+.about-motion-ready .about-reveal,
+.about-motion-ready .about-reveal-item,
+.about-motion-ready .about-reveal-group > *{
+  opacity:0;
+  transform:translate3d(0,34px,0);
+  transition:
+    opacity .72s cubic-bezier(.16,1,.3,1),
+    transform .82s cubic-bezier(.16,1,.3,1);
+  will-change:opacity,transform;
+}
+
+.about-motion-ready .about-reveal.is-visible,
+.about-motion-ready .about-reveal-item.is-visible,
+.about-motion-ready .about-reveal-group > *.is-visible{
+  opacity:1;
+  transform:translate3d(0,0,0);
+}
+
+/* ---------------------------------------------------------
+   STAGGER
+   --------------------------------------------------------- */
+
+.about-reveal-group > *:nth-child(1){
+  transition-delay:.02s;
+}
+
+.about-reveal-group > *:nth-child(2){
+  transition-delay:.09s;
+}
+
+.about-reveal-group > *:nth-child(3){
+  transition-delay:.16s;
+}
+
+.about-reveal-group > *:nth-child(4){
+  transition-delay:.23s;
+}
+
+.about-reveal-group > *:nth-child(5){
+  transition-delay:.30s;
+}
+
+/* ---------------------------------------------------------
+   HEADINGS
+   --------------------------------------------------------- */
+
+.about-intro-title h2,
+.about-philosophy h2,
+.about-process-heading h2,
+.about-section-heading h2{
+  transition:
+    transform .9s cubic-bezier(.16,1,.3,1),
+    opacity .9s cubic-bezier(.16,1,.3,1);
+}
+
+/* ---------------------------------------------------------
+   PRINCIPLE CARDS
+   --------------------------------------------------------- */
+
+.about-principle-card{
+  transition:
+    transform .65s cubic-bezier(.16,1,.3,1),
+    border-color .45s ease,
+    background .45s ease,
+    box-shadow .45s ease;
+}
+
+.about-principle-card:hover{
+  transform:translate3d(0,-7px,0);
+}
+
+/* ---------------------------------------------------------
+   PROCESS ROW
+   --------------------------------------------------------- */
+
+.process-row{
+  transition:
+    transform .6s cubic-bezier(.16,1,.3,1),
+    padding .45s cubic-bezier(.16,1,.3,1),
+    background .45s ease;
+}
+
+/* ---------------------------------------------------------
+   AUDIENCE
+   --------------------------------------------------------- */
+
+.audience-grid article{
+  transition:
+    transform .55s cubic-bezier(.16,1,.3,1),
+    background .45s ease,
+    border-color .45s ease;
+}
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media(max-width:800px){
+
+  .about-motion-ready .about-reveal,
+  .about-motion-ready .about-reveal-item,
+  .about-motion-ready .about-reveal-group > *{
+    transform:translate3d(0,24px,0);
+    transition-duration:.62s;
+  }
+
+  .about-reveal-group > *:nth-child(1){
+    transition-delay:.02s;
+  }
+
+  .about-reveal-group > *:nth-child(2){
+    transition-delay:.07s;
+  }
+
+  .about-reveal-group > *:nth-child(3){
+    transition-delay:.12s;
+  }
+
+  .about-reveal-group > *:nth-child(4){
+    transition-delay:.17s;
+  }
+
+}
+
+/* ---------------------------------------------------------
+   REDUCED MOTION
+   --------------------------------------------------------- */
+
+@media(prefers-reduced-motion:reduce){
+
+  .about-motion-ready .about-reveal,
+  .about-motion-ready .about-reveal-item,
+  .about-motion-ready .about-reveal-group > *{
+    opacity:1 !important;
+    transform:none !important;
+    transition:none !important;
+  }
+
+  .about-principle-card,
+  .process-row,
+  .audience-grid article{
+    transition:none !important;
+  }
+
+}
+
 </style>
 
 </head>
@@ -3754,14 +3908,13 @@ html[data-theme="dark"] .port{
 <section class="about-section about-intro">
   <div class="container">
 
-    <div class="about-section-label">
-      <span>02</span>
+    <div class="about-section-label about-reveal">
       <span>WHO WE ARE</span>
     </div>
 
     <div class="about-intro-grid">
 
-      <div class="about-intro-title">
+      <div class="about-intro-title about-reveal">
         <span class="eyebrow">CYRUSWEB</span>
         <h2>
           Membangun website
@@ -3769,7 +3922,7 @@ html[data-theme="dark"] .port{
         </h2>
       </div>
 
-      <div class="about-intro-copy">
+      <div class="about-intro-copy about-reveal">
         <p class="lead-copy">
           Bagi kami, website bukan sekadar halaman digital yang dipenuhi
           visual. Website adalah tempat sebuah bisnis memperkenalkan dirinya,
@@ -3793,28 +3946,24 @@ html[data-theme="dark"] .port{
 
     </div>
 
-    <div class="about-stats">
+    <div class="about-stats about-reveal-group">
 
       <div class="about-stat">
-        <strong>01</strong>
         <span>STRATEGY</span>
         <p>Memahami tujuan sebelum menentukan solusi.</p>
       </div>
 
       <div class="about-stat">
-        <strong>02</strong>
         <span>DESIGN</span>
         <p>Mengubah positioning menjadi pengalaman visual.</p>
       </div>
 
       <div class="about-stat">
-        <strong>03</strong>
         <span>DEVELOPMENT</span>
         <p>Membangun interface yang cepat dan responsif.</p>
       </div>
 
       <div class="about-stat">
-        <strong>04</strong>
         <span>EXPERIENCE</span>
         <p>Membuat setiap interaksi memiliki tujuan.</p>
       </div>
@@ -3831,14 +3980,13 @@ html[data-theme="dark"] .port{
 <section class="about-section about-philosophy">
   <div class="container">
 
-    <div class="about-section-label">
-      <span>03</span>
+    <div class="about-section-label about-reveal">
       <span>OUR PHILOSOPHY</span>
     </div>
 
-    <div class="about-philosophy-grid">
+    <div class="about-philosophy-grid about-reveal-group">
 
-      <div>
+      <div class="about-reveal">
         <span class="eyebrow">CARA KAMI BERPIKIR</span>
         <h2>
           Website yang baik
@@ -3846,7 +3994,7 @@ html[data-theme="dark"] .port{
         </h2>
       </div>
 
-      <div class="about-philosophy-copy">
+      <div class="about-philosophy-copy about-reveal-group">
         <p>
           Pengunjung biasanya membentuk kesan dalam waktu yang sangat singkat.
           Sebelum membaca seluruh isi halaman, mereka sudah menilai apakah
@@ -3868,7 +4016,7 @@ html[data-theme="dark"] .port{
 
     </div>
 
-    <div class="philosophy-statement">
+    <div class="philosophy-statement about-reveal">
       <span>THE CYRUS APPROACH</span>
       <strong>
         Simple on the surface.
@@ -3886,7 +4034,7 @@ html[data-theme="dark"] .port{
 <section class="about-section about-principles">
   <div class="container">
 
-    <div class="about-section-heading">
+    <div class="about-section-heading about-reveal">
       <div>
         <span class="eyebrow">YANG KAMI UTAMAKAN</span>
         <h2>Empat prinsip dalam<br><em>setiap proyek.</em></h2>
@@ -3898,14 +4046,11 @@ html[data-theme="dark"] .port{
       </p>
     </div>
 
-    <div class="about-principle-grid">
+    <div class="about-principle-grid about-reveal-group">
 
-      <article class="about-principle-card">
-        <div class="principle-top">
-          <span>01</span>
-          <span>01 / 04</span>
-        </div>
-        <div class="principle-icon">◌</div>
+      <article class="about-principle-card about-reveal-item">
+        <div class="principle-top"></div>
+        <div class="principle-icon about-reveal-item">◌</div>
         <h3>Clarity</h3>
         <p>
           Pesan bisnis harus mudah dipahami. Struktur informasi dibuat agar
@@ -3913,12 +4058,9 @@ html[data-theme="dark"] .port{
         </p>
       </article>
 
-      <article class="about-principle-card">
-        <div class="principle-top">
-          <span>02</span>
-          <span>02 / 04</span>
-        </div>
-        <div class="principle-icon">⌁</div>
+      <article class="about-principle-card about-reveal-item">
+        <div class="principle-top"></div>
+        <div class="principle-icon about-reveal-item">⌁</div>
         <h3>Precision</h3>
         <p>
           Detail menentukan kualitas. Typography, spacing, hierarchy,
@@ -3926,12 +4068,9 @@ html[data-theme="dark"] .port{
         </p>
       </article>
 
-      <article class="about-principle-card">
-        <div class="principle-top">
-          <span>03</span>
-          <span>03 / 04</span>
-        </div>
-        <div class="principle-icon">↗</div>
+      <article class="about-principle-card about-reveal-item">
+        <div class="principle-top"></div>
+        <div class="principle-icon about-reveal-item">↗</div>
         <h3>Performance</h3>
         <p>
           Visual premium tidak boleh mengorbankan kecepatan. Website harus
@@ -3939,12 +4078,9 @@ html[data-theme="dark"] .port{
         </p>
       </article>
 
-      <article class="about-principle-card">
-        <div class="principle-top">
-          <span>04</span>
-          <span>04 / 04</span>
-        </div>
-        <div class="principle-icon">✦</div>
+      <article class="about-principle-card about-reveal-item">
+        <div class="principle-top"></div>
+        <div class="principle-icon about-reveal-item">✦</div>
         <h3>Purpose</h3>
         <p>
           Setiap halaman harus mempunyai tujuan: membangun kepercayaan, menjelaskan
@@ -3964,12 +4100,11 @@ html[data-theme="dark"] .port{
 <section class="about-section about-process">
   <div class="container">
 
-    <div class="about-section-label">
-      <span>04</span>
+    <div class="about-section-label about-reveal">
       <span>HOW WE BUILD</span>
     </div>
 
-    <div class="about-process-heading">
+    <div class="about-process-heading about-reveal">
       <span class="eyebrow">DARI IDE MENJADI PENGALAMAN</span>
       <h2>
         Setiap proyek
@@ -3977,10 +4112,10 @@ html[data-theme="dark"] .port{
       </h2>
     </div>
 
-    <div class="about-process-list">
+    <div class="about-process-list about-reveal-group">
 
-      <article class="process-row">
-        <div class="process-number">01</div>
+      <article class="process-row about-reveal-item">
+
         <div class="process-main">
           <h3>Riset & Strategi</h3>
           <p>
@@ -3988,11 +4123,11 @@ html[data-theme="dark"] .port{
             dan tujuan website sebelum masuk ke visual.
           </p>
         </div>
-        <span class="process-arrow">↗</span>
+        <span class="process-arrow about-reveal-item">↗</span>
       </article>
 
-      <article class="process-row">
-        <div class="process-number">02</div>
+      <article class="process-row about-reveal-item">
+
         <div class="process-main">
           <h3>Struktur & UX</h3>
           <p>
@@ -4000,11 +4135,11 @@ html[data-theme="dark"] .port{
             dan struktur halaman agar pengalaman terasa jelas.
           </p>
         </div>
-        <span class="process-arrow">↗</span>
+        <span class="process-arrow about-reveal-item">↗</span>
       </article>
 
-      <article class="process-row">
-        <div class="process-number">03</div>
+      <article class="process-row about-reveal-item">
+
         <div class="process-main">
           <h3>Desain Visual</h3>
           <p>
@@ -4012,11 +4147,11 @@ html[data-theme="dark"] .port{
             intertindakan, dan detail interface yang sesuai karakter brand.
           </p>
         </div>
-        <span class="process-arrow">↗</span>
+        <span class="process-arrow about-reveal-item">↗</span>
       </article>
 
-      <article class="process-row">
-        <div class="process-number">04</div>
+      <article class="process-row about-reveal-item">
+
         <div class="process-main">
           <h3>Pengembangan & Optimasi</h3>
           <p>
@@ -4024,7 +4159,7 @@ html[data-theme="dark"] .port{
             responsiveness, performance, accessibility, dan maintainability.
           </p>
         </div>
-        <span class="process-arrow">↗</span>
+        <span class="process-arrow about-reveal-item">↗</span>
       </article>
 
     </div>
@@ -4039,7 +4174,7 @@ html[data-theme="dark"] .port{
 <section class="about-section about-standard">
   <div class="container">
 
-    <div class="standard-panel">
+    <div class="standard-panel about-reveal">
 
       <div class="standard-meta">
         <span class="eyebrow">STANDAR KAMI</span>
@@ -4076,7 +4211,7 @@ html[data-theme="dark"] .port{
 <section class="about-section about-audience">
   <div class="container">
 
-    <div class="about-section-heading">
+    <div class="about-section-heading about-reveal">
       <div>
         <span class="eyebrow">DIBANGUN UNTUK BISNIS</span>
         <h2>
@@ -4091,10 +4226,9 @@ html[data-theme="dark"] .port{
       </p>
     </div>
 
-    <div class="audience-grid">
+    <div class="audience-grid about-reveal-group">
 
       <article>
-        <span>01</span>
         <h3>Bisnis</h3>
         <p>
           Website profesional untuk memperkuat kehadiran dan kredibilitas
@@ -4103,7 +4237,6 @@ html[data-theme="dark"] .port{
       </article>
 
       <article>
-        <span>02</span>
         <h3>Brand</h3>
         <p>
           Digital experience yang membantu sebuah brand mempunyai identitas
@@ -4112,7 +4245,6 @@ html[data-theme="dark"] .port{
       </article>
 
       <article>
-        <span>03</span>
         <h3>Jasa</h3>
         <p>
           Website layanan yang menjelaskan nilai dengan jelas dan membantu
@@ -4121,7 +4253,6 @@ html[data-theme="dark"] .port{
       </article>
 
       <article>
-        <span>04</span>
         <h3>Produk</h3>
         <p>
           Interface digital untuk produk, platform, dan kebutuhan web custom
@@ -4140,7 +4271,7 @@ html[data-theme="dark"] .port{
      ========================================================= -->
 <section class="about-section about-technology" id="about-technology">
 
-  <div class="about-technology-copy">
+  <div class="about-technology-copy about-reveal">
     <span class="eyebrow">TEKNOLOGI YANG KAMI GUNAKAN</span>
     <h2>Fondasi teknologi yang dipilih<br><em>sesuai kebutuhan proyek.</em></h2>
     <p>
@@ -4158,8 +4289,7 @@ html[data-theme="dark"] .port{
 
 
   <div class="container about-tech-intro">
-    <div class="about-section-label">
-      <span>08 / TEKNOLOGI</span>
+    <div class="about-section-label about-reveal">
       <span>TEKNOLOGI YANG KAMI GUNAKAN</span>
     </div>
   </div>
@@ -5652,6 +5782,91 @@ window.addEventListener(
 );
 
 
+
+/* =========================================================
+   CYRUSWEB — ABOUT SCROLL REVEAL ENGINE
+   Lightweight / mobile friendly / fail-safe
+   ========================================================= */
+
+(function(){
+
+  const root = document.documentElement;
+
+  /*
+   * Jangan aktifkan motion sebelum JS benar-benar siap.
+   * Kalau JS gagal, seluruh konten tetap terlihat.
+   */
+  root.classList.add("about-motion-ready");
+
+  const revealItems = document.querySelectorAll(
+    ".about-reveal, .about-reveal-item, .about-reveal-group > *"
+  );
+
+  if(!revealItems.length) return;
+
+  /*
+   * Reduced motion:
+   * tampilkan semuanya tanpa animasi.
+   */
+  if(
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ){
+    revealItems.forEach(el=>{
+      el.classList.add("is-visible");
+    });
+    return;
+  }
+
+  /*
+   * IntersectionObserver jauh lebih ringan
+   * dibanding menjalankan animasi berdasarkan scroll event.
+   */
+  const observer = new IntersectionObserver(
+    entries => {
+
+      entries.forEach(entry => {
+
+        if(!entry.isIntersecting) return;
+
+        const el = entry.target;
+
+        requestAnimationFrame(()=>{
+          el.classList.add("is-visible");
+        });
+
+        /*
+         * Elemen cukup dianimasikan sekali.
+         * Ini menghindari kerja berulang saat user scroll naik-turun.
+         */
+        observer.unobserve(el);
+
+      });
+
+    },
+    {
+      root:null,
+
+      /*
+       * Animasi mulai sedikit sebelum elemen
+       * benar-benar berada di tengah layar.
+       */
+      rootMargin:"0px 0px -8% 0px",
+
+      /*
+       * Tidak perlu menunggu seluruh elemen terlihat.
+       */
+      threshold:0.08
+    }
+  );
+
+  revealItems.forEach(el=>{
+    observer.observe(el);
+  });
+
+})();
+
+
 /* =========================================================
    INIT
 ========================================================= */
@@ -5889,6 +6104,35 @@ window.addEventListener(
 })();
 </script>
 
+
+<script id="cyrus-about-motion">
+(() => {
+  const items = document.querySelectorAll(
+    '.about-reveal, .about-reveal-item, .about-reveal-group > *'
+  );
+
+  if (!items.length) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    items.forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+
+      entry.target.classList.add('is-visible');
+      obs.unobserve(entry.target);
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -8% 0px'
+  });
+
+  items.forEach(el => observer.observe(el));
+})();
+</script>
 
 </body>
 </html>
