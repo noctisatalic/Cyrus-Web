@@ -3107,6 +3107,15 @@ html[data-theme="dark"] .trusted-eyebrow{
   font-weight:700;
   letter-spacing:.12em;
 }
+html[data-theme="dark"] .core-glass .logo img{
+  filter:brightness(0) invert(1);
+}
+
+html[data-theme="light"] .core-glass .logo img,
+html:not([data-theme]) .core-glass .logo img{
+  filter:brightness(0);
+}
+
 
 .core-meta{
   display:flex;
@@ -3497,6 +3506,34 @@ html[data-theme="dark"] .port{
   left:3%;
   transform:none;
 }
+<style id="cyrus-technology-mobile-performance">
+@media (max-width:600px){
+  .arch .route-glow{
+    filter:none;
+    opacity:.55;
+  }
+
+  .arch .aura{
+    filter:blur(6px);
+  }
+
+  .arch .core-glass{
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none;
+  }
+
+  .arch .node,
+  .arch .core,
+  .arch .orbit,
+  .arch .aura{
+    transform:translateZ(0);
+  }
+
+  .arch .routing{
+    contain:strict;
+  }
+}
+</style>
 
 .n-github{
   top:49%;
