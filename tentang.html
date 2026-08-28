@@ -2741,6 +2741,64 @@ html[data-theme="dark"] .trusted-eyebrow{
 
 </style>
 
+
+<style id="cyrus-technology-smooth-render">
+/* CYRUSWEB — TECHNOLOGY SMOOTH RENDER OPTIMIZATION */
+
+.about-technology,
+.tech-section,
+.arch{
+  -webkit-transform:translateZ(0);
+  transform:translateZ(0);
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+}
+
+.arch{
+}
+
+.arch .grid,
+.arch .routing,
+.arch .route,
+.arch .route-glow,
+.arch .node,
+.arch .core,
+.arch .port{
+  transform-box:fill-box;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+}
+
+/* SVG tidak perlu ikut layout/reflow halaman */
+.arch .routing{
+  contain:paint;
+}
+
+/* Kurangi repaint dari efek yang tidak perlu */
+.arch .grid{
+  pointer-events:none;
+}
+
+.arch .node{
+  will-change:transform;
+}
+
+/* Scroll tetap halus tanpa mengubah desain */
+@media (prefers-reduced-motion: no-preference){
+  .about-technology,
+  .tech-section{
+    scroll-margin-top:20px;
+  }
+}
+
+@media(max-width:600px){
+  .arch{
+    transform:translate3d(0,0,0);
+    -webkit-transform:translate3d(0,0,0);
+  }
+}
+</style>
+
 <style id="cyrus-technology-architecture">
 
 /* CYRUSWEB — TECHNOLOGY ARCHITECTURE VISUAL ENGINE */
@@ -4869,17 +4927,7 @@ html[data-theme="dark"] .port{
 </div>
 
 
-<div class="foot">
 
-  <strong>
-    Selected tools. Thoughtfully integrated.
-  </strong>
-
-  <span>
-    SATU ALUR DEVELOPMENT · BERBAGAI TEKNOLOGI TERINTEGRASI
-  </span>
-
-</div>
 
 </section>
 
@@ -5173,735 +5221,493 @@ html[data-theme="dark"] .port{
      ========================================================= -->
 
 <script id="technology-architecture-script">
-/* =========================================================
-   ELEMENTS
-========================================================= */
+(() => {
+  "use strict";
 
-const section =
-  document.getElementById("tech");
+  const section = document.getElementById("tech");
+  const arch = document.getElementById("arch");
+  const svg = document.getElementById("routing");
+  const routesLayer = document.getElementById("routes");
+  const core = document.getElementById("core");
+  const nodes = [...document.querySelectorAll(".node")];
 
-const arch =
-  document.getElementById("arch");
+  if (!section || !arch || !svg || !routesLayer || !core) return;
 
-const svg =
-  document.getElementById("routing");
+  const SVG_NS = "http://www.w3.org/2000/svg";
 
-const routesLayer =
-  document.getElementById("routes");
+  let visible = false;
+  let destroyed = false;
+  let routesBuilt = false;
 
-const core =
-  document.getElementById("core");
+  let targetX = 0;
+  let targetY = 0;
+  let currentX = 0;
+  let currentY = 0;
 
-const nodes =
-  [...document.querySelectorAll(".node")];
+  let parallaxRAF = 0;
+  let packetRAF = 0;
+  let packetRunning = false;
 
+  const packets = new Set();
+  const packetTimers = [];
+  let resizeTimer = null;
 
-/* =========================================================
-   INTERSECTION
-========================================================= */
+  /* =========================================================
+     VISIBILITY
+     ========================================================= */
 
-const io =
-  new IntersectionObserver(
+  const visibilityObserver = new IntersectionObserver(
     entries => {
+      const entry = entries[0];
 
-      entries.forEach(entry => {
+      visible = !!entry?.isIntersecting;
 
-        if(entry.isIntersecting){
+      if (visible) {
+        section.classList.add("active");
 
-          section.classList.add("active");
+        if (!routesBuilt) {
+          buildRoutes();
+          routesBuilt = true;
 
+          requestAnimationFrame(() => {
+            animateRoutes();
+            startPackets();
+            startParallax();
+          });
+        } else {
+          startPackets();
+          startParallax();
         }
-
-      });
-
+      } else {
+        stopParallax();
+        stopPackets();
+      }
     },
     {
-      threshold:.12
+      threshold: 0.04,
+      rootMargin: "120px 0px 120px 0px"
     }
   );
 
-io.observe(section);
+  visibilityObserver.observe(section);
 
+  /* =========================================================
+     ROUTES
+     ========================================================= */
 
-/* =========================================================
-   SVG
-========================================================= */
+  function createRoute(d, tech) {
+    const glow = document.createElementNS(SVG_NS, "path");
+    glow.classList.add("route-glow");
+    glow.dataset.tech = tech;
+    glow.setAttribute("d", d);
 
-const SVG_NS =
-  "http://www.w3.org/2000/svg";
+    const path = document.createElementNS(SVG_NS, "path");
+    path.classList.add("route");
+    path.dataset.tech = tech;
+    path.setAttribute("d", d);
 
-
-/* =========================================================
-   CREATE ROUTE
-========================================================= */
-
-function createRoute(d,tech){
-
-  const glow =
-    document.createElementNS(
-      SVG_NS,
-      "path"
-    );
-
-  glow.classList.add("route-glow");
-  glow.dataset.tech=tech;
-  glow.setAttribute("d",d);
-
-  const path =
-    document.createElementNS(
-      SVG_NS,
-      "path"
-    );
-
-  path.classList.add("route");
-  path.dataset.tech=tech;
-  path.setAttribute("d",d);
-
-  routesLayer.appendChild(glow);
-  routesLayer.appendChild(path);
-}
-
-
-/* =========================================================
-   CLEAR
-========================================================= */
-
-function clearRoutes(){
-
-  while(routesLayer.firstChild){
-
-    routesLayer.removeChild(
-      routesLayer.firstChild
-    );
-
+    routesLayer.appendChild(glow);
+    routesLayer.appendChild(path);
   }
 
-}
+  function clearRoutes() {
+    routesLayer.replaceChildren();
+  }
 
+  function getArchRect() {
+    return arch.getBoundingClientRect();
+  }
 
-/* =========================================================
-   RECT
-========================================================= */
+  function getPortPosition(node, ar) {
+    const port = node.querySelector(".port");
+    if (!port) return null;
 
-function getArchRect(){
+    const pr = port.getBoundingClientRect();
 
-  return arch.getBoundingClientRect();
+    return {
+      x: pr.left - ar.left + pr.width / 2,
+      y: pr.top - ar.top + pr.height / 2
+    };
+  }
 
-}
+  function getCoreAnchor(ar) {
+    const cr = core.getBoundingClientRect();
 
+    return {
+      x: cr.left - ar.left + cr.width / 2,
+      y: cr.top - ar.top + cr.height / 2
+    };
+  }
 
-/* =========================================================
-   PORT
-========================================================= */
+  function buildRoutes() {
+    if (destroyed) return;
 
-function getPortPosition(node){
+    clearRoutes();
 
-  const port =
-    node.querySelector(".port");
+    const mobile = window.innerWidth <= 600;
+    const ar = getArchRect();
+    const c = getCoreAnchor(ar);
 
-  const pr =
-    port.getBoundingClientRect();
+    nodes.forEach(node => {
+      const port = getPortPosition(node, ar);
+      if (!port) return;
 
-  const ar =
-    getArchRect();
+      const side = node.dataset.side;
+      let d;
 
-  return {
+      if (side === "right") {
+        const lane = mobile ? c.x - 82 : c.x - 150;
 
-    x:
-      pr.left -
-      ar.left +
-      pr.width/2,
+        d = `
+          M ${port.x} ${port.y}
+          H ${lane}
+          Q ${lane - 18} ${port.y}
+            ${lane - 18} ${(port.y + c.y) / 2}
+          Q ${lane - 18} ${c.y}
+            ${c.x - 72} ${c.y}
+        `;
+      } else if (side === "left") {
+        const lane = mobile ? c.x + 82 : c.x + 150;
 
-    y:
-      pr.top -
-      ar.top +
-      pr.height/2
+        d = `
+          M ${port.x} ${port.y}
+          H ${lane}
+          Q ${lane + 18} ${port.y}
+            ${lane + 18} ${(port.y + c.y) / 2}
+          Q ${lane + 18} ${c.y}
+            ${c.x + 72} ${c.y}
+        `;
+      } else {
+        d = `
+          M ${port.x} ${port.y}
+          V ${c.y - 125}
+          Q ${port.x} ${c.y - 92}
+            ${c.x} ${c.y - 72}
+        `;
+      }
 
-  };
+      createRoute(d, node.dataset.tech);
+    });
+  }
 
-}
+  /* =========================================================
+     ROUTE DRAW
+     ========================================================= */
 
+  function animateRoutes() {
+    if (!visible || destroyed) return;
 
-/* =========================================================
-   CORE
-========================================================= */
+    const routes = [...routesLayer.querySelectorAll(".route")];
 
-function getCoreAnchor(){
-
-  const ar =
-    getArchRect();
-
-  const cr =
-    core.getBoundingClientRect();
-
-  return {
-
-    x:
-      cr.left -
-      ar.left +
-      cr.width/2,
-
-    y:
-      cr.top -
-      ar.top +
-      cr.height/2
-
-  };
-
-}
-
-
-/* =========================================================
-   ROUTING
-========================================================= */
-
-function buildRoutes(){
-
-  clearRoutes();
-
-  const mobile =
-    window.innerWidth<=600;
-
-  const c =
-    getCoreAnchor();
-
-  nodes.forEach(node=>{
-
-    const port =
-      getPortPosition(node);
-
-    const side =
-      node.dataset.side;
-
-    let d;
-
-    if(side==="right"){
-
-      const lane =
-        mobile
-        ? c.x-82
-        : c.x-150;
-
-      d=`
-        M ${port.x} ${port.y}
-
-        H ${lane}
-
-        Q
-          ${lane-18}
-          ${port.y}
-          ${lane-18}
-          ${(port.y+c.y)/2}
-
-        Q
-          ${lane-18}
-          ${c.y}
-          ${c.x-72}
-          ${c.y}
-      `;
-
-    }else if(side==="left"){
-
-      const lane =
-        mobile
-        ? c.x+82
-        : c.x+150;
-
-      d=`
-        M ${port.x} ${port.y}
-
-        H ${lane}
-
-        Q
-          ${lane+18}
-          ${port.y}
-          ${lane+18}
-          ${(port.y+c.y)/2}
-
-        Q
-          ${lane+18}
-          ${c.y}
-          ${c.x+72}
-          ${c.y}
-      `;
-
-    }else{
-
-      d=`
-        M ${port.x} ${port.y}
-
-        V ${c.y-125}
-
-        Q
-          ${port.x}
-          ${c.y-92}
-          ${c.x}
-          ${c.y-72}
-      `;
-
-    }
-
-    createRoute(
-      d,
-      node.dataset.tech
-    );
-
-  });
-
-}
-
-
-/* =========================================================
-   DRAW
-========================================================= */
-
-function animateRoutes(){
-
-  document
-    .querySelectorAll(".route")
-    .forEach((path,index)=>{
-
+    routes.forEach((path, index) => {
       let length;
 
-      try{
-        length=
-          path.getTotalLength();
-      }catch{
+      try {
+        length = path.getTotalLength();
+      } catch {
         return;
       }
 
-      path.style.strokeDasharray=
-        length;
-
-      path.style.strokeDashoffset=
-        length;
+      path.style.strokeDasharray = String(length);
+      path.style.strokeDashoffset = String(length);
 
       path.animate(
-
         [
-          {
-            strokeDashoffset:length
-          },
-          {
-            strokeDashoffset:0
-          }
+          { strokeDashoffset: length },
+          { strokeDashoffset: 0 }
         ],
-
         {
-          duration:850,
-          delay:300+index*55,
-          easing:"cubic-bezier(.16,1,.3,1)",
-          fill:"forwards"
+          duration: 850,
+          delay: 180 + index * 45,
+          easing: "cubic-bezier(.16,1,.3,1)",
+          fill: "forwards"
         }
-
       );
-
     });
-
-}
-
-
-/* =========================================================
-   DATA PACKET
-========================================================= */
-
-function sendPacket(route){
-
-  let length;
-
-  try{
-    length=
-      route.getTotalLength();
-  }catch{
-    return;
   }
 
-  const dot =
-    document.createElementNS(
-      SVG_NS,
-      "circle"
-    );
+  /* =========================================================
+     PACKETS — SINGLE RAF ENGINE
+     ========================================================= */
 
-  dot.classList.add("data-dot");
+  function sendPacket(route) {
+    if (!visible || destroyed || packets.size >= 4) return;
 
-  dot.setAttribute(
-    "r",
-    window.innerWidth<=600 ? "1.5" : "2"
-  );
+    let length;
 
-  svg.appendChild(dot);
-
-  const start=
-    performance.now();
-
-  const duration=1450;
-
-  function animate(time){
-
-    const progress=
-      Math.min(
-        1,
-        (time-start)/duration
-      );
-
-    const point=
-      route.getPointAtLength(
-        progress*length
-      );
-
-    dot.setAttribute(
-      "cx",
-      point.x
-    );
-
-    dot.setAttribute(
-      "cy",
-      point.y
-    );
-
-    dot.setAttribute(
-      "opacity",
-      Math.sin(
-        progress*Math.PI
-      )*.8
-    );
-
-    if(progress<1){
-
-      requestAnimationFrame(
-        animate
-      );
-
-    }else{
-
-      dot.remove();
-
-    }
-
-  }
-
-  requestAnimationFrame(
-    animate
-  );
-
-}
-
-
-/* =========================================================
-   PACKETS
-========================================================= */
-
-function startPackets(){
-
-  const routes=
-    [...document.querySelectorAll(".route")];
-
-  routes.forEach((route,index)=>{
-
-    setTimeout(()=>{
-
-      sendPacket(route);
-
-      setInterval(()=>{
-
-        sendPacket(route);
-
-      },3600+Math.random()*1800);
-
-    },1700+index*140);
-
-  });
-
-}
-
-
-/* =========================================================
-   HOVER
-========================================================= */
-
-nodes.forEach(node=>{
-
-  const tech=
-    node.dataset.tech;
-
-  function activate(){
-
-    document
-      .querySelectorAll(".route")
-      .forEach(route=>{
-
-        route.classList.toggle(
-          "active",
-          route.dataset.tech===tech
-        );
-
-      });
-
-  }
-
-  function deactivate(){
-
-    document
-      .querySelectorAll(".route")
-      .forEach(route=>{
-
-        route.classList.remove(
-          "active"
-        );
-
-      });
-
-  }
-
-  node.addEventListener(
-    "mouseenter",
-    activate
-  );
-
-  node.addEventListener(
-    "mouseleave",
-    deactivate
-  );
-
-  node.addEventListener(
-    "touchstart",
-    activate,
-    {passive:true}
-  );
-
-});
-
-
-/* =========================================================
-   PARALLAX
-========================================================= */
-
-let targetX=0;
-let targetY=0;
-
-let currentX=0;
-let currentY=0;
-
-arch.addEventListener(
-  "pointermove",
-  event=>{
-
-    if(window.innerWidth<=600){
+    try {
+      length = route.getTotalLength();
+    } catch {
       return;
     }
 
-    const rect=
-      arch.getBoundingClientRect();
+    const dot = document.createElementNS(SVG_NS, "circle");
 
-    targetX=
-      event.clientX/
-      rect.width-.5;
+    dot.classList.add("data-dot");
 
-    targetY=
-      event.clientY/
-      rect.height-.5;
-
-  }
-);
-
-arch.addEventListener(
-  "pointerleave",
-  ()=>{
-
-    targetX=0;
-    targetY=0;
-
-  }
-);
-
-
-function parallax(){
-
-  currentX+=
-    (targetX-currentX)*.045;
-
-  currentY+=
-    (targetY-currentY)*.045;
-
-  if(window.innerWidth>600){
-
-    core.style.transform=
-      `
-      translate3d(-50%,-50%,0)
-      rotateX(${currentY*-3}deg)
-      rotateY(${currentX*6}deg)
-      `;
-
-  }else{
-
-    core.style.transform=
-      "translate3d(-50%,-50%,0)";
-
-  }
-
-  requestAnimationFrame(
-    parallax
-  );
-
-}
-
-
-/* =========================================================
-   RESIZE
-========================================================= */
-
-let previousWidth=
-  window.innerWidth;
-
-let resizeTimer;
-
-
-window.addEventListener(
-  "resize",
-  ()=>{
-
-    clearTimeout(
-      resizeTimer
+    dot.setAttribute(
+      "r",
+      window.innerWidth <= 600 ? "1.5" : "2"
     );
 
-    resizeTimer=
-      setTimeout(()=>{
+    svg.appendChild(dot);
 
-        if(
-          Math.abs(
-            window.innerWidth-
-            previousWidth
-          )>2
-        ){
-
-          previousWidth=
-            window.innerWidth;
-
-          buildRoutes();
-
-          setTimeout(
-            animateRoutes,
-            50
-          );
-
-        }
-
-      },100);
-
-  }
-);
-
-
-
-/* =========================================================
-   CYRUSWEB — ABOUT SCROLL REVEAL ENGINE
-   Lightweight / mobile friendly / fail-safe
-   ========================================================= */
-
-(function(){
-
-  const root = document.documentElement;
-
-  /*
-   * Jangan aktifkan motion sebelum JS benar-benar siap.
-   * Kalau JS gagal, seluruh konten tetap terlihat.
-   */
-  root.classList.add("about-motion-ready");
-
-  const revealItems = document.querySelectorAll(
-    ".about-reveal, .about-reveal-item, .about-reveal-group > *"
-  );
-
-  if(!revealItems.length) return;
-
-  /*
-   * Reduced motion:
-   * tampilkan semuanya tanpa animasi.
-   */
-  if(
-    window.matchMedia &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  ){
-    revealItems.forEach(el=>{
-      el.classList.add("is-visible");
+    packets.add({
+      dot,
+      route,
+      length,
+      start: performance.now(),
+      duration: 1450
     });
-    return;
   }
 
-  /*
-   * IntersectionObserver jauh lebih ringan
-   * dibanding menjalankan animasi berdasarkan scroll event.
-   */
-  const observer = new IntersectionObserver(
-    entries => {
+  function packetFrame(now) {
+    packetRAF = 0;
 
-      entries.forEach(entry => {
-
-        if(!entry.isIntersecting) return;
-
-        const el = entry.target;
-
-        requestAnimationFrame(()=>{
-          el.classList.add("is-visible");
-        });
-
-        /*
-         * Elemen cukup dianimasikan sekali.
-         * Ini menghindari kerja berulang saat user scroll naik-turun.
-         */
-        observer.unobserve(el);
-
-      });
-
-    },
-    {
-      root:null,
-
-      /*
-       * Animasi mulai sedikit sebelum elemen
-       * benar-benar berada di tengah layar.
-       */
-      rootMargin:"0px 0px -8% 0px",
-
-      /*
-       * Tidak perlu menunggu seluruh elemen terlihat.
-       */
-      threshold:0.08
+    if (!visible || destroyed) {
+      stopPackets();
+      return;
     }
-  );
 
-  revealItems.forEach(el=>{
-    observer.observe(el);
-  });
-
-})();
-
-
-/* =========================================================
-   INIT
-========================================================= */
-
-window.addEventListener(
-  "load",
-  ()=>{
-
-    requestAnimationFrame(()=>{
-
-      buildRoutes();
-
-      setTimeout(
-        animateRoutes,
-        200
+    packets.forEach(packet => {
+      const progress = Math.min(
+        1,
+        (now - packet.start) / packet.duration
       );
 
-      startPackets();
+      let point;
 
-      parallax();
+      try {
+        point = packet.route.getPointAtLength(
+          progress * packet.length
+        );
+      } catch {
+        packets.delete(packet);
+        packet.dot.remove();
+        return;
+      }
 
+      packet.dot.setAttribute("cx", point.x);
+      packet.dot.setAttribute("cy", point.y);
+      packet.dot.setAttribute(
+        "opacity",
+        String(Math.sin(progress * Math.PI) * 0.8)
+      );
+
+      if (progress >= 1) {
+        packets.delete(packet);
+        packet.dot.remove();
+      }
     });
 
+    if (packets.size > 0) {
+      packetRAF = requestAnimationFrame(packetFrame);
+    }
   }
-);
+
+  function startPacketLoop() {
+    if (packetRAF || !visible || destroyed) return;
+
+    packetRAF = requestAnimationFrame(packetFrame);
+  }
+
+  function stopPacketLoop() {
+    if (packetRAF) {
+      cancelAnimationFrame(packetRAF);
+      packetRAF = 0;
+    }
+  }
+
+  function stopPackets() {
+    stopPacketLoop();
+
+    packetTimers.splice(0).forEach(timer => {
+      clearTimeout(timer);
+      clearInterval(timer);
+    });
+
+    packets.forEach(packet => packet.dot.remove());
+    packets.clear();
+  }
+
+  function startPackets() {
+    if (packetRunning || !visible || destroyed) return;
+
+    packetRunning = true;
+
+    const routes = [...routesLayer.querySelectorAll(".route")];
+
+    routes.forEach((route, index) => {
+      const timer = setTimeout(() => {
+        if (!visible || destroyed) return;
+
+        sendPacket(route);
+        startPacketLoop();
+
+        const interval = setInterval(() => {
+          if (visible && !destroyed) {
+            sendPacket(route);
+            startPacketLoop();
+          }
+        }, 4300 + Math.random() * 1300);
+
+        packetTimers.push(interval);
+      }, 1200 + index * 120);
+
+      packetTimers.push(timer);
+    });
+  }
+
+  /* =========================================================
+     HOVER
+     ========================================================= */
+
+  nodes.forEach(node => {
+    const tech = node.dataset.tech;
+
+    const activate = () => {
+      routesLayer.querySelectorAll(".route").forEach(route => {
+        route.classList.toggle(
+          "active",
+          route.dataset.tech === tech
+        );
+      });
+    };
+
+    const deactivate = () => {
+      routesLayer.querySelectorAll(".route.active").forEach(route => {
+        route.classList.remove("active");
+      });
+    };
+
+    node.addEventListener("mouseenter", activate);
+    node.addEventListener("mouseleave", deactivate);
+    node.addEventListener("touchstart", activate, { passive: true });
+  });
+
+  /* =========================================================
+     PARALLAX — ONLY WHILE VISIBLE
+     ========================================================= */
+
+  arch.addEventListener(
+    "pointermove",
+    event => {
+      if (!visible || window.innerWidth <= 600) return;
+
+      const rect = arch.getBoundingClientRect();
+
+      targetX = event.clientX / rect.width - 0.5;
+      targetY = event.clientY / rect.height - 0.5;
+
+      startParallax();
+    },
+    { passive: true }
+  );
+
+  arch.addEventListener(
+    "pointerleave",
+    () => {
+      targetX = 0;
+      targetY = 0;
+    },
+    { passive: true }
+  );
+
+  function parallaxFrame() {
+    parallaxRAF = 0;
+
+    if (!visible || destroyed) return;
+
+    currentX += (targetX - currentX) * 0.045;
+    currentY += (targetY - currentY) * 0.045;
+
+    if (
+      Math.abs(targetX - currentX) < 0.0005 &&
+      Math.abs(targetY - currentY) < 0.0005
+    ) {
+      currentX = targetX;
+      currentY = targetY;
+      return;
+    }
+
+    core.style.transform =
+      `translate3d(-50%,-50%,0) ` +
+      `rotateX(${currentY * -3}deg) ` +
+      `rotateY(${currentX * 6}deg)`;
+
+    parallaxRAF = requestAnimationFrame(parallaxFrame);
+  }
+
+  function startParallax() {
+    if (
+      parallaxRAF ||
+      !visible ||
+      destroyed ||
+      window.innerWidth <= 600
+    ) return;
+
+    parallaxRAF = requestAnimationFrame(parallaxFrame);
+  }
+
+  function stopParallax() {
+    if (parallaxRAF) {
+      cancelAnimationFrame(parallaxRAF);
+      parallaxRAF = 0;
+    }
+  }
+
+  /* =========================================================
+     RESIZE
+     ========================================================= */
+
+  let previousWidth = window.innerWidth;
+
+  window.addEventListener(
+    "resize",
+    () => {
+      clearTimeout(resizeTimer);
+
+      resizeTimer = setTimeout(() => {
+        if (
+          Math.abs(window.innerWidth - previousWidth) <= 2
+        ) return;
+
+        previousWidth = window.innerWidth;
+
+        if (!visible) return;
+
+        buildRoutes();
+        routesBuilt = true;
+
+        stopPackets();
+        packetRunning = false;
+
+        requestAnimationFrame(() => {
+          animateRoutes();
+          startPackets();
+        });
+      }, 180);
+    },
+    { passive: true }
+  );
+
+  /* =========================================================
+     CLEANUP
+     ========================================================= */
+
+  window.addEventListener("pagehide", () => {
+    destroyed = true;
+
+    visibilityObserver.disconnect();
+
+    stopParallax();
+    stopPackets();
+
+    if (resizeTimer) {
+      clearTimeout(resizeTimer);
+    }
+  });
+})();
 </script>
 
 <!-- =========================================================
