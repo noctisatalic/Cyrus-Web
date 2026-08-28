@@ -3757,6 +3757,61 @@ html[data-theme="dark"] .port{
 }
 
 /* ---------------------------------------------------------
+   PROCESS TYPING TITLE
+   --------------------------------------------------------- */
+
+.process-typing-title{
+  position:relative;
+  display:block;
+}
+
+.process-typing-title .typing-line{
+  display:block;
+  min-height:1em;
+  white-space:nowrap;
+}
+
+.process-typing-title .typing-accent{
+  display:inline;
+}
+
+.process-typing-title .typing-cursor{
+  display:inline-block;
+  width:2px;
+  height:.85em;
+  margin-left:7px;
+  vertical-align:-.08em;
+  background:currentColor;
+  animation:processTypingCursor .75s steps(1,end) infinite;
+}
+
+@keyframes processTypingCursor{
+  0%,49%{opacity:1}
+  50%,100%{opacity:0}
+}
+
+@media(max-width:520px){
+  .process-typing-title .typing-line{
+    white-space:normal;
+  }
+
+  .process-typing-title .typing-cursor{
+    margin-left:5px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .process-typing-title .typing-line{
+    visibility:visible;
+  }
+
+  .process-typing-title .typing-cursor{
+    animation:none;
+    opacity:1;
+  }
+}
+
+/* ---------------------------------------------------------
    PRINCIPLE CARDS
    --------------------------------------------------------- */
 
@@ -3776,12 +3831,8 @@ html[data-theme="dark"] .port{
    PROCESS ROW
    --------------------------------------------------------- */
 
-.process-row{
-  transition:
-    transform .6s cubic-bezier(.16,1,.3,1),
-    padding .45s cubic-bezier(.16,1,.3,1),
-    background .45s ease;
-}
+/* Process rows use the reveal-group animation.
+   Keep row transition limited to hover/layout behavior. */
 
 /* ---------------------------------------------------------
    AUDIENCE
@@ -3891,7 +3942,6 @@ html[data-theme="dark"] .port{
 
     <div class="about-hero-meta">
       <span class="eyebrow">TENTANG CYRUSWEB</span>
-      <span class="about-hero-index">01 / IDENTITY</span>
     </div>
 
     <h1>
@@ -4121,15 +4171,16 @@ html[data-theme="dark"] .port{
 
     <div class="about-process-heading about-reveal">
       <span class="eyebrow">DARI IDE MENJADI PENGALAMAN</span>
-      <h2>
-        Setiap proyek
-        <span>dibangun bertahap.</span>
+      <h2 class="process-typing-title">
+        <span class="typing-line" data-text="Setiap proyek"></span>
+        <span class="typing-line typing-accent" data-text="dibangun bertahap."></span>
+        <span class="typing-cursor" aria-hidden="true"></span>
       </h2>
     </div>
 
     <div class="about-process-list about-reveal-group">
 
-      <article class="process-row about-reveal-item">
+      <article class="process-row">
 
         <div class="process-main">
           <h3>Riset & Strategi</h3>
@@ -4138,10 +4189,10 @@ html[data-theme="dark"] .port{
             dan tujuan website sebelum masuk ke visual.
           </p>
         </div>
-        <span class="process-arrow about-reveal-item">↗</span>
+        <span class="process-arrow">↗</span>
       </article>
 
-      <article class="process-row about-reveal-item">
+      <article class="process-row">
 
         <div class="process-main">
           <h3>Struktur & UX</h3>
@@ -4150,10 +4201,10 @@ html[data-theme="dark"] .port{
             dan struktur halaman agar pengalaman terasa jelas.
           </p>
         </div>
-        <span class="process-arrow about-reveal-item">↗</span>
+        <span class="process-arrow">↗</span>
       </article>
 
-      <article class="process-row about-reveal-item">
+      <article class="process-row">
 
         <div class="process-main">
           <h3>Desain Visual</h3>
@@ -4162,10 +4213,10 @@ html[data-theme="dark"] .port{
             intertindakan, dan detail interface yang sesuai karakter brand.
           </p>
         </div>
-        <span class="process-arrow about-reveal-item">↗</span>
+        <span class="process-arrow">↗</span>
       </article>
 
-      <article class="process-row about-reveal-item">
+      <article class="process-row">
 
         <div class="process-main">
           <h3>Pengembangan & Optimasi</h3>
@@ -4174,7 +4225,7 @@ html[data-theme="dark"] .port{
             responsiveness, performance, accessibility, dan maintainability.
           </p>
         </div>
-        <span class="process-arrow about-reveal-item">↗</span>
+        <span class="process-arrow">↗</span>
       </article>
 
     </div>
@@ -5797,6 +5848,86 @@ window.addEventListener(
 );
 
 
+
+/* =========================================================
+   CYRUSWEB — PROCESS TYPING EFFECT
+   ========================================================= */
+
+(function(){
+  const title = document.querySelector(".process-typing-title");
+  if(!title) return;
+
+  const lines = title.querySelectorAll(".typing-line");
+  const cursor = title.querySelector(".typing-cursor");
+
+  const reduced =
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if(reduced){
+    lines.forEach(line => {
+      line.textContent = line.dataset.text || "";
+    });
+    return;
+  }
+
+  let started = false;
+
+  const typeTitle = () => {
+    if(started) return;
+    started = true;
+
+    lines.forEach(line => {
+      line.textContent = "";
+    });
+
+    let lineIndex = 0;
+    let charIndex = 0;
+
+    const typeNext = () => {
+      if(lineIndex >= lines.length){
+        if(cursor) cursor.style.display = "inline-block";
+        return;
+      }
+
+      const line = lines[lineIndex];
+      const text = line.dataset.text || "";
+
+      if(charIndex < text.length){
+        line.textContent += text.charAt(charIndex);
+        charIndex++;
+
+        setTimeout(typeNext, 55);
+      }else{
+        lineIndex++;
+        charIndex = 0;
+
+        setTimeout(typeNext, 180);
+      }
+    };
+
+    if(cursor) cursor.style.display = "inline-block";
+    typeNext();
+  };
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if(!entry.isIntersecting) return;
+
+        requestAnimationFrame(typeTitle);
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      root:null,
+      rootMargin:"0px 0px -12% 0px",
+      threshold:.15
+    }
+  );
+
+  observer.observe(title);
+})();
 
 /* =========================================================
    CYRUSWEB — ABOUT SCROLL REVEAL ENGINE
