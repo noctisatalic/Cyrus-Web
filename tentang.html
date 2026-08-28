@@ -6189,7 +6189,6 @@ window.addEventListener(
 
 <script>
 (function(){
-
   const titles = document.querySelectorAll(
     "h1.typing-title, h2.typing-title"
   );
@@ -6201,18 +6200,14 @@ window.addEventListener(
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function delayFor(char){
-
-    /* Spasi sedikit lebih cepat */
     if(char === " "){
       return 45 + Math.random() * 35;
     }
 
-    /* Tanda baca membuat typing terasa manusiawi */
     if(/[.,!?;:]/.test(char)){
       return 230 + Math.random() * 120;
     }
 
-    /* Normal keyboard typing */
     return 75 + Math.random() * 35;
   }
 
@@ -6220,17 +6215,17 @@ window.addEventListener(
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  function prepareTitle(title){
-
+  titles.forEach(title => {
     if(title.dataset.typingPrepared) return;
+
     title.dataset.typingPrepared = "true";
 
-    /*
-     * Simpan struktur HTML asli.
-     * Kita tidak meratakan innerHTML menjadi text biasa,
-     * sehingga <span>, <em>, <br>, dan warna tema tetap aman.
-     */
     const original = title.innerHTML;
+
+    if(reduce){
+      title.innerHTML = original;
+      return;
+    }
 
     title.innerHTML =
       '<span class="typing-content"></span>' +
@@ -6239,25 +6234,36 @@ window.addEventListener(
     const content = title.querySelector(".typing-content");
     const cursor = title.querySelector(".typing-cursor");
 
-    /*
-     * Parse HTML asli ke DOM sementara.
-     */
     const temp = document.createElement("div");
     temp.innerHTML = original;
 
-    /*
-     * Ketik node demi node.
-     * Element seperti <span> / <em> tetap dipertahankan.
-     */
+    function placeCursor(parent){
+      if(cursor.parentNode){
+        cursor.parentNode.removeChild(cursor);
+      }
+
+      parent.appendChild(cursor);
+    }
+
     async function typeNode(node, parent){
 
       if(node.nodeType === Node.TEXT_NODE){
 
         for(const char of node.nodeValue){
 
+          if(cursor.parentNode){
+            cursor.parentNode.removeChild(cursor);
+          }
+
           parent.appendChild(
             document.createTextNode(char)
           );
+
+          /*
+           * Cursor selalu berada tepat setelah
+           * karakter terakhir yang baru diketik.
+           */
+          placeCursor(parent);
 
           await sleep(delayFor(char));
         }
@@ -6270,30 +6276,32 @@ window.addEventListener(
       }
 
       /*
-       * <br> langsung ditambahkan tanpa diketik sebagai karakter.
+       * BR tetap dipertahankan sehingga cursor
+       * tidak kehilangan posisi baris terakhir.
        */
       if(node.tagName === "BR"){
+        if(cursor.parentNode){
+          cursor.parentNode.removeChild(cursor);
+        }
 
         parent.appendChild(
           document.createElement("br")
         );
 
-        await sleep(120);
+        /*
+         * Setelah <br>, cursor berada di parent
+         * sehingga otomatis masuk ke ujung baris baru.
+         */
+        placeCursor(parent);
 
+        await sleep(90);
         return;
       }
 
       const clone = node.cloneNode(false);
 
-      /*
-       * Paksa elemen internal mengikuti warna judul.
-       */
-      if(
-        node.tagName === "SPAN" ||
-        node.tagName === "EM" ||
-        node.tagName === "STRONG"
-      ){
-        clone.style.color = "inherit";
+      if(cursor.parentNode){
+        cursor.parentNode.removeChild(cursor);
       }
 
       parent.appendChild(clone);
@@ -6301,55 +6309,73 @@ window.addEventListener(
       for(const child of node.childNodes){
         await typeNode(child, clone);
       }
-    }
-
-    async function start(){
-
-      cursor.style.display = "inline-block";
-
-      for(const node of temp.childNodes){
-        await typeNode(node, content);
-      }
 
       /*
-       * Setelah selesai, cursor tetap berkedip.
+       * Setelah element selesai, pindahkan cursor
+       * ke ujung element tersebut sementara.
        */
-      cursor.style.display = "inline-block";
+      placeCursor(clone);
     }
 
-    if(reduce){
+    async function startTyping(){
 
-      title.innerHTML = original;
-      title.dataset.typingDone = "true";
-      return;
+      let nodeIndex = 0;
+
+      async function next(){
+        if(nodeIndex >= temp.childNodes.length){
+
+          /*
+           * Pastikan cursor berada tepat di akhir
+           * karakter/node terakhir.
+           */
+          if(cursor.parentNode){
+            cursor.parentNode.removeChild(cursor);
+          }
+
+          /*
+           * Cari node terakhir yang benar-benar
+           * menghasilkan isi.
+           */
+          let last = content;
+
+          while(last.lastElementChild){
+            last = last.lastElementChild;
+          }
+
+          placeCursor(last);
+
+          return;
+        }
+
+        const node = temp.childNodes[nodeIndex++];
+        await typeNode(node, content);
+
+        await next();
+      }
+
+      await next();
     }
 
     const observer = new IntersectionObserver(
       entries => {
-
         entries.forEach(entry => {
-
           if(!entry.isIntersecting) return;
 
           requestAnimationFrame(() => {
-            start();
+            startTyping();
           });
 
           observer.unobserve(title);
         });
-
       },
       {
-        root:null,
-        threshold:.12,
-        rootMargin:"0px 0px -8% 0px"
+        threshold:.15,
+        rootMargin:"0px 0px -6% 0px"
       }
     );
 
     observer.observe(title);
-  }
-
-  titles.forEach(prepareTitle);
+  });
 
 })();
 </script>
