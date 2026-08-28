@@ -6147,12 +6147,18 @@ window.addEventListener(
 
 <!-- =========================================================
      CYRUSWEB — UNIVERSAL TITLE TYPING
-     Menjaga warna asli tema
+     Natural keyboard-style / theme-safe
      ========================================================= -->
 <style>
 .typing-title{
   position:relative;
-  color:inherit;
+  color:var(--primary) !important;
+}
+
+.typing-title span,
+.typing-title em,
+.typing-title strong{
+  color:inherit !important;
 }
 
 .typing-title .typing-content{
@@ -6166,7 +6172,7 @@ window.addEventListener(
   margin-left:7px;
   vertical-align:-.08em;
   background:currentColor;
-  animation:universalTypingCursor .7s steps(1,end) infinite;
+  animation:universalTypingCursor .72s steps(1,end) infinite;
 }
 
 @keyframes universalTypingCursor{
@@ -6183,6 +6189,7 @@ window.addEventListener(
 
 <script>
 (function(){
+
   const titles = document.querySelectorAll(
     "h1.typing-title, h2.typing-title"
   );
@@ -6193,99 +6200,157 @@ window.addEventListener(
     window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  titles.forEach(title => {
-    if(title.dataset.typingReady) return;
-    title.dataset.typingReady = "1";
+  function delayFor(char){
 
-    if(reduce) return;
+    /* Spasi sedikit lebih cepat */
+    if(char === " "){
+      return 45 + Math.random() * 35;
+    }
 
+    /* Tanda baca membuat typing terasa manusiawi */
+    if(/[.,!?;:]/.test(char)){
+      return 230 + Math.random() * 120;
+    }
+
+    /* Normal keyboard typing */
+    return 75 + Math.random() * 35;
+  }
+
+  function sleep(ms){
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  function prepareTitle(title){
+
+    if(title.dataset.typingPrepared) return;
+    title.dataset.typingPrepared = "true";
+
+    /*
+     * Simpan struktur HTML asli.
+     * Kita tidak meratakan innerHTML menjadi text biasa,
+     * sehingga <span>, <em>, <br>, dan warna tema tetap aman.
+     */
     const original = title.innerHTML;
 
     title.innerHTML =
       '<span class="typing-content"></span>' +
       '<span class="typing-cursor" aria-hidden="true"></span>';
 
-    const target = title.querySelector(".typing-content");
+    const content = title.querySelector(".typing-content");
     const cursor = title.querySelector(".typing-cursor");
 
-    // Simpan HTML asli supaya warna/style span/em tetap dipertahankan.
-    const temp = document.createElement("span");
+    /*
+     * Parse HTML asli ke DOM sementara.
+     */
+    const temp = document.createElement("div");
     temp.innerHTML = original;
 
-    const nodes = Array.from(temp.childNodes);
+    /*
+     * Ketik node demi node.
+     * Element seperti <span> / <em> tetap dipertahankan.
+     */
+    async function typeNode(node, parent){
 
-    function typeNode(node, done){
       if(node.nodeType === Node.TEXT_NODE){
-        const text = node.textContent;
-        let i = 0;
 
-        const timer = setInterval(() => {
-          target.appendChild(
-            document.createTextNode(text.charAt(i))
+        for(const char of node.nodeValue){
+
+          parent.appendChild(
+            document.createTextNode(char)
           );
-          i++;
 
-          if(i >= text.length){
-            clearInterval(timer);
-            done();
-          }
-        }, 32);
-
-        return;
-      }
-
-      if(node.nodeType === Node.ELEMENT_NODE){
-        const clone = node.cloneNode(false);
-        target.appendChild(clone);
-
-        const children = Array.from(node.childNodes);
-        let index = 0;
-
-        function next(){
-          if(index >= children.length){
-            done();
-            return;
-          }
-
-          typeNode(children[index++], next);
+          await sleep(delayFor(char));
         }
 
-        next();
         return;
       }
 
-      done();
-    }
-
-    function start(){
-      let index = 0;
-
-      function next(){
-        if(index >= nodes.length) return;
-
-        typeNode(nodes[index++], next);
+      if(node.nodeType !== Node.ELEMENT_NODE){
+        return;
       }
 
-      next();
+      /*
+       * <br> langsung ditambahkan tanpa diketik sebagai karakter.
+       */
+      if(node.tagName === "BR"){
+
+        parent.appendChild(
+          document.createElement("br")
+        );
+
+        await sleep(120);
+
+        return;
+      }
+
+      const clone = node.cloneNode(false);
+
+      /*
+       * Paksa elemen internal mengikuti warna judul.
+       */
+      if(
+        node.tagName === "SPAN" ||
+        node.tagName === "EM" ||
+        node.tagName === "STRONG"
+      ){
+        clone.style.color = "inherit";
+      }
+
+      parent.appendChild(clone);
+
+      for(const child of node.childNodes){
+        await typeNode(child, clone);
+      }
+    }
+
+    async function start(){
+
+      cursor.style.display = "inline-block";
+
+      for(const node of temp.childNodes){
+        await typeNode(node, content);
+      }
+
+      /*
+       * Setelah selesai, cursor tetap berkedip.
+       */
+      cursor.style.display = "inline-block";
+    }
+
+    if(reduce){
+
+      title.innerHTML = original;
+      title.dataset.typingDone = "true";
+      return;
     }
 
     const observer = new IntersectionObserver(
       entries => {
+
         entries.forEach(entry => {
+
           if(!entry.isIntersecting) return;
 
-          requestAnimationFrame(start);
+          requestAnimationFrame(() => {
+            start();
+          });
+
           observer.unobserve(title);
         });
+
       },
       {
-        threshold:.15,
-        rootMargin:"0px 0px -6% 0px"
+        root:null,
+        threshold:.12,
+        rootMargin:"0px 0px -8% 0px"
       }
     );
 
     observer.observe(title);
-  });
+  }
+
+  titles.forEach(prepareTitle);
+
 })();
 </script>
 
