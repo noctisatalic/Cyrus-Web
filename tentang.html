@@ -3757,61 +3757,6 @@ html[data-theme="dark"] .port{
 }
 
 /* ---------------------------------------------------------
-   PROCESS TYPING TITLE
-   --------------------------------------------------------- */
-
-.process-typing-title{
-  position:relative;
-  display:block;
-}
-
-.process-typing-title .typing-line{
-  display:block;
-  min-height:1em;
-  white-space:nowrap;
-}
-
-.process-typing-title .typing-accent{
-  display:inline;
-}
-
-.process-typing-title .typing-cursor{
-  display:inline-block;
-  width:2px;
-  height:.85em;
-  margin-left:7px;
-  vertical-align:-.08em;
-  background:currentColor;
-  animation:processTypingCursor .75s steps(1,end) infinite;
-}
-
-@keyframes processTypingCursor{
-  0%,49%{opacity:1}
-  50%,100%{opacity:0}
-}
-
-@media(max-width:520px){
-  .process-typing-title .typing-line{
-    white-space:normal;
-  }
-
-  .process-typing-title .typing-cursor{
-    margin-left:5px;
-  }
-}
-
-@media(prefers-reduced-motion:reduce){
-  .process-typing-title .typing-line{
-    visibility:visible;
-  }
-
-  .process-typing-title .typing-cursor{
-    animation:none;
-    opacity:1;
-  }
-}
-
-/* ---------------------------------------------------------
    PRINCIPLE CARDS
    --------------------------------------------------------- */
 
@@ -3944,7 +3889,7 @@ html[data-theme="dark"] .port{
       <span class="eyebrow">TENTANG CYRUSWEB</span>
     </div>
 
-    <h1>
+    <h1 class="typing-title">
       Kami tidak sekadar
       <em>membuat website.</em>
     </h1>
@@ -3981,7 +3926,7 @@ html[data-theme="dark"] .port{
 
       <div class="about-intro-title about-reveal">
         <span class="eyebrow">CYRUSWEB</span>
-        <h2>
+        <h2 class="typing-title">
           Membangun website
           <span>yang punya alasan.</span>
         </h2>
@@ -4053,7 +3998,7 @@ html[data-theme="dark"] .port{
 
       <div class="about-reveal">
         <span class="eyebrow">CARA KAMI BERPIKIR</span>
-        <h2>
+        <h2 class="typing-title">
           Website yang baik
           <span>bekerja sebelum berbicara.</span>
         </h2>
@@ -4102,7 +4047,7 @@ html[data-theme="dark"] .port{
     <div class="about-section-heading about-reveal">
       <div>
         <span class="eyebrow">YANG KAMI UTAMAKAN</span>
-        <h2>Empat prinsip dalam<br><em>setiap proyek.</em></h2>
+        <h2 class="typing-title">Empat prinsip dalam<br><em>setiap proyek.</em></h2>
       </div>
 
       <p>
@@ -4171,10 +4116,9 @@ html[data-theme="dark"] .port{
 
     <div class="about-process-heading about-reveal">
       <span class="eyebrow">DARI IDE MENJADI PENGALAMAN</span>
-      <h2 class="process-typing-title">
-        <span class="typing-line" data-text="Setiap proyek"></span>
-        <span class="typing-line typing-accent" data-text="dibangun bertahap."></span>
-        <span class="typing-cursor" aria-hidden="true"></span>
+      <h2 class="typing-title">
+        Setiap proyek
+        <span>dibangun bertahap.</span>
       </h2>
     </div>
 
@@ -4247,7 +4191,7 @@ html[data-theme="dark"] .port{
         <span>CYRUSWEB / 2026</span>
       </div>
 
-      <h2>
+      <h2 class="typing-title">
         Kalau sebuah website
         terlihat biasa,
         mengapa pelanggan harus
@@ -4280,7 +4224,7 @@ html[data-theme="dark"] .port{
     <div class="about-section-heading about-reveal">
       <div>
         <span class="eyebrow">DIBANGUN UNTUK BISNIS</span>
-        <h2>
+        <h2 class="typing-title">
           Dibangun untuk
           <em>berbagai kebutuhan.</em>
         </h2>
@@ -4339,7 +4283,7 @@ html[data-theme="dark"] .port{
 
   <div class="about-technology-copy about-reveal">
     <span class="eyebrow">TEKNOLOGI YANG KAMI GUNAKAN</span>
-    <h2>Fondasi teknologi yang dipilih<br><em>sesuai kebutuhan proyek.</em></h2>
+    <h2 class="typing-title">Fondasi teknologi yang dipilih<br><em>sesuai kebutuhan proyek.</em></h2>
     <p>
       Teknologi bukan sekadar daftar alat yang digunakan dalam sebuah website.
       CyrusWeb memilih teknologi berdasarkan kebutuhan bisnis, performa,
@@ -4368,7 +4312,7 @@ html[data-theme="dark"] .port{
     YANG KAMI PAKAI
   </div>
 
-  <h2>
+  <h2 class="typing-title">
     Teknologi yang
     <span>menggerakkan</span>
     setiap proyek.
@@ -4953,7 +4897,7 @@ html[data-theme="dark"] .port{
   <div class="trusted-head">
     <div class="trusted-eyebrow">Dipercayakan Oleh</div>
 
-    <h2>
+    <h2 class="typing-title">
       Brand yang
       <span>percaya pada kualitas pengerjaan.</span>
     </h2>
@@ -5072,7 +5016,7 @@ html[data-theme="dark"] .port{
     <div class="cta-chamber liquid-glass">
       <div class="section-tag"><span></span>Start a Project</div>
 
-      <h2>Your business.<br>Better online.</h2>
+      <h2 class="typing-title">Your business.<br>Better online.</h2>
 
       <p>
         Punya visi atau ide website? Mari wujudkan bersama CyrusWeb
@@ -5850,86 +5794,6 @@ window.addEventListener(
 
 
 /* =========================================================
-   CYRUSWEB — PROCESS TYPING EFFECT
-   ========================================================= */
-
-(function(){
-  const title = document.querySelector(".process-typing-title");
-  if(!title) return;
-
-  const lines = title.querySelectorAll(".typing-line");
-  const cursor = title.querySelector(".typing-cursor");
-
-  const reduced =
-    window.matchMedia &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  if(reduced){
-    lines.forEach(line => {
-      line.textContent = line.dataset.text || "";
-    });
-    return;
-  }
-
-  let started = false;
-
-  const typeTitle = () => {
-    if(started) return;
-    started = true;
-
-    lines.forEach(line => {
-      line.textContent = "";
-    });
-
-    let lineIndex = 0;
-    let charIndex = 0;
-
-    const typeNext = () => {
-      if(lineIndex >= lines.length){
-        if(cursor) cursor.style.display = "inline-block";
-        return;
-      }
-
-      const line = lines[lineIndex];
-      const text = line.dataset.text || "";
-
-      if(charIndex < text.length){
-        line.textContent += text.charAt(charIndex);
-        charIndex++;
-
-        setTimeout(typeNext, 55);
-      }else{
-        lineIndex++;
-        charIndex = 0;
-
-        setTimeout(typeNext, 180);
-      }
-    };
-
-    if(cursor) cursor.style.display = "inline-block";
-    typeNext();
-  };
-
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if(!entry.isIntersecting) return;
-
-        requestAnimationFrame(typeTitle);
-        observer.unobserve(entry.target);
-      });
-    },
-    {
-      root:null,
-      rootMargin:"0px 0px -12% 0px",
-      threshold:.15
-    }
-  );
-
-  observer.observe(title);
-})();
-
-/* =========================================================
    CYRUSWEB — ABOUT SCROLL REVEAL ENGINE
    Lightweight / mobile friendly / fail-safe
    ========================================================= */
@@ -6277,6 +6141,151 @@ window.addEventListener(
   });
 
   items.forEach(el => observer.observe(el));
+})();
+</script>
+
+
+<!-- =========================================================
+     CYRUSWEB — UNIVERSAL TITLE TYPING
+     Menjaga warna asli tema
+     ========================================================= -->
+<style>
+.typing-title{
+  position:relative;
+  color:inherit;
+}
+
+.typing-title .typing-content{
+  display:inline;
+}
+
+.typing-title .typing-cursor{
+  display:inline-block;
+  width:2px;
+  height:.82em;
+  margin-left:7px;
+  vertical-align:-.08em;
+  background:currentColor;
+  animation:universalTypingCursor .7s steps(1,end) infinite;
+}
+
+@keyframes universalTypingCursor{
+  0%,49%{opacity:1}
+  50%,100%{opacity:0}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .typing-title .typing-cursor{
+    display:none;
+  }
+}
+</style>
+
+<script>
+(function(){
+  const titles = document.querySelectorAll(
+    "h1.typing-title, h2.typing-title"
+  );
+
+  if(!titles.length) return;
+
+  const reduce =
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  titles.forEach(title => {
+    if(title.dataset.typingReady) return;
+    title.dataset.typingReady = "1";
+
+    if(reduce) return;
+
+    const original = title.innerHTML;
+
+    title.innerHTML =
+      '<span class="typing-content"></span>' +
+      '<span class="typing-cursor" aria-hidden="true"></span>';
+
+    const target = title.querySelector(".typing-content");
+    const cursor = title.querySelector(".typing-cursor");
+
+    // Simpan HTML asli supaya warna/style span/em tetap dipertahankan.
+    const temp = document.createElement("span");
+    temp.innerHTML = original;
+
+    const nodes = Array.from(temp.childNodes);
+
+    function typeNode(node, done){
+      if(node.nodeType === Node.TEXT_NODE){
+        const text = node.textContent;
+        let i = 0;
+
+        const timer = setInterval(() => {
+          target.appendChild(
+            document.createTextNode(text.charAt(i))
+          );
+          i++;
+
+          if(i >= text.length){
+            clearInterval(timer);
+            done();
+          }
+        }, 32);
+
+        return;
+      }
+
+      if(node.nodeType === Node.ELEMENT_NODE){
+        const clone = node.cloneNode(false);
+        target.appendChild(clone);
+
+        const children = Array.from(node.childNodes);
+        let index = 0;
+
+        function next(){
+          if(index >= children.length){
+            done();
+            return;
+          }
+
+          typeNode(children[index++], next);
+        }
+
+        next();
+        return;
+      }
+
+      done();
+    }
+
+    function start(){
+      let index = 0;
+
+      function next(){
+        if(index >= nodes.length) return;
+
+        typeNode(nodes[index++], next);
+      }
+
+      next();
+    }
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if(!entry.isIntersecting) return;
+
+          requestAnimationFrame(start);
+          observer.unobserve(title);
+        });
+      },
+      {
+        threshold:.15,
+        rootMargin:"0px 0px -6% 0px"
+      }
+    );
+
+    observer.observe(title);
+  });
 })();
 </script>
 
