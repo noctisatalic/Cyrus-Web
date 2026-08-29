@@ -1956,59 +1956,134 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.querySelector(".pricing-grid");
   if (!grid) return;
 
-  fetch("https://cyrusweb.vercel.app/api/pricing?t=" + Date.now())
-    .then(res => {
-      if (!res.ok) throw new Error("Pricing API error");
-      return res.json();
-    })
-    .then(result => {
-      if (!result.success || !Array.isArray(result.data)) {
-        throw new Error("Format pricing tidak valid");
-      }
+      const pricingPlans = [
+        {
+          name: "Starter",
+          price: "800k - 2jt",
+          period: "/project",
+          description: "cocok buat UMKM, personal brand, jasa, toko kecil, atau bisnis yang baru mulai dan butuh website profesional tanpa fitur backend kompleks.",
+          features: [
+            "Custom Design",
+            "1-5 Halaman",
+            "Fully Responsive",
+            "Mobile-First",
+            "Modern UI",
+            "Basic Animation",
+            "WhatsApp Integration",
+            "Contact Form",
+            "Google Maps",
+            "Basic SEO",
+            "Speed Optimization",
+            "Domain & Deployment",
+            "14–30 Days Support"
+          ],
+          highlighted: true
+        },
+        {
+          name: "Business",
+          price: "5jt - 8jt",
+          period: "/project",
+          description: "Untuk bisnis yang ingin tampil profesional, membangun kepercayaan, dan meningkatkan konversi.",
+          features: [
+            "Premium UI/UX",
+            "5-8 Halaman",
+            "Responsive & Mobile-First",
+            "Advanced Animation",
+            "Portfolio & Services",
+            "Whatsapp & Inquiry Form",
+            "CMS / Admin Dashboard",
+            "SEO & Analytics",
+            "Backend & Database",
+            "Performance & Security",
+            "Domain & Deployment",
+            "30–60 Days Support"
+          ],
+          highlighted: false
+        },
+        {
+          name: "Profesional",
+          price: "10jt - 15jt",
+          period: "/project",
+          description: "Untuk bisnis yang membutuhkan website premium dengan sistem digital yang lebih powerful.",
+          features: [
+            "Everything in Business",
+            "Premium UI/UX",
+            "5-20 Halaman",
+            "Advanced Animation & Interaction",
+            "Advanced CMS / Admin Dashboard",
+            "Lead & Customer Management",
+            "Advanced Inquiry System",
+            "Custom Backend & API",
+            "Database System",
+            "User Authentication",
+            "Advanced SEO",
+            "Analytics & Conversion Tracking",
+            "Performance Optimization",
+            "Advanced Security",
+            "Cloud Storage Integration",
+            "Third-Party API Integration",
+            "Payment / Booking Integration",
+            "Production Deployment",
+            "3 Months Support"
+          ],
+          highlighted: false
+        },
+        {
+          name: "Custom",
+          price: "Custom",
+          period: "/project",
+          description: "Sistem khusus dengan kebutuhan database, dashboard, integrasi API, atau arsitektur yang tidak cocok dengan paket standar.",
+          features: [
+            "Custom System Architecture",
+            "CMS / Admin Dashboard",
+            "Database & Authentication",
+            "API Integration",
+            "Dedicated Maintenance"
+          ],
+          highlighted: false
+        }
+      ];
 
       grid.innerHTML = "";
 
-      result.data.forEach(item => {
+      pricingPlans.forEach(item => {
         const card = document.createElement("article");
 
         card.className =
           "price-card liquid-glass" +
           (item.highlighted ? " featured" : "");
 
-        const price = /^\d+$/.test(String(item.price))
-          ? "Rp" + Number(item.price).toLocaleString("id-ID")
-          : item.price;
-
         const period = item.period
           ? "<small> " + item.period + "</small>"
           : "";
 
-        const features = Array.isArray(item.features)
-          ? item.features.map(feature => "<li>" + feature + "</li>").join("")
-          : "";
-
-        const isCustom =
-          String(item.name).toLowerCase() === "custom";
-
-        const buttonText =
-          isCustom ? "Konsultasi" : "Pilih " + item.name;
-
-        const message =
-          isCustom
-            ? "Halo CyrusWeb, saya ingin konsultasi paket Custom"
-            : "Halo CyrusWeb, saya berminat paket " + item.name;
+        const features = item.features
+          .map(feature => "<li>" + feature + "</li>")
+          .join("");
 
         const packageName = String(item.name || "").toLowerCase();
 
         let audience = "";
+
         if (packageName.includes("starter")) {
-          audience = "Personal, usaha kecil, dan kebutuhan website sederhana";
-        } else if (packageName.includes("business") || packageName.includes("bisnis")) {
-          audience = "UMKM, brand, jasa, dan bisnis yang ingin tampil profesional";
-        } else if (packageName.includes("professional") || packageName.includes("pro")) {
-          audience = "Bisnis berkembang yang membutuhkan website lebih premium";
+          audience =
+            "Personal, usaha kecil, dan kebutuhan website sederhana";
+        } else if (
+          packageName.includes("business") ||
+          packageName.includes("bisnis")
+        ) {
+          audience =
+            "UMKM, brand, jasa, dan bisnis yang ingin tampil profesional";
+        } else if (
+          packageName.includes("profesional") ||
+          packageName.includes("professional") ||
+          packageName.includes("pro")
+        ) {
+          audience =
+            "Bisnis berkembang yang membutuhkan website lebih premium";
         } else if (packageName.includes("custom")) {
-          audience = "Kebutuhan khusus, fitur custom, dan sistem sesuai kebutuhan";
+          audience =
+            "Kebutuhan khusus, fitur custom, dan sistem sesuai kebutuhan";
         }
 
         const audienceBlock = audience
@@ -2017,6 +2092,17 @@ document.addEventListener("DOMContentLoaded", () => {
             '<strong>' + audience + '</strong>' +
             '</div>'
           : "";
+
+        const isCustom =
+          packageName === "custom";
+
+        const buttonText =
+          isCustom ? "Konsultasi" : "Pilih " + item.name;
+
+        const message =
+          isCustom
+            ? "Halo CyrusWeb, saya ingin konsultasi paket Custom"
+            : "Halo CyrusWeb, saya berminat paket " + item.name;
 
         card.innerHTML =
           (item.highlighted
@@ -2027,11 +2113,11 @@ document.addEventListener("DOMContentLoaded", () => {
           String(item.name).toUpperCase() +
           '</span>' +
           '<div class="price-amount">' +
-          price +
+          item.price +
           period +
           '</div>' +
           '<p class="price-desc">' +
-          (item.description || "") +
+          item.description +
           '</p>' +
           audienceBlock +
           '<div class="price-feature-title">YANG ANDA DAPATKAN</div>' +
@@ -2049,12 +2135,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         grid.appendChild(card);
       });
-    })
-    .catch(error => {
-      console.error("Pricing load error:", error);
-      grid.innerHTML =
-        '<div class="portfolio-loading">Pricing gagal dimuat.</div>';
-    });
 });
 </script>
 
