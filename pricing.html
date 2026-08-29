@@ -1623,6 +1623,497 @@ html[data-theme="dark"] .pricing-detail-cta:hover {
   box-shadow: 0 12px 30px rgba(255,255,255,.12);
 }
 
+
+/* ── Full Pricing Page ── */
+
+.pricing-explainer,
+.pricing-choice,
+.pricing-value,
+.pricing-benefits,
+.pricing-process,
+.pricing-faq {
+  margin-top: 110px;
+}
+
+.pricing-explainer-head,
+.pricing-choice-head,
+.pricing-benefits-head,
+.pricing-process-head,
+.pricing-faq-head {
+  max-width: 760px;
+}
+
+.pricing-explainer-head,
+.pricing-choice-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+}
+
+.pricing-comparison-wrap {
+  margin-top: 48px;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  overflow: hidden;
+  background: rgba(255,255,255,.45);
+}
+
+.pricing-comparison-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pricing-comparison {
+  width: 100%;
+  min-width: 850px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.pricing-comparison th,
+.pricing-comparison td {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--line);
+  font-size: 11px;
+  line-height: 1.5;
+  vertical-align: middle;
+}
+
+.pricing-comparison th {
+  background: rgba(0,0,0,.025);
+  color: var(--text);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .06em;
+}
+
+.pricing-comparison td {
+  color: var(--muted);
+}
+
+.pricing-comparison td:first-child {
+  color: var(--text);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pricing-comparison tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.pricing-comparison th:not(:first-child),
+.pricing-comparison td:not(:first-child) {
+  text-align: center;
+}
+
+.pricing-comparison-note {
+  margin: 16px 20px 20px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.pricing-choice-grid,
+.pricing-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 48px;
+}
+
+.pricing-choice-card,
+.pricing-benefit {
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: rgba(255,255,255,.4);
+}
+
+.pricing-choice-title {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .15em;
+}
+
+.pricing-choice-card h3,
+.pricing-benefit h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.pricing-choice-card p,
+.pricing-benefit p {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.pricing-value-layout {
+  display: grid;
+  grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr);
+  gap: 80px;
+  align-items: start;
+}
+
+.pricing-value-copy {
+  max-width: 680px;
+}
+
+.pricing-value-copy p {
+  margin-bottom: 18px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.pricing-process-list {
+  margin-top: 48px;
+  border-top: 1px solid var(--line);
+}
+
+.pricing-process-item {
+  display: grid;
+  grid-template-columns: minmax(180px,.5fr) 1fr;
+  gap: 40px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.pricing-process-item > span {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.pricing-process-item p {
+  max-width: 620px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+
+.pricing-selection-note {
+  margin: 18px auto 0;
+  width: fit-content;
+  max-width: 100%;
+  text-align: center;
+}
+
+.pricing-selection-note span {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  color: var(--muted);
+}
+
+.pricing-selection-note strong {
+  display: block;
+  font-size: 11px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.pricing-terms {
+  padding: 110px 0;
+}
+
+.pricing-terms-head {
+  max-width: 760px;
+}
+
+.pricing-terms-head .section-description {
+  max-width: 650px;
+}
+
+.pricing-terms-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 48px;
+}
+
+.pricing-term-card {
+  padding: 26px 24px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: rgba(255,255,255,.42);
+}
+
+.pricing-term-label {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .15em;
+  color: var(--muted);
+}
+
+.pricing-term-card h3 {
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: -.02em;
+}
+
+.pricing-term-card p {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.pricing-term-card p:last-child {
+  margin-bottom: 0;
+}
+
+.pricing-transaction {
+  margin-top: 22px;
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background: rgba(255,255,255,.32);
+}
+
+.pricing-transaction-head {
+  max-width: 600px;
+}
+
+.pricing-transaction-head .section-label {
+  margin-bottom: 12px;
+}
+
+.pricing-transaction-head h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: -.025em;
+}
+
+.pricing-transaction-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 30px;
+  margin-top: 28px;
+}
+
+.pricing-transaction-item {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.pricing-transaction-item strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.pricing-transaction-item p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.pricing-terms-note {
+  margin-top: 18px;
+  padding: 20px 22px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+}
+
+.pricing-terms-note strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pricing-terms-note p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+html[data-theme="dark"] .pricing-term-card,
+html[data-theme="dark"] .pricing-transaction {
+  background: rgba(255,255,255,.025);
+}
+
+@media (max-width: 900px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pricing-terms-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-transaction-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .pricing-terms {
+    padding: 80px 0;
+  }
+
+  .pricing-selection-note {
+    margin-top: 14px;
+    padding: 0 14px;
+  }
+
+  .pricing-terms-grid {
+    gap: 14px;
+    margin-top: 32px;
+  }
+
+  .pricing-term-card {
+    padding: 22px 20px;
+    border-radius: 21px;
+  }
+
+  .pricing-transaction {
+    padding: 22px 20px;
+    border-radius: 22px;
+  }
+
+  .pricing-transaction-head h3 {
+    font-size: 19px;
+  }
+}
+
+.pricing-faq-list {
+  margin-top: 48px;
+  border-top: 1px solid var(--line);
+}
+
+.pricing-faq-list details {
+  border-bottom: 1px solid var(--line);
+}
+
+.pricing-faq-list summary {
+  padding: 22px 4px;
+  cursor: pointer;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  list-style: none;
+}
+
+.pricing-faq-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.pricing-faq-list summary::after {
+  content: "+";
+  float: right;
+  color: var(--muted);
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.pricing-faq-list details[open] summary::after {
+  content: "−";
+}
+
+.pricing-faq-list details p {
+  max-width: 760px;
+  padding: 0 30px 22px 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+html[data-theme="dark"] .pricing-comparison-wrap,
+html[data-theme="dark"] .pricing-choice-card,
+html[data-theme="dark"] .pricing-benefit {
+  background: rgba(255,255,255,.025);
+}
+
+html[data-theme="dark"] .pricing-comparison th {
+  background: rgba(255,255,255,.045);
+}
+
+@media (max-width: 800px) {
+  .pricing-explainer-head,
+  .pricing-choice-head {
+    display: block;
+  }
+
+  .pricing-explainer-head .section-description,
+  .pricing-choice-head .section-description {
+    margin-top: 20px;
+  }
+
+  .pricing-value-layout {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .pricing-process-item {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 640px) {
+  .pricing-explainer,
+  .pricing-choice,
+  .pricing-value,
+  .pricing-benefits,
+  .pricing-process,
+  .pricing-faq {
+    margin-top: 80px;
+  }
+
+  .pricing-choice-grid,
+  .pricing-benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .pricing-choice-card,
+  .pricing-benefit {
+    padding: 22px;
+    border-radius: 20px;
+  }
+
+  .pricing-comparison-wrap {
+    margin-top: 32px;
+    border-radius: 20px;
+  }
+
+  .pricing-process-list,
+  .pricing-faq-list {
+    margin-top: 32px;
+  }
+
+  .pricing-process-item {
+    padding: 20px 0;
+  }
+}
+
 </style>
 
 <style id="cyrus-phase-1-1-clean">
@@ -2302,12 +2793,624 @@ html[data-theme="dark"] .navbar {
         <p class="section-desc" style="margin-top:0;">Transparansi harga awal yang dirancang fleksibel menyesuaikan tingkat kompleksitas project.</p>
       </div>
 
-      <div class="pricing-grid"></div>
+      <div class="pricing-selection-note">
+  <span>SEBELUM MEMILIH</span>
+  <strong>Lihat &amp; setujui ketentuan, lalu pilih paket yang cocok untuk Anda.</strong>
+</div>
+
+<div class="pricing-grid"></div>
       </div>
     </div>
   </section>
 
-  <section class="cta-section" id="order">
+
+<!-- ── Penjelasan & Perbandingan Paket ── -->
+<section class="pricing-explainer" id="pricing-comparison">
+  <div class="container">
+
+    <div class="pricing-explainer-head">
+      <div>
+        <span class="section-label">
+          <span></span>
+          Perbandingan Paket
+        </span>
+        <h2 class="section-title">
+          Lihat perbedaannya<br>
+          sebelum memilih.
+        </h2>
+      </div>
+
+      <p class="section-description">
+        Setiap paket dibuat untuk kebutuhan yang berbeda.
+        Gunakan perbandingan ini sebagai gambaran sebelum menentukan
+        paket yang paling sesuai dengan bisnis Anda.
+      </p>
+    </div>
+
+    <div class="pricing-comparison-wrap">
+      <div class="pricing-comparison-scroll">
+        <table class="pricing-comparison">
+          <thead>
+            <tr>
+              <th>Kebutuhan</th>
+              <th>Starter</th>
+              <th>Business</th>
+              <th>Profesional</th>
+              <th>Custom</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>Untuk siapa</td>
+              <td>Personal & usaha kecil</td>
+              <td>UMKM & bisnis berkembang</td>
+              <td>Bisnis dengan kebutuhan lebih kompleks</td>
+              <td>Kebutuhan khusus</td>
+            </tr>
+
+            <tr>
+              <td>Skala website</td>
+              <td>1–5 halaman</td>
+              <td>5–8 halaman</td>
+              <td>5–20 halaman</td>
+              <td>Sesuai kebutuhan</td>
+            </tr>
+
+            <tr>
+              <td>Desain</td>
+              <td>Custom UI</td>
+              <td>Premium UI/UX</td>
+              <td>Premium UI/UX</td>
+              <td>Sepenuhnya custom</td>
+            </tr>
+
+            <tr>
+              <td>Animasi & interaksi</td>
+              <td>Dasar</td>
+              <td>Advanced</td>
+              <td>Advanced</td>
+              <td>Sesuai scope</td>
+            </tr>
+
+            <tr>
+              <td>CMS / Dashboard</td>
+              <td>—</td>
+              <td>✓</td>
+              <td>✓ Advanced</td>
+              <td>✓ Custom</td>
+            </tr>
+
+            <tr>
+              <td>Backend & database</td>
+              <td>—</td>
+              <td>✓</td>
+              <td>✓ Advanced</td>
+              <td>✓ Custom</td>
+            </tr>
+
+            <tr>
+              <td>Integrasi API</td>
+              <td>—</td>
+              <td>Dasar</td>
+              <td>✓</td>
+              <td>✓ Custom</td>
+            </tr>
+
+            <tr>
+              <td>SEO & analytics</td>
+              <td>Dasar</td>
+              <td>✓</td>
+              <td>Advanced</td>
+              <td>Sesuai kebutuhan</td>
+            </tr>
+
+            <tr>
+              <td>Dukungan setelah launch</td>
+              <td>14–30 hari</td>
+              <td>30–60 hari</td>
+              <td>3 bulan</td>
+              <td>Sesuai kesepakatan</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="pricing-comparison-note">
+        Perbandingan ini merupakan gambaran umum.
+        Fitur dan scope final mengikuti kebutuhan project yang telah disepakati.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="pricing-choice" id="pricing-choice">
+  <div class="container">
+
+    <div class="pricing-choice-head">
+      <span class="section-label">
+        <span></span>
+        Panduan Memilih
+      </span>
+
+      <h2 class="section-title">
+        Belum yakin paket<br>
+        mana yang tepat?
+      </h2>
+
+      <p class="section-description">
+        Tidak perlu memilih paket hanya berdasarkan harga.
+        Pertimbangkan tujuan website dan seberapa jauh website tersebut
+        akan digunakan dalam bisnis Anda.
+      </p>
+    </div>
+
+    <div class="pricing-choice-grid">
+
+      <article class="pricing-choice-card">
+        <span class="pricing-choice-title">STARTER</span>
+        <h3>Butuh website profesional untuk mulai dikenal?</h3>
+        <p>
+          Starter cocok jika kebutuhan utama Anda adalah memiliki
+          website yang rapi, responsif, profesional, dan mudah ditemukan
+          calon pelanggan tanpa sistem backend yang kompleks.
+        </p>
+      </article>
+
+      <article class="pricing-choice-card">
+        <span class="pricing-choice-title">BUSINESS</span>
+        <h3>Website mulai menjadi bagian dari pemasaran?</h3>
+        <p>
+          Business cocok untuk bisnis yang membutuhkan tampilan lebih
+          premium, pengelolaan konten, inquiry pelanggan, serta fondasi
+          website yang lebih siap digunakan untuk berkembang.
+        </p>
+      </article>
+
+      <article class="pricing-choice-card">
+        <span class="pricing-choice-title">PROFESIONAL</span>
+        <h3>Bisnis membutuhkan sistem digital yang lebih serius?</h3>
+        <p>
+          Profesional ditujukan untuk project dengan kebutuhan UI/UX
+          yang lebih dalam, dashboard, database, pengelolaan customer,
+          integrasi, serta fungsi digital yang lebih kompleks.
+        </p>
+      </article>
+
+      <article class="pricing-choice-card">
+        <span class="pricing-choice-title">CUSTOM</span>
+        <h3>Kebutuhan Anda tidak masuk ke paket standar?</h3>
+        <p>
+          Tidak masalah. Project Custom dibuat berdasarkan kebutuhan
+          sistem, arsitektur, integrasi, dan alur bisnis yang ingin
+          dibangun.
+        </p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="pricing-value" id="pricing-value">
+  <div class="container">
+
+    <div class="pricing-value-layout">
+
+      <div class="pricing-value-intro">
+        <span class="section-label">
+          <span></span>
+          Tentang Harga
+        </span>
+
+        <h2 class="section-title">
+          Harga bukan sekadar<br>
+          jumlah halaman.
+        </h2>
+      </div>
+
+      <div class="pricing-value-copy">
+        <p>
+          Dua website dengan jumlah halaman yang sama belum tentu
+          memiliki tingkat pengerjaan yang sama.
+        </p>
+
+        <p>
+          Desain custom, pengalaman pengguna, animasi, dashboard,
+          database, integrasi API, keamanan, performa, dan kebutuhan
+          bisnis lainnya dapat membuat kompleksitas project berbeda jauh.
+        </p>
+
+        <p>
+          Karena itu, harga di atas digunakan sebagai rentang awal.
+          Setelah kebutuhan Anda dipahami, scope project dapat ditentukan
+          dengan lebih jelas sehingga biaya yang ditawarkan tetap masuk
+          akal dan sesuai pekerjaan yang benar-benar dibutuhkan.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="pricing-benefits" id="pricing-benefits">
+  <div class="container">
+
+    <div class="pricing-benefits-head">
+      <span class="section-label">
+        <span></span>
+        Nilai Project
+      </span>
+
+      <h2 class="section-title">
+        Bukan sekadar<br>
+        website jadi.
+      </h2>
+
+      <p class="section-description">
+        Website yang baik bukan hanya terlihat bagus.
+        Website harus membantu bisnis menyampaikan nilai,
+        membangun kepercayaan, dan memudahkan calon pelanggan
+        mengambil tindakan.
+      </p>
+    </div>
+
+    <div class="pricing-benefits-grid">
+
+      <article class="pricing-benefit">
+        <h3>Tampilan yang mewakili bisnis</h3>
+        <p>
+          Desain disesuaikan dengan karakter bisnis dan target pelanggan,
+          bukan sekadar mengganti warna pada template.
+        </p>
+      </article>
+
+      <article class="pricing-benefit">
+        <h3>Informasi yang mudah dipahami</h3>
+        <p>
+          Struktur konten dan navigasi dibuat agar pengunjung dapat
+          memahami layanan dan menemukan informasi penting dengan cepat.
+        </p>
+      </article>
+
+      <article class="pricing-benefit">
+        <h3>Nyaman di berbagai perangkat</h3>
+        <p>
+          Website dirancang responsif dengan perhatian khusus pada
+          pengalaman pengguna smartphone.
+        </p>
+      </article>
+
+      <article class="pricing-benefit">
+        <h3>Dibangun sesuai kebutuhan</h3>
+        <p>
+          Fitur dan sistem mengikuti kebutuhan project sehingga Anda
+          tidak perlu membayar kompleksitas yang sebenarnya tidak diperlukan.
+        </p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="pricing-process" id="pricing-process">
+  <div class="container">
+
+    <div class="pricing-process-head">
+      <span class="section-label">
+        <span></span>
+        Proses Pengerjaan
+      </span>
+
+      <h2 class="section-title">
+        Dari kebutuhan<br>
+        menjadi website.
+      </h2>
+    </div>
+
+    <div class="pricing-process-list">
+
+      <div class="pricing-process-item">
+        <span>Konsultasi kebutuhan</span>
+        <p>
+          Memahami bisnis, target pelanggan, tujuan website,
+          dan fitur yang memang dibutuhkan.
+        </p>
+      </div>
+
+      <div class="pricing-process-item">
+        <span>Perencanaan project</span>
+        <p>
+          Menentukan struktur halaman, alur pengguna, fitur,
+          dan scope pengerjaan sebelum proses development dimulai.
+        </p>
+      </div>
+
+      <div class="pricing-process-item">
+        <span>Desain & pengembangan</span>
+        <p>
+          Website dibangun berdasarkan rancangan dan kebutuhan
+          yang telah disepakati.
+        </p>
+      </div>
+
+      <div class="pricing-process-item">
+        <span>Pengujian & penyempurnaan</span>
+        <p>
+          Responsive, interaksi, performa, form, dan fungsi utama
+          diperiksa sebelum website dipublikasikan.
+        </p>
+      </div>
+
+      <div class="pricing-process-item">
+        <span>Website siap digunakan</span>
+        <p>
+          Website dipublikasikan dan diserahkan sesuai scope
+          project yang telah disepakati.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<section class="pricing-terms" id="pricing-terms">
+  <div class="container">
+
+    <div class="pricing-terms-head">
+      <span class="section-label">
+        <span></span>
+        Ketentuan Project
+      </span>
+
+      <h2 class="section-title">
+        Supaya project berjalan<br>
+        dengan jelas sejak awal.
+      </h2>
+
+      <p class="section-description">
+        Sebelum memilih paket dan memulai pengerjaan, berikut gambaran
+        mengenai pembayaran, proses pengerjaan, serta ketentuan apabila
+        terjadi pembatalan project.
+      </p>
+    </div>
+
+    <div class="pricing-terms-grid">
+
+      <article class="pricing-term-card">
+        <span class="pricing-term-label">PEMBAYARAN</span>
+        <h3>DP 50% di awal project</h3>
+        <p>
+          Pengerjaan project dimulai setelah kebutuhan, scope, harga,
+          dan ketentuan project disepakati bersama serta pembayaran
+          DP sebesar 50% telah diterima.
+        </p>
+        <p>
+          Sisa 50% dibayarkan setelah website selesai sesuai scope
+          yang telah disepakati dan sebelum proses final deployment
+          atau serah terima project.
+        </p>
+      </article>
+
+      <article class="pricing-term-card">
+        <span class="pricing-term-label">JIKA PROJECT DIBATALKAN</span>
+        <h3>Apa yang terjadi dengan DP?</h3>
+        <p>
+          Apabila client membatalkan project setelah pengerjaan
+          dimulai, DP 50% tidak dapat dikembalikan karena digunakan
+          untuk mengalokasikan waktu, proses desain, development,
+          revisi, dan pekerjaan yang telah dilakukan untuk project.
+        </p>
+        <p>
+          Ketentuan ini berlaku untuk pembatalan yang berasal dari
+          pihak client setelah project mulai dikerjakan.
+        </p>
+      </article>
+
+      <article class="pricing-term-card">
+        <span class="pricing-term-label">HASIL PEKERJAAN</span>
+        <h3>DP tidak berarti pekerjaan menjadi hangus</h3>
+        <p>
+          Jika project dibatalkan oleh client setelah pengerjaan
+          berjalan, hasil pekerjaan yang telah selesai pada saat
+          pembatalan tetap dapat diberikan sesuai kondisi dan tahap
+          pekerjaan yang telah dicapai.
+        </p>
+        <p>
+          Bentuk hasil yang diberikan dapat berupa desain, aset,
+          struktur halaman, source code, atau bagian website yang
+          memang telah dikerjakan, dengan batasan sesuai tahap
+          pengerjaan dan kesepakatan project.
+        </p>
+      </article>
+
+    </div>
+
+    <div class="pricing-transaction">
+
+      <div class="pricing-transaction-head">
+        <span class="section-label">
+          <span></span>
+          Alur Pembayaran &amp; Pengerjaan
+        </span>
+
+        <h3>
+          Tidak ada biaya yang tiba-tiba
+          di tengah pengerjaan.
+        </h3>
+      </div>
+
+      <div class="pricing-transaction-list">
+
+        <div class="pricing-transaction-item">
+          <strong>Konsultasi &amp; penentuan kebutuhan</strong>
+          <p>
+            Membahas tujuan website, fitur, halaman, desain,
+            integrasi, serta kebutuhan bisnis.
+          </p>
+        </div>
+
+        <div class="pricing-transaction-item">
+          <strong>Scope &amp; harga disepakati</strong>
+          <p>
+            Scope pekerjaan dan estimasi harga ditentukan sebelum
+            project dimulai sehingga kedua pihak memiliki acuan yang jelas.
+          </p>
+        </div>
+
+        <div class="pricing-transaction-item">
+          <strong>DP 50% diterima</strong>
+          <p>
+            DP menjadi tanda dimulainya project dan pengalokasian
+            waktu untuk pengerjaan.
+          </p>
+        </div>
+
+        <div class="pricing-transaction-item">
+          <strong>Desain &amp; development</strong>
+          <p>
+            Project dikerjakan sesuai scope yang telah disepakati,
+            termasuk proses komunikasi dan revisi sesuai ketentuan paket.
+          </p>
+        </div>
+
+        <div class="pricing-transaction-item">
+          <strong>Review &amp; penyempurnaan</strong>
+          <p>
+            Website diperiksa, diperbaiki, dan disiapkan agar sesuai
+            dengan hasil yang telah disepakati.
+          </p>
+        </div>
+
+        <div class="pricing-transaction-item">
+          <strong>Pelunasan 50%</strong>
+          <p>
+            Setelah pekerjaan sesuai scope selesai, sisa pembayaran
+            50% diselesaikan sebelum final deployment atau serah terima.
+          </p>
+        </div>
+
+        <div class="pricing-transaction-item">
+          <strong>Deployment &amp; support</strong>
+          <p>
+            Website dipublikasikan dan dukungan setelah launch diberikan
+            sesuai masa support pada paket yang dipilih.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="pricing-terms-note">
+      <strong>Perubahan di luar scope</strong>
+      <p>
+        Permintaan fitur baru, halaman tambahan, integrasi tambahan,
+        atau perubahan besar yang tidak termasuk dalam scope awal
+        akan dibicarakan dan disepakati terlebih dahulu sebelum dikerjakan.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section class="pricing-faq" id="pricing-faq">
+  <div class="container">
+
+    <div class="pricing-faq-head">
+      <span class="section-label">
+        <span></span>
+        Pertanyaan Umum
+      </span>
+
+      <h2 class="section-title">
+        Sebelum project<br>
+        dimulai.
+      </h2>
+    </div>
+
+    <div class="pricing-faq-list">
+
+      <details>
+        <summary>Apakah harga sudah termasuk domain dan hosting?</summary>
+        <p>
+          Kebutuhan domain dan deployment dapat disesuaikan dengan paket
+          dan scope project. Detail biaya akan dijelaskan sebelum project dimulai.
+        </p>
+      </details>
+
+      <details>
+        <summary>Berapa lama pengerjaan website?</summary>
+        <p>
+          Waktu pengerjaan bergantung pada jumlah halaman, tingkat desain,
+          fitur, revisi, dan kompleksitas sistem. Estimasi final diberikan
+          setelah scope project ditentukan.
+        </p>
+      </details>
+
+      <details>
+        <summary>Apakah saya bisa request desain sendiri?</summary>
+        <p>
+          Bisa. Referensi desain, identitas brand, warna, maupun contoh
+          website dapat digunakan sebagai acuan selama tetap sesuai dengan
+          kebutuhan dan scope project.
+        </p>
+      </details>
+
+      <details>
+        <summary>Apakah website bisa diubah setelah selesai?</summary>
+        <p>
+          Bisa. Perubahan minor dan dukungan setelah launch mengikuti
+          ketentuan support pada paket yang dipilih. Pengembangan fitur
+          baru dapat dibicarakan sebagai pekerjaan tambahan.
+        </p>
+      </details>
+
+      <details>
+        <summary>Apakah semua paket mendapatkan CMS?</summary>
+        <p>
+          Tidak. CMS dan dashboard tersedia pada paket yang memang
+          membutuhkan pengelolaan konten atau sistem administrasi.
+        </p>
+      </details>
+
+      <details>
+        <summary>Bagaimana jika kebutuhan saya tidak cocok dengan paket?</summary>
+        <p>
+          Anda tidak harus memaksakan kebutuhan ke paket standar.
+          Project Custom tersedia untuk kebutuhan sistem, database,
+          dashboard, integrasi, atau arsitektur khusus.
+        </p>
+      </details>
+
+      <details>
+        <summary>Apakah tersedia maintenance setelah website selesai?</summary>
+        <p>
+          Dukungan setelah launch mengikuti paket yang dipilih.
+          Kebutuhan maintenance berkelanjutan juga dapat dibicarakan
+          sesuai kebutuhan website.
+        </p>
+      </details>
+
+      <details>
+        <summary>Bagaimana proses pembayarannya?</summary>
+        <p>
+          Mekanisme pembayaran dan termin disepakati sebelum pengerjaan
+          dimulai berdasarkan scope dan nilai project.
+        </p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="order">
     <div class="container">
       <div class="cta-chamber liquid-glass">
         <div class="section-tag"><span></span>Start a Project</div>
