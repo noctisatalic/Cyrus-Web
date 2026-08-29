@@ -20,49 +20,6 @@
       : "light";
   }
 
-  function applyTheme(theme){
-
-    root.dataset.theme = theme;
-
-    localStorage.setItem(STORAGE_KEY, theme);
-
-    syncToggles(theme);
-  }
-
-  function createToggleContent(toggle){
-
-    /*
-      Jangan hapus konten kalau sudah pernah dibuat.
-    */
-
-    if(toggle.dataset.cyrusThemeReady === "true"){
-      return;
-    }
-
-    toggle.innerHTML = `
-      <span class="theme-switch-sun" aria-hidden="true">☀</span>
-      <span class="theme-switch-moon" aria-hidden="true">☾</span>
-      <span class="theme-switch-knob" aria-hidden="true"></span>
-    `;
-
-    toggle.dataset.cyrusThemeReady = "true";
-
-    toggle.setAttribute("role","switch");
-    toggle.setAttribute("aria-label","Ganti tema");
-    toggle.setAttribute("tabindex","0");
-
-    toggle.addEventListener("click",toggleTheme);
-
-    toggle.addEventListener("keydown",function(e){
-
-      if(e.key === "Enter" || e.key === " "){
-        e.preventDefault();
-        toggleTheme();
-      }
-
-    });
-  }
-
   function getToggles(){
 
     return [
@@ -86,27 +43,68 @@
 
   }
 
+  function applyTheme(theme){
+
+    root.dataset.theme = theme;
+    localStorage.setItem(STORAGE_KEY, theme);
+    syncToggles(theme);
+
+  }
+
+  function createToggleContent(toggle){
+
+    if(toggle.dataset.cyrusThemeReady === "true"){
+      return;
+    }
+
+    toggle.innerHTML = `
+      <span class="theme-switch-sun" aria-hidden="true">☀</span>
+      <span class="theme-switch-moon" aria-hidden="true">☾</span>
+      <span class="theme-switch-knob" aria-hidden="true"></span>
+    `;
+
+    toggle.dataset.cyrusThemeReady = "true";
+
+    toggle.setAttribute("role","switch");
+    toggle.setAttribute("aria-label","Ganti tema");
+    toggle.setAttribute("tabindex","0");
+
+    toggle.addEventListener("click", toggleTheme);
+
+    toggle.addEventListener("keydown", function(e){
+
+      if(e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        toggleTheme();
+      }
+
+    });
+
+  }
+
   function animateThemeChange(){
 
-    let overlay = document.querySelector(".cyrus-theme-transition");
+    let overlay =
+      document.querySelector(".cyrus-theme-transition");
 
     if(!overlay){
 
       overlay = document.createElement("div");
-
       overlay.className = "cyrus-theme-transition";
 
       document.body.appendChild(overlay);
 
     }
 
+    overlay.classList.remove("active");
+
+    void overlay.offsetWidth;
+
     overlay.classList.add("active");
 
-    setTimeout(function(){
-
+    window.setTimeout(function(){
       overlay.classList.remove("active");
-
-    },420);
+    },450);
 
   }
 
@@ -122,12 +120,10 @@
         ? "light"
         : "dark";
 
-    /*
-      Native View Transition bila browser mendukung.
-      Fallback tetap smooth dengan CSS.
-    */
-
-    if(document.startViewTransition){
+    if(
+      document.startViewTransition &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ){
 
       document.startViewTransition(function(){
 
@@ -145,42 +141,19 @@
 
   }
 
-  /*
-    Detect all existing CyrusWeb theme buttons.
-  */
-
   function init(){
 
     const theme = getTheme();
 
     applyTheme(theme);
 
-    getToggles().forEach(createToggleContent);
+    getToggles().forEach(function(toggle){
+      createToggleContent(toggle);
+    });
 
     syncToggles(theme);
 
-    /*
-      Support tombol yang mungkin dibuat setelah page load.
-    */
-
-    const observer = new MutationObserver(function(){
-
-      getToggles().forEach(createToggleContent);
-
-      syncToggles(root.dataset.theme);
-
-    });
-
-    observer.observe(document.body,{
-      childList:true,
-      subtree:true
-    });
-
   }
-
-  /*
-    Jalankan setelah DOM siap.
-  */
 
   if(document.readyState === "loading"){
 
