@@ -1632,7 +1632,7 @@ html[data-theme="dark"] .pricing-detail-cta:hover {
 .pricing-benefits,
 .pricing-process,
 .pricing-faq {
-  margin-top: 72px;
+  margin-top: 56px;
 }
 
 .pricing-explainer-head,
@@ -1826,7 +1826,7 @@ html[data-theme="dark"] .pricing-detail-cta:hover {
 }
 
 .pricing-terms {
-  padding: 110px 0;
+  padding: 64px 0;
 }
 
 .pricing-terms-head {
@@ -1841,7 +1841,7 @@ html[data-theme="dark"] .pricing-detail-cta:hover {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
-  margin-top: 48px;
+  margin-top: 28px;
 }
 
 .pricing-term-card {
@@ -2003,7 +2003,7 @@ html[data-theme="dark"] .pricing-transaction {
 }
 
 .pricing-faq-list {
-  margin-top: 48px;
+  margin-top: 28px;
   border-top: 1px solid var(--line);
 }
 
@@ -2083,7 +2083,7 @@ html[data-theme="dark"] .pricing-comparison th {
   .pricing-benefits,
   .pricing-process,
   .pricing-faq {
-    margin-top: 80px;
+    margin-top: 56px;
   }
 
   .pricing-choice-grid,
@@ -2742,6 +2742,288 @@ html[data-theme="dark"] .navbar {
   ]
 }
 </script>
+<style>
+/* CYRUS FIX: pricing mobile header alignment */
+@media (max-width: 640px) {
+  .pricing-explainer-head,
+  .pricing-choice-head {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .pricing-explainer-head .section-label,
+  .pricing-choice-head .section-label {
+    margin-bottom: 12px;
+  }
+
+  .pricing-explainer-head .section-title,
+  .pricing-choice-head .section-title {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .pricing-explainer-head .section-description,
+  .pricing-choice-head .section-description {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 20px;
+  }
+}
+</style>
+
+
+<style>
+/* CYRUS PRICING V2 OVERRIDE */
+
+/* Header section: label tetap di atas, title + description sejajar secara rapi */
+.pricing-choice-head,
+.pricing-explainer-head {
+  display: block;
+  max-width: 900px;
+}
+
+.pricing-choice-head .section-label,
+.pricing-explainer-head .section-label {
+  display: flex;
+  width: fit-content;
+  margin-bottom: 18px;
+}
+
+.pricing-choice-head .section-title,
+.pricing-explainer-head .section-title {
+  margin: 0;
+  max-width: 760px;
+}
+
+.pricing-choice-head .section-description,
+.pricing-explainer-head .section-description {
+  max-width: 620px;
+  margin-top: 18px;
+}
+
+/* Paket pilihan */
+.pricing-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 42px;
+}
+
+.pricing-choice-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 210px;
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.72),
+      rgba(255,255,255,.32)
+    );
+  transition:
+    transform .45s cubic-bezier(.16,1,.3,1),
+    border-color .35s ease,
+    box-shadow .45s ease,
+    background .35s ease;
+}
+
+.pricing-choice-card::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(
+    circle,
+    rgba(255,255,255,.9) 0%,
+    rgba(255,255,255,0) 58%
+  );
+  opacity: 0;
+  transform: translate(-20%, -20%);
+  transition: opacity .45s ease, transform .7s cubic-bezier(.16,1,.3,1);
+  pointer-events: none;
+}
+
+.pricing-choice-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(0,0,0,.22);
+  box-shadow: 0 24px 60px rgba(0,0,0,.09);
+}
+
+.pricing-choice-card:hover::before {
+  opacity: 1;
+  transform: translate(10%, 10%);
+}
+
+.pricing-choice-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.pricing-choice-title {
+  letter-spacing: .18em;
+}
+
+.pricing-choice-card h3 {
+  max-width: 470px;
+}
+
+.pricing-choice-card p {
+  max-width: 560px;
+}
+
+/* Section rhythm */
+.pricing-choice,
+.pricing-value,
+.pricing-benefits,
+.pricing-process,
+.pricing-faq {
+  margin-top: 64px;
+}
+
+.pricing-explainer {
+  margin-top: 56px;
+}
+
+.pricing-terms {
+  margin-top: 64px;
+  padding: 72px 0;
+}
+
+/* Mobile: WAJIB satu kolom */
+@media (max-width: 768px) {
+  .pricing-choice-grid,
+  .pricing-benefits-grid,
+  .pricing-terms-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .pricing-choice-card {
+    min-height: auto;
+    padding: 24px 22px;
+    border-radius: 22px;
+  }
+
+  .pricing-choice-head .section-title,
+  .pricing-explainer-head .section-title {
+    max-width: 100%;
+  }
+
+  .pricing-choice-head .section-description,
+  .pricing-explainer-head .section-description {
+    max-width: 100%;
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pricing-choice,
+  .pricing-value,
+  .pricing-benefits,
+  .pricing-process,
+  .pricing-faq {
+    margin-top: 52px;
+  }
+
+  .pricing-explainer {
+    margin-top: 48px;
+  }
+
+  .pricing-choice-grid {
+    gap: 14px;
+    margin-top: 30px;
+  }
+
+  .pricing-choice-card {
+    padding: 22px 20px;
+  }
+
+  .pricing-choice-card h3 {
+    font-size: 17px;
+  }
+
+  .pricing-choice-card p {
+    font-size: 11px;
+    line-height: 1.7;
+  }
+
+  .pricing-terms {
+    margin-top: 52px;
+    padding: 56px 0;
+  }
+}
+
+/* Dark mode */
+html[data-theme="dark"] .pricing-choice-card {
+  background: linear-gradient(
+    145deg,
+    rgba(255,255,255,.055),
+    rgba(255,255,255,.018)
+  );
+}
+
+html[data-theme="dark"] .pricing-choice-card:hover {
+  border-color: rgba(255,255,255,.28);
+  box-shadow: 0 24px 60px rgba(0,0,0,.28);
+}
+</style>
+
+
+<style>
+/* CYRUS PRICING V2 — CONSISTENT HEADING SPACING */
+.pricing-value .section-description,
+.pricing-benefits-head .section-description,
+.pricing-terms-head .section-description {
+  margin-top: 24px !important;
+}
+</style>
+<style>
+/* CYRUS PRICING V2 — FINAL MOBILE GRID */
+@media (max-width: 768px) {
+  .pricing-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+  }
+}
+</style>
+
+<style id="cyrus-faq-cms-style">
+.pricing-faq-category {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 12px;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  vertical-align: middle;
+}
+
+.pricing-faq-loading,
+.pricing-faq-empty {
+  padding: 24px 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.pricing-faq-question {
+  display: inline;
+}
+
+@media (max-width: 640px) {
+  .pricing-faq-category {
+    display: block;
+    width: fit-content;
+    margin: 7px 0 0;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -3335,77 +3617,10 @@ html[data-theme="dark"] .navbar {
       </h2>
     </div>
 
-    <div class="pricing-faq-list">
-
-      <details>
-        <summary>Apakah harga sudah termasuk domain dan hosting?</summary>
-        <p>
-          Kebutuhan domain dan deployment dapat disesuaikan dengan paket
-          dan scope project. Detail biaya akan dijelaskan sebelum project dimulai.
-        </p>
-      </details>
-
-      <details>
-        <summary>Berapa lama pengerjaan website?</summary>
-        <p>
-          Waktu pengerjaan bergantung pada jumlah halaman, tingkat desain,
-          fitur, revisi, dan kompleksitas sistem. Estimasi final diberikan
-          setelah scope project ditentukan.
-        </p>
-      </details>
-
-      <details>
-        <summary>Apakah saya bisa request desain sendiri?</summary>
-        <p>
-          Bisa. Referensi desain, identitas brand, warna, maupun contoh
-          website dapat digunakan sebagai acuan selama tetap sesuai dengan
-          kebutuhan dan scope project.
-        </p>
-      </details>
-
-      <details>
-        <summary>Apakah website bisa diubah setelah selesai?</summary>
-        <p>
-          Bisa. Perubahan minor dan dukungan setelah launch mengikuti
-          ketentuan support pada paket yang dipilih. Pengembangan fitur
-          baru dapat dibicarakan sebagai pekerjaan tambahan.
-        </p>
-      </details>
-
-      <details>
-        <summary>Apakah semua paket mendapatkan CMS?</summary>
-        <p>
-          Tidak. CMS dan dashboard tersedia pada paket yang memang
-          membutuhkan pengelolaan konten atau sistem administrasi.
-        </p>
-      </details>
-
-      <details>
-        <summary>Bagaimana jika kebutuhan saya tidak cocok dengan paket?</summary>
-        <p>
-          Anda tidak harus memaksakan kebutuhan ke paket standar.
-          Project Custom tersedia untuk kebutuhan sistem, database,
-          dashboard, integrasi, atau arsitektur khusus.
-        </p>
-      </details>
-
-      <details>
-        <summary>Apakah tersedia maintenance setelah website selesai?</summary>
-        <p>
-          Dukungan setelah launch mengikuti paket yang dipilih.
-          Kebutuhan maintenance berkelanjutan juga dapat dibicarakan
-          sesuai kebutuhan website.
-        </p>
-      </details>
-
-      <details>
-        <summary>Bagaimana proses pembayarannya?</summary>
-        <p>
-          Mekanisme pembayaran dan termin disepakati sebelum pengerjaan
-          dimulai berdasarkan scope dan nilai project.
-        </p>
-      </details>
-
+    <div class="pricing-faq-list" id="pricing-faq-list">
+      <div class="pricing-faq-loading">
+        Memuat pertanyaan...
+      </div>
     </div>
   </div>
 </section>
@@ -3869,13 +4084,128 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 </script>
 
+
+<script>
+/* CYRUS PRICING V2 REVEAL */
+(() => {
+  const cards = document.querySelectorAll(
+    '.pricing-choice-card, .pricing-benefit, .pricing-term-card'
+  );
+
+  if (!cards.length) return;
+
+  cards.forEach((card, i) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(28px)';
+    card.style.transition =
+      `opacity .7s cubic-bezier(.16,1,.3,1) ${i * 70}ms,
+       transform .7s cubic-bezier(.16,1,.3,1) ${i * 70}ms`;
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.12 });
+
+  cards.forEach(card => observer.observe(card));
+})();
+</script>
+
+
+<script id="cyrus-faq-cms">
+(function () {
+  const list = document.getElementById("pricing-faq-list");
+
+  if (!list) return;
+
+  const API_URL = "https://cyrusweb-backend.vercel.app/api/faq";
+
+  function escapeHTML(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function renderFAQ(items) {
+    if (!Array.isArray(items) || !items.length) {
+      list.innerHTML = `
+        <div class="pricing-faq-empty">
+          Belum ada pertanyaan yang tersedia.
+        </div>
+      `;
+      return;
+    }
+
+    list.innerHTML = items.map(function (item) {
+      const category = item.category
+        ? `<span class="pricing-faq-category">${escapeHTML(item.category)}</span>`
+        : "";
+
+      return `
+        <details>
+          <summary>
+            <span class="pricing-faq-question">
+              ${escapeHTML(item.question)}
+            </span>
+            ${category}
+          </summary>
+          <p>${escapeHTML(item.answer).replace(/\n/g, "<br>")}</p>
+        </details>
+      `;
+    }).join("");
+  }
+
+  async function loadFAQ() {
+    try {
+      const response = await fetch(API_URL, {
+        method: "GET",
+        cache: "no-store",
+        headers: {
+          "Accept": "application/json"
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error("HTTP " + response.status);
+      }
+
+      const json = await response.json();
+
+      if (!json.success) {
+        throw new Error(json.message || "FAQ API gagal");
+      }
+
+      renderFAQ(json.data);
+    } catch (error) {
+      console.error("CyrusWeb FAQ CMS:", error);
+
+      list.innerHTML = `
+        <div class="pricing-faq-empty">
+          Pertanyaan belum dapat dimuat. Silakan coba lagi nanti.
+        </div>
+      `;
+    }
+  }
+
+  loadFAQ();
+})();
+</script>
+
 </body>
 </html>
 
 <style id="final-pure-white-popular-fix">
 html[data-theme="dark"] .price-card.featured {
   background: var(--card) !important;
-  border: 4px solid #ffffff !important;
+  border: 1.5px solid #ffffff !important;
   border-color: #ffffff !important;
   box-shadow: none !important;
 }
