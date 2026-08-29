@@ -1484,35 +1484,6 @@ html[data-theme="dark"] ::selection {
   color: #111;
 }
 
-.cw-theme-toggle {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--line);
-  background: var(--light);
-  color: var(--primary);
-  font-size: 15px;
-  transition: transform .2s, background .2s, color .2s;
-}
-
-.cw-theme-toggle:hover {
-  transform: translateY(-1px);
-}
-
-.cw-theme-toggle .cw-moon {
-  display: none;
-}
-
-html[data-theme="dark"] .cw-theme-toggle .cw-sun {
-  display: none;
-}
-
-html[data-theme="dark"] .cw-theme-toggle .cw-moon {
-  display: inline;
-}
 </style>
 
 
@@ -1880,9 +1851,40 @@ html[data-theme="dark"] .navbar {
 }
 </script>
 <link rel="stylesheet" href="cursor.css">
+
+<style id="cyrus-theme-toggle-baseline">
+.cw-theme-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  background: var(--light);
+  color: var(--primary);
+  font-size: 15px;
+  transition: transform .2s, background .2s, color .2s;
+}
+
+.cw-theme-toggle:hover {
+  transform: translateY(-1px);
+}
+
+.cw-theme-toggle .cw-moon {
+  display: none;
+}
+
+html[data-theme="dark"] .cw-theme-toggle .cw-sun {
+  display: none;
+}
+
+html[data-theme="dark"] .cw-theme-toggle .cw-moon {
+  display: inline;
+}
+</style>
 </head>
 <body>
-
 <div class="cursor"></div>
 <div class="cursor-ring"></div>
 
@@ -2229,5 +2231,6 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <script src="cursor.js"></script>
+
 </body>
 </html>
