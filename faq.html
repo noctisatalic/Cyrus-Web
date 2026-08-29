@@ -1766,6 +1766,70 @@ html[data-theme="dark"] .navbar {
   ]
 }
 </script>
+
+<style id="cyrus-faq-category-style">
+.faq-category {
+  margin-top: 64px;
+}
+
+.faq-category:first-child {
+  margin-top: 0;
+}
+
+.faq-category-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.faq-category-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.faq-category-count {
+  flex-shrink: 0;
+  padding: 5px 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.faq-category-list {
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 640px) {
+  .faq-category {
+    margin-top: 48px;
+  }
+
+  .faq-category-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .faq-category-title {
+    font-size: 16px;
+  }
+
+  .faq-category-count {
+    font-size: 9px;
+  }
+}
+
+html[data-theme="dark"] .faq-category-count {
+  border-color: var(--line);
+}
+</style>
 </head>
 <body>
 
@@ -2028,7 +2092,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       "https://cyrusweb.vercel.app/api/faq?t=" + Date.now(),
       {
         method: "GET",
-        cache: "no-store"
+        cache: "no-store",
+        headers: {
+          "Accept": "application/json"
+        }
       }
     );
 
@@ -2048,48 +2115,125 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
+    /*
+     * FAQ CMS
+     * Semua data berasal dari API.
+     * Tidak ada pertanyaan/jawaban yang di-hardcode.
+     */
+    const grouped = new Map();
+
+    result.data.forEach((item) => {
+      const category =
+        String(item.category || "Umum").trim() || "Umum";
+
+      if (!grouped.has(category)) {
+        grouped.set(category, []);
+      }
+
+      grouped.get(category).push(item);
+    });
+
     faqList.innerHTML = "";
 
-    result.data.forEach((item, index) => {
-      const article = document.createElement("article");
-      article.className = "faq-item";
+    grouped.forEach((items, category) => {
+      const categorySection = document.createElement("section");
+      categorySection.className = "faq-category";
+      categorySection.dataset.category = category;
 
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "faq-question";
-      button.setAttribute("aria-expanded", "false");
-      button.innerHTML = `
-        <span>${escapeHtml(item.question || "Pertanyaan")}</span>
-        <span class="faq-icon">+</span>
-      `;
+      const categoryHead = document.createElement("div");
+      categoryHead.className = "faq-category-head";
 
-      const answer = document.createElement("div");
-      answer.className = "faq-answer";
-      answer.hidden = true;
-      answer.innerHTML = `<p>${formatAnswer(item.answer || "")}</p>`;
+      const categoryTitle = document.createElement("h2");
+      categoryTitle.className = "faq-category-title";
+      categoryTitle.textContent = category;
 
-      button.addEventListener("click", () => {
-        const isOpen = button.getAttribute("aria-expanded") === "true";
+      const categoryCount = document.createElement("span");
+      categoryCount.className = "faq-category-count";
+      categoryCount.textContent = `${items.length} pertanyaan`;
 
-        document.querySelectorAll(".faq-question").forEach((other) => {
-          if (other !== button) {
-            other.setAttribute("aria-expanded", "false");
-            other.classList.remove("open");
-            other.querySelector(".faq-icon").textContent = "+";
-            const otherAnswer = other.parentElement.querySelector(".faq-answer");
-            if (otherAnswer) otherAnswer.hidden = true;
+      categoryHead.appendChild(categoryTitle);
+      categoryHead.appendChild(categoryCount);
+
+      const categoryList = document.createElement("div");
+      categoryList.className = "faq-category-list";
+
+      items.forEach((item) => {
+        const article = document.createElement("article");
+        article.className = "faq-item";
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "faq-question";
+        button.setAttribute("aria-expanded", "false");
+
+        button.innerHTML = `
+          <span>${escapeHtml(item.question || "Pertanyaan")}</span>
+          <span class="faq-icon">+</span>
+        `;
+
+        const answer = document.createElement("div");
+        answer.className = "faq-answer";
+        answer.hidden = true;
+
+        answer.innerHTML =
+          `<p>${formatAnswer(item.answer || "")}</p>`;
+
+        button.addEventListener("click", () => {
+          const isOpen =
+            button.getAttribute("aria-expanded") === "true";
+
+          document
+            .querySelectorAll(".faq-question")
+            .forEach((other) => {
+              if (other !== button) {
+                other.setAttribute("aria-expanded", "false");
+                other.classList.remove("open");
+
+                const otherIcon =
+                  other.querySelector(".faq-icon");
+
+                if (otherIcon) {
+                  otherIcon.textContent = "+";
+                }
+
+                const otherAnswer =
+                  other.parentElement.querySelector(".faq-answer");
+
+                if (otherAnswer) {
+                  otherAnswer.hidden = true;
+                }
+
+                const otherArticle = other.closest(".faq-item");
+
+                if (otherArticle) {
+                  otherArticle.classList.remove("open");
+                }
+              }
+            });
+
+          button.setAttribute(
+            "aria-expanded",
+            String(!isOpen)
+          );
+
+          const icon = button.querySelector(".faq-icon");
+
+          if (icon) {
+            icon.textContent = isOpen ? "+" : "−";
           }
+
+          article.classList.toggle("open", !isOpen);
+          answer.hidden = isOpen;
         });
 
-        button.setAttribute("aria-expanded", String(!isOpen));
-        button.querySelector(".faq-icon").textContent = isOpen ? "+" : "−";
-        article.classList.toggle("open", !isOpen);
-        answer.hidden = isOpen;
+        article.appendChild(button);
+        article.appendChild(answer);
+        categoryList.appendChild(article);
       });
 
-      article.appendChild(button);
-      article.appendChild(answer);
-      faqList.appendChild(article);
+      categorySection.appendChild(categoryHead);
+      categorySection.appendChild(categoryList);
+      faqList.appendChild(categorySection);
     });
 
   } catch (error) {
@@ -2114,7 +2258,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   function formatAnswer(value) {
     return escapeHtml(value)
       .replace(/\n/g, "<br>")
-      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+      .replace(
+        /\*\*(.*?)\*\*/g,
+        "<strong>$1</strong>"
+      );
   }
 });
 </script>
