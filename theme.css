@@ -1,0 +1,292 @@
+/* =========================================================
+   CYRUSWEB — GLOBAL THEME SWITCH
+   Light = OFF / Dark = ON
+   ========================================================= */
+
+.cyrus-theme-toggle,
+.theme-toggle,
+#theme-toggle,
+[data-theme-toggle]{
+  --switch-w: 58px;
+  --switch-h: 30px;
+
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:space-between;
+
+  width:var(--switch-w);
+  height:var(--switch-h);
+
+  padding:3px;
+
+  border:1px solid rgba(17,17,17,.14);
+  border-radius:999px;
+
+  background:#e9e9e9;
+
+  cursor:pointer;
+  overflow:hidden;
+
+  transition:
+    background .45s cubic-bezier(.16,1,.3,1),
+    border-color .45s cubic-bezier(.16,1,.3,1),
+    box-shadow .45s cubic-bezier(.16,1,.3,1),
+    transform .2s ease;
+
+  -webkit-tap-highlight-color:transparent;
+}
+
+.cyrus-theme-toggle:hover,
+.theme-toggle:hover,
+#theme-toggle:hover,
+[data-theme-toggle]:hover{
+  transform:scale(1.035);
+}
+
+.cyrus-theme-toggle:active,
+.theme-toggle:active,
+#theme-toggle:active,
+[data-theme-toggle]:active{
+  transform:scale(.97);
+}
+
+/* TRACK */
+
+.cyrus-theme-toggle::before,
+.theme-toggle::before,
+#theme-toggle::before,
+[data-theme-toggle]::before{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  border-radius:inherit;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.8),
+      rgba(255,255,255,.15)
+    );
+
+  pointer-events:none;
+}
+
+/* KNOB */
+
+.cyrus-theme-toggle .theme-switch-knob,
+.theme-toggle .theme-switch-knob,
+#theme-toggle .theme-switch-knob,
+[data-theme-toggle] .theme-switch-knob{
+  position:absolute;
+
+  top:3px;
+  left:3px;
+
+  width:22px;
+  height:22px;
+
+  border-radius:50%;
+
+  background:#fff;
+
+  box-shadow:
+    0 2px 7px rgba(0,0,0,.16),
+    inset 0 1px 0 rgba(255,255,255,.9);
+
+  z-index:3;
+
+  transition:
+    transform .55s cubic-bezier(.16,1,.3,1),
+    background .45s ease,
+    box-shadow .45s ease;
+}
+
+/* ICONS */
+
+.cyrus-theme-toggle .theme-switch-sun,
+.cyrus-theme-toggle .theme-switch-moon,
+.theme-toggle .theme-switch-sun,
+.theme-toggle .theme-switch-moon,
+#theme-toggle .theme-switch-sun,
+#theme-toggle .theme-switch-moon,
+[data-theme-toggle] .theme-switch-sun,
+[data-theme-toggle] .theme-switch-moon{
+  position:absolute;
+
+  top:50%;
+  transform:translateY(-50%);
+
+  display:grid;
+  place-items:center;
+
+  width:22px;
+  height:22px;
+
+  font-size:12px;
+  line-height:1;
+
+  pointer-events:none;
+
+  transition:
+    opacity .3s ease,
+    transform .45s cubic-bezier(.16,1,.3,1);
+}
+
+.cyrus-theme-toggle .theme-switch-sun,
+.theme-toggle .theme-switch-sun,
+#theme-toggle .theme-switch-sun,
+[data-theme-toggle] .theme-switch-sun{
+  left:3px;
+}
+
+.cyrus-theme-toggle .theme-switch-moon,
+.theme-toggle .theme-switch-moon,
+#theme-toggle .theme-switch-moon,
+[data-theme-toggle] .theme-switch-moon{
+  right:3px;
+}
+
+/* LIGHT = OFF */
+
+html[data-theme="light"] .cyrus-theme-toggle,
+html[data-theme="light"] .theme-toggle,
+html[data-theme="light"] #theme-toggle,
+html[data-theme="light"] [data-theme-toggle]{
+  background:#dedede;
+}
+
+html[data-theme="light"] .theme-switch-knob,
+html[data-theme="light"] .theme-toggle .theme-switch-knob,
+html[data-theme="light"] #theme-toggle .theme-switch-knob{
+  transform:translateX(0);
+}
+
+html[data-theme="light"] .theme-switch-sun{
+  opacity:1;
+  transform:translateY(-50%) scale(1);
+}
+
+html[data-theme="light"] .theme-switch-moon{
+  opacity:.28;
+  transform:translateY(-50%) scale(.75);
+}
+
+/* DARK = ON */
+
+html[data-theme="dark"] .cyrus-theme-toggle,
+html[data-theme="dark"] .theme-toggle,
+html[data-theme="dark"] #theme-toggle,
+html[data-theme="dark"] [data-theme-toggle]{
+  background:#171717;
+  border-color:rgba(255,255,255,.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 4px 18px rgba(0,0,0,.2);
+}
+
+html[data-theme="dark"] .theme-switch-knob{
+  transform:translateX(28px);
+  background:#f7f7f7;
+  box-shadow:
+    0 2px 9px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,1);
+}
+
+html[data-theme="dark"] .theme-switch-sun{
+  opacity:.28;
+  transform:translateY(-50%) scale(.75);
+}
+
+html[data-theme="dark"] .theme-switch-moon{
+  opacity:1;
+  transform:translateY(-50%) scale(1);
+}
+
+/* =========================================================
+   GLOBAL THEME TRANSITION
+   ========================================================= */
+
+html,
+body,
+body *,
+body *::before,
+body *::after{
+  transition-property:
+    background-color,
+    color,
+    border-color,
+    box-shadow,
+    fill,
+    stroke;
+  transition-duration:.45s;
+  transition-timing-function:cubic-bezier(.16,1,.3,1);
+}
+
+/*
+  Jangan ikutkan animasi/transform utama website.
+  GSAP, typing, architecture, cursor dll tetap punya
+  kontrol animasinya sendiri.
+*/
+
+body *,
+body *::before,
+body *::after{
+  transition-property:
+    background-color,
+    color,
+    border-color,
+    box-shadow,
+    fill,
+    stroke;
+}
+
+/* Theme transition overlay */
+
+.cyrus-theme-transition{
+  position:fixed;
+  inset:0;
+
+  z-index:2147483647;
+
+  pointer-events:none;
+
+  background:#fff;
+
+  opacity:0;
+
+  transition:
+    opacity .42s cubic-bezier(.16,1,.3,1),
+    background-color .42s ease;
+}
+
+html[data-theme="dark"] .cyrus-theme-transition{
+  background:#080808;
+}
+
+.cyrus-theme-transition.active{
+  opacity:.12;
+}
+
+/* accessibility */
+
+@media(prefers-reduced-motion:reduce){
+
+  html,
+  body,
+  body *,
+  body *::before,
+  body *::after{
+    transition-duration:.01ms !important;
+  }
+
+  .cyrus-theme-toggle,
+  .theme-toggle,
+  #theme-toggle,
+  [data-theme-toggle]{
+    transition:none !important;
+  }
+
+}
