@@ -102,34 +102,6 @@ section {
   overflow: hidden;
 }
 
-/* Custom Cursor */
-.cursor, .cursor-ring {
-  position: fixed;
-  pointer-events: none;
-  z-index: 99999;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.2s;
-}
-.cursor {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--primary);
-}
-.cursor-ring {
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(17, 17, 17, 0.25);
-  border-radius: 50%;
-  transition: width 0.3s, height 0.3s, background 0.3s;
-}
-.cursor-ring.active {
-  width: 54px;
-  height: 54px;
-  background: rgba(17, 17, 17, 0.03);
-  border-color: rgba(17, 17, 17, 0.15);
-}
-
 /* Section Header Shared */
 .section-tag {
   display: inline-flex;
@@ -2997,6 +2969,7 @@ html[data-theme="dark"] .nav-cta {
 }
 
 </style>
+<link rel="stylesheet" href="cursor.css">
 </head>
 <body>
 
@@ -3475,32 +3448,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Inisialisasi GSAP ScrollTrigger
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
-
-    /* --- Custom Cursor --- */
-    const cursor = document.querySelector(".cursor");
-    const ring = document.querySelector(".cursor-ring");
-    let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
-    let ringX = mouseX, ringY = mouseY;
-
-    window.addEventListener("mousemove", (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      gsap.to(cursor, { x: mouseX, y: mouseY, duration: 0.05, ease: "power2.out" });
-    });
-
-    gsap.ticker.add(() => {
-      ringX += (mouseX - ringX) * 0.15;
-      ringY += (mouseY - ringY) * 0.15;
-      if (ring) {
-        ring.style.left = ringX + "px";
-        ring.style.top = ringY + "px";
-      }
-    });
-
-    document.querySelectorAll("a, button, .service-card, .price-card, .testimonial-card").forEach(el => {
-      el.addEventListener("mouseenter", () => ring && ring.classList.add("active"));
-      el.addEventListener("mouseleave", () => ring && ring.classList.remove("active"));
-    });
 
     /* --- Animasi Hero Load --- */
     const heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -4128,5 +4075,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+<script src="cursor.js"></script>
 </body>
 </html>
