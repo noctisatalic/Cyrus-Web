@@ -1010,6 +1010,17 @@ html[data-theme="dark"] .price-card.featured .price-badge {
   background: var(--line);
 }
 
+.pricing-detail-description-section {
+  margin-bottom: 24px;
+}
+
+.pricing-detail-description {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
 .pricing-detail-features {
   list-style: none;
   margin: 14px 0 24px;
@@ -2485,6 +2496,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <div class="pricing-detail-divider"></div>
 
+      <div class="pricing-detail-section pricing-detail-description-section">
+        <span class="pricing-detail-label">TENTANG PAKET</span>
+        <p class="pricing-detail-description"></p>
+      </div>
+
       <div class="pricing-detail-section">
         <span class="pricing-detail-label">YANG ANDA DAPATKAN</span>
         <ul class="pricing-detail-features"></ul>
@@ -2501,6 +2517,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalTitle = modal.querySelector("#pricing-detail-title");
   const modalPrice = modal.querySelector(".pricing-detail-price");
   const modalFeatures = modal.querySelector(".pricing-detail-features");
+  const modalDescription = modal.querySelector(".pricing-detail-description");
   const modalCta = modal.querySelector(".pricing-detail-cta");
 
   function closeDetail() {
@@ -2520,6 +2537,8 @@ document.addEventListener("DOMContentLoaded", () => {
     modalPrice.innerHTML =
       String(item.price) +
       (item.period ? '<small> ' + item.period + '</small>' : '');
+
+    modalDescription.textContent = String(item.description || "");
 
     modalFeatures.innerHTML = item.features
       .map(feature => '<li>' + feature + '</li>')
@@ -2592,9 +2611,7 @@ document.addEventListener("DOMContentLoaded", () => {
           (item.period ? '<small> ' + item.period + '</small>' : "") +
         '</div>' +
 
-        '<p class="price-desc">' +
-          item.description +
-        '</p>' +
+
 
         audienceBlock +
       '</div>' +
