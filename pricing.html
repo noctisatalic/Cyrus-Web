@@ -534,94 +534,133 @@ section {
 
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
   margin-top: 48px;
+  align-items: stretch;
 }
 
 .price-card {
-  padding: 32px 24px;
+  min-width: 0;
+  padding: 30px 24px 24px;
   border-radius: 28px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.3s, box-shadow 0.3s;
   position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.58);
+  box-shadow: 0 12px 35px rgba(0,0,0,.035);
+  transition:
+    transform .35s cubic-bezier(.22,1,.36,1),
+    box-shadow .35s ease,
+    border-color .35s ease;
+}
+
+.price-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(0,0,0,.045), transparent 38%),
+    linear-gradient(135deg, rgba(255,255,255,.55), transparent 55%);
+  opacity: .8;
+}
+
+.price-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.price-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 24px 55px rgba(0,0,0,.08);
+  border-color: rgba(0,0,0,.14);
 }
 
 .price-card.featured {
   background: var(--white);
-  border: 2px solid var(--primary);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+  border: 1.5px solid var(--primary);
+  box-shadow:
+    0 22px 55px rgba(0,0,0,.09),
+    0 0 0 1px rgba(0,0,0,.025);
   transform: translateY(-8px);
 }
 
-.price-card:hover {
-  transform: translateY(-6px);
-}
-
 .price-card.featured:hover {
-  transform: translateY(-12px);
+  transform: translateY(-13px);
+  box-shadow:
+    0 30px 65px rgba(0,0,0,.12),
+    0 0 0 1px rgba(0,0,0,.035);
 }
 
 .price-badge {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  padding: 4px 10px;
+  top: 18px;
+  right: 18px;
+  padding: 6px 10px;
   border-radius: 999px;
   background: var(--primary);
   color: var(--white);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  line-height: 1;
 }
 
 .price-tier {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .13em;
   color: var(--muted);
 }
 
 .price-amount {
   font-family: var(--font-display);
-  font-size: 36px;
+  font-size: clamp(30px, 2.7vw, 38px);
   font-weight: 500;
-  letter-spacing: -0.04em;
-  margin-top: 16px;
+  letter-spacing: -.045em;
+  line-height: 1;
+  margin-top: 17px;
+  white-space: nowrap;
 }
 
 .price-amount small {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 400;
   color: var(--muted);
   font-family: var(--font-body);
+  letter-spacing: 0;
 }
 
 .price-desc {
   color: var(--muted);
   font-size: 12px;
-  line-height: 1.6;
-  margin-top: 8px;
-  min-height: 50px;
+  line-height: 1.65;
+  margin-top: 12px;
+  min-height: 58px;
 }
 
 .price-audience {
   margin: 20px 0 18px;
   padding: 14px 15px;
   border: 1px solid var(--line);
-  border-radius: 16px;
-  background: rgba(0,0,0,.025);
+  border-radius: 17px;
+  background: rgba(0,0,0,.022);
 }
 
 .price-audience span {
   display: block;
-  margin-bottom: 6px;
-  font-size: 8px;
+  margin-bottom: 7px;
+  font-size: 7px;
   line-height: 1.2;
-  font-weight: 700;
-  letter-spacing: .14em;
+  font-weight: 800;
+  letter-spacing: .16em;
   color: var(--muted);
 }
 
@@ -634,12 +673,37 @@ section {
 }
 
 .price-feature-title {
-  margin: 18px 0 10px;
-  font-size: 8px;
+  margin: 20px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-size: 7px;
   line-height: 1.2;
-  font-weight: 700;
-  letter-spacing: .14em;
+  font-weight: 800;
+  letter-spacing: .16em;
   color: var(--muted);
+}
+
+html[data-theme="dark"] .price-card {
+  background: rgba(255,255,255,.035);
+  box-shadow: 0 16px 45px rgba(0,0,0,.18);
+}
+
+html[data-theme="dark"] .price-card::before {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(255,255,255,.055), transparent 38%),
+    linear-gradient(135deg, rgba(255,255,255,.035), transparent 55%);
+}
+
+html[data-theme="dark"] .price-card:hover {
+  border-color: rgba(255,255,255,.16);
+  box-shadow: 0 24px 55px rgba(0,0,0,.28);
+}
+
+html[data-theme="dark"] .price-card.featured {
+  background: rgba(255,255,255,.055);
+  box-shadow:
+    0 24px 60px rgba(0,0,0,.28),
+    0 0 0 1px rgba(255,255,255,.035);
 }
 
 html[data-theme="dark"] .price-audience {
@@ -648,23 +712,383 @@ html[data-theme="dark"] .price-audience {
 
 .price-features {
   list-style: none;
-  margin: 24px 0;
-  padding-top: 20px;
-  border-top: 1px solid var(--line);
+  margin: 0 0 24px;
+  padding: 12px 0 0;
 }
 
 .price-features li {
   display: flex;
-  gap: 10px;
-  font-size: 12px;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 11px;
+  line-height: 1.5;
   color: var(--muted);
-  margin: 10px 0;
+  margin: 9px 0;
 }
 
 .price-features li::before {
   content: "✓";
+  flex: 0 0 auto;
   color: var(--primary);
+  font-weight: 800;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+@media (max-width: 1100px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .price-card.featured {
+    transform: none;
+  }
+
+  .price-card.featured:hover {
+    transform: translateY(-7px);
+  }
+}
+
+@media (max-width: 640px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 32px;
+  }
+
+  .price-card {
+    padding: 26px 20px 20px;
+    border-radius: 24px;
+  }
+
+  .price-card:hover,
+  .price-card.featured:hover {
+    transform: translateY(-4px);
+  }
+
+  .price-amount {
+    font-size: 34px;
+  }
+
+  .price-desc {
+    min-height: auto;
+  }
+
+  .price-audience {
+    margin: 17px 0 16px;
+  }
+
+  .price-features {
+    margin-bottom: 20px;
+  }
+}
+
+
+/* ── Pricing Presentation V2 ── */
+
+.price-card-main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.price-card .price-desc {
+  min-height: 0;
+  margin-top: 14px;
+  line-height: 1.65;
+}
+
+.price-card .price-audience {
+  margin: 20px 0 0;
+}
+
+.price-card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.price-card-actions > * {
+  min-width: 0;
+}
+
+.price-detail-btn,
+.price-select-btn {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  font-size: 11px;
   font-weight: 700;
+  letter-spacing: .01em;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    background .25s ease,
+    border-color .25s ease;
+}
+
+.price-detail-btn {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.5);
+  color: var(--text);
+}
+
+.price-detail-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0,0,0,.16);
+  box-shadow: 0 10px 25px rgba(0,0,0,.06);
+}
+
+.price-select-btn {
+  width: 100%;
+}
+
+.price-card.featured .price-detail-btn {
+  border-color: rgba(0,0,0,.12);
+}
+
+html[data-theme="dark"] .price-detail-btn {
+  background: rgba(255,255,255,.045);
+  border-color: rgba(255,255,255,.14);
+  color: var(--text);
+}
+
+html[data-theme="dark"] .price-detail-btn:hover {
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.25);
+}
+
+html[data-theme="dark"] .price-card.featured {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.075),
+      rgba(255,255,255,.035)
+    );
+  border: 1.5px solid var(--primary);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.10),
+    0 0 0 2px rgba(255,255,255,.025),
+    0 24px 65px rgba(0,0,0,.55),
+    0 0 45px rgba(255,255,255,.10);
+}
+
+html[data-theme="dark"] .price-card.featured::before {
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(255,255,255,.18),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(255,255,255,.045),
+      transparent 45%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.10),
+      transparent 55%
+    );
+  opacity: 1;
+}
+
+html[data-theme="dark"] .price-card.featured .price-badge {
+  background: var(--primary);
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,.35);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.12),
+    0 8px 25px rgba(0,0,0,.4);
+}
+
+.pricing-detail-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .25s ease, visibility .25s ease;
+}
+
+.pricing-detail-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.pricing-detail-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.pricing-detail-panel {
+  position: relative;
+  width: min(100%, 520px);
+  max-height: min(82vh, 720px);
+  overflow-y: auto;
+  padding: 30px;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 28px;
+  background: rgba(255,255,255,.9);
+  box-shadow:
+    0 35px 100px rgba(0,0,0,.22),
+    0 0 0 1px rgba(0,0,0,.04);
+  transform: translateY(18px) scale(.97);
+  transition: transform .35s cubic-bezier(.22,1,.36,1);
+}
+
+.pricing-detail-modal.is-open .pricing-detail-panel {
+  transform: translateY(0) scale(1);
+}
+
+.pricing-detail-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: rgba(255,255,255,.65);
+  color: var(--text);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.pricing-detail-kicker,
+.pricing-detail-label {
+  display: block;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+
+.pricing-detail-kicker {
+  margin-bottom: 10px;
+}
+
+.pricing-detail-head h3 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: -.02em;
+}
+
+.pricing-detail-price {
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -.04em;
+}
+
+.pricing-detail-price small {
+  margin-left: 5px;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.pricing-detail-divider {
+  height: 1px;
+  margin: 24px 0;
+  background: var(--line);
+}
+
+.pricing-detail-features {
+  list-style: none;
+  margin: 14px 0 24px;
+  padding: 0;
+}
+
+.pricing-detail-features li {
+  position: relative;
+  padding: 10px 0 10px 25px;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.pricing-detail-features li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.pricing-detail-cta {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  background: var(--primary);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.pricing-detail-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0,0,0,.16);
+}
+
+html[data-theme="dark"] .pricing-detail-panel {
+  border-color: rgba(255,255,255,.12);
+  background: rgba(25,25,25,.94);
+  box-shadow:
+    0 35px 100px rgba(0,0,0,.6),
+    0 0 0 1px rgba(255,255,255,.04);
+}
+
+html[data-theme="dark"] .pricing-detail-close {
+  background: rgba(255,255,255,.06);
+  border-color: rgba(255,255,255,.14);
+  color: var(--text);
+}
+
+html[data-theme="dark"] .pricing-detail-features li {
+  border-color: rgba(255,255,255,.1);
+}
+
+body.pricing-modal-open {
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .price-card-actions {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .pricing-detail-panel {
+    padding: 25px 20px 20px;
+    border-radius: 24px;
+  }
+
+  .pricing-detail-price {
+    font-size: 28px;
+  }
 }
 
 /* Portfolio Section */
@@ -1951,12 +2375,12 @@ html[data-theme="dark"] .navbar {
 
 
 <script>
-/* --- Dynamic Pricing CMS --- */
+/* --- Pricing Presentation V2 --- */
 document.addEventListener("DOMContentLoaded", () => {
   const grid = document.querySelector(".pricing-grid");
   if (!grid) return;
 
-      const pricingPlans = [
+  const pricingPlans = [
         {
           name: "Starter",
           price: "800k - 2jt",
@@ -2044,97 +2468,164 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       ];
 
-      grid.innerHTML = "";
+  const modal = document.createElement("div");
+  modal.className = "pricing-detail-modal";
+  modal.setAttribute("aria-hidden", "true");
 
-      pricingPlans.forEach(item => {
-        const card = document.createElement("article");
+  modal.innerHTML = `
+    <div class="pricing-detail-backdrop" data-pricing-close></div>
+    <div class="pricing-detail-panel" role="dialog" aria-modal="true" aria-labelledby="pricing-detail-title">
+      <button class="pricing-detail-close" type="button" aria-label="Tutup" data-pricing-close>×</button>
 
-        card.className =
-          "price-card liquid-glass" +
-          (item.highlighted ? " featured" : "");
+      <div class="pricing-detail-head">
+        <span class="pricing-detail-kicker">DETAIL PAKET</span>
+        <h3 id="pricing-detail-title"></h3>
+        <div class="pricing-detail-price"></div>
+      </div>
 
-        const period = item.period
-          ? "<small> " + item.period + "</small>"
-          : "";
+      <div class="pricing-detail-divider"></div>
 
-        const features = item.features
-          .map(feature => "<li>" + feature + "</li>")
-          .join("");
+      <div class="pricing-detail-section">
+        <span class="pricing-detail-label">YANG ANDA DAPATKAN</span>
+        <ul class="pricing-detail-features"></ul>
+      </div>
 
-        const packageName = String(item.name || "").toLowerCase();
+      <a class="pricing-detail-cta" href="#" target="_blank" rel="noopener">
+        Pilih Paket
+      </a>
+    </div>
+  `;
 
-        let audience = "";
+  document.body.appendChild(modal);
 
-        if (packageName.includes("starter")) {
-          audience =
-            "Personal, usaha kecil, dan kebutuhan website sederhana";
-        } else if (
-          packageName.includes("business") ||
-          packageName.includes("bisnis")
-        ) {
-          audience =
-            "UMKM, brand, jasa, dan bisnis yang ingin tampil profesional";
-        } else if (
-          packageName.includes("profesional") ||
-          packageName.includes("professional") ||
-          packageName.includes("pro")
-        ) {
-          audience =
-            "Bisnis berkembang yang membutuhkan website lebih premium";
-        } else if (packageName.includes("custom")) {
-          audience =
-            "Kebutuhan khusus, fitur custom, dan sistem sesuai kebutuhan";
-        }
+  const modalTitle = modal.querySelector("#pricing-detail-title");
+  const modalPrice = modal.querySelector(".pricing-detail-price");
+  const modalFeatures = modal.querySelector(".pricing-detail-features");
+  const modalCta = modal.querySelector(".pricing-detail-cta");
 
-        const audienceBlock = audience
-          ? '<div class="price-audience">' +
-            '<span>COCOK UNTUK</span>' +
-            '<strong>' + audience + '</strong>' +
-            '</div>'
-          : "";
+  function closeDetail() {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("pricing-modal-open");
+  }
 
-        const isCustom =
-          packageName === "custom";
+  function openDetail(item) {
+    const packageName = String(item.name || "");
+    const isCustom = packageName.toLowerCase() === "custom";
+    const message = isCustom
+      ? "Halo CyrusWeb, saya ingin konsultasi paket Custom"
+      : "Halo CyrusWeb, saya berminat paket " + packageName;
 
-        const buttonText =
-          isCustom ? "Konsultasi" : "Pilih " + item.name;
+    modalTitle.textContent = packageName.toUpperCase();
+    modalPrice.innerHTML =
+      String(item.price) +
+      (item.period ? '<small> ' + item.period + '</small>' : '');
 
-        const message =
-          isCustom
-            ? "Halo CyrusWeb, saya ingin konsultasi paket Custom"
-            : "Halo CyrusWeb, saya berminat paket " + item.name;
+    modalFeatures.innerHTML = item.features
+      .map(feature => '<li>' + feature + '</li>')
+      .join("");
 
-        card.innerHTML =
-          (item.highlighted
-            ? '<span class="price-badge">POPULAR</span>'
-            : "") +
-          '<div>' +
-          '<span class="price-tier">' +
+    modalCta.href =
+      "https://wa.me/6281318048885?text=" +
+      encodeURIComponent(message);
+
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("pricing-modal-open");
+  }
+
+  pricingPlans.forEach(item => {
+    const card = document.createElement("article");
+    card.className =
+      "price-card liquid-glass" +
+      (item.highlighted ? " featured" : "");
+
+    const packageName = String(item.name || "").toLowerCase();
+
+    let audience = "";
+
+    if (packageName.includes("starter")) {
+      audience = "Personal, usaha kecil, dan kebutuhan website sederhana";
+    } else if (
+      packageName.includes("business") ||
+      packageName.includes("bisnis")
+    ) {
+      audience = "UMKM, brand, jasa, dan bisnis yang ingin tampil profesional";
+    } else if (
+      packageName.includes("profesional") ||
+      packageName.includes("professional") ||
+      packageName.includes("pro")
+    ) {
+      audience = "Bisnis berkembang yang membutuhkan website lebih premium";
+    } else if (packageName.includes("custom")) {
+      audience = "Kebutuhan khusus, fitur custom, dan sistem sesuai kebutuhan";
+    }
+
+    const isCustom = packageName === "custom";
+    const buttonText = isCustom
+      ? "Konsultasi"
+      : "Pilih " + item.name;
+
+    const message = isCustom
+      ? "Halo CyrusWeb, saya ingin konsultasi paket Custom"
+      : "Halo CyrusWeb, saya berminat paket " + item.name;
+
+    const audienceBlock = audience
+      ? '<div class="price-audience">' +
+          '<span>COCOK UNTUK</span>' +
+          '<strong>' + audience + '</strong>' +
+        '</div>'
+      : "";
+
+    card.innerHTML =
+      (item.highlighted
+        ? '<span class="price-badge">POPULAR</span>'
+        : "") +
+
+      '<div class="price-card-main">' +
+        '<span class="price-tier">' +
           String(item.name).toUpperCase() +
-          '</span>' +
-          '<div class="price-amount">' +
+        '</span>' +
+
+        '<div class="price-amount">' +
           item.price +
-          period +
-          '</div>' +
-          '<p class="price-desc">' +
+          (item.period ? '<small> ' + item.period + '</small>' : "") +
+        '</div>' +
+
+        '<p class="price-desc">' +
           item.description +
-          '</p>' +
-          audienceBlock +
-          '<div class="price-feature-title">YANG ANDA DAPATKAN</div>' +
-          '<ul class="price-features">' +
-          features +
-          '</ul>' +
-          '</div>' +
-          '<a href="https://wa.me/6281318048885?text=' +
+        '</p>' +
+
+        audienceBlock +
+      '</div>' +
+
+      '<div class="price-card-actions">' +
+        '<button type="button" class="price-detail-btn">' +
+          'Lihat Detail' +
+        '</button>' +
+
+        '<a href="https://wa.me/6281318048885?text=' +
           encodeURIComponent(message) +
           '" target="_blank" rel="noopener" class="' +
           (item.highlighted ? "btn-primary" : "btn-secondary") +
-          '" style="width:100%;justify-content:center;">' +
+          ' price-select-btn">' +
           buttonText +
-          '</a>';
+        '</a>' +
+      '</div>';
 
-        grid.appendChild(card);
-      });
+    card.querySelector(".price-detail-btn")
+      .addEventListener("click", () => openDetail(item));
+
+    grid.appendChild(card);
+  });
+
+  modal.querySelectorAll("[data-pricing-close]").forEach(el => {
+    el.addEventListener("click", closeDetail);
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") closeDetail();
+  });
 });
 </script>
 
